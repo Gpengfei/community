@@ -1,23 +1,28 @@
 <template>
-  <div class="Index">
-    <div class="cont">
-      <!--轮播-->
-<!--      <Swiper/>-->
-      <!--轮播end-->
-      <!--形式1-->
-      <!--形式1 end-->
-      <!--形式2-->
-      <!--形式3 end-->
-    </div>
+  <div class="swiper">
+    <swiper ref="mySwiper" :options="swiperOptions">
+      <swiper-slide>Slide 1</swiper-slide>
+      <swiper-slide>Slide 2</swiper-slide>
+      <swiper-slide>Slide 3</swiper-slide>
+      <swiper-slide>Slide 4</swiper-slide>
+      <swiper-slide>Slide 5</swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
   </div>
 </template>
 
 <script>
-  // import Swiper from "../../components/shop/Swiper"
   export default {
-    name: "Index",
+    name: "swiper",
     data() {
-      return {};
+      return {
+        swiperOptions: {
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          // Some Swiper option/callback...
+        }
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -39,6 +44,8 @@
      * 注意 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm. 替换掉 mounted
      * */
     mounted() {
+      console.log('Current Swiper instance object', this.swiper)
+      this.swiper.slideTo(3, 1000, false)
     },
     /**
      * 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
@@ -76,7 +83,11 @@
      * computed: {aDouble: vm => vm.a * 2}
      * 计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。
      * */
-    computed: {},
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.$swiper
+      }
+    },
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
@@ -96,18 +107,13 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      // Swiper
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .Index {
-    .cont{
-      width: 1226px;
-      max-width: 1226px;
-      margin: 0 auto;
-    }
+  .swiper {
+    width: 100%;
+    height: 460px;
   }
 </style>

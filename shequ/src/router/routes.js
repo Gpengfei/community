@@ -49,6 +49,8 @@ export default [
     },
     {
       path: '/shop/index',
+      name:"Index",
+      title:"商城",
       component: ()=>import('@views/shop/Index.vue'),
       children:[]
     }
