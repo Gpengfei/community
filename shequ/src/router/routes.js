@@ -46,6 +46,9 @@ export default [
     {
       path: '/register',
       component: ()=>import('@views/Register.vue')
+    },
+    {
+      path: '/shop/index',
+      component: ()=>import('@views/shop/index.vue')
     }
-    
   ]
