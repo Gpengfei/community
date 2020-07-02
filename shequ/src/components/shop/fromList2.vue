@@ -5,7 +5,7 @@
         <h2 class="title">智能</h2>
         <div class="more">
           <ul class="ul">
-            <li class="li">热门</li>
+            <li class="li ">热门</li>
             <li class="li">电视影音</li>
           </ul>
         </div>
