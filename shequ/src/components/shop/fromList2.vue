@@ -1,17 +1,21 @@
 <template>
-  <div class="fromList1">
+  <div class="fromList2">
     <div class="box">
       <div class="top-hd">
-        <h2 class="title">手机</h2>
+        <h2 class="title">智能</h2>
         <div class="more">
-          <span class="a">
-            查看全部<i class="iconfont iconfont-arrow-right-big"></i>
-          </span>
+          <ul class="ul">
+            <li class="li">热门</li>
+            <li class="li">电视影音</li>
+          </ul>
         </div>
       </div>
       <div class="box-bd clearfix">
         <div class="row">
           <div class="left">
+            <div class="imgWar">
+              <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
+            </div>
             <div class="imgWar">
               <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
             </div>
@@ -36,6 +40,21 @@
                   </del>
                 </p>
               </li>
+              <li class="liLast">
+                <div class="div">
+                  <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
+                  <h3 class="h3">
+                    小米小爱触屏音箱
+                  </h3>
+                  <p class="price"><span class="num">199</span>元</p>
+                </div>
+                <div class="div">
+                  <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
+                  <div class="more">
+                    浏览更多
+                    <small class="small">热门</small></div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -46,7 +65,7 @@
 
 <script>
   export default {
-    name: "fromList1",
+    name: "fromList2",
     data() {
       return {};
     },
@@ -132,7 +151,7 @@
 </script>
 
 <style scoped lang="scss">
-  .fromList1 {
+  .fromList2 {
     margin-bottom: 8px;
     .box {
       .top-hd {
@@ -172,18 +191,15 @@
           height: 614px;
           /*margin-left: 14px;*/
           margin-bottom: 14px;
-          background: #fff;
           -webkit-transition: all .2s linear;
           transition: all .2s linear;
           cursor: pointer;
           .imgWar {
             display: block;
-            width: 100%;
-            height: 100%;
-
+            margin-bottom: 14px;
             .img {
               width: 234px;
-              height: 614px;
+              height: 300px;
             }
           }
         }
@@ -203,7 +219,6 @@
               padding: 20px 0;
               position: relative;
               z-index: 1;
-              float: left;
               width: 234px;
               margin-left: 14px;
               margin-bottom: 14px;
@@ -243,6 +258,57 @@
                 .del{
                   margin-left: .5em;
                   color: #b0b0b0;
+                }
+              }
+            }
+            .liLast{
+              position: relative;
+              z-index: 1;
+              -webkit-transition: all .2s linear;
+              transition: all .2s linear;
+              cursor: pointer;
+              .div{
+                background-color: #ffffff;
+                position: relative;
+                z-index: 1;
+                width: 234px;
+                margin-left: 14px;
+                margin-bottom: 14px;
+                -webkit-transition: all .2s linear;
+                transition: all .2s linear;
+                height: 93px;
+                padding-top: 50px;
+                .h3{
+                  color: #333;
+                  margin: -10px 110px 5px 30px;
+                  font-size: 14px;
+                  font-weight: 400;
+                }
+                .price{
+                  margin: 0 110px 0 30px;
+                  font-size: 12px;
+                  color: #ff6700;
+                  .num{
+                    font-size: 14px;
+                  }
+                }
+                .img{
+                  position: absolute;
+                  right: 20px;
+                  top: 32px;
+                  width: 80px;
+                  height: 80px;
+                }
+                .more{
+                  display: block;
+                  margin: 0 110px 0 30px;
+                  font-size: 18px;
+                  color: #333;
+                  .small{
+                    display: block;
+                    font-size: 12px;
+                    color: #757575;
+                  }
                 }
               }
             }

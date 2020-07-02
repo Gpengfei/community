@@ -8,6 +8,7 @@
       <fromList1/>
       <!--形式1 end-->
       <!--形式2-->
+      <fromList2/>
       <!--形式3 end-->
     </div>
   </div>
@@ -16,6 +17,7 @@
 <script>
   import swiperSe from "@components/shop/swiperSeTop"
   import fromList1 from "@components/shop/fromList1"
+  import fromList2 from "@components/shop/fromList2"
   export default {
     name: "Index",
     data() {
@@ -100,13 +102,15 @@
      * */
     components: {
       swiperSe,
-      fromList1
+      fromList1,
+      fromList2
     },
   }
 </script>
 
 <style scoped lang="scss">
   .Index {
+    background: #f5f5f5;
     .cont{
       width: 1226px;
       max-width: 1226px;
