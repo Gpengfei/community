@@ -1,23 +1,26 @@
 <template>
-  <div class="Index">
-    <div class="cont">
-      <!--轮播-->
-      <swiperSe />
-      <!--轮播end-->
-      <!--形式1-->
-      <fromList1/>
-      <!--形式1 end-->
-      <!--形式2-->
-      <!--形式3 end-->
+  <div class="fromList1">
+    <div class="box">
+      <div class="top-hd">
+        <h2 class="title">手机</h2>
+        <div class="more">
+          <a>
+            查看全部<i class="iconfont iconfont-arrow-right-big"></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-bd clearfix">
+        <div class="row">
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import swiperSe from "@components/shop/swiperSeTop"
-  import fromList1 from "@components/shop/fromList1"
   export default {
-    name: "Index",
+    name: "fromList1",
     data() {
       return {};
     },
@@ -98,19 +101,20 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      swiperSe,
-      fromList1
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .Index {
-    .cont{
-      width: 1226px;
-      max-width: 1226px;
-      margin: 0 auto;
+  .fromList1 {
+    .box{
+      .title {
+        margin:0;
+        font-size:22px;
+        font-weight:200;
+        line-height:58px;
+        color:#333
+      }
     }
   }
 </style>
