@@ -4,14 +4,40 @@
       <div class="top-hd">
         <h2 class="title">手机</h2>
         <div class="more">
-          <a>
+          <span class="a">
             查看全部<i class="iconfont iconfont-arrow-right-big"></i>
-          </a>
+          </span>
         </div>
       </div>
       <div class="box-bd clearfix">
         <div class="row">
+          <div class="left">
+            <div class="imgWar">
+              <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
+            </div>
+          </div>
+          <div class="right">
+            <ul class="ul">
+              <li class="li">
+                <img class="img" src="" alt="">
+                <p class="title">
+                  小米10 青春版 5G
+                </p>
+                <p class="desc">50倍潜望式变焦 / 轻薄5G手机</p>
+                <p class="price">
+                  <span class="num">2009</span>
+                  <span class="">元</span>
+                  起
+                  <del class="del">
+                    <span class="num">
 
+                    </span>
+                    元
+                  </del>
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -107,13 +133,120 @@
 
 <style scoped lang="scss">
   .fromList1 {
-    .box{
-      .title {
-        margin:0;
-        font-size:22px;
-        font-weight:200;
-        line-height:58px;
-        color:#333
+    .box {
+      .top-hd {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+          margin: 0;
+          font-size: 22px;
+          font-weight: 200;
+          line-height: 58px;
+          color: #333;
+        }
+
+        .more {
+          .a {
+            font-size: 16px;
+            line-height: 58px;
+            color: #424242;
+            -webkit-transition: all .4s;
+            transition: all .4s;
+          }
+        }
+      }
+
+      .row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        .left {
+          position: relative;
+          z-index: 1;
+          float: left;
+          width: 234px;
+          height: 614px;
+          /*margin-left: 14px;*/
+          margin-bottom: 14px;
+          background: #fff;
+          -webkit-transition: all .2s linear;
+          transition: all .2s linear;
+
+          .imgWar {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            .img {
+              width: 234px;
+              height: 614px;
+            }
+          }
+        }
+
+        .right {
+          width: 100%;
+
+          .ul {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            .li {
+              height: 260px;
+              padding: 20px 0;
+              position: relative;
+              z-index: 1;
+              float: left;
+              width: 234px;
+              margin-left: 14px;
+              margin-bottom: 14px;
+              background: #fff;
+              -webkit-transition: all .2s linear;
+              transition: all .2s linear;
+
+              .img {
+                width: 160px;
+                height: 160px;
+                margin: 0 auto 18px;
+              }
+              .title, .desc{
+                text-align: center;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                margin: 0 10px 2px;
+              }
+              .title{
+                font-size: 14px;
+                font-weight: 400;
+                color: #333;
+
+              }
+              .desc{
+                margin: 0 10px 10px;
+                height: 18px;
+                font-size: 12px;
+                color: #b0b0b0;
+              }
+              .price{
+                margin: 0 10px 10px;
+                text-align: center;
+                color: #ff6700;
+                .del{
+                  margin-left: .5em;
+                  color: #b0b0b0;
+                }
+              }
+            }
+          }
+
+        }
       }
     }
   }
