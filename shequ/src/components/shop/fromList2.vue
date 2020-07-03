@@ -52,7 +52,8 @@
                   <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
                   <div class="more">
                     浏览更多
-                    <small class="small">热门</small></div>
+                    <small class="small">热门</small>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -304,6 +305,27 @@
                   margin: 0 110px 0 30px;
                   font-size: 18px;
                   color: #333;
+                  .ul{
+                    margin: 0;
+                    padding: 16px 0 0;
+                    list-style-type: none;
+                    font-size: 16px;
+                    .li{
+                      display: inline-block;
+                      padding: 0;
+                      margin: 0 15px;
+                      color: #424242;
+                      border-bottom: 2px solid #f5f5f5;
+                      border-bottom: 2px solid rgba(0,0,0,0);
+                      -webkit-transition: border .3s;
+                      transition: border .3s;
+                      cursor: pointer;
+                      &.cs{
+                        color: #ff6700;
+                        border-bottom: 2px solid #ff6700;
+                      }
+                    }
+                  }
                   .small{
                     display: block;
                     font-size: 12px;
