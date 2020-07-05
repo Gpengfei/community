@@ -1,38 +1,99 @@
 <template>
-  <div class="swiperSeTop">
-    <swiper class="swiper" ref="mySwiper" :options="swiperOption">
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-    </swiper>
+  <div class="header-and-footer">
+    <!--头部-->
+    <div class="header">
+      <div class="sqBox">
+        <div class="header-box">
+          <div class="box-l">
+            <img src="@assets/img/logo1.png" alt />
+          </div>
+          <div class="box-nav">
+            <ul>
+              <li v-for="(item,index) in navData" :key="index">
+                <router-link :to="item.url">
+                  <span :class="navsIndex==index?'sty':''">{{item.name}}</span>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="box-r">
+            <i class="iconfont">&#xe608;</i>
+            <template v-if="isLogin">
+              <i class="iconfont bj">&#xe60e;</i>
+              <router-link to="/newsLists">
+                <i class="iconfont xx tx">&#xe635;</i>
+              </router-link>
+              <router-link to="/mine">
+                <img src="img/minetx.png" alt />
+              </router-link>
+            </template>
+            <template v-else>
+              <router-link to="/login">
+                <span class="dl">登录</span>
+              </router-link>
+              <span class="fgx">丨</span>
+              <router-link to="/register">
+                <span class="zc">注册</span>
+              </router-link>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-zw"></div>
+    <transition name="creditFile">
+      <router-view />
+    </transition>
+    <!--底部-->
+    <div class="footer">
+      <div class="sqBox">
+        <div class="tooter-box">
+          <div class="box-top">
+            <ul>
+              <li v-for="(item,index) in navData0" :key="index">
+                <router-link :to="item.url">
+                  <span>{{item.name}}</span>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="box-bot">CopyRight 2006-2020, All Rights Reserved 内蒙古XX有限公司 版权所有</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import "@style/headerFooter/headerFooter.scss";
   export default {
-    name: "swiperSeTop",
+    name: "Shop",
     data() {
       return {
-        swiperOption: {
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        }
+        navData: [
+          { name: "首页", url: "/" },
+          { name: "社区便民", url: "/" },
+          { name: "通知资讯", url: "/" },
+          { name: "会员商城", url: "/shop/index" },
+          { name: "健康管理", url: "/" },
+          { name: "居家安防", url: "/" }
+        ],
+        navData0: [
+          { name: "首页", url: "/" },
+          { name: "社区便民", url: "/" },
+          { name: "通知资讯", url: "/" },
+          { name: "会员商城", url: "/" },
+          { name: "健康管理", url: "/" },
+          { name: "居家安防", url: "/" },
+          { name: "手机App", url: "/" }
+        ]
       };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
      * */
     beforeCreate() {
+
     },
     /*
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
@@ -49,8 +110,6 @@
      * 注意 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm. 替换掉 mounted
      * */
     mounted() {
-      console.log('Current Swiper instance object', this.swiper)
-      this.swiper.slideTo(3, 1000, false)
     },
     /**
      * 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
@@ -89,8 +148,11 @@
      * 计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。
      * */
     computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
+      navsIndex() {
+        return this.$store.state.isNav;
+      },
+      isLogin() {
+        return this.$store.state.isLogin;
       }
     },
     /**
@@ -112,26 +174,29 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .swiperSeTop {
-    width: 100%;
-    height: 460px;
-    .swiper{
-      width: 100%;
-      height: 100%;
-      .se{
-        width: 100%;
-        height: 100%;
-      }
-      .img{
-        width: 100%;
-        height: 100%;
-      }
-    }
+  .creditFile-enter {
+    opacity: 0;
+  }
+  .creditFile-enter-active {
+    transition: opacity 1s ease;
+  }
+  .creditFile-enter-to {
+    opacity: 1;
+    position: relative;
+  }
+  .creditFile-leave {
+    opacity: 1;
+  }
+  .creditFile-leave-active {
+    transition: opacity 1s ease;
+  }
+  .creditFile-leave-to {
+    opacity: 0;
+    position: absolute;
   }
 </style>

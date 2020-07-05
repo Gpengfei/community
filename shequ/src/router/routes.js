@@ -49,9 +49,24 @@ export default [
     },
     {
       path: '/shop/index',
-      name:"Index",
       title:"商城",
-      component: ()=>import('@views/shop/Index.vue'),
-      children:[]
+      component: ()=>import('@views/shop/Shop.vue'),
+      children:[
+        {
+          path: '/',
+          name:"Index",
+          component: ()=>import('@views/shop/Index.vue')
+        },
+        {
+          path: '/',
+          name:"Index",
+          component: ()=>import('@views/shop/Index.vue')
+        },
+        {
+          path: '/shop/index/detial',
+          name:"Detial",
+          component: ()=>import('@views/shop/ShopDetial.vue')
+        },
+      ]
     }
   ]

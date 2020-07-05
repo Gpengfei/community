@@ -5,7 +5,7 @@
         <h2 class="title">智能</h2>
         <div class="more">
           <ul class="ul">
-            <li class="li ">热门</li>
+            <li class="li select">热门</li>
             <li class="li">电视影音</li>
           </ul>
         </div>
@@ -156,6 +156,7 @@
     margin-bottom: 8px;
     .box {
       .top-hd {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -169,6 +170,33 @@
         }
 
         .more {
+          position: absolute;
+          top: 0;
+          right: 0;
+          .ul{
+            margin: 0;
+            padding: 16px 0 0;
+            list-style-type: none;
+            font-size: 16px;
+            .li{
+              display: inline-block;
+              padding: 0;
+              color: #424242;
+              border-bottom: 2px solid #f5f5f5;
+              border-bottom: 2px solid rgba(0,0,0,0);
+              transition: border .3s;
+              cursor: pointer;
+              margin: 0 0 0 30px;
+              &.select{
+                color: #ff6700;
+                border-bottom: 2px solid #ff6700;
+              }
+              &:hover{
+                color: #ff6700;
+                border-bottom: 2px solid #ff6700;
+              }
+            }
+          }
           .a {
             font-size: 16px;
             line-height: 58px;

@@ -1,33 +1,14 @@
 <template>
-  <div class="swiperSeTop">
-    <swiper class="swiper" ref="mySwiper" :options="swiperOption">
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-    </swiper>
+  <div class="ShopDetial">
+
   </div>
 </template>
 
 <script>
   export default {
-    name: "swiperSeTop",
+    name: "ShopDetial",
     data() {
-      return {
-        swiperOption: {
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        }
-      };
+      return {};
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -49,8 +30,6 @@
      * 注意 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm. 替换掉 mounted
      * */
     mounted() {
-      console.log('Current Swiper instance object', this.swiper)
-      this.swiper.slideTo(3, 1000, false)
     },
     /**
      * 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
@@ -88,11 +67,7 @@
      * computed: {aDouble: vm => vm.a * 2}
      * 计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。
      * */
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
+    computed: {},
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
@@ -112,26 +87,11 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .swiperSeTop {
-    width: 100%;
-    height: 460px;
-    .swiper{
-      width: 100%;
-      height: 100%;
-      .se{
-        width: 100%;
-        height: 100%;
-      }
-      .img{
-        width: 100%;
-        height: 100%;
-      }
-    }
+  .ShopDetial {
   }
 </style>
