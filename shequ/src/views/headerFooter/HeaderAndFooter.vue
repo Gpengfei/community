@@ -24,7 +24,8 @@
                 <i class="iconfont xx tx">&#xe635;</i>
               </router-link>
               <router-link to="/mine">
-                <img src="img/minetx.png" alt />
+                <img :src="avatar" alt v-if="avatar"/>
+                <img src="img/minetx.png" alt v-else/>
               </router-link>
             </template>
             <template v-else>
@@ -73,7 +74,7 @@ export default {
         { name: "首页", url: "/" },
         { name: "社区便民", url: "/" },
         { name: "通知资讯", url: "/" },
-        { name: "会员商城", url: "/shop/index" },
+        { name: "会员商城", url: "/" },
         { name: "健康管理", url: "/" },
         { name: "居家安防", url: "/" }
       ],
@@ -85,8 +86,23 @@ export default {
         { name: "健康管理", url: "/" },
         { name: "居家安防", url: "/" },
         { name: "手机App", url: "/" }
-      ]
+      ],
+      token:'',
+      avatar:'',
     };
+  },
+  mounted(){
+    let token=this.$store.state.token
+    this.token=token
+    // 获取用户信息
+    this.$api.article.user({
+      token:this.token
+    }).then(res=>{
+      console.log(res)
+      if(res.data.code==1){
+        this.avatar=res.data.data.avatar
+      }
+    })
   },
   computed: {
     navsIndex() {
