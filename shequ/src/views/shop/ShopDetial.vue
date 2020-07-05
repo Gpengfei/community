@@ -1,10 +1,11 @@
 <template>
   <div class="ShopDetial">
-
+    <detialTop/>
   </div>
 </template>
 
 <script>
+  import detialTop from "@components/shop/detialTop"
   export default {
     name: "ShopDetial",
     data() {
@@ -87,7 +88,9 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {
+      detialTop
+    },
   }
 </script>
 
