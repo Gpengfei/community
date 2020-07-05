@@ -1,25 +1,17 @@
 <template>
-  <div class="ShopDetial">
-    <detialTop/>
-    <!--内容部分-->
-    <div class="row">
-      <div class="left">
-        <detialLeft/>
-      </div>
-      <div class="right">
-        <detialRight/>
-      </div>
-    </div>
-    <!--内容部分 end-->
+  <div class="detialRight">
+    <h2 class="h2">
+      Redmi K30
+    </h2>
+    <p class="dp">
+
+    </p>
   </div>
 </template>
 
 <script>
-  import detialTop from "@components/shop/detialTop"
-  import detialLeft from "@components/shop/detialLeft"
-  import detialRight from "@components/shop/detialRight"
   export default {
-    name: "ShopDetial",
+    name: "detialRight",
     data() {
       return {};
     },
@@ -100,29 +92,22 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      detialTop,
-      detialLeft,
-      detialRight
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .ShopDetial {
-    .row{
-      width: 1226px;
-      margin-right: auto;
-      margin-left: auto;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 32px;
-      padding-bottom: 12px;
-      .left{}
-      .right{
-
-      }
+  .detialRight {
+    width: 100%;
+    .h2{
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      font-weight: 400;
+      color: #212121;
+    }
+    .dp{
+      
     }
   }
 </style>

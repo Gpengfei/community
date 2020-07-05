@@ -3,23 +3,18 @@
     <div class="box">
       <div class="nav-bar">
         <div class="container">
-          <h2>Redmi 10X 4G</h2>
+          <h2 class="h2">Redmi 10X 4G</h2>
           <div class="con">
             <div class="left">
               <span class="separator">|</span>
-              <a href="https://www.mi.com/redmi10x-5G">Redmi 10X 5G系列</a>
+              <a>Redmi 10X 5G系列</a>
             </div>
             <div class="right">
               <a>概述</a>
               <span class="separator">|</span>
               <a>参数</a>
               <span class="separator">|</span>
-              <a>F码通道</a>
-              <span class="separator">|</span>
-              <a class="J_contactBtnNav">咨询客服</a>
-              <span class="separator">|</span>
               <a class="J_nav_comment">用户评价</a>
-              <a class="btn btn-small btn-primary J_nav_buy hide">立即购买</a>
             </div>
           </div>
         </div>
@@ -117,8 +112,65 @@
 
 <style scoped lang="scss">
   .detialTop {
-    width: 1226px;
-    margin-right: auto;
-    margin-left: auto;
+    position: relative;
+    z-index: 4;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    -webkit-box-shadow: 0 5px 5px rgba(0,0,0,.07);
+    box-shadow: 0 5px 5px rgba(0,0,0,.07);
+    .box{
+      .nav-bar{
+        position: relative;
+        height: 63px;
+        width: 100%;
+        margin-top: 0;
+        color: #616161;
+        .container{
+          width: 1226px;
+          margin-right: auto;
+          margin-left: auto;
+          .h2{
+            margin: 0;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 60px;
+            color: #424242;
+            float: left;
+          }
+          .con{
+            .left{
+              float: left;
+              margin-left: 5px;
+              font-size: 12px;
+              margin-top: 21px;
+              .separator{
+                margin: 0 .5em;
+                color: #424242;
+                .a{
+                  color: #616161;
+                }
+              }
+            }
+            .right{
+              float: right;
+              margin: 17px 0 0 0;
+              font-size: 14px;
+              a{
+                color: #616161;
+              }
+              span{
+                margin: 0 .5em;
+                color: #e0e0e0;
+              }
+            }
+          }
+        }
+        .container:after, .container:before {
+          content: " ";
+          display: table;
+        }
+      }
+    }
   }
 </style>
