@@ -173,9 +173,52 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
-
+// 路由报错回调方法
+router.onError((error) => {
+  const pattern = /Loading chunk (\d)+ failed/g;
+  const isChunkLoadFailed = error.message.match(pattern);
+  if (isChunkLoadFailed) {
+    window.location.reload();
+    router.replace(router.history.pending.fullPath);
+  } else {
+    console.log(error)
+  }
+});
 Vue.config.productionTip = false;
+// 全局守卫
+router.beforeEach((to,from,next)=>{
+  let getFlag = localStorage.getItem("shequ");
+  let token=localStorage.getItem("token");
+  let userId=localStorage.getItem("userId");
+  if(getFlag=='isLogin'){//判断是否登录
+    store.state.isLogin = true
+    store.state.userId=userId
+    store.state.token=token
+    next()
+    if (!to.meta.isLogin){
+      if(to.path=='/login'||to.path=='/register'){
+        Message({
+          message: "请先退出登录登录",
+          type: "warning"
+        });
+        next({path:'/'})
+      }
+    }
+  }
 
+  else{
+    store.state.isLogin = false
+    if(to.meta.isLogin){
+      Message({
+        message: "请先登录",
+        type: "warning"
+      });
+      next({path:'/login'})
+    }else{
+      next()
+    }
+  }
+})
 new Vue({
   router,
   store,
