@@ -30,6 +30,14 @@ const article = {
     login(params){
         return axios.post(`${base.sq}/User/login`, qs.stringify(params));
     },
+     // 获取用户信息
+     user(params){
+        return axios.post(`${base.sq}/User/user`, qs.stringify(params));
+    },
+    // 获取消息列表
+    getNoticeList(params){
+        return axios.post(`${base.sq}/Notice/getNoticeList`, qs.stringify(params));
+    },
 
 }
 
