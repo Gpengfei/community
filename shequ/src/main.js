@@ -8,6 +8,8 @@ Vue.prototype.$api = api;
 import vueAwesomeSwiper from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
 Vue.use(vueAwesomeSwiper)
+import moment from 'moment'
+Vue.prototype.$moment=moment
 import "@assets/css/reset.scss";
 import "@assets/css/fonts.scss"
 import {
