@@ -65,6 +65,14 @@ export default [
       path: '/register',
       component: ()=>import('@views/Register.vue')
     },
+    {
+      path: '/retrievePassword',
+      component: ()=>import('@views/RetrievePassword.vue')
+    },
+    {
+      path: '/mobilePhoneVerification',
+      component: ()=>import('@views/MobilePhoneVerification.vue')
+    },
 /*    {
       path: '/shop/index',
       title:"商城",
