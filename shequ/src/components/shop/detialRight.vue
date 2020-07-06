@@ -7,6 +7,7 @@
       <span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 / 最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC
     </p>
     <div class="line"></div>
+    <div class=""></div>
   </div>
 </template>
 
