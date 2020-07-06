@@ -37,14 +37,14 @@ export default [
             },
           ]
         },
+        // {
+        //   path: '/shop/index',
+        //   name:"Index",
+        //   title:"商城首页",
+        //   component: ()=>import('@views/shop/Index.vue')
+        // },
         {
           path: '/shop/index',
-          name:"Index",
-          title:"商城首页",
-          component: ()=>import('@views/shop/Index.vue')
-        },
-        {
-          path: '/',
           name:"Index",
           component: ()=>import('@views/shop/Index.vue')
         },

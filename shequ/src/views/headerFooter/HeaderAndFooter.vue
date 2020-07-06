@@ -74,7 +74,7 @@ export default {
         { name: "首页", url: "/" },
         { name: "社区便民", url: "/" },
         { name: "通知资讯", url: "/" },
-        { name: "会员商城", url: "/" },
+        { name: "会员商城", url: "/shop/index" },
         { name: "健康管理", url: "/" },
         { name: "居家安防", url: "/" }
       ],
@@ -82,7 +82,7 @@ export default {
         { name: "首页", url: "/" },
         { name: "社区便民", url: "/" },
         { name: "通知资讯", url: "/" },
-        { name: "会员商城", url: "/" },
+        { name: "会员商城", url: "/shop/index" },
         { name: "健康管理", url: "/" },
         { name: "居家安防", url: "/" },
         { name: "手机App", url: "/" }

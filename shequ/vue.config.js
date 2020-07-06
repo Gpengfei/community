@@ -20,7 +20,7 @@ module.exports = {
       })
     }, */
     // open: process.platform === 'darwin',
-    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : '0.0.0.0',
+    host: process.env.NODE_ENV === 'production' ? 'http://smart.zhuwenyong.xyz' : '0.0.0.0',
     hot: true,
     https: false,
     // port: 8080,
