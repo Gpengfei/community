@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = Routes;
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes,
 });
