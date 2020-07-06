@@ -1,2 +1,29 @@
-$color:#1ac1b0;
+$color: #1ac1b0;
 $shopColor: #ff6700;
+
+@mixin mixins-ticket-vertical($width, $height, $r, $left, $l-color, $r-color) {
+	width: $width;
+	height: $height;
+	// $left - 1px 是为了避免某些百分百比缩放页面时，出现空隙
+	// $r + 1px 是为了防止出现锯齿
+	// 51% 是为了防止出现元素中间会有一小段空白区域的情况
+	background: radial-gradient(circle at left top, transparent $r, $l-color $r + 1px) $left - 1px top / 100% 51% no-repeat,
+	radial-gradient(circle at left bottom, transparent $r, $l-color $r + 1px) $left - 1px bottom / 100% 51% no-repeat,
+	radial-gradient(circle at  right top, transparent $r, $r-color  $r + 1px ) -($width - $left) top / 100% 51% no-repeat,
+	radial-gradient(circle at right bottom , transparent $r, $r-color  $r + 1px )  -($width - $left) bottom / 100% 51% no-repeat;
+
+	filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, .2));
+}
+
+/*.parent {
+	@include mixins-ticket-vertical(200px, 200px, 10px, 150px, #fc3a28, #fc3a28);
+}*/
+
+@mixin priceDetial() {
+	display:block;
+	font-size:18px;
+	line-height:1;
+	color:#ff6700;
+	padding:12px 0 10px
+}
+

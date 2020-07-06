@@ -4,10 +4,16 @@
       Redmi K30
     </h2>
     <p class="dp">
-      <span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 / 最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC
+      <span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 /
+      最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC
     </p>
+    <p title="
+    自己自愿
+    自营
+    "
+       class="company-info">自营</p>
     <div class="line"></div>
-    <div class=""></div>
+    <div class="price"><span class="span">4899 元</span></div>
   </div>
 </template>
 
@@ -102,26 +108,36 @@
   .detialRight {
     font-size: 14px;
     width: 100%;
-    .h2{
+
+    .h2 {
       margin: 0;
       padding: 0;
       font-size: 24px;
       font-weight: 400;
       color: #212121;
     }
-    .dp{
+
+    .line {
+      margin-top: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .dp {
       color: #b0b0b0;
       margin: 0;
       padding: 0;
       padding-top: 8px;
       line-height: 1.5;
-      .span{
+
+      .span {
         color: rgb(255, 74, 0);
       }
-      .line{
-        margin-top: 12px;
-        border-bottom: 1px solid #e0e0e0;
-      }
+    }
+
+    .company-info {
+      margin-top: 14px;
+      color: $shopColor;
+      margin-bottom: 0;
     }
   }
 </style>
