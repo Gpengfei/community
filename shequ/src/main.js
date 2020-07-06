@@ -11,7 +11,8 @@ Vue.use(vueAwesomeSwiper)
 import moment from 'moment'
 Vue.prototype.$moment=moment
 import "@assets/css/reset.scss";
-import "@assets/css/fonts.scss"
+import "@assets/css/fonts.scss";
+import asdFun from "./common/asd_publicMethod";
 import {
   Pagination,
   Dialog,
@@ -221,6 +222,7 @@ router.beforeEach((to,from,next)=>{
     }
   }
 })
+Vue.use(asdFun)
 new Vue({
   router,
   store,

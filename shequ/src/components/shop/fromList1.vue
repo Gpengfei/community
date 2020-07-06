@@ -12,13 +12,13 @@
       <div class="box-bd clearfix">
         <div class="row">
           <div class="left">
-            <div class="imgWar">
+            <div class="imgWar"  @click="a_go('/shop/index/detial')">
               <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
             </div>
           </div>
           <div class="right">
             <ul class="ul">
-              <li class="li">
+              <li class="li" @click="a_go('/shop/index/detial')">
                 <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
                 <p class="title">
                   小米10 青春版 5G
