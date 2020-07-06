@@ -198,7 +198,7 @@ router.beforeEach((to,from,next)=>{
     store.state.token=token
     next()
     if (!to.meta.isLogin){
-      if(to.path=='/login'||to.path=='/register'){
+      if(to.path=='/login#'||to.path=='/register#'){
         Message({
           message: "请先退出登录登录",
           type: "warning"
