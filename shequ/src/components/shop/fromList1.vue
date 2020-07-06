@@ -239,7 +239,7 @@
               .price{
                 margin: 0 10px 10px;
                 text-align: center;
-                color: #ff6700;
+                color: $shopColor;
                 .del{
                   margin-left: .5em;
                   color: #b0b0b0;

@@ -188,12 +188,12 @@
               cursor: pointer;
               margin: 0 0 0 30px;
               &.select{
-                color: #ff6700;
-                border-bottom: 2px solid #ff6700;
+                color: $shopColor;
+                border-bottom: 2px solid $shopColor;
               }
               &:hover{
-                color: #ff6700;
-                border-bottom: 2px solid #ff6700;
+                color: $shopColor;
+                border-bottom: 2px solid $shopColor;
               }
             }
           }
@@ -283,7 +283,7 @@
               .price{
                 margin: 0 10px 10px;
                 text-align: center;
-                color: #ff6700;
+                color: $shopColor;
                 .del{
                   margin-left: .5em;
                   color: #b0b0b0;
@@ -316,7 +316,7 @@
                 .price{
                   margin: 0 110px 0 30px;
                   font-size: 12px;
-                  color: #ff6700;
+                  color: $shopColor;
                   .num{
                     font-size: 14px;
                   }
@@ -349,8 +349,8 @@
                       transition: border .3s;
                       cursor: pointer;
                       &.cs{
-                        color: #ff6700;
-                        border-bottom: 2px solid #ff6700;
+                        color: $shopColor;
+                        border-bottom: 2px solid $shopColor;
                       }
                     }
                   }

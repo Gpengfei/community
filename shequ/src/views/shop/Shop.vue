@@ -22,6 +22,9 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.$store.commit("change",res=>{
+        res.isNav = 3
+      })
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
