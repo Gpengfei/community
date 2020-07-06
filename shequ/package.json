@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "element-china-area-data": "^4.1.2",
@@ -15,6 +16,7 @@
     "moment": "^2.27.0",
     "qs": "^6.9.4",
     "swiper": "^5.4.5",
+    "tinymce": "^5.4.0",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.2.0",
