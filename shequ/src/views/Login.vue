@@ -15,7 +15,9 @@
           </p>
           <p class="input-btn" @click="ljdl">立即登录</p>
           <p class="wjmm-zc">
-            <span>忘记密码?</span>
+            <router-link to="/mobilePhoneVerification">
+              <span>忘记密码?</span>
+            </router-link>
             <span>|</span>
             <router-link to="/register">
               <span>注册</span>
