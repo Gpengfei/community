@@ -36,7 +36,23 @@ export default [
               component: ()=>import('@views/mine/DataAndName.vue'),
             },
           ]
-        }
+        },
+        {
+          path: '/shop/index',
+          name:"Index",
+          title:"商城首页",
+          component: ()=>import('@views/shop/Index.vue')
+        },
+        {
+          path: '/',
+          name:"Index",
+          component: ()=>import('@views/shop/Index.vue')
+        },
+        {
+          path: '/shop/index/detial',
+          name:"Detial",
+          component: ()=>import('@views/shop/ShopDetial.vue')
+        },
       ]
     },
     {
@@ -47,7 +63,7 @@ export default [
       path: '/register',
       component: ()=>import('@views/Register.vue')
     },
-    {
+/*    {
       path: '/shop/index',
       title:"商城",
       component: ()=>import('@views/shop/Shop.vue'),
@@ -68,5 +84,5 @@ export default [
           component: ()=>import('@views/shop/ShopDetial.vue')
         },
       ]
-    }
+    }*/
   ]
