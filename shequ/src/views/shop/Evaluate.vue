@@ -1,5 +1,6 @@
 <template>
-  <div class="Evaluate"> </div>
+  <div class="Evaluate">
+  </div>
 </template>
 
 <script>
