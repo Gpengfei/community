@@ -8,6 +8,9 @@ export default{
     userstatms(state,flag){
         state.minNav=flag
     },
+    userNavFb(state,flag){
+        state.navFb=flag
+    },
     change(state,callbacks){
         callbacks(state)
     }
