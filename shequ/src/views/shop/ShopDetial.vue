@@ -11,6 +11,16 @@
       </div>
     </div>
     <!--内容部分 end-->
+    <div class="details">
+      <div class="row2">
+        <div class="title">
+          <h3 class="h3">详情</h3>
+        </div>
+        <div class="detail">
+          <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a482afa34053b1b32ece1023475af7fb.jpeg" alt="">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +28,7 @@
   import detialTop from "@components/shop/detialTop"
   import detialLeft from "@components/shop/detialLeft"
   import detialRight from "@components/shop/detialRight"
+
   export default {
     name: "ShopDetial",
     data() {
@@ -110,7 +121,7 @@
 
 <style scoped lang="scss">
   .ShopDetial {
-    .row{
+    .row {
       width: 1226px;
       margin-right: auto;
       margin-left: auto;
@@ -119,10 +130,44 @@
       justify-content: center;
       padding-top: 32px;
       padding-bottom: 12px;
-      .left{}
-      .right{
+
+      .left {
+      }
+
+      .right {
 
       }
     }
+
+    .details {
+      width: 100%;
+      padding-bottom: 50px;
+      background-color: #f6f6f6;
+
+      .row2 {
+        .title {
+          width: 1226px;
+          margin-right: auto;
+          margin-left: auto;
+
+          .h3 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 1em 0;
+          }
+        }
+
+        .detail {
+          width: 1226px;
+          margin: auto;
+          .img {
+            width: 100%;
+          }
+        }
+      }
+    }
+
   }
 </style>

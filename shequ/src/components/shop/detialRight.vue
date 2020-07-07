@@ -51,10 +51,10 @@
       <div class="price">秒杀价：2038元</div>
     </div>
     <!-- 总结价格end -->
-    <!---->
+    <!--按钮-->
     <div  class="btn_box">
       <div class="sale-btn">
-        <a data-v-381dda6a="" class="btn">立即预约</a>
+        <a class="btn">立即预约</a>
       </div>
       <div  class="favorite-btn">
         <a  class="btn">
@@ -62,7 +62,7 @@
         </a>
       </div>
     </div>
-    <!---->
+    <!--按钮 end-->
   </div>
 </template>
 
