@@ -12,12 +12,27 @@
     <!--店铺-->
     <p title="自己自愿自营" class="company-info">自营</p>
     <!--店铺 end-->
-    <div class="line"></div>
     <!--钱-->
     <div class="linePrice">
-      <span class="span">4899 元 <del class="del"> 333元 </del></span>
+      <span class="span">4899 元 <del class="del">333元</del></span>
     </div>
     <!--钱 end-->
+    <div class="line"></div>
+    <!--地址-->
+    <div class="address_box">
+      <div class="address">
+        <div class="con">
+          <div class="info">
+            <span>内蒙古</span>
+            <span>呼和浩特市</span>
+            <span>赛罕区</span>
+            <span>敕勒川路街道</span>
+          </div>
+          <a class="edit">修改</a>
+        </div>
+      </div>
+    </div>
+    <!--地址ened-->
     <!-- 规格 -->
     <div class="buy-box-child" v-for="(arr, i) in specifications" :key="i">
       <div class="option-box">
@@ -52,12 +67,12 @@
     </div>
     <!-- 总结价格end -->
     <!--按钮-->
-    <div  class="btn_box">
+    <div class="btn_box">
       <div class="sale-btn">
         <a class="btn">立即预约</a>
       </div>
-      <div  class="favorite-btn">
-        <a  class="btn">
+      <div class="favorite-btn">
+        <a class="btn">
           喜欢
         </a>
       </div>
@@ -249,6 +264,10 @@
 
         .span {
           float: right;
+          .del{
+            display: inline-block;
+            margin-left: 5px;
+          }
         }
       }
     }
@@ -275,6 +294,31 @@
     .line {
       margin-top: 12px;
       border-bottom: 1px solid #e0e0e0;
+    }
+
+    .address_box {
+      margin: 20px 0;
+
+      .address {
+        position: relative;
+        padding: 30px 50px;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+        .con{
+          .info{
+            display: inline-block;
+            span{
+              display: inline;
+              margin-right: 14px;
+            }
+          }
+          .edit{
+            color: #ff6700;
+            margin: 0;
+            display: inline-block;
+          }
+        }
+      }
     }
 
     .dp {
@@ -309,10 +353,12 @@
 
     .btn_box {
       margin: 10px 0 20px 0;
-      .sale-btn{
+
+      .sale-btn {
         display: inline-block;
         margin-right: 10px;
-        .btn{
+
+        .btn {
           @include asd_btn();
           width: 298px;
           height: 52px;
@@ -323,10 +369,12 @@
           color: #fff;
         }
       }
-      .favorite-btn{
+
+      .favorite-btn {
         display: inline-block;
         margin-right: 10px;
-        .btn{
+
+        .btn {
           @include asd_btn();
           width: 140px;
           height: 52px;
