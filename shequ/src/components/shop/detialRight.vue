@@ -14,7 +14,7 @@
     <!--店铺 end-->
     <div class="line"></div>
     <!--钱-->
-    <div class="price">
+    <div class="linePrice">
       <span class="span">4899 元 <del class="del"> 333元 </del></span>
     </div>
     <!--钱 end-->
@@ -23,13 +23,32 @@
       <div class="option-box">
         <div class="title">{{arr.title}}</div>
         <ul class="ul">
-          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.list" :key="j">
+          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.list"
+              :key="j">
             <a class="a">{{item.name}}</a>
           </li>
         </ul>
       </div>
     </div>
     <!-- 规格 -->
+    <div class="selected-list">
+      <ul class="ul">
+        <li class="li">Redmi K30 8GB+256GB 深海微光
+          <span class="span">1799元<del class="del">2199元</del>
+          </span>
+        </li>
+      </ul>
+      <ul class="ul">
+        <li class="li"></li>
+      </ul>
+      <ul class="ul">
+        <li class="li"></li>
+      </ul>
+      <ul class="ul">
+        <li class="li"> 云空间年卡500G<span class="span">239元</span></li><!----><!----><!----><!---->
+      </ul>
+      <div class="price">秒杀价：2038元</div>
+    </div>
   </div>
 </template>
 
@@ -38,31 +57,31 @@
     name: "detialRight",
     data() {
       return {
-        specificationsArr:[0,0],
-        specifications:[
+        specificationsArr: [0, 0],
+        specifications: [
           {
-            title:"选择版本",
-            list:[
+            title: "选择版本",
+            list: [
               {
-                name:"6GB+128GB",
-                active:true
+                name: "6GB+128GB",
+                active: true
               },
               {
-                name:"25GB+128GB",
-                active:false
+                name: "25GB+128GB",
+                active: false
               }
             ]
           },
           {
-            title:"选择规格",
-            list:[
+            title: "选择规格",
+            list: [
               {
-                name:"bug绿",
-                active:true
+                name: "bug绿",
+                active: true
               },
               {
-                name:"bug兰",
-                active:false
+                name: "bug兰",
+                active: false
               }
             ]
           }
@@ -131,17 +150,17 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
-      active(i,j){
-        this.specificationsArr.splice(i,1,j);
+      active(i, j) {
+        this.specificationsArr.splice(i, 1, j);
       }
     },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
     watch: {
-      specifications(){
+      specifications() {
         for (let i = 0; i < this.specifications.length; i++) {
-          this.specificationsArr.splice(i,0,0);
+          this.specificationsArr.splice(i, 0, 0);
         }
       }
     },
@@ -161,21 +180,22 @@
 </script>
 
 <style scoped lang="scss">
-  @mixin buy_box_child(){
+  @mixin buy_box_child() {
     margin-bottom: 30px;
     position: relative;
-    .title{
+    .title {
       font-size: 18px;
       line-height: 1.6;
     }
-    .ul{
+    .ul {
       margin: 0;
       padding: 0;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
       flex-wrap: wrap;
-      .li{
+
+      .li {
         margin-right: 12px;
         margin-top: 10px;
         line-height: 42px;
@@ -189,7 +209,8 @@
         width: 292px;
         font-size: 16px;
         text-align: center;
-        &.active,&:hover{
+
+        &.active, &:hover {
           z-index: 3;
           color: $shopColor;
           border-color: $shopColor;
@@ -198,6 +219,33 @@
       }
     }
   }
+
+  @mixin selected_list() {
+    background: #f9f9fa;
+    padding: 30px;
+    margin-bottom: 30px;
+    .ul {
+      padding: 0;
+      margin: 0;
+
+      .li {
+        list-style: none;
+        line-height: 30px;
+        color: #616161;
+
+        .span {
+          float: right;
+        }
+      }
+    }
+    .price {
+      color: $shopColor;
+      font-size: 24px;
+      padding-top: 20px;
+      line-height: 36px;
+    }
+  }
+
   .detialRight {
     font-size: 14px;
     width: 100%;
@@ -233,11 +281,16 @@
       margin-bottom: 0;
     }
 
-    .price {
-      @include priceDetial();
+    .linePrice {
+      @include priceDetial(18px, 14px);
     }
-    .buy-box-child{
+
+    .buy-box-child {
       @include buy_box_child();
+    }
+
+    .selected-list {
+      @include selected_list();
     }
   }
 </style>
