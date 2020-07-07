@@ -1,5 +1,6 @@
 <template>
   <div class="detialRight">
+    <!--标题部分-->
     <h2 class="h2">
       Redmi K30
     </h2>
@@ -7,13 +8,28 @@
       <span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 /
       最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC
     </p>
-    <p title="
-    自己自愿
-    自营
-    "
-       class="company-info">自营</p>
+    <!--标题部分-->
+    <!--店铺-->
+    <p title="自己自愿自营" class="company-info">自营</p>
+    <!--店铺 end-->
     <div class="line"></div>
-    <div class="price"><span class="span">4899 元</span></div>
+    <!--钱-->
+    <div class="price">
+      <span class="span">4899 元 <del class="del"> 333元 </del></span>
+    </div>
+    <!--钱 end-->
+    <!-- 规格 -->
+    <div class="buy-box-child" v-for="(arr, i) in specifications" :key="i">
+      <div class="option-box">
+        <div class="title">{{arr.title}}</div>
+        <ul class="ul">
+          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.list" :key="j">
+            <a class="a">{{item.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 规格 -->
   </div>
 </template>
 
@@ -21,7 +37,37 @@
   export default {
     name: "detialRight",
     data() {
-      return {};
+      return {
+        specificationsArr:[0,0],
+        specifications:[
+          {
+            title:"选择版本",
+            list:[
+              {
+                name:"6GB+128GB",
+                active:true
+              },
+              {
+                name:"25GB+128GB",
+                active:false
+              }
+            ]
+          },
+          {
+            title:"选择规格",
+            list:[
+              {
+                name:"bug绿",
+                active:true
+              },
+              {
+                name:"bug兰",
+                active:false
+              }
+            ]
+          }
+        ]
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -84,11 +130,21 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      active(i,j){
+        this.specificationsArr.splice(i,1,j);
+      }
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
-    watch: {},
+    watch: {
+      specifications(){
+        for (let i = 0; i < this.specifications.length; i++) {
+          this.specificationsArr.splice(i,0,0);
+        }
+      }
+    },
     /**
      * 包含 Vue 实例可用指令的哈希表。
      * */
@@ -105,6 +161,43 @@
 </script>
 
 <style scoped lang="scss">
+  @mixin buy_box_child(){
+    margin-bottom: 30px;
+    position: relative;
+    .title{
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .ul{
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      .li{
+        margin-right: 12px;
+        margin-top: 10px;
+        line-height: 42px;
+        height: 42px;
+        position: relative;
+        border: 1px solid #e0e0e0;
+        list-style: none;
+        cursor: pointer;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+        width: 292px;
+        font-size: 16px;
+        text-align: center;
+        &.active,&:hover{
+          z-index: 3;
+          color: $shopColor;
+          border-color: $shopColor;
+        }
+
+      }
+    }
+  }
   .detialRight {
     font-size: 14px;
     width: 100%;
@@ -138,6 +231,13 @@
       margin-top: 14px;
       color: $shopColor;
       margin-bottom: 0;
+    }
+
+    .price {
+      @include priceDetial();
+    }
+    .buy-box-child{
+      @include buy_box_child();
     }
   }
 </style>

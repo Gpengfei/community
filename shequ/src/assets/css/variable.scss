@@ -20,10 +20,18 @@ $shopColor: #ff6700;
 }*/
 
 @mixin priceDetial() {
-	display:block;
-	font-size:18px;
-	line-height:1;
-	color:#ff6700;
-	padding:12px 0 10px
+	display: block;
+	font-size: 18px;
+	line-height: 1;
+	color: #ff6700;
+	padding: 12px 0 10px;
+	.span {
+		display: inline-block
+	}
+	.del {
+		font-size: 14px;
+		margin-left: 5px;
+		color: #b0b0b0
+	}
 }
 
