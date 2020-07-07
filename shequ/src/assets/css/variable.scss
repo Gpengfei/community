@@ -50,10 +50,5 @@ $btnboder: #b0b0b0;
 	color: $btnboder;
 	cursor: pointer;
 	transition: all .4s;
-	&.primary {
-		background: $shopColor;
-		border-color: $shopColor;
-		color: #fff;
-	}
 }
 

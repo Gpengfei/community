@@ -31,6 +31,7 @@
       </div>
     </div>
     <!-- 规格 -->
+    <!-- 总结价格 -->
     <div class="selected-list">
       <ul class="ul">
         <li class="li">Redmi K30 8GB+256GB 深海微光
@@ -49,6 +50,19 @@
       </ul>
       <div class="price">秒杀价：2038元</div>
     </div>
+    <!-- 总结价格end -->
+    <!---->
+    <div  class="btn_box">
+      <div class="sale-btn">
+        <a data-v-381dda6a="" class="btn">立即预约</a>
+      </div>
+      <div  class="favorite-btn">
+        <a  class="btn">
+          喜欢
+        </a>
+      </div>
+    </div>
+    <!---->
   </div>
 </template>
 
@@ -291,6 +305,38 @@
 
     .selected-list {
       @include selected_list();
+    }
+
+    .btn_box {
+      margin: 10px 0 20px 0;
+      .sale-btn{
+        display: inline-block;
+        margin-right: 10px;
+        .btn{
+          @include asd_btn();
+          width: 298px;
+          height: 52px;
+          line-height: 52px;
+          font-size: 16px;
+          background: $shopColor;
+          border-color: $shopColor;
+          color: #fff;
+        }
+      }
+      .favorite-btn{
+        display: inline-block;
+        margin-right: 10px;
+        .btn{
+          @include asd_btn();
+          width: 140px;
+          height: 52px;
+          line-height: 52px;
+          font-size: 16px;
+          background: #b0b0b0;
+          border-color: #b0b0b0;
+          color: #fff;
+        }
+      }
     }
   }
 </style>
