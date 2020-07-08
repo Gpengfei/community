@@ -5,12 +5,14 @@
         <div class="release-box-l">
           <ul>
             <template v-for="(item,index) in navFb">
-              <li :key="index" :class="{'sty':navIs==index}">{{item}}</li>
+              <router-link :key="index" :to="item.url">
+                <li :class="{'sty':navIs==index}">{{item.name}}</li>
+              </router-link>
             </template>
           </ul>
         </div>
         <div class="release-box-r">
-            <router-view />
+          <router-view />
         </div>
       </div>
     </div>
@@ -22,16 +24,20 @@ import "@style/release/release.scss";
 export default {
   data() {
     return {
-      navFb: ["房屋租赁", "发布服务", "发布通知"]
+      navFb: [
+        { name: "房屋租赁", url: "/release" },
+        { name: "发布服务", url: "/releaseService" },
+        { name: "发布通知", url: "/release" }
+      ]
     };
   },
   mounted() {
     this.$store.dispatch("setNav", 100);
   },
-  computed:{
-      navIs(){
-          return this.$store.state.navFb
-      }
+  computed: {
+    navIs() {
+      return this.$store.state.navFb;
+    }
   }
 };
 </script>

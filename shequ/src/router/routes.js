@@ -67,6 +67,10 @@ export default [
             {
               path:'/',
               component:()=>import('@views/release/ReleaseHousingResources.vue')
+            },
+            {
+              path:'/releaseService',
+              component:()=>import('@views/release/ReleaseService.vue')
             }
           ]
         },
