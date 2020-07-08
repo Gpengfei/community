@@ -1,0 +1,51 @@
+.release{
+    background-color: #f7f7f7;
+    width: 100%;
+    padding: 20px 0;
+    min-height: 668px;
+    .release-box{
+        width: 100%;
+        overflow: hidden;
+        .release-box-l{
+            float: left;
+            width: 300px;
+            ul{
+                width: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+                li{
+                    width: 100%;
+                    background-color: #fff;
+                    height: 50px;
+                    box-sizing: border-box;
+                    padding: 0 30px;
+                    line-height: 50px;
+                    border-bottom: 1px solid #eee;
+                    font-size: 14px;
+                    color: #333;
+                    position: relative;
+                    cursor: pointer;
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                    &.sty{
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 50%;
+                            height: 30%;
+                            transform: translateY(-50%);
+                            width: 2px;
+                            background-color: $color;
+                        }
+                    }
+                }
+            }
+        }
+        .release-box-r{
+            width: auto;
+            margin-left: 320px;
+        }
+    }
+}

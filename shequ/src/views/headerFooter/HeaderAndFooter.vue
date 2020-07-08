@@ -19,7 +19,9 @@
           <div class="box-r">
             <i class="iconfont">&#xe608;</i>
             <template v-if="isLogin">
-              <i class="iconfont bj">&#xe60e;</i>
+              <router-link to="/release">
+                <i class="iconfont bj">&#xe60e;</i>
+              </router-link>
               <router-link to="/newsLists">
                 <i class="iconfont xx tx">&#xe635;</i>
               </router-link>

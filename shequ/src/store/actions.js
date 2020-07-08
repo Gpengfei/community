@@ -7,5 +7,8 @@ export default{
     },
     setMin({commit},flag){
         commit('userstatms',flag)
+    },
+    setNavFb({commit},flag){
+        commit('userNavFb',flag)
     }
 }

@@ -60,6 +60,16 @@ export default [
             },
           ]
         },
+        {
+          path: '/release',
+          component: ()=>import('@views/release/Release.vue'),
+          children:[
+            {
+              path:'/',
+              component:()=>import('@views/release/ReleaseHousingResources.vue')
+            }
+          ]
+        },
       ]
     },
     {
@@ -78,6 +88,7 @@ export default [
       path: '/mobilePhoneVerification',
       component: ()=>import('@views/MobilePhoneVerification.vue')
     },
+
 /*    {
       path: '/shop/index',
       title:"商城",
