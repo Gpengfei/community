@@ -10,11 +10,11 @@
               <a>Redmi 10X 5G系列</a>
             </div>
             <div class="right">
-              <a>概述</a>
+              <a @click="a_go('/shop/index/detial')">概述</a>
               <span class="separator">|</span>
-              <a>参数</a>
-              <span class="separator">|</span>
-              <a class="J_nav_comment">用户评价</a>
+              <!--<a>参数</a>
+              <span class="separator">|</span>-->
+              <a class="J_nav_comment" @click="a_go('/shop/index/evaluate')">用户评价</a>
             </div>
           </div>
         </div>

@@ -53,6 +53,11 @@ export default [
               name:"Detial",
               component: ()=>import('@views/shop/ShopDetial.vue')
             },
+            {
+              path: '/shop/index/evaluate',
+              name:"Detial",
+              component: ()=>import('@views/shop/Evaluate.vue')
+            },
           ]
         },
       ]
