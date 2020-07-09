@@ -27,7 +27,7 @@ export default {
       navFb: [
         { name: "房屋租赁", url: "/release" },
         { name: "发布服务", url: "/releaseService" },
-        { name: "发布通知", url: "/release" }
+        { name: "发布通知", url: "/releaseNotice" }
       ]
     };
   },
