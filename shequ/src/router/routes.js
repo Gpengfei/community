@@ -71,6 +71,10 @@ export default [
             {
               path:'/releaseService',
               component:()=>import('@views/release/ReleaseService.vue')
+            },
+            {
+              path:'/releaseNotice',
+              component:()=>import('@views/release/ReleaseNotice.vue')
             }
           ]
         },
