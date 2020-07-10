@@ -1,22 +1,23 @@
 import base from './base'; // 导入接口域名列表
 import axios from '@/utils/http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
-const article = {    
-    // 新闻列表    
-    // articleList () {        
-    //     return axios.get(`${base.sq}/topics`);    
-    // },    
-    // 新闻详情,演示    
-    // articleDetail (id, params) {        
-    //     return axios.get(`${base.sq}/topic/${id}`, {            
-    //         params: params        
-    //     });    
+let httpFFs = process.env.NODE_ENV === 'production' ? `${base.sq}` : 'https://105.test.7wpp.com';
+const article = {
+    // 新闻列表
+    // articleList () {
+    //     return axios.get(`${base.sq}/topics`);
     // },
-    // post提交    
+    // 新闻详情,演示
+    // articleDetail (id, params) {
+    //     return axios.get(`${base.sq}/topic/${id}`, {
+    //         params: params
+    //     });
+    // },
+    // post提交
     // 注册页面
     // 获取用户类型
-    getUserClassification (params) {        
-        return axios.post(`${base.sq}/Userclass/getUserClassification`, qs.stringify(params));    
+    getUserClassification (params) {
+        return axios.post(`${base.sq}/Userclass/getUserClassification`, qs.stringify(params));
     },
     // 获取社区
     getUserClassstreet(params){
@@ -37,6 +38,10 @@ const article = {
     // 获取消息列表
     getNoticeList(params){
         return axios.post(`${base.sq}/Notice/getNoticeList`, qs.stringify(params));
+    },
+    // 商品首页
+    getShopIndex(params){
+        return axios.post(`${base.sq}/addons/shopro/index/template`, qs.stringify(params));
     },
 
 }
