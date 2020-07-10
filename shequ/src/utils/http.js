@@ -6,8 +6,7 @@ import axios from 'axios';
 import router from '../router';
 import store from '../store/index';
 import { Message } from 'element-ui';
-import base from '@/api/base'; // 导入接口域名列表
-let httpFFs = process.env.NODE_ENV === 'production' ? `${base.sq}` : 'http://smart.zhuwenyong.xyz';
+
 /**
  * 提示函数
  * 禁止点击蒙层、显示一秒后关闭
@@ -61,8 +60,6 @@ const errorHandle = (status, other) => {
 // 创建axios实例
 var instance = axios.create({    timeout: 1000 * 12});
 // 设置post请求头
-// instance.defaults.headers.post['Host'] = `${httpFFs}`;
-instance.defaults.headers.post['platform'] = 'H5';
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 /**
  * 请求拦截器
