@@ -1,7 +1,7 @@
 import base from './base'; // 导入接口域名列表
 import axios from '@/utils/http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
-let httpFFs = process.env.NODE_ENV === 'production' ? `${base.sq}` : 'https://105.test.7wpp.com';
+let httpFFs = process.env.NODE_ENV === 'production' ? `${base.sq}` : 'http://smart.zhuwenyong.xyz';
 const article = {
     // 新闻列表
     // articleList () {
@@ -39,10 +39,17 @@ const article = {
     getNoticeList(params){
         return axios.post(`${base.sq}/Notice/getNoticeList`, qs.stringify(params));
     },
-    // 商品首页
-    getShopIndex(params){
-        return axios.post(`${base.sq}/addons/shopro/index/template`, qs.stringify(params));
+    // 商品首页模板
+    getShopIndex(){
+        return axios.post(`${httpFFs}/addons/shopro/index/template`);
     },
+    // 商品首页初始化数据
+    getShopInit(){
+        return axios.post(`${httpFFs}/addons/shopro/index/init`);
+    },
+    getStatusNum(){
+        return axios.post(`${httpFFs}/addons/shopro/index/init`);
+    }
 
 }
 

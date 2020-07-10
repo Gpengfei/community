@@ -2,7 +2,7 @@
   <div class="Index">
     <div class="cont">
       <!--轮播-->
-      <swiperSe />
+      <swiperSe/>
       <!--轮播end-->
       <!--形式1-->
       <fromList1/>
@@ -18,6 +18,7 @@
   import swiperSe from "@components/shop/swiperSeTop"
   import fromList1 from "@components/shop/fromList1"
   import fromList2 from "@components/shop/fromList2"
+
   export default {
     name: "Index",
     data() {
@@ -32,6 +33,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.getInstall();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -84,7 +86,21 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      getShopInit() {
+        this.$api.article
+            .getShopInit().then(res => {
+          console.log(res);
+          this.getInstall();
+        });
+      },
+      getInstall() {
+        this.$api.article
+            .getShopIndex().then(res => {
+              console.log(res);
+            });
+      }
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
@@ -111,7 +127,8 @@
 <style scoped lang="scss">
   .Index {
     background: #f5f5f5;
-    .cont{
+
+    .cont {
       width: 1226px;
       max-width: 1226px;
       margin: 0 auto;
