@@ -95,10 +95,9 @@
         });
       },
       getInstall() {
-        this.$api.article
-            .getShopIndex().then(res => {
-              console.log(res);
-            });
+        this.a_post("/addons/shopro/index/template", res => {
+          console.log(res);
+        });
       }
     },
     /**
