@@ -1,14 +1,13 @@
 import Vue from "vue";
 import axios from "axios";
 import qs from "qs";
-Vue.use(axios);
 /* post请求 */
 export function post(url, data, callbacks) {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      'platform':"H5"
+      // "platform":"H5"
     },
     baseURL:
         process.env.NODE_ENV == "production"
@@ -35,8 +34,7 @@ export function get(url, data) {
     method: "POST",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
-      charset: "UTF-8",
-      platform:"H5"
+      'platform':"H5"
     },
     data: qs.stringify(data),
     xhrFields: {

@@ -702,8 +702,7 @@
          * */
         methods: {
           getShopInit() {
-            this.$api.article
-                .getShopInit().then(res => {
+            this.a_post("/addons/shopro/index/template", res => {
               console.log(res);
               this.getInstall();
             });
