@@ -1,11 +1,8 @@
 <template>
   <div class="swiperSeTop">
     <swiper class="swiper" ref="mySwiper" :options="swiperOption">
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
+      <swiper-slide v-for="(arr,index) in list" :key="index" class="sw" >
+        <img class="img" @click="a_go(arr.path)" :src="arr.image" alt="">
       </swiper-slide>
       <swiper-slide class="sw">
         <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
@@ -38,6 +35,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -81,7 +79,11 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {},
+    props: {
+      list: {
+        type: Array
+      }
+    },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -112,8 +114,7 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-    },
+    components: {},
   }
 </script>
 
@@ -121,14 +122,17 @@
   .swiperSeTop {
     width: 100%;
     height: 460px;
-    .swiper{
+
+    .swiper {
       width: 100%;
       height: 100%;
-      .se{
+
+      .se {
         width: 100%;
         height: 100%;
       }
-      .img{
+
+      .img {
         width: 100%;
         height: 100%;
       }

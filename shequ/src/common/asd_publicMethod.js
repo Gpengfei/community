@@ -8,8 +8,7 @@ export function post(url, data, callbacks) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      'platform':"H5",
-      'Host':'http://smart.zhuwenyong.xyz/'
+      'platform':"H5"
     },
     baseURL:
         process.env.NODE_ENV == "production"
