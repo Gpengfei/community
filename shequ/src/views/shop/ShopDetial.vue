@@ -43,6 +43,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.getShopDetial();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -95,7 +96,13 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      getShopDetial() {
+        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3",{id:3}, res => {
+          console.log(res);
+        });
+      }
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
@@ -122,7 +129,7 @@
 <style scoped lang="scss">
   .ShopDetial {
     .row {
-      width: 1226px;
+      width: $allWidth;
       margin-right: auto;
       margin-left: auto;
       display: flex;
@@ -146,7 +153,7 @@
 
       .row2 {
         .title {
-          width: 1226px;
+          width: $allWidth;
           margin-right: auto;
           margin-left: auto;
 
@@ -160,7 +167,7 @@
         }
 
         .detail {
-          width: 1226px;
+          width: $allWidth;
           margin: auto;
           .img {
             width: 100%;

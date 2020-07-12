@@ -1,56 +1,26 @@
 <template>
-  <div class="fromList1">
-    <div class="box">
-      <div class="top-hd">
-        <h2 class="title">手机</h2>
-        <div class="more">
-          <span class="a">
-            查看全部<i class="iconfont iconfont-arrow-right-big"></i>
-          </span>
+  <div class="topList">
+    <ul class="ul">
+      <li class="li">
+        <p class="p">
+            qwerr
+          <i class="el-icon-arrow-right"></i>
+        </p>
+        <div class="div">
+          <ul class="ul">
+            <li class="li">
+
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="box-bd clearfix">
-        <div class="row">
-          <div class="left">
-            <div class="imgWar" @click="a_go('/shop/index/detial')">
-              <img class="img"
-                   src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"
-                   alt="">
-            </div>
-          </div>
-          <div class="right">
-            <ul class="ul">
-              <li class="li" @click="a_go('/shop/index/detial')">
-                <img class="img"
-                     src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"
-                     alt="">
-                <p class="title">
-                  小米10 青春版 5G
-                </p>
-                <p class="desc">50倍潜望式变焦 / 轻薄5G手机</p>
-                <p class="price">
-                  <span class="num">2009</span>
-                  <span class="">元</span>
-                  <span class="">起</span>
-                  <del class="del">
-                    <span class="num">
-                      333
-                    </span>
-                    元
-                  </del>
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
   export default {
-    name: "fromList1",
+    name: "topList",
     data() {
       return {};
     },
@@ -136,146 +106,66 @@
 </script>
 
 <style scoped lang="scss">
-  .fromList1 {
-    margin-bottom: 8px;
-
-    .box {
-      .top-hd {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .title {
-          margin: 0;
-          font-size: 22px;
-          font-weight: 200;
-          line-height: 58px;
-          color: #333;
-        }
-
-        .more {
-          .a {
-            font-size: 16px;
-            line-height: 58px;
-            color: #424242;
-            -webkit-transition: all .4s;
-            transition: all .4s;
-          }
-        }
-      }
-
-      .row {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-
-        .left {
+  .topList {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 21;
+    width: 234px;
+    height: 460px;
+    font-size: 14px;
+    .ul{
+      height: 420px;
+      margin: 0;
+      padding: 20px 0;
+      list-style-type: none;
+      border: 0;
+      color: #fff;
+      background: rgba(105,101,101,.6);
+      .li{
+        .p{
           position: relative;
-          z-index: 1;
-          float: left;
-          width: 234px;
-          height: 614px;
-          /*margin-left: 14px;*/
-          margin-bottom: 14px;
-          background: #fff;
-          -webkit-transition: all .2s linear;
-          transition: all .2s linear;
-          cursor: pointer;
-          &:hover {
-            z-index: 2;
-            -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-            -webkit-transform: translate3d(0, -2px, 0);
-            transform: translate3d(0, -2px, 0);
-          }
-          .imgWar {
-            display: block;
-            width: 100%;
-            height: 100%;
-
-            .img {
-              width: 234px;
-              height: 614px;
-            }
+          display: block;
+          padding-left: 30px;
+          height: 42px;
+          line-height: 42px;
+          .el-icon-arrow-right{
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 16px;
+            line-height: 16px;
+            color: #e0e0e0;
           }
         }
-
-        .right {
-          width: 100%;
-
-          .ul {
-            width: 100%;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-
-            .li {
-              height: 260px;
-              padding: 20px 0;
+        .div{
+          position: absolute;
+          flex: 1;
+          left: 234px;
+          top: 0;
+          z-index: 24;
+          height: 458px;
+          border: 1px solid #e0e0e0;
+          border-left: 0;
+          background: #fff;
+          -webkit-box-shadow: 0 8px 16px rgba(0,0,0,.18);
+          box-shadow: 0 8px 16px rgba(0,0,0,.18);
+          width: 992px;
+          .ul{
+            width: 248px;
+            height: 458px;
+            margin: 0;
+            padding: 2px 0;
+            list-style-type: none;
+            .li{
               position: relative;
-              z-index: 1;
               float: left;
-              width: 234px;
-              margin-left: 14px;
-              margin-bottom: 14px;
-              background: #fff;
-              -webkit-transition: all .2s linear;
-              transition: all .2s linear;
-              cursor: pointer;
-
-              .img {
-                display: block;
-                width: 160px;
-                height: 160px;
-                margin: 0 auto 18px auto;
-              }
-
-              .title, .desc {
-                text-align: center;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-                margin: 0 10px 2px;
-              }
-
-              .title {
-                font-size: 14px;
-                font-weight: 400;
-                color: #333;
-
-              }
-
-              .desc {
-                margin: 0 10px 10px;
-                height: 18px;
-                font-size: 12px;
-                color: #b0b0b0;
-              }
-
-              .price {
-                margin: 0 10px 10px;
-                text-align: center;
-                color: $shopColor;
-
-                .del {
-                  margin-left: .5em;
-                  color: #b0b0b0;
-                }
-              }
+              width: 265px;
+              height: 76px;
             }
           }
-
         }
       }
-    }
-
-    .li:hover {
-      z-index: 2;
-      -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-      -webkit-transform: translate3d(0, -2px, 0);
-      transform: translate3d(0, -2px, 0);
     }
   }
 </style>

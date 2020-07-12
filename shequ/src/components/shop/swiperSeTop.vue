@@ -1,5 +1,6 @@
 <template>
   <div class="swiperSeTop">
+    <topList />
     <swiper class="swiper" ref="mySwiper" :options="swiperOption">
       <swiper-slide v-for="(arr,index) in list" :key="index" class="sw" >
         <img class="img" @click="a_go(arr.path)" :src="arr.image" alt="">
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+  import topList from "@components/shop/topList"
   export default {
     name: "swiperSeTop",
     data() {
@@ -114,7 +116,9 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {
+      topList
+    },
   }
 </script>
 
@@ -122,7 +126,7 @@
   .swiperSeTop {
     width: 100%;
     height: 460px;
-
+    position: relative;
     .swiper {
       width: 100%;
       height: 100%;

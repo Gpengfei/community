@@ -617,7 +617,7 @@
           //   });
           // },
           getInstall() {
-            this.a_post("/addons/shopro/index/template", res => {
+            this.a_post("/addons/shopro/index/template",{}, res => {
               console.log(res);
             });
           }
@@ -654,8 +654,8 @@
     background: #f5f5f5;
 
     .cont {
-      width: 1226px;
-      max-width: 1226px;
+      width: $allWidth;
+      max-width: $allWidth;
       margin: 0 auto;
     }
   }

@@ -127,7 +127,7 @@
         margin-top: 0;
         color: #616161;
         .container{
-          width: 1226px;
+          width: $allWidth;
           margin-right: auto;
           margin-left: auto;
           .h2{
