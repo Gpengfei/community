@@ -1,0 +1,130 @@
+.myOrder {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  .myOrder-box {
+    width: 100%;
+    .myOrder-sxandsoso {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      position: relative;
+      box-sizing: border-box;
+      padding: 0 10px;
+      justify-content: space-between;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #eee;
+        bottom: 0;
+        left: 0;
+      }
+      ul {
+        display: flex;
+        li {
+          padding: 0 10px;
+          font: 16px;
+          color: #999;
+          margin-right: 10px;
+          cursor: pointer;
+          &.sty {
+            color: $color;
+            border-bottom: 3px solid $color;
+          }
+        }
+      }
+      .pfsoso {
+        box-sizing: border-box;
+        padding-top: 10px;
+        .pfsoso-box {
+          width: 272px;
+          height: 30px;
+          border-radius: 5px;
+          border: 1px solid $color;
+          line-height: 28px;
+          display: flex;
+          overflow: hidden;
+          box-sizing: border-box;
+          padding-left: 10px;
+          input {
+            flex: 5;
+            font-size: 14px;
+            color: #666;
+          }
+          .iconfont {
+            flex: 1;
+            background-color: $color;
+            color: #fff;
+            font-size: 15px;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .myOrder-sx {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0;
+      .sx-box {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: #eee;
+        overflow: hidden;
+        .sx-l {
+          float: left;
+          .el-select {
+            width: 170px;
+            height: 30px;
+          }
+          .el-select .el-input__inner {
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+            height: 30px;
+            font-size: 14px;
+          }
+          .el-select .el-input .el-select__caret {
+            line-height: 30px;
+            color: #666;
+          }
+        }
+        .sx-r {
+          width: auto;
+          margin-left: 170px;
+          ul {
+            display: flex;
+            width: 100%;
+            li {
+              color: #666;
+              font-size: 14px;
+              text-align: center;
+              &:nth-child(1) {
+                width: 358px;
+              }
+              &:nth-child(2) {
+                width: 113px;
+              }
+              &:nth-child(3) {
+                width: 110px;
+              }
+              &:nth-child(4) {
+                width: 140px;
+              }
+              &:nth-child(5) {
+                width: 150px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// 组件默认样式
+.el-select-dropdown__item.selected {
+  color: $color;
+}
