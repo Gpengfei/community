@@ -10,9 +10,10 @@
             float: left;
             width: 300px;
             ul{
-                width: 100%;
+                width: 300px;
                 border-radius: 10px;
                 overflow: hidden;
+                position: fixed;
                 li{
                     width: 100%;
                     background-color: #fff;
