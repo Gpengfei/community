@@ -1,14 +1,12 @@
 <template>
-  <div class="shopAll">
-    <router-view />
-    <FloatRight/>
+  <div class="seckill">
+
   </div>
 </template>
 
 <script>
-  import FloatRight from "@components/shop/FloatRight"
   export default {
-    name: "Shop",
+    name: "seckill",
     data() {
       return {
 
@@ -17,14 +15,12 @@
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
      * */
-    beforeCreate() {},
+    beforeCreate() {
+    },
     /*
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
-      this.$store.commit("change",res=>{
-        res.isNav = 3
-      })
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -73,14 +69,7 @@
      * computed: {aDouble: vm => vm.a * 2}
      * 计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。
      * */
-    computed: {
-      navsIndex() {
-        return this.$store.state.isNav;
-      },
-      isLogin() {
-        return this.$store.state.isLogin;
-      }
-    },
+    computed: {},
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
@@ -100,14 +89,11 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      FloatRight
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-.SHOPALL{
-
-}
+  .seckill {
+  }
 </style>

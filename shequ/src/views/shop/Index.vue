@@ -131,97 +131,6 @@
               },
               "decorate_id": 4
             },
-            {
-              "id": 1152,
-              "type": "coupons",
-              "category": "home",
-              "name": "优惠券",
-              "content": {
-                "ids": "1",
-                "name": ""
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1153,
-              "type": "groupon",
-              "category": "home",
-              "name": "拼团",
-              "content": {
-                "id": 12,
-                "name": "",
-                "groupon_name": "7.4拼团"
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1154,
-              "type": "seckill",
-              "category": "home",
-              "name": "秒杀",
-              "content": {
-                "id": 11,
-                "name": "限时秒杀",
-                "seckill_name": "7.4秒杀"
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1155,
-              "type": "live",
-              "category": "home",
-              "name": "小程序直播",
-              "content": {
-                "style": 1,
-                "ids": "",
-                "name": ""
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1156,
-              "type": "adv",
-              "category": "home",
-              "name": "广告魔方",
-              "content": {
-                "list": [
-                  {
-                    "name": "",
-                    "image": "https://shopro-1253949872.file.myqcloud.com/uploads/20200704/019f2c02697b47e6fd1e149cd1fa09cf.png",
-                    "path": "/pages/index/index",
-                    "path_name": "商城-首页",
-                    "path_type": 1
-                  }
-                ],
-                "name": "",
-                "style": 1
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1157,
-              "type": "title-block",
-              "category": "home",
-              "name": "标题栏",
-              "content": {
-                "name": "为你推荐",
-                "color": "#000000",
-                "image": "http://shopro.7wpp.com/imgs/title2.png"
-              },
-              "decorate_id": 4
-            },
-            {
-              "id": 1158,
-              "type": "goods-list",
-              "category": "home",
-              "name": "自定义商品",
-              "content": {
-                "ids": "6,5,4,3",
-                "image": "https://shopro-1253949872.file.myqcloud.com",
-                "name": ""
-              },
-              "decorate_id": 4
-            }
           ],
           "user": [
             {
@@ -701,13 +610,12 @@
          * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
          * */
         methods: {
-          getShopInit() {
-            this.a_post("/addons/shopro/index/template", res => {
-              console.log(res);
-              this.getInstall();
-            });
-          }
-          ,
+          // getShopInit() {
+          //   this.a_post("/addons/shopro/index/template", res => {
+          //     console.log(res);
+          //     this.getInstall();
+          //   });
+          // },
           getInstall() {
             this.a_post("/addons/shopro/index/template", res => {
               console.log(res);
