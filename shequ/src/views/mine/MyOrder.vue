@@ -37,6 +37,124 @@
           </div>
         </div>
       </div>
+      <div class="myOrder-lis">
+        <ul>
+          <li class="dfk">
+            <p class="dd-title">
+              <span class="title-time">2020-06-15 12:02:12</span>
+              <span class="title-ddh">订单号:123456789123</span>
+            </p>
+            <table>
+              <tr>
+                <td width="426px" align="center">
+                  <div class="tb-box">
+                    <div class="tb-img">
+                      <img src="img/ddt.png" alt />
+                    </div>
+                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
+                    <div class="tb-num">x1</div>
+                  </div>
+                </td>
+                <td width="111px" align="center">李三三</td>
+                <td width="111px" align="center">￥1500</td>
+                <td width="140px" align="center">
+                  <div class="zt-box">
+                    <p>等待商家付款</p>
+                    <p>订单详情</p>
+                  </div>
+                </td>
+                <td width="152px" align="center">
+                  <p class="czan">立即付款</p>
+                </td>
+              </tr>
+            </table>
+          </li>
+          <li class="dsh">
+            <p class="dd-title">
+              <span class="title-time">2020-06-15 12:02:12</span>
+              <span class="title-ddh">订单号:123456789123</span>
+            </p>
+            <table>
+              <tr>
+                <td width="426px" align="center">
+                  <div class="tb-box">
+                    <div class="tb-img">
+                      <img src="img/ddt.png" alt />
+                    </div>
+                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
+                    <div class="tb-num">x1</div>
+                  </div>
+                </td>
+                <td width="111px" align="center">李三三</td>
+                <td width="111px" align="center">￥1500</td>
+                <td width="140px" align="center">
+                  <div class="zt-box">
+                    <p>等待商家付款</p>
+                    <p>订单详情</p>
+                    <p class="ckdd">查看物流</p>
+                  </div>
+                </td>
+                <td width="152px" align="center">
+                  <p class="czan">确认收货</p>
+                </td>
+              </tr>
+            </table>
+          </li>
+          <li class="ywc">
+            <p class="dd-title">
+              <span class="title-time">2020-06-15 12:02:12</span>
+              <span class="title-ddh">订单号:123456789123</span>
+            </p>
+            <table>
+              <tr>
+                <td width="426px" align="center">
+                  <div class="tb-box">
+                    <div class="tb-img">
+                      <img src="img/ddt.png" alt />
+                    </div>
+                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
+                    <div class="tb-num">x1</div>
+                  </div>
+                </td>
+                <td rowspan="2" width="111px" align="center">李三三</td>
+                <td rowspan="2" width="111px" align="center">￥1500</td>
+                <td rowspan="2" width="140px" align="center">
+                  <div class="zt-box">
+                    <p>交易完成</p>
+                    <p>订单详情</p>
+                  </div>
+                </td>
+                <td rowspan="2" width="152px" align="center">
+                  <p class="zcgm">再次购买</p>
+                  <p class="pj">评价</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="426px" align="center">
+                  <div class="tb-box">
+                    <div class="tb-img">
+                      <img src="img/ddt.png" alt />
+                    </div>
+                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
+                    <div class="tb-num">x1</div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="fy">
+      <div class="fy-box">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="1000"
+          prev-text="上一页"
+          next-text="下一页"
+        ></el-pagination>
+      </div>
     </div>
   </div>
 </template>
