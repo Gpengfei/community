@@ -1,45 +1,36 @@
 <template>
-  <div class="ShopDetial">
-    <detialTop :detail="details"/>
-    <!--内容部分-->
-    <div class="row">
-      <div class="left">
-        <detialLeft :detail="details"/>
-      </div>
-      <div class="right">
-        <detialRight :detail="details"/>
-      </div>
-    </div>
-    <!--内容部分 end-->
-    <div class="details">
-      <div class="row2">
-        <div class="title">
-          <h3 class="h3">商品详情</h3>
-        </div>
-        <div class="detail" v-html="details.content">
-        </div>
-      </div>
-      <div class="row2">
-        <div class="title">
-          <h3 class="h3">规格参数</h3>
-        </div>
-        <div class="detail" >
-        </div>
-      </div>
-    </div>
+  <div class="swiperShopLeft">
+    <swiper class="swiper" ref="mySwiperLeft" :options="swiperOption">
+      <swiper-slide v-for="(arr,index) in list" :key="index" class="sw">
+        <img class="img" :src="arr" alt="">
+      </swiper-slide>
+      <swiper-slide class="sw">
+        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
+      </swiper-slide>
+      <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div>
+    </swiper>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
   </div>
 </template>
 
 <script>
-  import detialTop from "@components/shop/detialTop"
-  import detialLeft from "@components/shop/detialLeft"
-  import detialRight from "@components/shop/detialRight"
-
   export default {
-    name: "ShopDetial",
+    name: "swiperShopLeft",
     data() {
       return {
-        details: {},
+        swiperOption: {
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+            dynamicBullets: true,
+          },
+        }
       };
     },
     /**
@@ -51,7 +42,6 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
-      this.getShopDetial();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -63,6 +53,8 @@
      * 注意 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm. 替换掉 mounted
      * */
     mounted() {
+      console.log('Current Swiper instance object', this.swiper)
+      this.swiper.slideTo(3, 1000, false)
     },
     /**
      * 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
@@ -94,12 +86,9 @@
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
     props: {
-      detail: {
-        type: Object,
-        default: ()=>{
-          return {}
-        }
-      },
+      list: {
+        type: Array
+      }
     },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
@@ -107,23 +96,15 @@
      * computed: {aDouble: vm => vm.a * 2}
      * 计算属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。注意，如果某个依赖 (比如非响应式属性) 在该实例范畴之外，则计算属性是不会被更新的。
      * */
-    computed: {},
+    computed: {
+      swiper() {
+        return this.$refs.mySwiperLeft.$swiper
+      }
+    },
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {
-      getShopDetial() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3", {id: 3}, res => {
-          console.log("detail", res.data.data);
-          this.$store.commit("change", ress => {
-            ress.shopDetial = res.data.data
-            ress.swiperShopLeft = res.data.data.images
-            /*swiperShopLeft*/
-          });
-          this.details = res.data.data;
-        });
-      }
-    },
+    methods: {},
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
@@ -139,72 +120,30 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      detialTop,
-      detialLeft,
-      detialRight
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .ShopDetial {
-    .row {
-      width: $allWidth;
-      margin-right: auto;
-      margin-left: auto;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 32px;
-      padding-bottom: 12px;
+  .swiperShopLeft {
+    position: relative;
+    width: 560px;
+    height: 560px;
 
-      .left {
-      }
-
-      .right {
-
-      }
+    .swiper {
+      width: 100%;
+      height: 100%;
     }
 
-    .details {
-      width: 100%;
-      padding-bottom: 50px;
-      background-color: #f6f6f6;
-
-      .row2 {
-        .title {
-          width: $allWidth;
-          margin-right: auto;
-          margin-left: auto;
-
-          .h3 {
-            font-size: 22px;
-            font-weight: 400;
-            margin-top: 0;
-            margin-bottom: 0;
-            padding: 1em 0;
-          }
-        }
-
-        .detail {
-          width: $allWidth;
-          margin: auto;
-          .img {
-            width: 100%;
-          }
-        }
-      }
+    .swiper-pagination {
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
     }
   }
 </style>
 <style lang="scss">
-  .detail{
-    p{
-      width: 100%;
-      img{
-        width: 100%;
-      }
-    }
+  :root {
+    --swiper-theme-color: #1ac1b0;
   }
 </style>

@@ -1,8 +1,11 @@
 <template>
-  <div class="detialLeft"> </div>
+  <div class="detialLeft">
+    <swiperShopLeft :list="$store.state.swiperShopLeft"/>
+  </div>
 </template>
 
 <script>
+  import swiperShopLeft from "@components/shop/swiperShopLeft"
   export default {
     name: "detialLeft",
     data() {
@@ -12,6 +15,7 @@
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
      * */
     beforeCreate() {
+
     },
     /*
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
@@ -28,6 +32,7 @@
      * 注意 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm. 替换掉 mounted
      * */
     mounted() {
+
     },
     /**
      * 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
@@ -85,13 +90,16 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {
+      swiperShopLeft
+    },
   }
 </script>
 
 <style scoped lang="scss">
   .detialLeft {
     width: 606px;
+    min-width: 606px;
     position: relative;
   }
 </style>

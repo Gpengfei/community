@@ -1,5 +1,6 @@
 $color: #1ac1b0;
-$shopColor: #ff6700;
+//$shopColor: #ff6700;
+$shopColor: $color;
 $btnboder: #b0b0b0;
 $allWidth:1226px;
 @mixin mixins-ticket-vertical($width, $height, $r, $left, $l-color, $r-color) {
