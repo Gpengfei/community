@@ -4,5 +4,6 @@ export default{
     minNav:0,
     navFb:0,
     userId:null,
-    token:null
+    token:null,
+    shopDetial: null
 }

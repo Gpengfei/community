@@ -1,23 +1,29 @@
 <template>
   <div class="ShopDetial">
-    <detialTop/>
+    <detialTop :detail="details"/>
     <!--内容部分-->
     <div class="row">
       <div class="left">
-        <detialLeft/>
+        <detialLeft :detail="details"/>
       </div>
       <div class="right">
-        <detialRight/>
+        <detialRight :detail="details"/>
       </div>
     </div>
     <!--内容部分 end-->
     <div class="details">
       <div class="row2">
         <div class="title">
-          <h3 class="h3">详情</h3>
+          <h3 class="h3">商品详情</h3>
         </div>
-        <div class="detail">
-          <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a482afa34053b1b32ece1023475af7fb.jpeg" alt="">
+        <div class="detail" v-html="details.content">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="title">
+          <h3 class="h3">规格参数</h3>
+        </div>
+        <div class="detail" >
         </div>
       </div>
     </div>
@@ -32,7 +38,9 @@
   export default {
     name: "ShopDetial",
     data() {
-      return {};
+      return {
+        details: {},
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -85,7 +93,14 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {},
+    props: {
+      detail: {
+        type: Object,
+        default: ()=>{
+          return {}
+        }
+      },
+    },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -98,8 +113,12 @@
      * */
     methods: {
       getShopDetial() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3",{id:3}, res => {
-          console.log(res);
+        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3", {id: 3}, res => {
+          console.log("detail", res.data.data);
+          this.$store.commit("change", ress => {
+            ress.shopDetial = res.data.data
+          });
+          this.details = res.data.data;
         });
       }
     },
@@ -175,6 +194,15 @@
         }
       }
     }
-
+  }
+</style>
+<style lang="scss">
+  .detail{
+    p{
+      width: 100%;
+      img{
+        width: 100%;
+      }
+    }
   }
 </style>

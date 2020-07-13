@@ -1,16 +1,14 @@
 <template>
   <div class="detialRight">
     <!--标题部分-->
-    <h2 class="h2">
-      Redmi K30
-    </h2>
-    <p class="dp">
-      <span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 /
-      最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC
+    <h2 class="h2">{{ detail.title }}</h2>
+    <p class="dp">{{ detail.subtitle }}
+      <!--<span class="span">「6GB+128GB到手价仅1499元；8GB+256GB到手价仅1799元」</span>120Hz高帧率流速屏 / 索尼6400万前后六摄 / 6.67''小孔径全面屏 /
+      最高可选8GB+256GB大存储 / 高通骁龙730G处理器 / 3D四曲面玻璃机身 / 4500mAh+27W快充 / 多功能NFC-->
     </p>
     <!--标题部分-->
     <!--店铺-->
-    <p title="自己自愿自营" class="company-info">自营</p>
+<!--    <p title="自己自愿自营" class="company-info">自营</p>-->
     <!--店铺 end-->
     <!--钱-->
     <div class="linePrice">
@@ -34,11 +32,11 @@
     </div>
     <!--地址ened-->
     <!-- 规格 -->
-    <div class="buy-box-child" v-for="(arr, i) in specifications" :key="i">
+    <div class="buy-box-child" v-for="(arr, i) in detail.sku" :key="i">
       <div class="option-box">
-        <div class="title">{{arr.title}}</div>
+        <div class="title">{{arr.name}}</div>
         <ul class="ul">
-          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.list"
+          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.content"
               :key="j">
             <a class="a">{{item.name}}</a>
           </li>
@@ -167,7 +165,14 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {},
+    props: {
+      detail: {
+        type: Object,
+        default: ()=>{
+          return {}
+        }
+      },
+    },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
