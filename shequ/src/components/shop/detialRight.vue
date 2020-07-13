@@ -8,35 +8,37 @@
     </p>
     <!--标题部分-->
     <!--店铺-->
-<!--    <p title="自己自愿自营" class="company-info">自营</p>-->
+    <!--    <p title="自己自愿自营" class="company-info">自营</p>-->
     <!--店铺 end-->
     <!--钱-->
     <div class="linePrice">
-      <span class="span">{{ detail.price }} 元 <del class="del">{{detail.original_price}}元</del></span>
+      <span class="span">{{ pricem || detail.price }} 元 <del v-if="priceDetm || detail.original_price"
+                                                             class="del">{{ priceDetm || detail.original_price }}元</del></span>
     </div>
     <!--钱 end-->
     <div class="line"></div>
     <!--地址-->
-    <div class="address_box">
-      <div class="address">
-        <div class="con">
-          <div class="info">
-            <span>内蒙古</span>
-            <span>呼和浩特市</span>
-            <span>赛罕区</span>
-            <span>敕勒川路街道</span>
-          </div>
-          <a class="edit">修改</a>
-        </div>
-      </div>
-    </div>
+    <!--    <div class="address_box">-->
+    <!--      <div class="address">-->
+    <!--        <div class="con">-->
+    <!--          <div class="info">-->
+    <!--            <span>内蒙古</span>-->
+    <!--            <span>呼和浩特市</span>-->
+    <!--            <span>赛罕区</span>-->
+    <!--            <span>敕勒川路街道</span>-->
+    <!--          </div>-->
+    <!--          <a class="edit">修改</a>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <!--地址ened-->
     <!-- 规格 -->
     <div class="buy-box-child" v-for="(arr, i) in detail.sku" :key="i">
       <div class="option-box">
         <div class="title">{{arr.name}}</div>
         <ul class="ul">
-          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)" v-for="(item, j) in arr.content"
+          <li class="li" :class="{active:specificationsArr[i] == j}" @click="active(i,j)"
+              v-for="(item, j) in arr.content"
               :key="j">
             <a class="a">{{item.name}}</a>
           </li>
@@ -44,34 +46,46 @@
       </div>
     </div>
     <!-- 规格 -->
+    <div class="line"></div>
+    <div class="inputNumber">
+      <div class="left">
+        购买数量
+      </div>
+      <el-input-number size="medium" v-model="number"></el-input-number>
+      <div class="right"></div>
+    </div>
+    <div class="line"></div>
+    <!--默认商品图-->
+    <div v-show="detailImage">
+      <img class="defaultImg" :src="detailImage" alt="">
+      <div class="line"></div>
+    </div>
+
+    <!--默认商品图end-->
+
     <!-- 总结价格 -->
     <div class="selected-list">
       <ul class="ul">
-        <li class="li">Redmi K30 8GB+256GB 深海微光
-          <span class="span">1799元<del class="del">2199元</del>
+        <li class="li"> {{ detail.title }}
+          <span class="span">{{ pricem || detail.price }} 元<del
+              class="del">{{ priceDetm || detail.original_price }} 元</del>
           </span>
         </li>
       </ul>
-      <ul class="ul">
-        <li class="li"></li>
-      </ul>
-      <ul class="ul">
-        <li class="li"></li>
-      </ul>
-      <ul class="ul">
-        <li class="li"> 云空间年卡500G<span class="span">239元</span></li><!----><!----><!----><!---->
-      </ul>
-      <div class="price">秒杀价：2038元</div>
+      <!-- <ul class="ul">
+              <li class="li"> {{ detail.title }} <span class="span">239元</span></li>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;
+            </ul>-->
+      <div class="price">总计：{{ pricem || detail.price }}元</div>
     </div>
     <!-- 总结价格end -->
     <!--按钮-->
     <div class="btn_box">
       <div class="sale-btn">
-        <a class="btn">立即预约</a>
+        <a class="btn">立即购买</a>
       </div>
       <div class="favorite-btn">
         <a class="btn">
-          喜欢
+          加入购物车
         </a>
       </div>
     </div>
@@ -84,35 +98,20 @@
     name: "detialRight",
     data() {
       return {
-        specificationsArr: [0, 0],
-        specifications: [
-          {
-            title: "选择版本",
-            list: [
-              {
-                name: "6GB+128GB",
-                active: true
-              },
-              {
-                name: "25GB+128GB",
-                active: false
-              }
-            ]
-          },
-          {
-            title: "选择规格",
-            list: [
-              {
-                name: "bug绿",
-                active: true
-              },
-              {
-                name: "bug兰",
-                active: false
-              }
-            ]
-          }
-        ]
+        specificationsArr: [-1, -1],
+        /*显示钱*/
+        //优惠价格
+        pricem: 0,
+        //实际价格
+        priceDetm: 0,
+        //图片
+        detailImage: "",
+        //对比
+        sku_priceStr: "",
+        // 选择的商品上位,
+        superiorPosition: {},
+        //
+        number: 1
       };
     },
     /**
@@ -169,7 +168,7 @@
     props: {
       detail: {
         type: Object,
-        default: ()=>{
+        default: () => {
           return {}
         }
       },
@@ -185,19 +184,66 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      /*点击规格*/
       active(i, j) {
         this.specificationsArr.splice(i, 1, j);
+        if (this.specificationsArr.length > 0 && this.specificationsArr.indexOf(-1) == 1) {
+          console.log("不通过")
+          return false;
+        }
+        this.sku_priceStr = "";
+        for (let k = 0; k < this.specificationsArr.length; k++) {
+          (this.specificationsArr.length - 1) == k ? this.sku_priceStr += this.detail.sku[k].content[this.specificationsArr[k]].id : this.sku_priceStr += this.detail.sku[k].content[this.specificationsArr[k]].id + ","
+        }
+        this.contrast(this.sku_priceStr);
+      },
+      /*对比*/
+      contrast(str) {
+        console.log("str", str);
+        for (let i = 0; i < this.detail.sku_price.length; i++) {
+          console.log(this.detail.sku_price[i].goods_sku_ids == str);
+          if (this.detail.sku_price[i].goods_sku_ids == str) {
+            this.superiorPosition = this.detail.sku_price[i];
+            //优惠价格
+            if (this.detail.sku_price[i].price) {
+              this.pricem = this.detail.sku_price[i].price;
+            }
+            //实际价格
+            if (this.detail.sku_price[i].original_price) {
+              this.priceDetm = this.detail.sku_price[i].original_price;
+            }
+            //图片
+            if (this.detail.sku_price[i].image) {
+              this.detailImage = this.detail.sku_price[i].image;
+            }
+          }
+        }
+      },
+      someMethod() {
+        for (let i = 0; i < this.detail.length; i++) {
+          this.detail.length.splice(i, 0, -1);
+          //优惠价格
+          this.pricem = detail.price;
+          //实际价格
+          this.priceDetm = detail.original_price;
+
+        }
       }
     },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
     watch: {
-      specifications() {
-        for (let i = 0; i < this.specifications.length; i++) {
-          this.specificationsArr.splice(i, 0, 0);
+      detail: {
+        handler: 'someMethod',
+        deep: true,
+        immediate: true
+      },
+      /*detail() {
+        for (let i = 0; i < this.sku.detail.length; i++) {
+          this.sku.detail.length.splice(i, 0, -1);
         }
-      }
+      }*/
     },
     /**
      * 包含 Vue 实例可用指令的哈希表。
@@ -270,7 +316,8 @@
 
         .span {
           float: right;
-          .del{
+
+          .del {
             display: inline-block;
             margin-left: 5px;
           }
@@ -299,6 +346,7 @@
 
     .line {
       margin-top: 12px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #e0e0e0;
     }
 
@@ -310,15 +358,18 @@
         padding: 30px 50px;
         background: #fafafa;
         border: 1px solid #e0e0e0;
-        .con{
-          .info{
+
+        .con {
+          .info {
             display: inline-block;
-            span{
+
+            span {
               display: inline;
               margin-right: 14px;
             }
           }
-          .edit{
+
+          .edit {
             color: #ff6700;
             margin: 0;
             display: inline-block;
@@ -390,6 +441,24 @@
           border-color: #b0b0b0;
           color: #fff;
         }
+      }
+    }
+
+    .defaultImg {
+      width: 200px;
+      height: 200px;
+      display: block;
+    }
+
+    .inputNumber{
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      .left{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        height: 100%;
       }
     }
   }

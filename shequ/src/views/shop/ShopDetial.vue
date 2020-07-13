@@ -14,18 +14,31 @@
     <div class="details">
       <div class="row2">
         <div class="title">
+          <h3 class="h3">规格参数</h3>
+        </div>
+        <div class="detail">
+          <div class="div">
+            <ul class="ul">
+            <li class="li" v-for="( arr,index ) in details.params" :key="index">
+              <div class="left">
+                {{ arr.title }}
+              </div>
+              <div class="right">
+                {{ arr.content }}
+              </div>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="title">
           <h3 class="h3">商品详情</h3>
         </div>
         <div class="detail" v-html="details.content">
         </div>
       </div>
-      <div class="row2">
-        <div class="title">
-          <h3 class="h3">规格参数</h3>
-        </div>
-        <div class="detail" >
-        </div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -204,6 +217,31 @@
       width: 100%;
       img{
         width: 100%;
+      }
+    }
+    .div{
+      background-color: #ffffff;
+      .ul{
+        border: 1px solid #dfdfdf;
+        .li{
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          border-bottom: 1px solid #dfdfdf;
+          &:last-child {
+            border-bottom: 0px solid #dfdfdf;
+          }
+            .left {
+              padding: 7px 10px;
+              width: 300px;
+              min-width: 300px;
+              border-right: 1px solid #dfdfdf;
+            }
+            .right {
+              padding: 7px 10px;
+              width: 100%;
+            }
+        }
       }
     }
   }

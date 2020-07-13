@@ -1,6 +1,9 @@
 <template>
   <div class="FloatRight">
     <div class="li">
+      <i class="el-icon-user i"></i>
+    </div>
+    <div class="li">
       <el-badge :value="2" :max="99" class="item">
       </el-badge>
       <i class="el-icon-shopping-cart-2 i"></i>
@@ -100,7 +103,7 @@
 <style scoped lang="scss">
   .FloatRight {
     position: fixed;
-    bottom: 50%;
+    top: 50%;
     transform: translate(0,-50%);
     right: 10px;
     z-index: 99;
