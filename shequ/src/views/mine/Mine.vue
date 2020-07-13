@@ -45,9 +45,9 @@ export default {
         { name: "资料与账号", styOff: false, url: "/dataAndName" },
         { name: "实名认证", styOff: true, url: "/dataAndName" },
         { name: "健康档案", styOff: true, url: "/mine" },
-        { name: "我的订单", styOff: false, url: "/mine" },
-        { name: "我的券包", styOff: true, url: "/mine" },
-        { name: "会员权益", styOff: false, url: "/mine" },
+        { name: "我的订单", styOff: false, url: "/myOrder" },
+        { name: "我的券包", styOff: true, url: "/coupons" },
+        { name: "会员权益", styOff: false, url: "/vipPrivilege" },
         { name: "积分商城", styOff: false, url: "/mine" }
       ]
     };

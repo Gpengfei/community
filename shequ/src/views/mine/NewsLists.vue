@@ -95,14 +95,18 @@ export default {
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
     // 导航改变状态
-    this.$store.dispatch("setMin", this.$route.query.id);
+    if (this.$route.query.id) {
+      this.$store.dispatch("setMin", this.$route.query.id);
+    } else {
+      this.$store.dispatch("setMin", 0);
+    }
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
       this.activeIndex = tab.index;
     }
-  },
+  }
 };
 </script>
 

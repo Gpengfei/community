@@ -35,6 +35,18 @@ export default [
               path: '/dataAndName',
               component: ()=>import('@views/mine/DataAndName.vue'),
             },
+            {
+              path: '/vipPrivilege',
+              component: ()=>import('@views/mine/VipPrivilege.vue'),
+            },
+            {
+              path: '/coupons',
+              component: ()=>import('@views/mine/Coupons.vue'),
+            },
+            {
+              path: '/myOrder',
+              component: ()=>import('@views/mine/MyOrder.vue'),
+            },
           ]
         },
         {
