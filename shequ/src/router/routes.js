@@ -47,6 +47,14 @@ export default [
               path: '/myOrder',
               component: ()=>import('@views/mine/MyOrder.vue'),
             },
+            {
+              path: '/healthRecords',
+              component: ()=>import('@views/mine/HealthRecords.vue'),
+            },
+            {
+              path: '/myService',
+              component: ()=>import('@views/mine/MyService.vue'),
+            },
           ]
         },
         {
