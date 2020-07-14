@@ -51,8 +51,10 @@
       <div class="left">
         购买数量
       </div>
-      <el-input-number size="medium" v-model="number"></el-input-number>
-      <div class="right"></div>
+      <el-input-number size="medium" v-model="goods_num" :min="1" :max="maxNumber"></el-input-number>
+      <div class="right">
+        库存: {{ maxNumber }}
+      </div>
     </div>
     <div class="line"></div>
     <!--默认商品图-->
@@ -80,7 +82,7 @@
     <!-- 总结价格end -->
     <!--按钮-->
     <div class="btn_box">
-      <div class="sale-btn">
+      <div class="sale-btn" @click="purchase()">
         <a class="btn">立即购买</a>
       </div>
       <div class="favorite-btn">
@@ -110,16 +112,18 @@
         sku_priceStr: "",
         // 选择的商品上位,
         superiorPosition: {},
-        //
-        number: 1
+        //最小数量
+        goods_num: 1,
+        //最大数量
+        maxNumber: 1,
+        // 确定规格
+        confirmGoodsInfo:{},
       };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
      * */
-    beforeCreate() {
-
-    },
+    beforeCreate() {},
     /*
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
@@ -172,6 +176,23 @@
           return {}
         }
       },
+      buyType: {
+        type: String,
+        default: 'sku'
+      },
+      goodsType: {
+        type: String,
+        default: 'goods'
+      },
+      grouponBuyType: {
+        type: String,
+        default: 'alone'
+      },
+      grouponId: {
+        //参加拼团的时候，传入当前团id;
+        type: Number,
+        default: 0
+      }
     },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
@@ -184,13 +205,50 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      /**
+       * 购买
+       * */
+      purchase() {
+
+        if (this.confirmSku()) {
+          let confirmGoodsList = [];
+          confirmGoodsList.push(that.confirmGoodsInfo);
+          let datas = {
+            goodsList: JSON.stringify(confirmGoodsList),
+            from: 'goods',
+            orderType: that.goodsType,
+            grouponBuyType: that.grouponBuyType,
+            grouponId: that.grouponId
+          }
+        }
+      },
+      /**
+       * 确定规格
+       * */
+      confirmSku() {
+        let that = this;
+        this.superiorPosition.goods_num = this.goods_num;
+        this.confirmGoodsInfo = {
+          goods_id: this.superiorPosition.goods_id,
+          goods_num: this.superiorPosition.goods_num,
+          sku_price_id: this.superiorPosition.id,
+          goods_price: this.superiorPosition.price
+        };
+        if (!this.confirmGoodsInfo.sku_price_id) {
+          this.$message.error('请选择规格');
+          return false;
+        } else {
+          return true;
+        }
+      },
       /*点击规格*/
       active(i, j) {
         this.specificationsArr.splice(i, 1, j);
-        if (this.specificationsArr.length > 0 && this.specificationsArr.indexOf(-1) == 1) {
+        if (this.specificationsArr.length > 0 && this.specificationsArr[0] == -1||this.specificationsArr.indexOf(-1) == 1) {
           console.log("不通过")
           return false;
         }
+        console.log("通过");
         this.sku_priceStr = "";
         for (let k = 0; k < this.specificationsArr.length; k++) {
           (this.specificationsArr.length - 1) == k ? this.sku_priceStr += this.detail.sku[k].content[this.specificationsArr[k]].id : this.sku_priceStr += this.detail.sku[k].content[this.specificationsArr[k]].id + ","
@@ -204,6 +262,10 @@
           console.log(this.detail.sku_price[i].goods_sku_ids == str);
           if (this.detail.sku_price[i].goods_sku_ids == str) {
             this.superiorPosition = this.detail.sku_price[i];
+            //库存
+            if (this.detail.sku_price[i].stock) {
+              this.maxNumber = this.detail.sku_price[i].stock
+            }
             //优惠价格
             if (this.detail.sku_price[i].price) {
               this.pricem = this.detail.sku_price[i].price;
@@ -226,8 +288,9 @@
           this.pricem = detail.price;
           //实际价格
           this.priceDetm = detail.original_price;
-
+          //
         }
+        this.maxNumber = this.detail.stock;
       }
     },
     /**
@@ -450,15 +513,27 @@
       display: block;
     }
 
-    .inputNumber{
+    .inputNumber {
+      width: 100%;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: flex-start;
-      .left{
+
+      .left {
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
         height: 100%;
+        font-size: 15px;
+        margin-right: 15px;
+      }
+
+      .right {
+        font-size: 15px;
+        display: block;
+        float: right;
+        height: 100%;
+        margin-left: 50px;
       }
     }
   }
