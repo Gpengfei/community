@@ -78,6 +78,11 @@ export default [
               name:"Detial",
               component: ()=>import('@views/shop/Evaluate.vue')
             },
+            {
+              path: '/shop/shoppingCard',
+              name:"Detial",
+              component: ()=>import('@views/shop/shoppingCard.vue')
+            },
           ]
         },
         {

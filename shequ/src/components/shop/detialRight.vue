@@ -209,17 +209,29 @@
        * 购买
        * */
       purchase() {
-
         if (this.confirmSku()) {
           let confirmGoodsList = [];
-          confirmGoodsList.push(that.confirmGoodsInfo);
+          confirmGoodsList.push(this.confirmGoodsInfo);
           let datas = {
             goodsList: JSON.stringify(confirmGoodsList),
             from: 'goods',
-            orderType: that.goodsType,
-            grouponBuyType: that.grouponBuyType,
-            grouponId: that.grouponId
+            orderType: this.goodsType,
+            grouponBuyType: this.grouponBuyType,
+            grouponId: this.grouponId
           }
+          console.log(datas);
+        }
+      },
+      /**
+       * 加入购物车确定
+       * */
+      confirmCart() {
+        let that = this;
+        if (this.confirmSku()) {
+          let confirmGoodsList = {
+            list: [that.confirmGoodsInfo],
+            from: 'goods'
+          };
         }
       },
       /**

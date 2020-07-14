@@ -1,6 +1,42 @@
 <template>
   <div class="shoppingCard">
-
+    <el-table
+        ref="multipleTable"
+        :data="tableData"
+        tooltip-effect="dark"
+        style="width: 100%"
+        @selection-change="handleSelectionChange">
+      <el-table-column
+          type="selection"
+          label="全选"
+          width="55">
+      </el-table-column>
+      <el-table-column
+          label="商品名称"
+          width="120">
+        <template slot-scope="scope">{{ scope.row.date }}</template>
+      </el-table-column>
+      <el-table-column
+          prop="name"
+          label="单价"
+          width="120">
+      </el-table-column>
+      <el-table-column
+          prop="address"
+          label="数量"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="address"
+          label="小计"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="address"
+          label="操作"
+          show-overflow-tooltip>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -8,7 +44,37 @@
   export default {
     name: "shoppingCard",
     data() {
-      return {};
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-08',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-06',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-07',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -93,5 +159,7 @@
 
 <style scoped lang="scss">
   .shoppingCard {
+    max-width: 1226px;
+    margin: 20px auto;
   }
 </style>

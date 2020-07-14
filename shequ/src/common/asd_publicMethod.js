@@ -47,6 +47,7 @@ export function get(url, data) {
 export function go(url, data = {}) {
   this.$router.push({ path: url, query: data });
 }
+
 export default {
   install: Vue => {
     Vue.prototype.a_post = post;

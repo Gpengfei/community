@@ -3,7 +3,7 @@
     <div class="li">
       <i class="el-icon-user i"></i>
     </div>
-    <div class="li">
+    <div class="li" @click="a_go('/shop/shoppingCard')">
       <el-badge :value="2" :max="99" class="item">
       </el-badge>
       <i class="el-icon-shopping-cart-2 i"></i>
