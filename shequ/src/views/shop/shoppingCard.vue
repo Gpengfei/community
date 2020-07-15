@@ -18,7 +18,8 @@
           <img class="img" :src="scope.row.sku_price.image" alt="">
         </template>
       </el-table-column>
-      <el-table-column label="商品名称">
+      <el-table-column label="商品名称"
+                       width="500">
         <template slot-scope="scope">
           <p class="pTitle">
             {{ scope.row.goods.title }} <span class="span">{{ scope.row.sku_price.goods_sku_text }}</span>
@@ -33,22 +34,45 @@
       <el-table-column
           prop="address"
           label="数量"
+          width="220"
           show-overflow-tooltip>
         <template slot-scope="scope">
-          <el-input-number size="medium" v-model="scope.row.goods_num"></el-input-number>
+          <el-input-number size="medium" @change="inNumber(scope.row.goods_num,scope)" :min="1"
+                           :max="scope.row.sku_price.stock" v-model="scope.row.goods_num"></el-input-number>
         </template>
       </el-table-column>
       <el-table-column
-          prop="address"
+          prop="good_money"
           label="小计"
+          align="center"
           show-overflow-tooltip>
       </el-table-column>
       <el-table-column
           prop="address"
           label="操作"
+          width="50"
           show-overflow-tooltip>
+        <template>
+          <el-button type="text"><i class="el-icon-delete"></i></el-button>
+        </template>
+
       </el-table-column>
     </el-table>
+    <div class="cart_war">
+      <div class="row">
+        <div class="left">
+          <span class="cart-total">共 <i >8</i> 件商品，已选择 <i >8</i>件</span>
+        </div>
+        <span class="right">
+          合计：
+          <em data-v-562c5445="">144.39</em>
+          元
+          <a class="a btn" href="">
+            去结算
+          </a>
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -190,8 +214,12 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      inNumber(currentValue, scope) {
+        console.log(currentValue, scope)
+        this.tableData[scope.$index].good_money = this.mmath(this.tableData[scope.$index].goods_num, this.tableData[scope.$index].sku_price.price);
+      },
       /* 计算价格*/
-      mmath(a,b){
+      mmath(a, b) {
         return (parseFloat(a) * 100 / 100 * parseFloat(b) * 100 / 100).toFixed(2)
       },
       async getCart() {
@@ -200,7 +228,7 @@
           this.tableData = [];
           this.list = [];
           for (let i = 0; i < res.data.data.length; i++) {
-            res.data.data[i].good_money = this.mmath(res.data.data[i].goods_num,res.data.data[i].sku_price.price);
+            res.data.data[i].good_money = this.mmath(res.data.data[i].goods_num, res.data.data[i].sku_price.price);
             this.list.splice(i, 0, res.data.data[i]);
             this.tableData.splice(i, 0, res.data.data[i]);
           }
@@ -247,6 +275,75 @@
     .img {
       width: 80px;
       height: 80px;
+    }
+
+    .span {
+      display: inline-block;
+      margin-left: 10px;
+      background-color: #f1f1f1;
+      padding: 0 3px;
+    }
+
+    .cart_war {
+      margin-top: 20px;
+      height: 50px;
+      text-align: right;
+      background-color: #fff;
+      -webkit-transition: background .3s ease, top .3s ease;
+      transition: background .3s ease, top .3s ease;
+      box-shadow: 0 -3px 6px rgba(0,0,0,.1);
+      position: sticky;
+      bottom: 0;
+      z-index: 9999;
+      .row{
+        position: relative;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        .left{
+          .cart-total{
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid #eee;
+            color: #757575;
+            i{
+              color: $shopColor;
+            }
+          }
+        }
+        .right{
+          padding-left: 13px;
+          color: $shopColor;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          em{
+            font-style: normal;
+            font-size: 30px;
+            vertical-align: unset;
+          }
+          .a.btn{
+            display: inline-block;
+            padding: 0;
+            text-align: center;
+            cursor: pointer;
+            -webkit-transition: all .4s;
+            transition: all .4s;
+            background: $shopColor;
+            border-color: $shopColor;
+            color: #fff;
+            width: 200px;
+            height: 48px;
+            line-height: 48px;
+            font-size: 18px;
+            margin-left: 50px;
+            vertical-align: top;
+          }
+        }
+      }
     }
   }
 </style>
