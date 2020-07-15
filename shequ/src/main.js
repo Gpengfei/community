@@ -11,6 +11,7 @@ Vue.use(vueAwesomeSwiper)
 import moment from 'moment'
 Vue.prototype.$moment=moment
 import "@assets/css/reset.scss";
+
 import "@assets/css/fonts.scss";
 import asdFun from "./common/asd_publicMethod";
 import {
@@ -195,8 +196,8 @@ router.beforeEach((to,from,next)=>{
   let userId=localStorage.getItem("userId");
   if(getFlag=='isLogin'){//判断是否登录
     store.state.isLogin = true
-    store.state.userId=userId
-    store.state.token=token
+    store.state.userId = userId
+    store.state.token = token
     next()
     if (!to.meta.isLogin){
       if(to.path=='/login'||to.path=='/register'){

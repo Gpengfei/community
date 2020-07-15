@@ -9,22 +9,34 @@
       <el-table-column
           type="selection"
           label="全选"
-          width="55">
+          width="40">
       </el-table-column>
       <el-table-column
-          label="商品名称"
-          width="120">
-        <template slot-scope="scope">{{ scope.row.date }}</template>
+          width="100"
+          label="图片">
+        <template slot-scope="scope">
+          <img class="img" :src="scope.row.sku_price.image" alt="">
+        </template>
+      </el-table-column>
+      <el-table-column label="商品名称">
+        <template slot-scope="scope">
+          <p class="pTitle">
+            {{ scope.row.goods.title }} <span class="span">{{ scope.row.sku_price.goods_sku_text }}</span>
+          </p>
+        </template>
       </el-table-column>
       <el-table-column
-          prop="name"
+          prop="sku_price.price"
           label="单价"
-          width="120">
+      >
       </el-table-column>
       <el-table-column
           prop="address"
           label="数量"
           show-overflow-tooltip>
+        <template slot-scope="scope">
+          <el-input-number size="medium" v-model="scope.row.goods_num"></el-input-number>
+        </template>
       </el-table-column>
       <el-table-column
           prop="address"
@@ -45,35 +57,74 @@
     name: "shoppingCard",
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
+        list: [],
+        tableData: [
+          {
+            "id": 1,
+            "user_id": 1,
+            "goods_id": 3,
+            "goods_num": 2,
+            "sku_price_id": 20,
+            "goods": {
+              "id": 3,
+              "type": "normal",
+              "title": "极简全棉纯棉床上用品四件套现代简约北欧男床单3三件套床笠被套4",
+              "subtitle": "100%纯棉面料 真133*72高密斜纹喷气款 佳品",
+              "weigh": 3,
+              "category_ids": "19",
+              "image": "http://smart.zhuwenyong.xyz/uploads/20200429/4228275afdf8468d80e5d4e5a803175a.jpg",
+              "images": [
+                "http://smart.zhuwenyong.xyz/uploads/20200429/e0c4d78a0a611e189d44318fce454f8c.jpg",
+                "http://smart.zhuwenyong.xyz/uploads/20200429/672628251b41648845fa7e13bbf7adba.jpg",
+                "http://smart.zhuwenyong.xyz/uploads/20200429/2e3b4c74d3a74531db1955c8933f371c.jpg"
+              ],
+              "params": [
+                {
+                  "title": "品牌: ",
+                  "content": "恩兴"
+                },
+                {
+                  "title": "棉种类: ",
+                  "content": "棉"
+                },
+                {
+                  "title": "货号: ",
+                  "content": "sjt02281054"
+                }
+              ],
+              "content": "<p><img src=\"http://shopro-1253949872.image.myqcloud.com/uploads/20200429/b716634323a2fd73c363daa680c1c1a9.jpg\" alt=\"\" /><img src=\"http://shopro-1253949872.image.myqcloud.com/uploads/20200429/7860eb7ad5d960e5fceeeb2a90ce12c1.jpg\" alt=\"\" /><img src=\"http://shopro-1253949872.image.myqcloud.com/uploads/20200429/ad33bd4aef3f8561d42e0274fc6859b0.jpg\" alt=\"\" /></p>",
+              "price": "158",
+              "original_price": "236.00",
+              "likes": 0,
+              "views": 376,
+              "sales": 4,
+              "show_sales": 0,
+              "service_ids": "2,4,1",
+              "dispatch_type": "express",
+              "dispatch_ids": "3",
+              "deletetime": null
+            },
+            "sku_price": {
+              "id": 20,
+              "goods_sku_ids": "16,18",
+              "goods_id": 3,
+              "weigh": 0,
+              "image": "http://shopro-1253949872.image.myqcloud.com/uploads/20200429/cb8a30459240899831a9b65778e3c9cd.jpg",
+              "stock": 10,
+              "sales": 0,
+              "sn": "000007",
+              "weight": 100000,
+              "price": "158.00",
+              "goods_sku_text": "L卡昂,1.8M床",
+              "status": "up",
+              "goods_sku_id_arr": [
+                "16",
+                "18"
+              ]
+            }
+          }
+        ],
+        multipleSelection: []
       };
     },
     /**
@@ -85,6 +136,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.getCart();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -138,8 +190,34 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
-      getCart() {
-
+      /* 计算价格*/
+      mmath(a,b){
+        return (parseFloat(a) * 100 / 100 * parseFloat(b) * 100 / 100).toFixed(2)
+      },
+      async getCart() {
+        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/cart", {}, res => {
+          console.log("detail", res.data.data);
+          this.tableData = [];
+          this.list = [];
+          for (let i = 0; i < res.data.data.length; i++) {
+            res.data.data[i].good_money = this.mmath(res.data.data[i].goods_num,res.data.data[i].sku_price.price);
+            this.list.splice(i, 0, res.data.data[i]);
+            this.tableData.splice(i, 0, res.data.data[i]);
+          }
+          console.log(this.tableData);
+        });
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
       }
     },
     /**
@@ -165,5 +243,10 @@
   .shoppingCard {
     max-width: 1226px;
     margin: 20px auto;
+
+    .img {
+      width: 80px;
+      height: 80px;
+    }
   }
 </style>

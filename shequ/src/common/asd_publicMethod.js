@@ -3,6 +3,7 @@ import axios from "axios";
 import qs from "qs";
 /* post请求 */
 export function post(url, data, callbacks) {
+  data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "47aea37e-801e-49be-b3b9-e7dca09a1eaa";
   const options = {
     method: "POST",
     headers: {
@@ -30,11 +31,11 @@ export function post(url, data, callbacks) {
 }
 /* get 请求 */
 export function get(url, data) {
+  data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "47aea37e-801e-49be-b3b9-e7dca09a1eaa";
   const options = {
     method: "POST",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
-      'platform':"H5"
     },
     data: qs.stringify(data),
     xhrFields: {
