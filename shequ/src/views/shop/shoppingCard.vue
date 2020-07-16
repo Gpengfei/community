@@ -1,3 +1,4 @@
+<!--购物车-->
 <template>
   <div class="shoppingCard">
     <el-table
@@ -246,6 +247,7 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+        console.log(this.multipleSelection)
       }
     },
     /**
