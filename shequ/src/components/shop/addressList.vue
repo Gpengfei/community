@@ -23,7 +23,7 @@
       </li>
       <div class="address-item">
         <div class="add-desc">
-          <i class="iconfont iconfont-plus"></i>
+          <i class="if el-icon-circle-plus-outline"></i>
           <span>添加新地址</span>
         </div>
       </div>
@@ -148,7 +148,7 @@
         &:hover {
           border-color: #b0b0b0;
 
-          .iconfont {
+          .if {
             background-color: #b0b0b0
           }
 
@@ -157,7 +157,7 @@
           }
         }
 
-        .iconfont {
+        .if {
           display: block;
           width: 30px;
           height: 30px;

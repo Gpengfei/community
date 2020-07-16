@@ -107,7 +107,8 @@
 </script>
 
 <style scoped lang="scss">
-.SHOPALL{
-
+.shopAll{
+  border: 1px solid #f5f5f5;
+  background-color: #f5f5f5;
 }
 </style>

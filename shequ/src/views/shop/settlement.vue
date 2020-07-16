@@ -9,12 +9,48 @@
         <addressList/>
       </div>
     </div>
+    <div class="detail">
+      <div class="address">
+        <div class="address-header">
+          <span class="header-title">商品及优惠券</span>
+        </div>
+        <div class="row-list">
+          <div class="good-item">
+            <div class="item-desc good-img">
+              <img
+                  src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1559616366.16874615.jpg?thumb=1&amp;w=30&amp;h=30">
+            </div>
+            <div class="item-desc good-name">
+              <a>
+                <span>小米巨能写 黑色 10支装</span>
+              </a>
+            </div>
+            <div class="item-desc">
+              <div class="special-handling-differentiate">
+                <div class="item-desc good-price">9.99元 x 1</div>
+                <div class="item-desc good-status"></div>
+                <div class="item-desc good-total">9.99元</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-options">
+        <div class="desc">
+          <p class="title"></p>
+        </div>
+      </div>
+    </div>
+    <!--弹出框-->
 
   </div>
 </template>
 
 <script>
   import addressList from "@components/shop/addressList"
+
   export default {
     name: "settlement",
     data() {
@@ -111,7 +147,6 @@
 
     .detail {
       position: relative;
-      padding: 48px 0 0;
 
       .address {
         position: relative;
@@ -130,5 +165,73 @@
 
     }
 
+    .row-list {
+      padding: 5px 0;
+      border-bottom: 1px solid #e0e0e0;
+
+      .good-item {
+        position: relative;
+        padding: 10px 0;
+
+        .item-desc {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          line-height: 30px;
+          color: #424242;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+
+          .good-price {
+            width: 150px;
+            text-align: center;
+          }
+
+          .good-total {
+            width: 190px;
+            text-align: center;
+            color: #ff6701;
+          }
+        }
+
+        .good-img {
+          width: 30px;
+          height: 30px;
+          margin: 0 10px 0 0;
+        }
+
+        .good-name {
+          width: 650px;
+        }
+
+      }
+    }
+
+    .section {
+      position: relative;
+      padding: 0 24px;
+
+      .section-options {
+        padding: 25px 0;
+        border-bottom: 1px solid #e0e0e0;
+
+        .desc {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          .title {
+            color: #333;
+            font-size: 18px;
+            line-height: 38px;
+          }
+        }
+      }
+    }
   }
 </style>

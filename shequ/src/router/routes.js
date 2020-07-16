@@ -90,6 +90,22 @@ export default [
                 title: "商城结算页"
               },
               component: ()=>import('@views/shop/settlement.vue'),
+            },
+            {
+              path: '/shop/OrderSubmission',
+              name:"settlement",
+              meta: {
+                title: "等待付款"
+              },
+              component: ()=>import('@views/shop/OrderSubmission.vue'),
+            },
+            {
+              path: '/shop/PaymentSuccessful',
+              name:"PaymentSuccessful",
+              meta: {
+                title: "支付完成"
+              },
+              component: ()=>import('@views/shop/PaymentSuccessful.vue'),
             }
           ]
         },

@@ -1,68 +1,67 @@
 <template>
-  <div class="ShopDetial">
-    <detialTop :detail="details"/>
-    <!--内容部分-->
-    <div class="rowWar">
-      <div class="row">
-        <div class="left">
-          <detialLeft :detail="details"/>
-        </div>
-        <div class="right">
-          <detialRight :detail="details"
-                       :buyType="details.activity_type == 'seckill' || detailType === 'score' ? 'buy' : buyType"
-                       :grouponBuyType="grouponBuyType"
-                       :goodsType="detailType === 'score' ? 'score' : 'goods'"
-          />
-        </div>
+  <div class="PaymentSuccessful">
+    <div class="container pay-success-box clearfix">
+      <div class="succ"><h2 class="title">支付成功</h2>
+        <p class="price">
+          <em>144.39</em>元
+        </p>
+        <a class="btn">查看订单详情</a>
+        <p class="state">商城不会以任何理由要求您提供银行卡信息或支付额外费用<br>请谨防钓鱼链接或诈骗电话。
+          <!--          <a target="_blank">了解详情&gt;</a>-->
+        </p>
       </div>
-    </div>
-    <!--内容部分 end-->
-    <div class="details">
-      <div class="row2">
-        <div class="title">
-          <h3 class="h3">规格参数</h3>
-        </div>
-        <div class="detail">
-          <div class="div">
-            <ul class="ul">
-            <li class="li" v-for="( arr,index ) in details.params" :key="index">
-              <div class="left">
-                {{ arr.title }}
+      <div class="info">
+        <ul class="ul">
+          <li class="clearfix">
+            <div class="label">订单编号：</div>
+            <div class="content">
+              5200716474403419
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="label">收货信息：</div>
+            <div class="content">
+              安厦 151****6690<br>
+              内蒙古 呼和浩特市
+              新城区
+              迎新路街道
+              内蒙古工行干校家属院别墅区2-2
+              <p style="color: rgb(255, 103, 0); margin: 0px;">* 在“订单详情页”你可以确认收货地址或者更改收货地址</p></div>
+          </li>
+          <li class="clearfix">
+            <div class="label">商品名称：</div>
+            <div class="content">
+              <div>小米水质TDS检测笔 白色
               </div>
-              <div class="right">
-                {{ arr.content }}
+              <div>小米巨能写 黑色 10支装
               </div>
-            </li>
-          </ul>
-          </div>
-        </div>
+              <div>小米中性笔 10支装 白色
+              </div>
+              <div>米家金属签字笔 金色
+              </div>
+              <div>米家金属签字笔专用笔芯 纯白色
+              </div>
+              <div>小米记事本 3本装（1黑1灰1蓝）
+              </div>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="label">发票信息：</div>
+            <div class="content">
+              电子普通发票 个人
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="row2">
-        <div class="title">
-          <h3 class="h3">商品详情</h3>
-        </div>
-        <div class="detail" v-html="details.content">
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
 
 <script>
-  import detialTop from "@components/shop/detialTop"
-  import detialLeft from "@components/shop/detialLeft"
-  import detialRight from "@components/shop/detialRight"
-
   export default {
-    name: "ShopDetial",
+    name: "PaymentSuccessful",
     data() {
-      return {
-        detailType: '',
-        buyType: 'sku',
-        grouponBuyType: 'alone', //拼团购买方式。
-        details: {},
-      };
+      return {};
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -73,7 +72,6 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
-      this.getShopDetial();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -115,14 +113,7 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {
-      detail: {
-        type: Object,
-        default: ()=>{
-          return {}
-        }
-      },
-    },
+    props: {},
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -133,20 +124,7 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {
-      getShopDetial() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3", {id: 3}, res => {
-          console.log("detail", res.data.data);
-          this.$store.commit("change", ress => {
-            ress.shopDetial = res.data.data
-            ress.swiperShopLeft = res.data.data.images
-            /*swiperShopLeft*/
-          });
-          this.details = res.data.data;
-          this.buyType = res.data.data.buyType
-        });
-      }
-    },
+    methods: {},
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
@@ -162,100 +140,141 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {
-      detialTop,
-      detialLeft,
-      detialRight
-    },
+    components: {},
   }
 </script>
 
 <style scoped lang="scss">
-  .ShopDetial {
-    .rowWar{
-      background-color: #ffffff;
-    }
-    .row {
-      width: $allWidth;
-      margin-right: auto;
-      margin-left: auto;
+  .PaymentSuccessful {
+    position: relative;
+    width: 1226px;
+    margin: 38px auto;
+    font-size: 14px;
+
+    .pay-success-box {
+      background-color: #8bc34a;
       display: flex;
       align-items: flex-start;
-      justify-content: center;
-      padding-top: 32px;
-      padding-bottom: 12px;
+      justify-content: flex-start;
 
-      .left {
-      }
+      .succ {
+        width: 506px;
+        height: 400px;
+        text-align: center;
 
-      .right {
-
-      }
-    }
-
-    .details {
-      width: 100%;
-      padding-bottom: 50px;
-      background-color: #f6f6f6;
-
-      .row2 {
         .title {
-          width: $allWidth;
-          margin-right: auto;
-          margin-left: auto;
+          font-size: 48px;
+          color: #fff;
+          line-height: 1;
+          margin-top: 70px;
+          margin-bottom: 10px;
+          font-weight: 400
+        }
 
-          .h3 {
-            font-size: 22px;
-            font-weight: 400;
-            margin-top: 0;
-            margin-bottom: 0;
-            padding: 1em 0;
+        .sub {
+          margin: 0;
+          color: #fff;
+        }
+
+        .price {
+          margin: 20px 0 30px;
+          color: #ff0;
+
+          em {
+            font-style: normal;
+            font-size: 24px
           }
         }
 
-        .detail {
-          width: $allWidth;
-          margin: auto;
-          .img {
-            width: 100%;
+        .state {
+          font-size: 12px;
+          color: #333;
+
+          a {
+            color: #ff0
           }
         }
+
+        .btn {
+          margin-bottom: 30px;
+          border-color: #fff;
+          background: none;
+          color: #fff;
+        }
       }
-    }
-  }
-</style>
-<style lang="scss">
-  .detail{
-    p{
-      width: 100%;
-      img{
-        width: 100%;
+
+      li, ul {
+        margin: 0;
+        padding: 0
       }
-    }
-    .div{
-      background-color: #ffffff;
-      .ul{
-        border: 1px solid #dfdfdf;
-        .li{
+
+      li {
+        list-style: none
+      }
+      .info {
+        width: 660px;
+        min-height: 400px;
+        padding-left: 60px;
+        font-size: 12px;
+        background-color: #fff;
+        position: relative;
+        ul {
+          width: 480px;
+          padding-top: 50px;
+          padding-bottom: 50px;
+          font-size: 14px;
+        }
+        li {
+          line-height: 24px;
+          margin-bottom: 8px;
           display: flex;
           align-items: flex-start;
           justify-content: flex-start;
-          border-bottom: 1px solid #dfdfdf;
-          &:last-child {
-            border-bottom: 0px solid #dfdfdf;
+          .app-code {
+            position: absolute;
+            right: 40px;
+            bottom: 25px;
+            text-align: center;
+            img {
+              display: block;
+              width: 86px;
+              height: 86px;
+              margin: 0 auto 10px
+            }
           }
-            .left {
-              padding: 7px 10px;
-              width: 300px;
-              min-width: 300px;
-              border-right: 1px solid #dfdfdf;
+          .label {
+            color: #b0b0b0;
+            min-width: 72px;
+          }
+          .content {
+            color: #757575;
+            .beta {
+              cursor: pointer;
+              color: #b0b0b0
             }
-            .right {
-              padding: 7px 10px;
-              width: 100%;
-            }
+          }
+          a {
+            color: #ff6700
+          }
         }
       }
+    }
+
+
+    .btn {
+      display: inline-block;
+      width: 158px;
+      height: 38px;
+      padding: 0;
+      margin: 0;
+      border: 1px solid #b0b0b0;
+      font-size: 14px;
+      line-height: 38px;
+      text-align: center;
+      color: #b0b0b0;
+      cursor: pointer;
+      -webkit-transition: all .4s;
+      transition: all .4s;
     }
   }
 </style>
