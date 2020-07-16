@@ -6,15 +6,27 @@
           <div class="name">安厦<span style="color: rgb(176, 176, 176);">家</span>
           </div>
           <div class="tel">151****6690</div>
-          <div class="address-con"><span>内蒙古</span><span
-          >呼和浩特市</span><span>新城区</span><span>迎新路街道</span>
-            <!----><span class="info">内蒙古工行干校家属院别墅区2-2</span></div>
-          <div class="address-action"><span>修改</span><!----></div>
+          <div class="address-con">
+            <span>内蒙古</span>
+            <span>呼和浩特市</span>
+            <span>新城区</span>
+            <span>迎新路街道</span>
+            <span class="info">内蒙古工行干校家属院别墅区2-2</span>
+          </div>
+          <div class="address-action">
+            <span>修改</span>
+          </div>
         </div>
         <div class="address-info-solt" style="display: none;">
 
         </div>
       </li>
+      <div class="address-item">
+        <div class="add-desc">
+          <i class="iconfont iconfont-plus"></i>
+          <span>添加新地址</span>
+        </div>
+      </div>
     </ul>
   </div>
 </template>
@@ -111,6 +123,7 @@
     width: 100%;
 
     .addressList {
+
       .address-item {
         display: inline-block;
         width: 268px;
@@ -124,12 +137,16 @@
         -webkit-transition: all .4s ease;
         transition: all .4s ease;
 
-        &:hover {
-          border-color: #b0b0b0;
+        .active, &:hover {
+          border-color: #ff6700;
 
-          .address-actio {
+          .address-action {
             opacity: 1
           }
+        }
+
+        &:hover {
+          border-color: #b0b0b0;
 
           .iconfont {
             background-color: #b0b0b0
@@ -140,147 +157,146 @@
           }
         }
 
-        .active {
-          border-color: #ff6700;
+        .iconfont {
+          display: block;
+          width: 30px;
+          height: 30px;
+          margin: 0 auto 8px;
+          font-size: 30px;
+          line-height: 30px;
+          background-color: #e0e0e0;
+          border-radius: 17px;
+          text-align: center;
+          -webkit-transition: all .4s ease;
+          transition: all .4s ease;
+          color: #fff
+        }
 
-          &:hover {
-            border-color: #ff6700;
+        .add-desc {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+          color: #b0b0b0;
+        }
+
+        .address-info {
+          padding: 15px 24px 0;
+        }
+
+        .name {
+          font-size: 18px;
+          color: #333;
+          line-height: 30px;
+          margin-bottom: 10px;
+
+          span {
+            float: right;
+            font-size: 14px;
+            color: #757575
           }
         }
 
-        .show-action {
-          .address-action {
-            opacity: 1
-          }
-        }
-      }
-
-      .iconfont {
-        display: block;
-        width: 30px;
-        height: 30px;
-        margin: 0 auto 8px;
-        font-size: 30px;
-        line-height: 30px;
-        background-color: #e0e0e0;
-        border-radius: 17px;
-        text-align: center;
-        -webkit-transition: all .4s ease;
-        transition: all .4s ease;
-        color: #fff
-      }
-
-      .add-desc {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate3d(-50%, -50%, 0);
-        transform: translate3d(-50%, -50%, 0);
-        color: #b0b0b0
-      }
-
-      .address-info {
-        padding: 15px 24px 0
-      }
-      .name {
-        font-size: 18px;
-        color: #333;
-        line-height: 30px;
-        margin-bottom: 10px;
-        span{
-          float: right;
-          font-size: 14px;
+        .address-action, .address-info, .telephone {
+          line-height: 22px;
           color: #757575
         }
+
+        .address-con {
+          span {
+            font-size: 14px;
+            display: inline-block;
+            margin-right: 3px;
+            word-wrap: break-word;
+          }
+
+          .info {
+            width: 100%
+          }
+
+        }
+
+        .address-action {
+          text-align: right;
+          position: absolute;
+          right: 24px;
+          bottom: 10px;
+          opacity: 0;
+
+          span {
+            color: #ff6700;
+            margin-left: 10px
+          }
+        }
+
+        .more-btn {
+          margin-bottom: 30px;
+          height: 50px;
+          line-height: 50px;
+          background-color: #eee;
+          color: #424242;
+          text-align: center;
+          cursor: pointer;
+
+          span {
+            .iconfont-normal {
+              display: inline-block;
+              margin-left: 3px;
+              position: relative;
+              top: -1px;
+              font-size: 14px;
+              vertical-align: middle
+            }
+          }
+        }
+
+        .mi-dialog__wrapper.address-modal {
+          overflow: inherit
+        }
+
+        .address-add {
+          .item {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom: 14px
+          }
+
+          .col {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1
+          }
+
+          .mr {
+            margin-right: 14px
+          }
+
+          .address-info-box {
+            position: relative;
+            display: block;
+
+            .iconfont-arrow-down-small {
+              position: absolute;
+              top: 50%;
+              right: 6px;
+              height: 24px;
+              line-height: 24px;
+              margin-top: -12px;
+              font-size: 24px;
+              color: #b0b0b0
+            }
+          }
+
+          .address-text {
+            color: #333
+          }
+        }
+
+
       }
     }
 
-    .addressList .address-action[data-v-039a89f6], .addressList .address-info[data-v-039a89f6], .addressList .telephone[data-v-039a89f6] {
-      line-height: 22px;
-      color: #757575
-    }
-
-    .addressList .address-con span[data-v-039a89f6] {
-      display: inline-block;
-      margin-right: 3px;
-      word-wrap: break-word
-    }
-
-    .addressList .address-con .info[data-v-039a89f6] {
-      width: 100%
-    }
-
-    .addressList .address-action[data-v-039a89f6] {
-      text-align: right;
-      position: absolute;
-      right: 24px;
-      bottom: 10px;
-      opacity: 0
-    }
-
-    .addressList .address-action span[data-v-039a89f6] {
-      color: #ff6700;
-      margin-left: 10px
-    }
-
-    .addressList .more-btn[data-v-039a89f6] {
-      margin-bottom: 30px;
-      height: 50px;
-      line-height: 50px;
-      background-color: #eee;
-      color: #424242;
-      text-align: center;
-      cursor: pointer
-    }
-
-    .addressList .more-btn span .iconfont-normal[data-v-039a89f6] {
-      display: inline-block;
-      margin-left: 3px;
-      position: relative;
-      top: -1px;
-      font-size: 14px;
-      vertical-align: middle
-    }
-
-    .mi-dialog__wrapper.address-modal {
-      overflow: inherit
-    }
-
-    .address-add .item {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      margin-bottom: 14px
-    }
-
-    .address-add .col {
-      -webkit-box-flex: 1;
-      -ms-flex: 1;
-      flex: 1
-    }
-
-    .address-add .mr {
-      margin-right: 14px
-    }
-
-    .address-add .address-info-box {
-      position: relative;
-      display: block
-    }
-
-    .address-add .address-info-box .iconfont-arrow-down-small {
-      position: absolute;
-      top: 50%;
-      right: 6px;
-      height: 24px;
-      line-height: 24px;
-      margin-top: -12px;
-      font-size: 24px;
-      color: #b0b0b0
-    }
-
-    .address-add .address-text {
-      color: #333
-    }
   }
 </style>

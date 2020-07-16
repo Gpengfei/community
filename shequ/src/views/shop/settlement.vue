@@ -6,6 +6,7 @@
         <div class="address-header">
           <span class="header-title">收货地址</span>
         </div>
+        <addressList/>
       </div>
     </div>
 
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+  import addressList from "@components/shop/addressList"
   export default {
     name: "settlement",
     data() {
@@ -95,7 +97,9 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {
+      addressList
+    },
   }
 </script>
 
