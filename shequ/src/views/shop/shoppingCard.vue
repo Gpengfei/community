@@ -66,9 +66,9 @@
         </div>
         <span class="right">
           合计：
-          <em data-v-562c5445="">144.39</em>
+          <em>144.39</em>
           元
-          <a class="a btn" href="">
+          <a @click="goSettlement" class="a btn">
             去结算
           </a>
         </span>
@@ -215,6 +215,11 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      /*去结算*/
+      goSettlement(){
+        this.a_go("/shop/settlement");
+      },
+      /**/
       inNumber(currentValue, scope) {
         console.log(currentValue, scope)
         this.tableData[scope.$index].good_money = this.mmath(this.tableData[scope.$index].goods_num, this.tableData[scope.$index].sku_price.price);
