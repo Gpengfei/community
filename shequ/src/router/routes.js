@@ -83,6 +83,14 @@ export default [
               name:"Detial",
               component: ()=>import('@views/shop/shoppingCard.vue')
             },
+            {
+              path: '/shop/settlement',
+              name:"settlement",
+              meta: {
+                title: "商城结算页"
+              },
+              component: ()=>import('@views/shop/settlement.vue'),
+            }
           ]
         },
         {

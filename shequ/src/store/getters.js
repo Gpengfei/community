@@ -3,5 +3,6 @@ export default {
     isNav:state=>state.isNav,
     minNav:state=>state.minNav,
     navFb:state=>state.navFb,
-    shopDetial:state=>state.shopDetial
+    shopDetial:state=>state.shopDetial,
+    addressList:state=>state.addressList
 }

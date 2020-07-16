@@ -1,20 +1,12 @@
-<!--结算页-->
 <template>
-  <div class="settlement">
-    <div class="detail">
-      <div class="address">
-        <div class="address-header">
-          <span class="header-title">收货地址</span>
-        </div>
-      </div>
-    </div>
+  <div class="addressList">
 
   </div>
 </template>
 
 <script>
   export default {
-    name: "settlement",
+    name: "addressList",
     data() {
       return {};
     },
@@ -100,31 +92,6 @@
 </script>
 
 <style scoped lang="scss">
-  .settlement {
-    padding: 40px 0 60px;
-    max-width: 1226px;
-    margin: auto;
-
-    .detail {
-      position: relative;
-      padding: 48px 0 0;
-
-      .address {
-        position: relative;
-        padding: 0 24px;
-
-        .address-header {
-          margin: 0 0 20px;
-
-          .header-title {
-            color: #333;
-            font-size: 18px;
-            line-height: 20px;
-          }
-        }
-      }
-
-    }
-
+  .addressList {
   }
 </style>

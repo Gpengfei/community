@@ -11,5 +11,7 @@ export default{
     //商品详情绑定
     shopDetial: null,
     //商品详情轮播绑定
-    swiperShopLeft:[]
+    swiperShopLeft:[],
+    //地址列表
+    addressList:[]
 }
