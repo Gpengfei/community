@@ -48,11 +48,14 @@ export function get(url, data) {
 export function go(url, data = {}) {
   this.$router.push({ path: url, query: data });
 }
-
+export function gop(url, data = {}) {
+  this.$router.push({ name: url, params: data });
+}
 export default {
   install: Vue => {
     Vue.prototype.a_post = post;
     Vue.prototype.a_get = get;
     Vue.prototype.a_go = go;
+    Vue.prototype.a_gop = gop;
   }
 };

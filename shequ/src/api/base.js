@@ -1,5 +1,5 @@
-const base = {    
-    sq: 'http://smart.zhuwenyong.xyz/api',  
+const base = {
+    sq: 'http://zt.shenyueyun.com//api',
     bd: ''
 }
 

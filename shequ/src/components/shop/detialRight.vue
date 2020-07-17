@@ -100,6 +100,7 @@
     name: "detialRight",
     data() {
       return {
+        type: this.buyType,
         specificationsArr: [-1, -1],
         /*显示钱*/
         //优惠价格
@@ -117,13 +118,14 @@
         //最大数量
         maxNumber: 1,
         // 确定规格
-        confirmGoodsInfo:{},
+        confirmGoodsInfo: {},
       };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
      * */
-    beforeCreate() {},
+    beforeCreate() {
+    },
     /*
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
@@ -219,7 +221,10 @@
             grouponBuyType: this.grouponBuyType,
             grouponId: this.grouponId
           }
-
+          this.$store.commit("change",stat=>{
+            stat.settlementObj = datas
+          });
+          this.a_gop("settlement", datas)
           console.log(datas);
         }
       },
@@ -257,7 +262,7 @@
       /*点击规格*/
       active(i, j) {
         this.specificationsArr.splice(i, 1, j);
-        if (this.specificationsArr.length > 0 && this.specificationsArr[0] == -1||this.specificationsArr.indexOf(-1) == 1) {
+        if (this.specificationsArr.length > 0 && this.specificationsArr[0] == -1 || this.specificationsArr.indexOf(-1) == 1) {
           console.log("不通过")
           return false;
         }
@@ -310,6 +315,9 @@
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
     watch: {
+      buyType(nweVal, oldVal) {
+        return newVal;
+      },
       detail: {
         handler: 'someMethod',
         deep: true,

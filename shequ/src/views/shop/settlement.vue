@@ -6,7 +6,9 @@
         <div class="address-header">
           <span class="header-title">收货地址</span>
         </div>
+        <!--地址列表-->
         <addressList/>
+        <!--地址列表-->
       </div>
     </div>
     <div class="detail">
@@ -15,21 +17,20 @@
           <span class="header-title">商品及优惠券</span>
         </div>
         <div class="row-list">
-          <div class="good-item">
+          <div class="good-item" v-for="(arr, index) in orderPreList" :key="index">
             <div class="item-desc good-img">
-              <img
-                  src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1559616366.16874615.jpg?thumb=1&amp;w=30&amp;h=30">
+              <img :src="arr.detail.image">
             </div>
             <div class="item-desc good-name">
               <a>
-                <span>小米巨能写 黑色 10支装</span>
+                <span>{{arr.detail.title}} <span> {{arr.detail.current_sku_price.goods_sku_text}}</span></span>
               </a>
             </div>
             <div class="item-desc">
               <div class="special-handling-differentiate">
-                <div class="item-desc good-price">9.99元 x 1</div>
+                <div class="item-desc good-price">{{ arr.detail.price }}元 x {{ arr.detail.goods_num }}</div>
                 <div class="item-desc good-status"></div>
-                <div class="item-desc good-total">9.99元</div>
+                <div class="item-desc good-total">{{arr.detail.goods_amount}}元</div>
               </div>
             </div>
           </div>
@@ -54,7 +55,19 @@
   export default {
     name: "settlement",
     data() {
-      return {};
+      return {
+        paramsList: this.$route.params,
+        goodsList: [],
+        from: "",
+        orderType: "",
+        grouponBuyType: "",
+        grouponId: "",
+        addressId: 0,
+        couponId: 0,
+        /* 商品列表 */
+        orderPre: {},
+        orderPreList: []
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -65,6 +78,22 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      console.log("params", this.$route.params);
+      let pObj = this.$route.params;
+      if (JSON.parse(this.$route.params.goodsList).length) {
+        this.goodsList = [];
+        let pObjList = JSON.parse(this.$route.params.goodsList);
+        for (let i = 0; i < pObjList.length; i++) {
+          this.goodsList.splice(i, 0, pObjList[i]);
+        }
+        this.from = this.$route.params.from;
+        this.orderType = this.$route.params.orderType;
+        this.grouponBuyType = this.$route.params.grouponBuyType;
+        this.grouponId = this.$route.params.grouponId;
+        this.getPre();
+      } else {
+        this.a_go("/shop/index");
+      }
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -117,7 +146,42 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      async getPre() {
+        let datas = {
+          address_id: this.addressId,
+          buy_type: this.grouponBuyType,
+          coupons_id: this.couponId,
+          dispatch_type: 'express',
+          from: this.from,
+          goods_list: this.goodsList,
+          groupon_id: this.grouponId,
+          order_type: this.orderType,
+        };
+
+        let deet = {
+          address_id: 0,
+          buy_type: "alone",
+          coupons_id: 0,
+          dispatch_type: "express",
+          from: "goods",
+          goods_list: [{goods_id: 3, goods_num: 1, sku_price_id: 21, goods_price: "178.00"}],
+          groupon_id: 0,
+          order_type: "goods",
+        }
+        console.log(datas, deet);
+        this.a_post("/addons/shopro/order/pre", datas, res => {
+          console.log("/addons/shopro/order/pre", res);
+          if (res.data.code == 1) {
+            this.orderPreList = [];
+            this.orderPre = res.data.data;
+            for (let i = 0; i < res.data.data.new_goods_list.length; i++) {
+              this.orderPreList.splice(i, 0, res.data.data.new_goods_list[i]);
+            }
+          }
+        });
+      }
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */

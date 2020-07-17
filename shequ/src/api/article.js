@@ -1,7 +1,7 @@
 import base from './base'; // 导入接口域名列表
 import axios from '@/utils/http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
-let httpFFs = process.env.NODE_ENV === 'production' ? 'http://smart.zhuwenyong.xyz' : 'http://smart.zhuwenyong.xyz';
+let httpFFs = process.env.NODE_ENV === 'production' ? 'http://zt.shenyueyun.com/' : 'http://zt.shenyueyun.com/';
 const article = {
     // 新闻列表
     // articleList () {

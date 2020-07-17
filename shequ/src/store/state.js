@@ -13,5 +13,7 @@ export default{
     //商品详情轮播绑定
     swiperShopLeft:[],
     //地址列表
-    addressList:[]
+    addressList:[],
+    //点击购买参数
+    settlementObj:[]
 }

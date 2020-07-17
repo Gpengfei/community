@@ -97,11 +97,11 @@
               "subtitle": "100%纯棉面料 真133*72高密斜纹喷气款 佳品",
               "weigh": 3,
               "category_ids": "19",
-              "image": "http://smart.zhuwenyong.xyz/uploads/20200429/4228275afdf8468d80e5d4e5a803175a.jpg",
+              "image": "http://zt.shenyueyun.com//uploads/20200429/4228275afdf8468d80e5d4e5a803175a.jpg",
               "images": [
-                "http://smart.zhuwenyong.xyz/uploads/20200429/e0c4d78a0a611e189d44318fce454f8c.jpg",
-                "http://smart.zhuwenyong.xyz/uploads/20200429/672628251b41648845fa7e13bbf7adba.jpg",
-                "http://smart.zhuwenyong.xyz/uploads/20200429/2e3b4c74d3a74531db1955c8933f371c.jpg"
+                "http://zt.shenyueyun.com//uploads/20200429/e0c4d78a0a611e189d44318fce454f8c.jpg",
+                "http://zt.shenyueyun.com//uploads/20200429/672628251b41648845fa7e13bbf7adba.jpg",
+                "http://zt.shenyueyun.com//uploads/20200429/2e3b4c74d3a74531db1955c8933f371c.jpg"
               ],
               "params": [
                 {
@@ -242,7 +242,7 @@
         return (parseFloat(a) * 100 / 100 * parseFloat(b) * 100 / 100).toFixed(2)
       },
       async getCart() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/cart", {}, res => {
+        this.a_post("http://zt.shenyueyun.com//addons/shopro/cart", {}, res => {
           console.log("detail", res.data.data);
           this.tableData = [];
           this.list = [];

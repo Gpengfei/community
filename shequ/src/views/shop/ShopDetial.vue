@@ -58,9 +58,9 @@
     name: "ShopDetial",
     data() {
       return {
+        buyType: 'sku',
         detailType: '',
         querydata: this.$route.query,
-        buyType: 'sku',
         grouponBuyType: 'alone', //拼团购买方式。
         details: {},
       };
@@ -136,7 +136,7 @@
      * */
     methods: {
       getShopDetial() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=" + this.querydata.id, {id: this.querydata.id}, res => {
+        this.a_post("http://zt.shenyueyun.com//addons/shopro/goods/detail?id=" + this.querydata.id, {id: this.querydata.id}, res => {
           console.log("detail", res.data.data);
           this.$store.commit("change", ress => {
             ress.shopDetial = res.data.data
