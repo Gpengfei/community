@@ -13,7 +13,7 @@
             <span>迎新路街道</span>
             <span class="info">内蒙古工行干校家属院别墅区2-2</span>
           </div>
-          <div class="address-action">
+          <div class="address-action" @click="showClick">
             <span>修改</span>
           </div>
         </div>
@@ -21,13 +21,38 @@
 
         </div>
       </li>
-      <div class="address-item">
+      <div class="address-item" @click="addClick">
         <div class="add-desc">
           <i class="if el-icon-circle-plus-outline"></i>
           <span>添加新地址</span>
         </div>
       </div>
     </ul>
+    <!--弹出框-->
+    <el-dialog
+        :title="eldioTitle"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose">
+      <el-form ref="form" :model="addressData" label-width="100px" size="mini">
+        <el-form-item label="收货人：">
+          <el-input v-model="addressData.consignee"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号：">
+          <el-input v-model="addressData.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="所在地区：">
+          <el-input v-model="area_text"></el-input>
+        </el-form-item>
+        <el-form-item label="详细地址：">
+          <el-input v-model="addressData.address"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -35,7 +60,27 @@
   export default {
     name: "addressList",
     data() {
-      return {};
+      return {
+        addressList:[
+          {
+            consignee:"安厦",
+            phone:"15147906690",
+            address:"内蒙古工行干校家属院别墅区2-2"
+          }
+        ],
+        addressData: {
+          id: 0,
+          consignee: '',
+          phone: '',
+          area_id: '',
+          address: '',
+          is_default: false
+        },
+        area_text: "",
+        /*弹框*/
+        dialogVisible: false,
+        eldioTitle: "",
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -98,7 +143,26 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      addClick() {
+        this.dialogVisible = true;
+        this.eldioTitle = "添加收货地址";
+        console.log("addClick");
+      },
+      showClick() {
+        this.dialogVisible = true;
+        this.eldioTitle = "修改收货地址";
+        console.log("showClick");
+      },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+            .then(_ => {
+              done();
+            })
+            .catch(_ => {
+            });
+      },
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */

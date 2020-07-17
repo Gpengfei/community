@@ -14,7 +14,7 @@
     <div class="detail">
       <div class="address">
         <div class="address-header">
-          <span class="header-title">商品及优惠券</span>
+          <span class="header-title">商品</span>
         </div>
         <div class="row-list">
           <div class="good-item" v-for="(arr, index) in orderPreList" :key="index">
@@ -28,9 +28,9 @@
             </div>
             <div class="item-desc">
               <div class="special-handling-differentiate">
-                <div class="item-desc good-price">{{ arr.detail.price }}元 x {{ arr.detail.goods_num }}</div>
+                <div class="item-desc good-price">￥ {{ arr.detail.price }} 元 x {{ arr.goods_num }}</div>
                 <div class="item-desc good-status"></div>
-                <div class="item-desc good-total">{{arr.detail.goods_amount}}元</div>
+                <div class="item-desc good-total">￥ {{arr.goods_amount}}元</div>
               </div>
             </div>
           </div>
@@ -40,11 +40,51 @@
     <div class="section">
       <div class="section-options">
         <div class="desc">
-          <p class="title"></p>
+          <p class="title">配送方式</p>
+        </div>
+        <div class="options-desc options-body">
+          <div class="options-list">
+            <div class="options-item selected">包邮</div>
+          </div>
         </div>
       </div>
     </div>
-    <!--弹出框-->
+    <div class="section">
+      <div class="seRowWar">
+        <div class="left">
+
+        </div>
+        <div class="right">
+          <ul class="ul">
+            <li class="li">
+              <span class="name">商品件数：</span>
+              <span class="valur">{{orderPre.goods_number}}件</span>
+            </li>
+            <li class="li">
+              <span class="name">商品总价：</span>
+              <span class="valur">￥{{ orderPre.goods_amount || '0.00' }}件</span>
+            </li>
+            <li class="li">
+              <span class="name">运费：</span>
+              <span class="valur">￥{{orderPre.dispatch_amount||"0.00" }}元</span>
+            </li>
+            <li class="li">
+              <span class="name">应付总额：</span>
+              <span class="valur pm">￥<em>{{ orderPre.total_fee||"0.00" }}</em> 元</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="detail-section footer-detail clearfix">
+      <div class="left"></div>
+      <div class="handle-action">
+        <div class="operating-button">
+          <a class="btn btn-primary">去结算</a>
+          <a class="btn btn-return">返回购物车</a>
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -64,9 +104,10 @@
         grouponId: "",
         addressId: 0,
         couponId: 0,
+
         /* 商品列表 */
         orderPre: {},
-        orderPreList: []
+        orderPreList: [],
       };
     },
     /**
@@ -175,8 +216,10 @@
           if (res.data.code == 1) {
             this.orderPreList = [];
             this.orderPre = res.data.data;
+            this.orderPre.goods_number = 0;
             for (let i = 0; i < res.data.data.new_goods_list.length; i++) {
               this.orderPreList.splice(i, 0, res.data.data.new_goods_list[i]);
+              this.orderPre.goods_number += parseInt(res.data.data.new_goods_list[i].goods_num);
             }
           }
         });
@@ -205,9 +248,11 @@
 
 <style scoped lang="scss">
   .settlement {
-    padding: 40px 0 60px;
+    /*padding: 40px 0 60px 0;*/
+    padding: 40px 0 0 0;
     max-width: 1226px;
-    margin: auto;
+    margin: 40px auto;
+    background-color: #ffffff;
 
     .detail {
       position: relative;
@@ -282,8 +327,12 @@
       .section-options {
         padding: 25px 0;
         border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
 
         .desc {
+          width: 150px;
           display: inline-block;
           overflow: hidden;
           white-space: nowrap;
@@ -293,6 +342,103 @@
             color: #333;
             font-size: 18px;
             line-height: 38px;
+          }
+        }
+
+        .options-desc {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          .options-list {
+            width: 960px;
+
+            .options-item {
+              display: inline-block;
+              height: 38px;
+              line-height: 38px;
+              margin-right: 14px;
+              border: 1px solid #fff;
+              color: #ff6700;
+            }
+          }
+        }
+      }
+    }
+
+    .seRowWar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .left {
+      }
+
+      .right {
+        .ul {
+          .li {
+            line-height: 2;
+            text-align: right;
+
+            .name {
+              width: 126px;
+              white-space: nowrap;
+              color: #757575;
+            }
+
+            .valur {
+              display: inline-block;
+              vertical-align: middle;
+              min-width: 64px;
+              color: #ff6700;
+
+              em {
+                font-style: normal;
+                font-size: 30px;
+                line-height: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .detail-section {
+      padding: 20px 48px;
+      border-top: 2px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .handle-action {
+        .operating-button {
+          .btn {
+            display: inline-block;
+            width: 158px;
+            height: 38px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #b0b0b0;
+            font-size: 14px;
+            line-height: 38px;
+            text-align: center;
+            color: #b0b0b0;
+            cursor: pointer;
+            -webkit-transition: all .4s;
+            transition: all .4s;
+          }
+
+          .btn-primary {
+            background: #ff6700;
+            border-color: #ff6700;
+            color: #fff;
+          }
+
+          .btn-return {
+            float: left;
+            margin-right: 30px;
+            vertical-align: top;
           }
         }
       }
