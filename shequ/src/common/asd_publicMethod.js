@@ -1,6 +1,6 @@
-import Vue from "vue";
 import axios from "axios";
 import qs from "qs";
+
 /* post请求 */
 export function post(url, data, callbacks) {
   data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "47aea37e-801e-49be-b3b9-e7dca09a1eaa";
@@ -12,8 +12,8 @@ export function post(url, data, callbacks) {
     },
     baseURL:
         process.env.NODE_ENV == "production"
-            ? "http://smart.zhuwenyong.xyz/"
-            : "http://smart.zhuwenyong.xyz/",
+            ? "http://zt.shenyueyun.com/"
+            : "http://zt.shenyueyun.com/",
     data: qs.stringify(data),
     xhrFields: {
       withCredentials: true

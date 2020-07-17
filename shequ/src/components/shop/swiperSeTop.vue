@@ -1,13 +1,13 @@
 <template>
   <div class="swiperSeTop">
-    <topList />
+<!--    <topList />-->
     <swiper class="swiper" ref="mySwiper" :options="swiperOption">
       <swiper-slide v-for="(arr,index) in list" :key="index" class="sw" >
         <img class="img" @click="a_go(arr.path)" :src="arr.image" alt="">
       </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
+<!--      <swiper-slide class="sw">-->
+<!--        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">-->
+<!--      </swiper-slide>-->
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import topList from "@components/shop/topList"
+  // import topList from "@components/shop/topList"
   export default {
     name: "swiperSeTop",
     data() {
@@ -83,7 +83,10 @@
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
     props: {
       list: {
-        type: Array
+        type: Array,
+        default: () => {
+          return [];
+        }
       }
     },
     /**
@@ -100,11 +103,26 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      someMethod(){
+      /*console.log(this.list.length);
+        for (let i = 0; i < this.list.length; i++) {
+          if(!process.env.NODE_ENV != "production"){
+            this.list[i].image = "http://zt.shenyueyun.com/" + this.list[i].image;
+          }
+        }*/
+      }
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
-    watch: {},
+    watch: {
+      list: {
+        handler: 'someMethod',
+        deep: true,
+        immediate: true
+      },
+    },
     /**
      * 包含 Vue 实例可用指令的哈希表。
      * */
@@ -117,7 +135,7 @@
      * 包含 Vue 实例可用组件的哈希表。
      * */
     components: {
-      topList
+      // topList
     },
   }
 </script>

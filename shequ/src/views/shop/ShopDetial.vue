@@ -59,6 +59,7 @@
     data() {
       return {
         detailType: '',
+        querydata: this.$route.query,
         buyType: 'sku',
         grouponBuyType: 'alone', //拼团购买方式。
         details: {},
@@ -135,7 +136,7 @@
      * */
     methods: {
       getShopDetial() {
-        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=3", {id: 3}, res => {
+        this.a_post("http://smart.zhuwenyong.xyz/addons/shopro/goods/detail?id=" + this.querydata.id, {id: this.querydata.id}, res => {
           console.log("detail", res.data.data);
           this.$store.commit("change", ress => {
             ress.shopDetial = res.data.data
@@ -143,7 +144,7 @@
             /*swiperShopLeft*/
           });
           this.details = res.data.data;
-          this.buyType = res.data.data.buyType
+          this.buyType = res.data.data.buyType;
         });
       }
     },

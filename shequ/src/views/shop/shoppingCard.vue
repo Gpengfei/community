@@ -62,11 +62,11 @@
     <div class="cart_war">
       <div class="row">
         <div class="left">
-          <span class="cart-total">共 <i >8</i> 件商品，已选择 <i >8</i>件</span>
+          <span class="cart-total">共 <i>{{allShopPiece}}</i> 件商品，已选择 <i>{{choiceShopPrece}}</i>件</span>
         </div>
         <span class="right">
           合计：
-          <em>144.39</em>
+          <em> {{ totalPrice.toFixed(2) }} </em>
           元
           <a @click="goSettlement" class="a btn">
             去结算
@@ -149,7 +149,13 @@
             }
           }
         ],
-        multipleSelection: []
+        multipleSelection: [],
+        //总价
+        totalPrice: 0.00,
+        /*总共的商品件数*/
+        allShopPiece: 0,
+        /*选择的商品件数*/
+        choiceShopPrece: 0
       };
     },
     /**
@@ -216,14 +222,21 @@
      * */
     methods: {
       /*去结算*/
-      goSettlement(){
+      goSettlement() {
         this.a_go("/shop/settlement");
       },
-      /**/
+      /*  */
       inNumber(currentValue, scope) {
         console.log(currentValue, scope)
         this.tableData[scope.$index].good_money = this.mmath(this.tableData[scope.$index].goods_num, this.tableData[scope.$index].sku_price.price);
-      },
+        for (let i = 0; i < this.list.length; i++) {
+          console
+          if (this.list[i].id == this.tableData[scope.$index].id&&this.list[i].goods_id == this.tableData[scope.$index].goods_id){
+            this.list.splice(i,1,this.tableData[scope.$index]);
+            this.allshop();
+          }
+        }
+        },
       /* 计算价格*/
       mmath(a, b) {
         return (parseFloat(a) * 100 / 100 * parseFloat(b) * 100 / 100).toFixed(2)
@@ -235,8 +248,9 @@
           this.list = [];
           for (let i = 0; i < res.data.data.length; i++) {
             res.data.data[i].good_money = this.mmath(res.data.data[i].goods_num, res.data.data[i].sku_price.price);
-            this.list.splice(i, 0, res.data.data[i]);
+            // this.list.splice(i, 0, res.data.data[i]);
             this.tableData.splice(i, 0, res.data.data[i]);
+            this.allShopPiece += parseInt(res.data.data[i].goods_num);
           }
           console.log(this.tableData);
         });
@@ -250,9 +264,26 @@
           this.$refs.multipleTable.clearSelection();
         }
       },
+      /* 选择商品*/
       handleSelectionChange(val) {
         this.multipleSelection = val;
         console.log(this.multipleSelection)
+        this.list = [];
+        for (let i = 0; i < val.length; i++) {
+          this.list.splice(i, 0, val[i]);
+        }
+        this.allshop();
+      },
+      /*
+      * 计算总商品
+      *  */
+      allshop() {
+        this.choiceShopPrece = 0;
+        this.totalPrice = 0;
+        for (let i = 0; i < this.list.length; i++) {
+          this.choiceShopPrece +=  parseInt(this.list[i].goods_num);
+          this.totalPrice += parseFloat(this.list[i].good_money);
+        }
       }
     },
     /**
@@ -298,11 +329,12 @@
       background-color: #fff;
       -webkit-transition: background .3s ease, top .3s ease;
       transition: background .3s ease, top .3s ease;
-      box-shadow: 0 -3px 6px rgba(0,0,0,.1);
+      box-shadow: 0 -3px 6px rgba(0, 0, 0, .1);
       position: sticky;
       bottom: 0;
       z-index: 9999;
-      .row{
+
+      .row {
         position: relative;
         z-index: 9999;
         display: flex;
@@ -310,29 +342,34 @@
         justify-content: space-between;
         width: 100%;
         height: 100%;
-        .left{
-          .cart-total{
+
+        .left {
+          .cart-total {
             margin-left: 16px;
             padding-left: 16px;
             border-left: 1px solid #eee;
             color: #757575;
-            i{
+
+            i {
               color: $shopColor;
             }
           }
         }
-        .right{
+
+        .right {
           padding-left: 13px;
           color: $shopColor;
           text-align: center;
           display: flex;
           align-items: center;
-          em{
+
+          em {
             font-style: normal;
             font-size: 30px;
             vertical-align: unset;
           }
-          .a.btn{
+
+          .a.btn {
             display: inline-block;
             padding: 0;
             text-align: center;

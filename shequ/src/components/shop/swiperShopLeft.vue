@@ -4,9 +4,6 @@
       <swiper-slide v-for="(arr,index) in list" :key="index" class="sw">
         <img class="img" :src="arr" alt="">
       </swiper-slide>
-      <swiper-slide class="sw">
-        <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e472d8648df665bc0b2047252685cef0.jpg" alt="">
-      </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
@@ -139,6 +136,11 @@
       left: 50%;
       bottom: 10px;
       transform: translateX(-50%);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
     }
   }
 </style>

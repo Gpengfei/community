@@ -2,60 +2,72 @@
   <div class="fromList2">
     <div class="box">
       <div class="top-hd">
-        <h2 class="title">智能</h2>
-        <div class="more">
-          <ul class="ul">
-            <li class="li select">热门</li>
-            <li class="li">电视影音</li>
-          </ul>
-        </div>
+        <h2 class="title">{{lisfromDetial.name}}</h2>
+        <!--        <div class="more">-->
+        <!--          <ul class="ul">-->
+        <!--            <li class="li select">热门</li>-->
+        <!--            <li class="li">电视影音</li>-->
+        <!--          </ul>-->
+        <!--        </div>-->
       </div>
       <div class="box-bd clearfix">
         <div class="row">
-          <div class="left">
-            <div class="imgWar" @click="a_go('/shop/index/detial')">
-              <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
-            </div>
-            <div class="imgWar" @click="a_go('/shop/index/detial')">
-              <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
-            </div>
-          </div>
+          <!--          <div class="left">-->
+          <!--            <div class="imgWar" @click="a_go('/shop/index/detial')">-->
+          <!--              <img class="img"-->
+          <!--                   src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"-->
+          <!--                   alt="">-->
+          <!--            </div>-->
+          <!--            <div class="imgWar" @click="a_go('/shop/index/detial')">-->
+          <!--              <img class="img"-->
+          <!--                   src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"-->
+          <!--                   alt="">-->
+          <!--            </div>-->
+          <!--          </div>-->
           <div class="right">
             <ul class="ul">
-              <li class="li" @click="a_go('/shop/index/detial')">
-                <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
+              <li class="li" @click="a_go('/shop/index/detial',{id:arr.id})"
+                  v-for="(arr,index) in lisfromDetial.goodsList.data"
+                  :key="index">
+                <img class="img"
+                     :src="arr.image"
+                     alt="">
                 <p class="title">
-                  小米10 青春版 5G
+                  {{arr.title}}
                 </p>
-                <p class="desc">50倍潜望式变焦 / 轻薄5G手机</p>
+                <p class="desc">{{arr.subtitle}}</p>
                 <p class="price">
-                  <span class="num">2009</span>
+                  <span class="num">{{arr.price}}</span>
                   <span class="">元</span>
                   <span class="">起</span>
                   <del class="del">
                     <span class="num">
-                      333
+                      {{arr.original_price}}
                     </span>
                     元
                   </del>
                 </p>
               </li>
-              <li class="liLast">
-                <div class="div" @click="a_go('/shop/index/detial')">
-                  <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
-                  <h3 class="h3">
-                    小米小爱触屏音箱
-                  </h3>
-                  <p class="price"><span class="num">199</span>元</p>
-                </div>
-                <div class="div" @click="a_go('/shop/index/detial')">
-                  <img class="img" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90" alt="">
-                  <div class="more">
-                    浏览更多
-                    <small class="small">热门</small>
-                  </div>
-                </div>
-              </li>
+              <!--              <li class="liLast">-->
+              <!--                <div class="div" @click="a_go('/shop/index/detial')">-->
+              <!--                  <img class="img"-->
+              <!--                       src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"-->
+              <!--                       alt="">-->
+              <!--                  <h3 class="h3">-->
+              <!--                    小米小爱触屏音箱-->
+              <!--                  </h3>-->
+              <!--                  <p class="price"><span class="num">199</span>元</p>-->
+              <!--                </div>-->
+              <!--                <div class="div" @click="a_go('/shop/index/detial')">-->
+              <!--                  <img class="img"-->
+              <!--                       src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8729282b199b3ec51e31c1b6b15f3f93.jpg?thumb=1&w=200&h=200&f=webp&q=90"-->
+              <!--                       alt="">-->
+              <!--                  <div class="more">-->
+              <!--                    浏览更多-->
+              <!--                    <small class="small">热门</small>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </li>-->
             </ul>
           </div>
         </div>
@@ -120,7 +132,11 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {},
+    props: {
+      lisfromDetial: {
+        type: Object,
+      }
+    },
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -154,6 +170,7 @@
 <style scoped lang="scss">
   .fromList2 {
     margin-bottom: 8px;
+
     .box {
       .top-hd {
         position: relative;
@@ -173,30 +190,35 @@
           position: absolute;
           top: 0;
           right: 0;
-          .ul{
+
+          .ul {
             margin: 0;
             padding: 16px 0 0;
             list-style-type: none;
             font-size: 16px;
-            .li{
+
+            .li {
               display: inline-block;
               padding: 0;
               color: #424242;
               border-bottom: 2px solid #f5f5f5;
-              border-bottom: 2px solid rgba(0,0,0,0);
+              border-bottom: 2px solid rgba(0, 0, 0, 0);
               transition: border .3s;
               cursor: pointer;
               margin: 0 0 0 30px;
-              &.select{
+
+              &.select {
                 color: $shopColor;
                 border-bottom: 2px solid $shopColor;
               }
-              &:hover{
+
+              &:hover {
                 color: $shopColor;
                 border-bottom: 2px solid $shopColor;
               }
             }
           }
+
           .a {
             font-size: 16px;
             line-height: 58px;
@@ -223,9 +245,11 @@
           -webkit-transition: all .2s linear;
           transition: all .2s linear;
           cursor: pointer;
+
           .imgWar {
             display: block;
             margin-bottom: 14px;
+
             &:hover {
               z-index: 2;
               -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
@@ -233,6 +257,7 @@
               -webkit-transform: translate3d(0, -2px, 0);
               transform: translate3d(0, -2px, 0);
             }
+
             .img {
               width: 234px;
               height: 300px;
@@ -262,48 +287,56 @@
               -webkit-transition: all .2s linear;
               transition: all .2s linear;
               cursor: pointer;
+
               .img {
                 display: block;
                 width: 160px;
                 height: 160px;
                 margin: 0 auto 18px auto;
               }
-              .title, .desc{
+
+              .title, .desc {
                 text-align: center;
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
                 margin: 0 10px 2px;
               }
-              .title{
+
+              .title {
                 font-size: 14px;
                 font-weight: 400;
                 color: #333;
 
               }
-              .desc{
+
+              .desc {
                 margin: 0 10px 10px;
                 height: 18px;
                 font-size: 12px;
                 color: #b0b0b0;
               }
-              .price{
+
+              .price {
                 margin: 0 10px 10px;
                 text-align: center;
                 color: $shopColor;
-                .del{
+
+                .del {
                   margin-left: .5em;
                   color: #b0b0b0;
                 }
               }
             }
-            .liLast{
+
+            .liLast {
               position: relative;
               z-index: 1;
               -webkit-transition: all .2s linear;
               transition: all .2s linear;
               cursor: pointer;
-              .div{
+
+              .div {
                 background-color: #ffffff;
                 position: relative;
                 z-index: 1;
@@ -314,6 +347,7 @@
                 transition: all .2s linear;
                 height: 93px;
                 padding-top: 50px;
+
                 &:hover {
                   z-index: 2;
                   -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
@@ -321,54 +355,63 @@
                   -webkit-transform: translate3d(0, -2px, 0);
                   transform: translate3d(0, -2px, 0);
                 }
-                .h3{
+
+                .h3 {
                   color: #333;
                   margin: -10px 110px 5px 30px;
                   font-size: 14px;
                   font-weight: 400;
                 }
-                .price{
+
+                .price {
                   margin: 0 110px 0 30px;
                   font-size: 12px;
                   color: $shopColor;
-                  .num{
+
+                  .num {
                     font-size: 14px;
                   }
                 }
-                .img{
+
+                .img {
                   position: absolute;
                   right: 20px;
                   top: 32px;
                   width: 80px;
                   height: 80px;
                 }
-                .more{
+
+                .more {
                   display: block;
                   margin: 0 110px 0 30px;
                   font-size: 18px;
                   color: #333;
-                  .ul{
+
+                  .ul {
                     margin: 0;
                     padding: 16px 0 0;
                     list-style-type: none;
                     font-size: 16px;
-                    .li{
+
+                    .li {
                       display: inline-block;
                       padding: 0;
                       margin: 0 15px;
                       color: #424242;
                       border-bottom: 2px solid #f5f5f5;
-                      border-bottom: 2px solid rgba(0,0,0,0);
+                      border-bottom: 2px solid rgba(0, 0, 0, 0);
                       -webkit-transition: border .3s;
                       transition: border .3s;
                       cursor: pointer;
-                      &.cs{
+
+                      &.cs {
                         color: $shopColor;
                         border-bottom: 2px solid $shopColor;
                       }
                     }
                   }
-                  .small{
+
+                  .small {
                     display: block;
                     font-size: 12px;
                     color: #757575;
@@ -381,6 +424,7 @@
         }
       }
     }
+
     .li:hover {
       z-index: 2;
       -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);

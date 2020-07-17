@@ -219,6 +219,7 @@
             grouponBuyType: this.grouponBuyType,
             grouponId: this.grouponId
           }
+
           console.log(datas);
         }
       },
