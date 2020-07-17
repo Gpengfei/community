@@ -161,20 +161,18 @@
             let provinceData = res.data.data.provinceData;
             let cityData = res.data.data.cityData;
             let areaData = res.data.data.areaData;
-            console.log(provinceData, cityData, areaData);
-            for (let i = 0; i < provinceData.length; i++) {
-              console.log("i", i);
-              this.options[i].children = [];
-              for (let j = 0; j < cityData.length; j++) {
-                console.log("j", j);
-                /*for (let k = 0; k < areaData.length; k++) {
-                  console.log("k", k);
-                  options[i].children[j].children.splice(k, 0, areaData[k]);
-                }*/
-                this.options[i].children.splice(j, 0, cityData[j]);
-              }
-              this.options.splice(i, 0, provinceData[i]);
-            }
+            // console.log(provinceData, cityData, areaData);
+            // for (let i = 0; i < provinceData.length; i++) {
+            //   this.options.splice(i, 0, provinceData[i]);
+            //   this.options[i].children = [];
+            //   for (let j = 0; j < cityData[i].length; j++) {
+            //     this.options[i].children.splice(j, 0, cityData[j]);
+            //     this.options[i].children[j].children = [];
+            //     for (let k = 0; k < areaData[i][j].length; k++) {
+            //       this.options[i].children[j].children.splice(k, 0, areaData[k]);
+            //     }
+            //   }
+            // }
             console.log("this.options", this.options);
           }
 
