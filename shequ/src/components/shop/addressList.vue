@@ -1,19 +1,19 @@
 <template>
   <div class="addressListWar">
     <ul class="addressList">
-      <li class="address-item">
+      <li class="address-item" v-for="(arr,index) in addressList" :key="index">
         <div class="address-info">
-          <div class="name">安厦<span style="color: rgb(176, 176, 176);">家</span>
+          <div class="name">{{ arr.consignee }}<span style="color: rgb(176, 176, 176);"><!--家--></span>
           </div>
-          <div class="tel">151****6690</div>
+          <div class="tel">{{ arr.phone }}</div>
           <div class="address-con">
             <span>内蒙古</span>
             <span>呼和浩特市</span>
             <span>新城区</span>
             <span>迎新路街道</span>
-            <span class="info">内蒙古工行干校家属院别墅区2-2</span>
+            <span class="info">{{arr.address}}</span>
           </div>
-          <div class="address-action" @click="showClick">
+          <div class="address-action" @click="showClick(arr)">
             <span>修改</span>
           </div>
         </div>
@@ -42,7 +42,11 @@
           <el-input v-model="addressData.phone"></el-input>
         </el-form-item>
         <el-form-item label="所在地区：">
-          <el-input v-model="area_text"></el-input>
+          <el-cascader
+              v-model="value"
+              :options="options"
+              :props="{ expandTrigger: 'hover' }"
+              @change="handleChange"></el-cascader>
         </el-form-item>
         <el-form-item label="详细地址：">
           <el-input v-model="addressData.address"></el-input>
@@ -61,11 +65,11 @@
     name: "addressList",
     data() {
       return {
-        addressList:[
+        addressList: [
           {
-            consignee:"安厦",
-            phone:"15147906690",
-            address:"内蒙古工行干校家属院别墅区2-2"
+            consignee: "安厦",
+            phone: "15147906690",
+            address: "内蒙古工行干校家属院别墅区2-2"
           }
         ],
         addressData: {
@@ -80,6 +84,8 @@
         /*弹框*/
         dialogVisible: false,
         eldioTitle: "",
+        options: [],
+        value: ""
       };
     },
     /**
@@ -91,11 +97,15 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.pullArea();
+      console.log(111111111111111111110);
+
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
      * */
     beforeMount() {
+
     },
     /**
      * el 被新创建的 vm. 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm. 也在文档内。
@@ -144,12 +154,41 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      async pullArea() {
+        this.a_post("/addons/shopro/address/area", {}, res => {
+          console.log("area", res.data.code);
+          if (res.data.code) {
+            let provinceData = res.data.data.provinceData;
+            let cityData = res.data.data.cityData;
+            let areaData = res.data.data.areaData;
+            console.log(provinceData, cityData, areaData);
+            for (let i = 0; i < provinceData.length; i++) {
+              console.log("i", i);
+              this.options[i].children = [];
+              for (let j = 0; j < cityData.length; j++) {
+                console.log("j", j);
+                /*for (let k = 0; k < areaData.length; k++) {
+                  console.log("k", k);
+                  options[i].children[j].children.splice(k, 0, areaData[k]);
+                }*/
+                this.options[i].children.splice(j, 0, cityData[j]);
+              }
+              this.options.splice(i, 0, provinceData[i]);
+            }
+            console.log("this.options", this.options);
+          }
+
+        });
+      },
+      handleChange() {
+      },
       addClick() {
         this.dialogVisible = true;
         this.eldioTitle = "添加收货地址";
         console.log("addClick");
       },
-      showClick() {
+      showClick(arr) {
+        this.addressData = arr;
         this.dialogVisible = true;
         this.eldioTitle = "修改收货地址";
         console.log("showClick");

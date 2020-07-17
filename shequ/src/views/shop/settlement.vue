@@ -119,22 +119,24 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
-      console.log("params", this.$route.params);
-      let pObj = this.$route.params;
-      if (JSON.parse(this.$route.params.goodsList).length) {
+      // this.pullArea();
+      let pObj =  this.$store.state.settlementObj || this.$route.params ;
+      console.log("pObj", pObj);
+      if (JSON.parse(pObj.goodsList).length) {
         this.goodsList = [];
-        let pObjList = JSON.parse(this.$route.params.goodsList);
+        let pObjList = JSON.parse(pObj.goodsList);
         for (let i = 0; i < pObjList.length; i++) {
           this.goodsList.splice(i, 0, pObjList[i]);
         }
-        this.from = this.$route.params.from;
-        this.orderType = this.$route.params.orderType;
-        this.grouponBuyType = this.$route.params.grouponBuyType;
-        this.grouponId = this.$route.params.grouponId;
+        this.from = pObj.from;
+        this.orderType = pObj.orderType;
+        this.grouponBuyType = pObj.grouponBuyType;
+        this.grouponId = pObj.grouponId;
         this.getPre();
       } else {
         this.a_go("/shop/index");
       }
+
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -188,6 +190,11 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      // async pullArea() {
+      //   this.a_post("/addons/shopro/address/area", {}, res => {
+      //     console.log("area", res);
+      //   });
+      // },
       async getPre() {
         let datas = {
           address_id: this.addressId,
