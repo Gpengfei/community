@@ -55,6 +55,10 @@ export default [
               path: '/myService',
               component: ()=>import('@views/mine/MyService.vue'),
             },
+            {
+              path: '/commodityEvaluation',
+              component: ()=>import('@views/mine/CommodityEvaluation.vue'),
+            },
           ]
         },
         {
