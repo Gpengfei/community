@@ -1,0 +1,220 @@
+.myOrder {
+  width: 100%;
+
+  .myOrder-box {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    .myOrder-sxandsoso {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      position: relative;
+      box-sizing: border-box;
+      padding: 0 10px;
+      justify-content: space-between;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #eee;
+        bottom: 0;
+        left: 0;
+      }
+      ul {
+        display: flex;
+        li {
+          padding: 0 10px;
+          font: 16px;
+          color: #999;
+          margin-right: 10px;
+          cursor: pointer;
+          &.sty {
+            color: $color;
+            border-bottom: 3px solid $color;
+          }
+        }
+      }
+    }
+    .myOrder-sx {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 10px;
+      box-sizing: border-box;
+      .sx-box {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background-color: #eee;
+        overflow: hidden;
+
+        .sx-r {
+          width: 100%;
+          ul {
+            display: flex;
+            width: 100%;
+            li {
+              color: #666;
+              font-size: 14px;
+              text-align: center;
+              &:nth-child(1) {
+                width: 521px;
+              }
+              &:nth-child(2) {
+                width: 113px;
+              }
+              &:nth-child(3) {
+                width: 152px;
+              }
+              &:nth-child(4) {
+                width: 152px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .myOrder-lis {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 10px;
+      padding-bottom: 30px;
+      ul {
+        width: 100%;
+        li {
+          width: 100%;
+          margin-bottom: 20px;
+          &.ywc {
+            .dd-title {
+              width: 100%;
+              background-color: #f5f5f5;
+              height: 30px;
+              line-height: 30px;
+              box-sizing: border-box;
+              padding: 0 30px;
+              .title-time {
+                font-size: 12px;
+                color: #333;
+                margin-right: 50px;
+              }
+              .title-ddh {
+                font-size: 12px;
+                color: #333;
+              }
+            }
+            table {
+              width: 100%;
+              border: 1px solid #f5f5f5;
+              border-collapse: collapse;
+              tr {
+                border-bottom: 1px solid #f5f5f5;
+                &:last-child {
+                  border-bottom: none;
+                }
+                td {
+                  border-right: 1px solid #f5f5f5;
+                  &:nth-child(1) {
+                    .tb-box {
+                      width: 100%;
+                      box-sizing: border-box;
+                      padding: 10px;
+                      display: flex;
+                      justify-content: space-between;
+                      .tb-img {
+                        width: 60px;
+                        height: 60px;
+                        margin-right: 10px;
+                        img {
+                          width: 100%;
+                        }
+                      }
+                      .tb-con {
+                        width: 257px;
+                        font-size: 12px;
+                        color: #333;
+                        text-align: left;
+                      }
+                      .tb-num {
+                        color: #999;
+                        font-size: 12px;
+                      }
+                    }
+                  }
+                  &:nth-child(2) {
+                    font-size: 12px;
+                    color: #333;
+                  }
+                  &:nth-child(3) {
+                    font-size: 12px;
+                    color: #999;
+                  }
+                  &:nth-child(4) {
+                    font-size: 12px;
+                    color: #999;
+                    p {
+                      line-height: 25px;
+                      &.ckdd {
+                        color: $color;
+                        cursor: pointer;
+                      }
+                    }
+                  }
+                  &:last-child {
+                    border-right: none;
+                    .zcgm {
+                      width: 100%;
+                      height: 30px;
+                      font-size: 12px;
+                      line-height: 30px;
+                      margin-bottom: 10px;
+                      cursor: pointer;
+                    }
+                    .pj {
+                      width: 80px;
+                      height: 30px;
+                      background-color: #ffac6b;
+                      font-size: 12px;
+                      color: #fff;
+                      line-height: 30px;
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .fy {
+    width: 100%;
+    height: 130px;
+    position: relative;
+    .fy-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      .el-pagination.is-background .btn-next,
+      .el-pagination.is-background .btn-prev,
+      .el-pagination.is-background .el-pager li {
+        background-color: #fff;
+      }
+      .el-pagination.is-background .el-pager li:not(.disabled).active {
+        background-color: $color;
+      }
+      .el-pagination button,
+      .el-pagination span {
+        padding: 0 10px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+// 组件默认样式
+.el-select-dropdown__item.selected {
+  color: $color;
+}
