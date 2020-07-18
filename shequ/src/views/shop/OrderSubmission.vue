@@ -199,7 +199,7 @@
 
               .pay-time-tip {
                 margin: 0 5px;
-                color: #ff6700;
+                color: $shopColor;
               }
             }
           }
@@ -211,7 +211,7 @@
             }
 
             .money {
-              color: #ff6700;
+              color: $shopColor;
               font-size: 14px;
             }
 
@@ -246,7 +246,7 @@
 
             .right {
               .order-num {
-                color: #ff6700;
+                color: $shopColor;
               }
             }
           }

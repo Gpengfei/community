@@ -7,7 +7,7 @@
           <span class="header-title">收货地址</span>
         </div>
         <!--地址列表-->
-        <addressList/>
+        <addressList v-on:addId="addId"/>
         <!--地址列表-->
       </div>
     </div>
@@ -80,7 +80,7 @@
       <div class="left"></div>
       <div class="handle-action">
         <div class="operating-button">
-          <a class="btn btn-primary">去结算</a>
+          <a class="btn btn-primary" @click="GoOrderSubmission">去结算</a>
           <a class="btn btn-return">返回购物车</a>
         </div>
       </div>
@@ -190,6 +190,28 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      addId(id){
+        this.addressId = id;
+      },
+      GoOrderSubmission(){
+        let datas = {
+          goods_list: this.goodsList,
+          from: this.from,
+          address_id: this.addressId,
+          coupons_id: this.couponId,
+          remark: this.remark,
+          dispatch_type: 'express',
+          order_type: this.orderType,
+          buy_type: this.grouponBuyType,
+          groupon_id: this.grouponId
+        }
+        this.a_post("/addons/shopro/order/createOrder", datas, res => {
+          console.log("address", res.data.code);
+          if (res.data.code) {
+            this.a_go("/shop/OrderSubmission", {id:res.data.data.id});
+          }
+        });
+      },
       // async pullArea() {
       //   this.a_post("/addons/shopro/address/area", {}, res => {
       //     console.log("area", res);
@@ -367,7 +389,7 @@
               line-height: 38px;
               margin-right: 14px;
               border: 1px solid #fff;
-              color: #ff6700;
+              color: $shopColor;
             }
           }
         }
@@ -398,7 +420,7 @@
               display: inline-block;
               vertical-align: middle;
               min-width: 64px;
-              color: #ff6700;
+              color: $shopColor;
 
               em {
                 font-style: normal;
@@ -437,8 +459,8 @@
           }
 
           .btn-primary {
-            background: #ff6700;
-            border-color: #ff6700;
+            background: $shopColor;
+            border-color: $shopColor;
             color: #fff;
           }
 

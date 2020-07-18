@@ -244,7 +244,6 @@
        * 确定规格
        * */
       confirmSku() {
-        let that = this;
         this.superiorPosition.goods_num = this.goods_num;
         this.confirmGoodsInfo = {
           goods_id: this.superiorPosition.goods_id,
@@ -454,7 +453,7 @@
           }
 
           .edit {
-            color: #ff6700;
+            color: $shopColor;
             margin: 0;
             display: inline-block;
           }

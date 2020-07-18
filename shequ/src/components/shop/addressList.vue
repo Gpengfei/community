@@ -1,16 +1,17 @@
 <template>
   <div class="addressListWar">
     <ul class="addressList">
-      <li class="address-item" v-for="(arr,index) in addressList" :key="index">
+      <li class="address-item" :class="{active:arr.is_default == 1}" v-for="(arr,index) in addressList" :key="index"
+          @click="addressChose(arr,index)">
         <div class="address-info">
-          <div class="name">{{ arr.consignee }}<span style="color: rgb(176, 176, 176);"><!--家--></span>
+          <div class="name">{{ arr.consignee }}
+            <span v-if="arr.is_default == 1" style="color: rgb(176, 176, 176);">默认</span>
           </div>
           <div class="tel">{{ arr.phone }}</div>
           <div class="address-con">
-            <span>内蒙古</span>
-            <span>呼和浩特市</span>
-            <span>新城区</span>
-            <span>迎新路街道</span>
+            <span>{{arr.province_name}}</span>
+            <span>{{arr.city_name}}</span>
+            <span>{{arr.area_name}}</span>
             <span class="info">{{arr.address}}</span>
           </div>
           <div class="address-action" @click="showClick(arr)">
@@ -30,7 +31,7 @@
     </ul>
     <!--弹出框-->
     <el-dialog
-        :title="eldioTitle"
+        :title="dioTitle"
         :visible.sync="dialogVisible"
         width="30%"
         :before-close="handleClose">
@@ -41,12 +42,12 @@
         <el-form-item label="手机号：">
           <el-input v-model="addressData.phone"></el-input>
         </el-form-item>
+        <div class="" style="position: relative">
+          <Aaddress v-if="AaddressShow" v-on:changeAreaGo="changeAreaGo"/>
+        </div>
         <el-form-item label="所在地区：">
-          <el-cascader
-              v-model="value"
-              :options="options"
-              :props="{ expandTrigger: 'hover' }"
-              @change="handleChange"></el-cascader>
+          <el-input class="area_text" :disabled="AaddressShow" @focus="AaddressShow = true"
+                    v-model="area_text"></el-input>
         </el-form-item>
         <el-form-item label="详细地址：">
           <el-input v-model="addressData.address"></el-input>
@@ -54,24 +55,21 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="editGO()">确 定</el-button>
   </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import Aaddress from "@components/shop/addresses"
+
   export default {
     name: "addressList",
     data() {
       return {
-        addressList: [
-          {
-            consignee: "安厦",
-            phone: "15147906690",
-            address: "内蒙古工行干校家属院别墅区2-2"
-          }
-        ],
+        AaddressShow: false,
+        addressList: [],
         addressData: {
           id: 0,
           consignee: '',
@@ -83,7 +81,7 @@
         area_text: "",
         /*弹框*/
         dialogVisible: false,
-        eldioTitle: "",
+        dioTitle: "",
         options: [],
         value: ""
       };
@@ -97,15 +95,13 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
-      this.pullArea();
       console.log(111111111111111111110);
-
+      this.getaddress();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
      * */
     beforeMount() {
-
     },
     /**
      * el 被新创建的 vm. 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm. 也在文档内。
@@ -131,6 +127,22 @@
      * 该钩子在服务器端渲染期间不被调用。
      */
     beforeDestroy() {
+      this.AaddressShow = true;
+      this.addressList = [];
+      this.addressData = {
+        id: 0,
+        consignee: '',
+        phone: '',
+        area_id: '',
+        address: '',
+        is_default: false
+      };
+      this.area_text = "";
+      /*弹框*/
+      this.dialogVisible = false;
+      this.dioTitle = "";
+      this.options = [];
+      this.value = "";
     },
     /**
      * props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。
@@ -154,41 +166,90 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
-      async pullArea() {
-        this.a_post("/addons/shopro/address/area", {}, res => {
-          console.log("area", res.data.code);
+      /*
+      * 点击确定并关闭
+      * */
+      editGO() {
+        this.dialogVisible = false;
+        let datas = {
+          id: this.addressData.id,
+          consignee: this.addressData.consignee,
+          phone: this.addressData.phone,
+          area_id: this.addressData.area_id,
+          address: this.addressData.address,
+          is_default: this.addressData.is_default
+        }
+        this.a_post("/addons/shopro/address/edit", datas, res => {
+          console.log("address", res.data.code);
           if (res.data.code) {
-            let provinceData = res.data.data.provinceData;
-            let cityData = res.data.data.cityData;
-            let areaData = res.data.data.areaData;
-            // console.log(provinceData, cityData, areaData);
-            // for (let i = 0; i < provinceData.length; i++) {
-            //   this.options.splice(i, 0, provinceData[i]);
-            //   this.options[i].children = [];
-            //   for (let j = 0; j < cityData[i].length; j++) {
-            //     this.options[i].children.splice(j, 0, cityData[j]);
-            //     this.options[i].children[j].children = [];
-            //     for (let k = 0; k < areaData[i][j].length; k++) {
-            //       this.options[i].children[j].children.splice(k, 0, areaData[k]);
-            //     }
-            //   }
-            // }
-            console.log("this.options", this.options);
+            this.getaddress();
+            /*初始化*/
+            this.AaddressShow = true;
+            this.$emit("addId", res.data.data.id);
+            this.addressList = [];
+            this.addressData = {
+              id: 0,
+              consignee: '',
+              phone: '',
+              area_id: '',
+              address: '',
+              is_default: false
+            };
+            this.area_text = "";
+            /*弹框*/
+            this.dialogVisible = false;
+            this.dioTitle = "";
+            this.options = [];
+            this.value = "";
           }
-
         });
       },
-      handleChange() {
+      /**传入值*/
+      changeAreaGo(Obj) {
+        this.AaddressShow = false;
+        this.area_text = `${Obj.provinceDataLabel.label} ${Obj.cityDataLabel.label} ${Obj.areaDataLabel.label}`
+        this.addressData.area_id = Obj.areaDataLabel.value;
       },
+      /*点击选择地区*/
+      addressClick() {
+
+      },
+      /*默认地址切换*/
+      addressChose(arr, index) {
+        for (let i = 0; i < this.addressList.length; i++) {
+          this.addressList[i].is_default = 0;
+          this.addressList.splice(i, 1, this.addressList[i]);
+        }
+        arr.is_default = 1
+        this.addressList.splice(index, 1, arr);
+        this.$emit("addId", arr.id);
+      },
+      /*获取地址列表*/
+      getaddress() {
+        this.a_post("/addons/shopro/address", {}, res => {
+          console.log("address", res.data.code);
+          if (res.data.code) {
+            this.addressList = [];
+            for (let i = 0; i < res.data.data.length; i++) {
+              if(res.data.data[i].is_default == 1){
+                this.$emit("addId", res.data.data[i].id);
+              }
+              this.addressList.splice(i, 0, res.data.data[i])
+            }
+          }
+        });
+      },
+      /*添加收货地址*/
       addClick() {
         this.dialogVisible = true;
-        this.eldioTitle = "添加收货地址";
+        this.dioTitle = "添加收货地址";
         console.log("addClick");
       },
+      /*修改收货地址*/
       showClick(arr) {
         this.addressData = arr;
         this.dialogVisible = true;
-        this.eldioTitle = "修改收货地址";
+        this.dioTitle = "修改收货地址";
         console.log("showClick");
       },
       handleClose(done) {
@@ -215,7 +276,9 @@
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {
+      Aaddress
+    },
   }
 </script>
 
@@ -238,16 +301,20 @@
         -webkit-transition: all .4s ease;
         transition: all .4s ease;
 
-        .active, &:hover {
-          border-color: #ff6700;
+        &.active {
+          border-color: $shopColor;
 
           .address-action {
-            opacity: 1
+            opacity: 0
           }
         }
 
         &:hover {
-          border-color: #b0b0b0;
+          border-color: $shopColor;
+
+          .address-action {
+            opacity: 1
+          }
 
           .if {
             background-color: #b0b0b0

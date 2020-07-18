@@ -1,67 +1,44 @@
 <template>
-  <div class="PaymentSuccessful">
-    <div class="container pay-success-box clearfix">
-      <div class="succ"><h2 class="title">支付成功</h2>
-        <p class="price">
-          <em>144.39</em>元
-        </p>
-        <a class="btn">查看订单详情</a>
-        <p class="state">商城不会以任何理由要求您提供银行卡信息或支付额外费用<br>请谨防钓鱼链接或诈骗电话。
-          <!--          <a target="_blank">了解详情&gt;</a>-->
-        </p>
+  <div class="addresses">
+    <div class="con">
+      <div class="address-selectd">
+        <span class="gray"> {{ provinceDataLabel.label || "选择省份/自治区" }}</span>
+        <span class="gray" v-if="provinceDataLabel.label"> {{ cityDataLabel.label || " 选择城市/地区" }}</span>
+        <span class="gray" v-if="cityDataLabel.label"> {{ areaDataLabel.label || "选择区县" }}</span>
       </div>
-      <div class="info">
-        <ul class="ul">
-          <li class="clearfix">
-            <div class="label">订单编号：</div>
-            <div class="content">
-              5200716474403419
-            </div>
-          </li>
-          <li class="clearfix">
-            <div class="label">收货信息：</div>
-            <div class="content">
-              安厦 151****6690<br>
-              内蒙古 呼和浩特市
-              新城区
-              迎新路街道
-              内蒙古工行干校家属院别墅区2-2
-              <p style="color: rgb(255, 103, 0); margin: 0px;">* 在“订单详情页”你可以确认收货地址或者更改收货地址</p></div>
-          </li>
-          <li class="clearfix">
-            <div class="label">商品名称：</div>
-            <div class="content">
-              <div>小米水质TDS检测笔 白色
-              </div>
-              <div>小米巨能写 黑色 10支装
-              </div>
-              <div>小米中性笔 10支装 白色
-              </div>
-              <div>米家金属签字笔 金色
-              </div>
-              <div>米家金属签字笔专用笔芯 纯白色
-              </div>
-              <div>小米记事本 3本装（1黑1灰1蓝）
-              </div>
-            </div>
-          </li>
-          <li class="clearfix">
-            <div class="label">发票信息：</div>
-            <div class="content">
-              电子普通发票 个人
-            </div>
-          </li>
-        </ul>
-      </div>
+      <ul class="address_list ul" v-if="!provinceDataLabel.label">
+        <li class="li" v-for="(arr, i) in provinceData" :key="i" @click="provinceDataClick(arr,i)">
+          {{ arr.label }}
+        </li>
+      </ul>
+      <ul class="address_list ul" v-if="provinceDataLabel.label&&!cityDataLabel.label">
+        <li class="li" v-for="(arr, j) in cityData[provinceDataLabel.index]" :key="j"
+            @click="cityDataClick(arr,j)">
+          {{ arr.label }}
+        </li>
+      </ul>
+      <ul class="address_list ul" v-if="cityDataLabel.label&&!areaDataLabel.label">
+        <li class="li" v-for="(arr, z) in areaData[provinceDataLabel.index][cityDataLabel.index]" :key="z"
+            @click="areaDataClick(arr,z)">
+          {{ arr.label }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "PaymentSuccessful",
+    name: "addresses",
     data() {
-      return {};
+      return {
+        provinceData: [],
+        cityData: [],
+        areaData: [],
+        provinceDataLabel: {},
+        cityDataLabel: {},
+        areaDataLabel: {}
+      };
     },
     /**
      * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -72,6 +49,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.pullArea();
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -124,157 +102,124 @@
     /**
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
-    methods: {},
+    methods: {
+      provinceDataClick(arr, index) {
+        arr.index = index
+        this.provinceDataLabel = arr;
+      },
+      cityDataClick(arr, index) {
+        arr.index = index
+        this.cityDataLabel = arr;
+      },
+      areaDataClick(arr, index) {
+        arr.index = index;
+        this.areaDataLabel = arr;
+        this.$emit("changeAreaGo",{
+          provinceDataLabel: this.provinceDataLabel,
+          cityDataLabel: this.cityDataLabel,
+          areaDataLabel: this.areaDataLabel
+        });
+      },
+      async pullArea() {
+        this.a_post("/addons/shopro/address/area", {}, res => {
+          console.log("area", res.data.code);
+          if (res.data.code) {
+            let provinceData = res.data.data.provinceData;
+            this.provinceData = []
+            for (let i = 0; i < provinceData.length; i++) {
+              this.provinceData.splice(i, 0, provinceData[i]);
+            }
+            let cityData = res.data.data.cityData;
+            this.cityData = [];
+            for (let i = 0; i < cityData.length; i++) {
+              this.cityData.splice(i, 0, cityData[i]);
+            }
+            let areaData = this.areaData = res.data.data.areaData;
+            this.areaData = [];
+            for (let i = 0; i < areaData.length; i++) {
+              this.areaData.splice(i, 0, areaData[i]);
+            }
+          }
+        });
+      }
+      ,
+    },
     /**
      * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
      * */
-    watch: {},
+    watch: {}
+    ,
     /**
      * 包含 Vue 实例可用指令的哈希表。
      * */
-    directives: {},
+    directives: {}
+    ,
     /**
      * 包含 Vue 实例可用过滤器的哈希表。
      * */
-    filters: {},
+    filters: {}
+    ,
     /**
      * 包含 Vue 实例可用组件的哈希表。
      * */
-    components: {},
+    components: {}
+    ,
   }
 </script>
 
 <style scoped lang="scss">
-  .PaymentSuccessful {
-    position: relative;
-    width: 1226px;
-    margin: 38px auto;
-    font-size: 14px;
+  .addresses {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding-top: 15px;
+    border: 1px solid $shopColor;
+    z-index: 3;
 
-    .pay-success-box {
-      background-color: #8bc34a;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
+    .address-selectd {
+      padding: 6px 0;
+      border-bottom: 1px solid #e0e0e0;
 
-      .succ {
-        width: 506px;
-        height: 400px;
-        text-align: center;
+      span {
+        line-height: 30px;
+        margin-right: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: $shopColor;
+        cursor: pointer;
+      }
 
-        .title {
-          font-size: 48px;
-          color: #fff;
-          line-height: 1;
-          margin-top: 70px;
-          margin-bottom: 10px;
-          font-weight: 400
-        }
+      .gray {
+        color: #757575;
+      }
+    }
 
-        .sub {
-          margin: 0;
-          color: #fff;
-        }
+    .con {
+      margin: 0 20px;
 
-        .price {
-          margin: 20px 0 30px;
-          color: #ff0;
+      .address_list.ul {
 
-          em {
-            font-style: normal;
-            font-size: 24px
-          }
-        }
+        width: 100%;
+        padding: 20px 0 14px;
 
-        .state {
-          font-size: 12px;
+        .li {
+          display: inline-block;
+          margin-right: 14px;
+          line-height: 30px;
+          margin-bottom: 6px;
           color: #333;
+          cursor: pointer;
 
-          a {
-            color: #ff0
+          &:hover {
+            color: $shopColor;
           }
         }
 
-        .btn {
-          margin-bottom: 30px;
-          border-color: #fff;
-          background: none;
-          color: #fff;
-        }
-      }
-
-      li, ul {
-        margin: 0;
-        padding: 0
-      }
-
-      li {
-        list-style: none
-      }
-      .info {
-        width: 660px;
-        min-height: 400px;
-        padding-left: 60px;
-        font-size: 12px;
-        background-color: #fff;
-        position: relative;
-        ul {
-          width: 480px;
-          padding-top: 50px;
-          padding-bottom: 50px;
-          font-size: 14px;
-        }
-        li {
-          line-height: 24px;
-          margin-bottom: 8px;
-          display: flex;
-          align-items: flex-start;
-          justify-content: flex-start;
-          .app-code {
-            position: absolute;
-            right: 40px;
-            bottom: 25px;
-            text-align: center;
-            img {
-              display: block;
-              width: 86px;
-              height: 86px;
-              margin: 0 auto 10px
-            }
-          }
-          .label {
-            color: #b0b0b0;
-            min-width: 72px;
-          }
-          .content {
-            color: #757575;
-            .beta {
-              cursor: pointer;
-              color: #b0b0b0
-            }
-          }
-          a {
-            color: $shopColor
-          }
-        }
       }
     }
 
 
-    .btn {
-      display: inline-block;
-      width: 158px;
-      height: 38px;
-      padding: 0;
-      margin: 0;
-      border: 1px solid #b0b0b0;
-      font-size: 14px;
-      line-height: 38px;
-      text-align: center;
-      color: #b0b0b0;
-      cursor: pointer;
-      -webkit-transition: all .4s;
-      transition: all .4s;
-    }
   }
 </style>
