@@ -59,7 +59,19 @@ export default [
               path: '/commodityEvaluation',
               component: ()=>import('@views/mine/CommodityEvaluation.vue'),
             },
+            {
+              path: '/serviceEvaluation',
+              component: ()=>import('@views/mine/ServiceEvaluation.vue'),
+            },
           ]
+        },
+        {
+          path: '/serviceEvaluationDetails',
+          component: ()=>import('@views/mine/ServiceEvaluationDetails.vue'),
+        },
+        {
+          path: '/serviceEvaluation1',
+          component: ()=>import('@views/mine/ServiceEvaluation1.vue'),
         },
         {
           path: '/shop/index',
