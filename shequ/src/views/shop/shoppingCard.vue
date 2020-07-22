@@ -225,12 +225,24 @@
       goSettlement() {
         this.a_go("/shop/settlement");
       },
+      /* 改变 */
+      edits(currentValue,is){
+        this.a_post("/addons/shopro/cart/edit", {
+          act: "change",
+          cart_list: [is],
+          value: currentValue
+        }, res => {
+          console.log(res);
+        });
+      },
       /*  */
       inNumber(currentValue, scope) {
-        console.log(currentValue, scope)
+        // console.log(currentValue, scope)
         this.tableData[scope.$index].good_money = this.mmath(this.tableData[scope.$index].goods_num, this.tableData[scope.$index].sku_price.price);
+        this.edits(currentValue,scope.$index+1);
+        this.allshops();
         for (let i = 0; i < this.list.length; i++) {
-          console
+          console.log(this.list[i].id,this.list[i].id == this.tableData[scope.$index].id&&this.list[i].goods_id == this.tableData[scope.$index].goods_id);
           if (this.list[i].id == this.tableData[scope.$index].id&&this.list[i].goods_id == this.tableData[scope.$index].goods_id){
             this.list.splice(i,1,this.tableData[scope.$index]);
             this.allshop();
@@ -242,7 +254,7 @@
         return (parseFloat(a) * 100 / 100 * parseFloat(b) * 100 / 100).toFixed(2)
       },
       async getCart() {
-        this.a_post("http://zt.shenyueyun.com//addons/shopro/cart", {}, res => {
+        this.a_post("/addons/shopro/cart", {}, res => {
           console.log("detail", res.data.data);
           this.tableData = [];
           this.list = [];
@@ -275,7 +287,16 @@
         this.allshop();
       },
       /*
-      * 计算总商品
+      * 计算选总商品
+      *  */
+      allshops(){
+        this.allShopPiece = 0;
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.allShopPiece +=  parseInt(this.tableData[i].goods_num);
+        }
+      },
+      /*
+      * 计算选中的总商品
       *  */
       allshop() {
         this.choiceShopPrece = 0;

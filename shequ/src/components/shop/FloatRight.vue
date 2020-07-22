@@ -4,7 +4,7 @@
       <i class="el-icon-user i"></i>
     </div>
     <div class="li" @click="a_go('/shop/shoppingCard')">
-      <el-badge :value="2" :max="99" class="item">
+      <el-badge :value="$store.state.shopCar" :max="99" class="item">
       </el-badge>
       <i class="el-icon-shopping-cart-2 i"></i>
     </div>
@@ -28,6 +28,7 @@
    * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
    * */
     created() {
+      this.a_card(res=>{});
     },
     /**
      * 在挂载开始之前被调用：相关的 render 函数首次被调用。

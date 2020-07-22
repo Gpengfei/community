@@ -15,5 +15,6 @@ export default{
     //地址列表
     addressList:[],
     //点击购买参数
-    settlementObj:{}
+    settlementObj:{},
+    shopCar:0,
 }

@@ -4,5 +4,6 @@ export default {
     minNav:state=>state.minNav,
     navFb:state=>state.navFb,
     shopDetial:state=>state.shopDetial,
-    addressList:state=>state.addressList
+    addressList:state=>state.addressList,
+    shopCar:state=>state.shopCar
 }

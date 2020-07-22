@@ -214,11 +214,16 @@
       addToCart() {
         if (this.confirmSku()) {
           let confirmGoodsList = {
-            list: [this.confirmGoodsInfo],
+            goods_list: [],
             from: 'goods'
           };
+          confirmGoodsList.goods_list.push(this.confirmGoodsInfo);
           this.a_post("/addons/shopro/cart/add", confirmGoodsList, res => {
-            console.log("detail", res.data.data);
+            if(res.data.code){
+              this.a_card(res=>{
+                console.log(res);
+              });
+            }
           });
         }
       },

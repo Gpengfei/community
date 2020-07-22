@@ -45,6 +45,19 @@ export function get(url, data) {
   };
   axios(options);
 }
+export function card(callbacks) {
+  console.log("card");
+  post("/addons/shopro/cart",{},ress =>{
+    callbacks(ress);
+    this.$store.commit("change",stat=>{
+      let num = 0;
+      for (let i = 0; i < ress.data.data.length; i++) {
+        num += parseInt(ress.data.data[i].goods_num);
+      }
+      stat.shopCar = num;
+    })
+  })
+}
 export function go(url, data = {}) {
   this.$router.push({ path: url, query: data });
 }
@@ -57,5 +70,6 @@ export default {
     Vue.prototype.a_get = get;
     Vue.prototype.a_go = go;
     Vue.prototype.a_gop = gop;
+    Vue.prototype.a_card = card;
   }
 };
