@@ -13,6 +13,9 @@
                        :grouponBuyType="grouponBuyType"
                        :goodsType="detailType === 'score' ? 'score' : 'goods'"
           />
+          <!--  -->
+
+          <!--  -->
         </div>
       </div>
     </div>
@@ -136,7 +139,7 @@
      * */
     methods: {
       getShopDetial() {
-        this.a_post("http://zt.shenyueyun.com//addons/shopro/goods/detail?id=" + this.querydata.id, {id: this.querydata.id}, res => {
+        this.a_post("addons/shopro/goods/detail?id=" + this.querydata.id, {id: this.querydata.id}, res => {
           console.log("detail", res.data.data);
           this.$store.commit("change", ress => {
             ress.shopDetial = res.data.data
