@@ -96,12 +96,13 @@
 </template>
 
 <script>
+  import storage from 'good-storage';
   export default {
     name: "detialRight",
     data() {
       return {
         type: this.buyType,
-        specificationsArr: [-1, -1],
+        specificationsArr: [],
         /*显示钱*/
         //优惠价格
         pricem: 0,
@@ -221,6 +222,7 @@
             grouponBuyType: this.grouponBuyType,
             grouponId: this.grouponId
           }
+          storage.set("settlementObj",datas);
           this.$store.commit("change",stat=>{
             stat.settlementObj = datas
           });
@@ -261,6 +263,7 @@
       /*点击规格*/
       active(i, j) {
         this.specificationsArr.splice(i, 1, j);
+        console.log(i, j,this.specificationsArr.length > 0 , this.specificationsArr[0] == -1 , this.specificationsArr)
         if (this.specificationsArr.length > 0 && this.specificationsArr[0] == -1 || this.specificationsArr.indexOf(-1) == 1) {
           console.log("不通过")
           return false;

@@ -4,95 +4,96 @@ import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
 import api from "./api";
-Vue.prototype.$api = api;
 import vueAwesomeSwiper from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
-Vue.use(vueAwesomeSwiper)
 import moment from 'moment'
-Vue.prototype.$moment=moment
 import "@assets/css/reset.scss";
-
+import storage from 'good-storage';
 import "@assets/css/fonts.scss";
 import asdFun from "./common/asd_publicMethod";
 import {
-  Pagination,
-  Dialog,
+  Alert,
+  Aside,
   Autocomplete,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  Menu,
-  Submenu,
-  MenuItem,
-  MenuItemGroup,
-  Input,
-  InputNumber,
-  Radio,
-  RadioGroup,
-  RadioButton,
+  Backtop,
+  Badge,
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  ButtonGroup,
+  Calendar,
+  Card,
+  Carousel,
+  CarouselItem,
+  Cascader,
+  CascaderPanel,
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
-  Switch,
-  Select,
-  Option,
-  OptionGroup,
-  Button,
-  ButtonGroup,
-  Table,
-  TableColumn,
-  DatePicker,
-  TimeSelect,
-  TimePicker,
-  Popover,
-  Tooltip,
-  Breadcrumb,
-  BreadcrumbItem,
-  Form,
-  FormItem,
-  Tabs,
-  TabPane,
-  Tag,
-  Tree,
-  Alert,
-  Slider,
-  Icon,
-  Row,
   Col,
-  Upload,
-  Progress,
-  Spinner,
-  Badge,
-  Card,
-  Rate,
-  Steps,
-  Step,
-  Carousel,
-  CarouselItem,
   Collapse,
   CollapseItem,
-  Cascader,
   ColorPicker,
-  Transfer,
   Container,
-  Header,
-  Aside,
-  Main,
+  DatePicker,
+  Dialog,
+  Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
   Footer,
+  Form,
+  FormItem,
+  Header,
+  Icon,
+  Image,
+  Input,
+  InputNumber,
+  Link,
+  Loading,
+  Main,
+  Menu,
+  MenuItem,
+  MenuItemGroup,
+  Message,
+  MessageBox,
+  Notification,
+  Option,
+  OptionGroup,
+  PageHeader,
+  Pagination,
+  Popover,
+  Progress,
+  Radio,
+  RadioButton,
+  RadioGroup,
+  Rate,
+  Row,
+  Select,
+  Slider,
+  Spinner,
+  Step,
+  Steps,
+  Submenu,
+  Switch,
+  Table,
+  TableColumn,
+  TabPane,
+  Tabs,
+  Tag,
   Timeline,
   TimelineItem,
-  Link,
-  Divider,
-  Image,
-  Calendar,
-  Backtop,
-  PageHeader,
-  CascaderPanel,
-  Loading,
-  MessageBox,
-  Message,
-  Notification,
+  TimePicker,
+  TimeSelect,
+  Tooltip,
+  Transfer,
+  Tree,
+  Upload,
 } from "element-ui";
+
+Vue.prototype.$api = api;
+Vue.use(vueAwesomeSwiper)
+Vue.prototype.$moment = moment
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -190,35 +191,33 @@ router.onError((error) => {
 });
 Vue.config.productionTip = false;
 // 全局守卫
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
   let getFlag = localStorage.getItem("shequ");
-  let token=localStorage.getItem("token");
-  let userId=localStorage.getItem("userId");
-  if(getFlag=='isLogin'){//判断是否登录
+  let token = localStorage.getItem("token");
+  let userId = localStorage.getItem("userId");
+  if (getFlag == 'isLogin') {//判断是否登录
     store.state.isLogin = true
     store.state.userId = userId
     store.state.token = token
     next()
-    if (!to.meta.isLogin){
-      if(to.path=='/login'||to.path=='/register'){
+    if (!to.meta.isLogin) {
+      if (to.path == '/login' || to.path == '/register') {
         Message({
           message: "请先退出登录登录",
           type: "warning"
         });
-        next({path:'/'})
+        next({path: '/'})
       }
     }
-  }
-
-  else{
+  } else {
     store.state.isLogin = false
-    if(to.meta.isLogin){
+    if (to.meta.isLogin) {
       Message({
         message: "请先登录",
         type: "warning"
       });
-      next({path:'/login'})
-    }else{
+      next({path: '/login'})
+    } else {
       next()
     }
   }
