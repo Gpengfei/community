@@ -1,5 +1,5 @@
 <template>
-  <div class="commodityEvaluation">
+  <div class="serviceEvaluation">
     <div class="myOrder-box">
       <div class="myOrder-sxandsoso">
         <ul>
@@ -12,8 +12,6 @@
           <div class="sx-r">
             <ul>
               <li>订单详情</li>
-              <li>收货人</li>
-              <li>金额</li>
               <li>操作</li>
             </ul>
           </div>
@@ -23,37 +21,48 @@
         <ul>
           <li class="ywc">
             <p class="dd-title">
-              <span class="title-time">2020-06-15 12:02:12</span>
-              <span class="title-ddh">订单号:123456789123</span>
+              <span class="title-time">商家名称：金万通保洁</span>
+              <span class="title-ddh">2019-06-27 15:30</span>
             </p>
             <table>
               <tr>
                 <td width="426px" align="center">
                   <div class="tb-box">
                     <div class="tb-img">
-                      <img src="img/ddt.png" alt />
+                      <img src="img/fwjl.png" alt />
                     </div>
-                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
-                    <div class="tb-num">x1</div>
+                    <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
                   </div>
                 </td>
-                <td rowspan="2" width="111px" align="center">李三三</td>
-                <td rowspan="2" width="111px" align="center">￥1500</td>
 
-                <td rowspan="2" width="152px" align="center">
-                  <p class="zcgm">订单详情</p>
-                  <p class="pj">评价</p>
+                <td width="152px" align="center">
+                  <router-link to="/serviceEvaluation1">
+                    <p class="pj">评价</p>
+                  </router-link>
                 </td>
               </tr>
+            </table>
+          </li>
+          <li class="ywc">
+            <p class="dd-title">
+              <span class="title-time">商家名称：金万通保洁</span>
+              <span class="title-ddh">2019-06-27 15:30</span>
+            </p>
+            <table>
               <tr>
                 <td width="426px" align="center">
                   <div class="tb-box">
                     <div class="tb-img">
-                      <img src="img/ddt.png" alt />
+                      <img src="img/fwjl.png" alt />
                     </div>
-                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
-                    <div class="tb-num">x1</div>
+                    <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
                   </div>
+                </td>
+
+                <td width="152px" align="center">
+                  <router-link to="/serviceEvaluationDetails">
+                    <p class="ckpj">查看评价</p>
+                  </router-link>
                 </td>
               </tr>
             </table>
@@ -76,7 +85,7 @@
 </template>
 
 <script>
-import "@style/mine/commodityEvaluation.scss";
+import "@style/mine/serviceEvaluation.scss";
 export default {
   data() {
     return {
