@@ -49,7 +49,9 @@
               </div>
             </div>
             <div class="tj-box">
-              <span class="btn">提交评价</span>
+              <router-link to="/serviceEvaluationCompleted">
+                <span class="btn">提交评价</span>
+              </router-link>
               <el-checkbox v-model="checked">匿名提交</el-checkbox>
             </div>
           </li>
@@ -64,9 +66,9 @@ import "@style/mine/serviceEvaluation1.scss";
 export default {
   data() {
     return {
-      checked: true
+      checked: true,
     };
-  }
+  },
 };
 </script>
 
