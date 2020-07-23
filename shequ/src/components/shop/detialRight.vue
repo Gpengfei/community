@@ -217,11 +217,16 @@
             goods_list: [],
             from: 'goods'
           };
+
           confirmGoodsList.goods_list.push(this.confirmGoodsInfo);
           this.a_post("/addons/shopro/cart/add", confirmGoodsList, res => {
             if(res.data.code){
               this.a_card(res=>{
                 console.log(res);
+                this.$message({
+                  message: '成功添加',
+                  type: 'success'
+                });
               });
             }
           });
