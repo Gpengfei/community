@@ -74,6 +74,10 @@ export default [
           component: ()=>import('@views/mine/ServiceEvaluation1.vue'),
         },
         {
+          path: '/serviceEvaluationCompleted',
+          component: ()=>import('@views/mine/ServiceEvaluationCompleted.vue'),
+        },
+        {
           path: '/shop/index',
           name:"Index",
           title:"商城首页",
