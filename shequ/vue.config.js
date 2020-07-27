@@ -7,7 +7,8 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/app/' : '/',
   configureWebpack: {
     externals: {
-      "BMap": "BMap"
+      "BMap": "BMap",
+      'AMap': 'AMap'
     }
   },
   devServer: {
