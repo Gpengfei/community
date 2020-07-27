@@ -1,5 +1,5 @@
 const base = {
-    sq: 'http://zt.shenyueyun.com//api',
+    sq: 'http://zt.shenyueyun.com/api',
     bd: ''
 }
 

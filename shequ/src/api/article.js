@@ -39,6 +39,42 @@ const article = {
     getNoticeList(params){
         return axios.post(`${base.sq}/Notice/getNoticeList`, qs.stringify(params));
     },
+    // 获取用户我的基本信息
+    getUserInfo(params){
+        return axios.post(`${base.sq}/User/getUserInfo`, qs.stringify(params));
+    },
+    // 修改用户名称
+    xgyhm(params){
+        return axios.post(`${base.sq}/User/getUsernameEdit`, qs.stringify(params));
+    },
+    // 修改手机号  
+    getMobileEdit(params){
+        return axios.post(`${base.sq}/User/getMobileEdit`, qs.stringify(params));
+    },
+    // 修改性别
+    getGenderEdit(params){
+        return axios.post(`${base.sq}/User/getGenderEdit`, qs.stringify(params));
+    },
+    // 修改头像
+    getAvatarEdit(params){
+        return axios.post(`${base.sq}/User/getAvatarEdit`, qs.stringify(params));
+    },
+    // 社区服务类型列表
+    gerServiceList(params){
+        return axios.post(`${base.sq}/Community/gerServiceList`, qs.stringify(params));
+    },
+    // 社区服务列表
+    gerCommunityList(params){
+        return axios.post(`${base.sq}/Community/gerCommunityList`, qs.stringify(params));
+    },
+    // 社区房屋列表
+    gerHousingList(params){
+        return axios.post(`${base.sq}/Housing/gerHousingList`, qs.stringify(params));
+    },
+    // 获取服务详情
+    gerCommunityDetailed(params){
+        return axios.post(`${base.sq}/Community/gerCommunityDetailed`, qs.stringify(params));
+    }
 }
 
 export default article;
