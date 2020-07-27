@@ -1,12 +1,42 @@
 <template>
   <div class="Evaluate">
     <detialTop/>
-
+    <div class="comment">
+      <div class="comment-top">
+        <div class="title">大家认为</div>
+        <div class="category">
+          <div class="cate-common chose">
+            全部（221110）
+          </div>
+          <div class="cate-common">
+            外观漂亮（866）
+          </div>
+          <div class="cate-common">
+            性价比高（726）
+          </div>
+          <div class="cate-common">
+            手感很好（516）
+          </div>
+          <div class="cate-common">
+            拍照清晰（505）
+          </div>
+          <div class="cate-common">
+            屏幕大（406）
+          </div>
+        </div>
+      </div>
+      <div class="comment-mid">
+        <ul class="ul">
+          <evaluateRow/>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import detialTop from "@components/shop/detialTop"
+  import evaluateRow from "@components/shop/evaluateRow"
   export default {
     name: "Evaluate",
     data() {
@@ -91,11 +121,60 @@
      * */
     components: {
       detialTop,
+      evaluateRow
     },
   }
 </script>
 
 <style scoped lang="scss">
   .Evaluate {
+    .comment {
+      background: #f5f5f5;
+      padding: 32px 0 30px;
+    }
+    .comment-top{
+      display: none;
+      width: 1226px;
+      margin: 0 auto 30px;
+      background: #fff;
+      padding: 40px;
+      box-sizing: border-box;
+      .title{
+        font-size: 18px;
+        color: #757575;
+        line-height: 28px;
+      }
+      .category{
+        margin-top: 14px;
+        .cate-common{
+          display: inline-block;
+          width: 168px;
+          height: 44px;
+          line-height: 44px;
+          text-align: center;
+          margin: 0 20px 0 0;
+          color: #b0b0b0;
+          font-size: 14px;
+          border: 1px solid #eee;
+          background: #f5f5f5;
+          -webkit-transition: all .2s;
+          transition: all .2s;
+          cursor: pointer;
+          &.chose{
+            border-color: #ff6700;
+            background: #ff6700;
+            color: #fff;
+          }
+          &:hover{
+            background: #eee;
+          }
+        }
+      }
+    }
+
+    .comment-mid{
+      width: 1226px;
+      margin: 0 auto;
+    }
   }
 </style>

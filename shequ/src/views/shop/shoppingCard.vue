@@ -6,7 +6,7 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
-        @selection-change="handleSelectionChange">
+        @selection-change="handleSelectionChange" @cell-click="cellClick">
       <el-table-column
           type="selection"
           label="全选"
@@ -221,6 +221,10 @@
      * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
      * */
     methods: {
+      /* 单元格被点击时候 */
+      cellClick(row){
+        this.a_go("/shop/index/detial", {id:row.goods_id});
+      },
       /*去结算*/
       goSettlement() {
         this.a_go("/shop/settlement");

@@ -1,33 +1,16 @@
 <template>
-  <div class="detialTop">
-    <div class="box">
-      <div class="nav-bar">
-        <div class="container">
-          <h2 class="h2">
-            {{ detail.title }}
-          </h2>
-          <div class="con">
-            <!--<div class="left">
-              <span class="separator">|</span>
-              <a>Redmi 10X 5G系列</a>
-            </div>-->
-            <div class="right">
-              <a class="a" @click="a_go('/shop/index/detial',{id: $route.query.id})">概述</a>
-              <span class="separator">|</span>
-              <!--<a>参数</a>
-              <span class="separator">|</span>-->
-              <a class="J_nav_comment a" @click="a_go('/shop/index/evaluate',{id: $route.query.id})">用户评价</a>
-            </div>
-          </div>
-        </div>
-      </div>
+  <li class="evaluateRow">
+    <div class="left">
+      <img class="img" src="" alt="">
+      <p class="title">康恩贝 维生素c vc 咀嚼片非泡腾片 补充VC 可搭配VE 1.2g*100片</p>
     </div>
-  </div>
+    <div class="right"></div>
+  </li>
 </template>
 
 <script>
   export default {
-    name: "detialTop",
+    name: "evaluateRow",
     data() {
       return {};
     },
@@ -81,14 +64,7 @@
      * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
      * validator: Function
      * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-    props: {
-      detail: {
-        type: Object,
-        default: ()=>{
-          return {}
-        }
-      },
-    },
+    props: {},
     /**
      * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
      * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -120,69 +96,34 @@
 </script>
 
 <style scoped lang="scss">
-  .detialTop {
-    position: relative;
-    z-index: 4;
-    background: #fff;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    -webkit-box-shadow: 0 5px 5px rgba(0,0,0,.07);
-    box-shadow: 0 5px 5px rgba(0,0,0,.07);
-    .box{
-      .nav-bar{
-        position: relative;
-        height: 63px;
-        width: 100%;
-        margin-top: 0;
-        color: #616161;
-        .container{
-          width: $allWidth;
-          margin-right: auto;
-          margin-left: auto;
-          .h2{
-            margin: 0;
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 60px;
-            color: #424242;
-            float: left;
-          }
-          .con{
-            .left{
-              float: left;
-              margin-left: 5px;
-              font-size: 12px;
-              margin-top: 21px;
-              .separator{
-                margin: 0 .5em;
-                color: #424242;
-                .a{
-                  color: #616161;
-                }
-              }
-            }
-            .right{
-              float: right;
-              margin: 17px 0 0 0;
-              font-size: 14px;
-              a{
-                color: #616161;
-                &:hover{
-                  color: $shopColor;
-                }
-              }
-              span{
-                margin: 0 .5em;
-                color: #e0e0e0;
-              }
-            }
-          }
-        }
-        .container:after, .container:before {
-          content: " ";
-          display: table;
-        }
+  .evaluateRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 340px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    .left{
+      width: 318px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-right: 1px solid #eeeeee;
+      .img{
+        width: 100px;
+        height: 100px;
       }
+      .title{
+        max-width: 220px;
+        line-height: 1.4;
+      }
+    }
+    .right{
+      width: 907px;
+      height: 100%;
     }
   }
 </style>
