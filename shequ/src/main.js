@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
+import https from 'axios'
+Vue.prototype.$https = https;
 import api from "./api";
 import vueAwesomeSwiper from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
