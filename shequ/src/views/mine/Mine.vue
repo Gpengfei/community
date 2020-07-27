@@ -5,11 +5,12 @@
         <div class="box-l">
           <div class="grxx">
             <div class="grxx-img">
-              <img src="img/minetx.png" alt class="tx" />
+              <img v-if="avatar.avatar" :src="avatar.avatar" alt class="tx" />
+              <img v-else src="img/minetx.png" alt class="tx" />
               <img src="img/minevip.png" alt class="vip" />
             </div>
-            <p class="grxx-name">张三</p>
-            <p class="grxx-zz">纺织社区居委会</p>
+            <p class="grxx-name">{{avatar.username}}</p>
+            <p class="grxx-zz">{{avatar.STREET_NAME}}</p>
             <p class="fb-btn">开始发布</p>
           </div>
           <div class="mine-nav">
@@ -50,25 +51,42 @@ export default {
         { name: "服务评价", styOff: false, url: "/serviceEvaluation" },
         { name: "我的券包", styOff: true, url: "/coupons" },
         { name: "会员权益", styOff: false, url: "/vipPrivilege" },
-        { name: "积分商城", styOff: false, url: "/mine" }
-      ]
+        { name: "积分商城", styOff: false, url: "/mine" },
+      ],
+      avatar: "",
+      token: "",
     };
   },
   mounted() {
+    let token = this.$store.state.token;
+    this.token = token;
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
+    // 获取个人信息
+    if (this.token) {
+      this.$api.article
+        .user({
+          token: this.token,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 1) {
+            this.avatar = res.data.data;
+          }
+        });
+    }
   },
   computed: {
     navIndex() {
       return this.$store.state.minNav;
-    }
+    },
   },
   methods: {
     navCli(url, index) {
       this.$router.push({ path: url, query: { id: index } });
       this.$store.dispatch("setMin", index);
-    }
-  }
+    },
+  },
 };
 </script>
 
