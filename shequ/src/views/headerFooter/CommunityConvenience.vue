@@ -389,7 +389,7 @@ export default {
       if (this.fl1Name == "房屋租赁") {
         this.$router.push({ path: "/productDetails1", query: { id: index } });
       } else {
-        this.$router.push({ path: "/productDetails", query: { id: 1 } });
+        this.$router.push({ path: "/productDetails", query: { id: index } });
       }
     },
     // 分页
