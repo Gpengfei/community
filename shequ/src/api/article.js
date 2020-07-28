@@ -74,6 +74,18 @@ const article = {
     // 获取服务详情
     gerCommunityDetailed(params){
         return axios.post(`${base.sq}/Community/gerCommunityDetailed`, qs.stringify(params));
+    },
+     // 获取房屋详情
+     gerHousingDetailed(params){
+        return axios.post(`${base.sq}/Housing/gerHousingDetailed`, qs.stringify(params));
+    },
+    // 修改密码
+    getPwdEdit(params){
+        return axios.post(`${base.sq}/User/getPwdEdit`, qs.stringify(params));
+    },
+    // 发布消息通知
+    getValidateAdd(params){
+        return axios.post(`${base.sq}/Notice/getValidateAdd`, qs.stringify(params));
     }
 }
 
