@@ -59,7 +59,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">登录密码</p>
               <p class="jbxx-box-r">
-                <span class="xg">修改</span>
+                <span class="xg" @click="xgmmCli">修改</span>
               </p>
             </div>
           </li>
@@ -184,6 +184,33 @@
         </ul>
       </div>
     </div>
+    <!--自定义弹出框-->
+    <div class="zdytck" v-if="isTck">
+      <div class="zdytck-box">
+        <p class="box-title">修改密码</p>
+        <div class="inp-box">
+          <input type="password" placeholder="请输入初始密码" v-model="ymm" />
+          <input type="password" placeholder="请输入新密码" v-model="xmm" />
+          <input type="password" placeholder="请确认新密码" v-model="yxmm" />
+        </div>
+        <div class="zdytck-btn">
+          <button
+            type="button"
+            @click="qxxgmmCli"
+            class="el-button el-button--default el-button--small"
+          >
+            <span>取消</span>
+          </button>
+          <button
+            @click="tjxgmmCli"
+            type="button"
+            class="el-button el-button--default el-button--small el-button--primary"
+          >
+            <span>确定</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -200,9 +227,67 @@ export default {
       userInfo: null,
       // 上传头像需要
       adatar: "",
+      // 自定义弹出框
+      isTck: false,
+      // 密码修改
+      ymm: "",
+      xmm: "",
+      yxmm: "",
     };
   },
   methods: {
+    // 修改密码
+    xgmmCli() {
+      this.isTck = true;
+    },
+    qxxgmmCli() {
+      this.isTck = false;
+      this.$message({
+        type: "info",
+        message: "取消输入",
+      });
+    },
+    tjxgmmCli() {
+      if (this.ymm == "") {
+        this.$message({
+          type: "warning",
+          message: "原始密码不能为空",
+        });
+        return;
+      }
+      if (this.xmm == "") {
+        this.$message({
+          type: "warning",
+          message: "请输入新密码",
+        });
+        return;
+      }
+      let pwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
+      if (!pwd.test(this.xmm)) {
+        this.$message({
+          message:
+            "密码不够安全（至少8-16个字符，至少1个大写字母，1个小写字母和1个数字）",
+          type: "warning",
+        });
+        return;
+      }
+      if (this.xmm != this.yxmm) {
+        this.$message({
+          message: "两次密码输入不一致",
+          type: "warning",
+        });
+        return;
+      }
+      this.$api.article
+        .getPwdEdit({
+          newpassword: this.xmm,
+          oldpassword: this.ymm,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
+    // 修改密码
     zhCli() {
       this.$store.dispatch("setMin", 2);
     },
