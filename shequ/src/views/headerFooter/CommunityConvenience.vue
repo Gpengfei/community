@@ -34,8 +34,8 @@
                 <template v-for="(item,index) in fl1List">
                   <span
                     :key="index"
-                    :class="fl1Index==index?'sty':''"
-                    @click="fl1Cli(index,item.name)"
+                    :class="fl1Indexs==index?'sty':''"
+                    @click="fl1Cli(index,item.name,item.id)"
                   >{{item.name}}</span>
                 </template>
               </div>
@@ -187,6 +187,7 @@ export default {
       // 分类导航
       fl1Name: "全部",
       fl1Index: 0,
+      fl1Indexs: 0,
       fl1List: [
         { name: "全部", id: 0 },
         // { name: "保洁劳务", id: 0 },
@@ -231,7 +232,7 @@ export default {
           for (let i = 0; i < lis.length; i++) {
             arr.push(lis[i]);
           }
-          let fcfw = { id: lis.length, name: "房屋租赁" };
+          let fcfw = { id: arr.length, name: "房屋租赁" };
           arr.push(fcfw);
           this.fl1List = arr;
         }
@@ -284,8 +285,9 @@ export default {
     imgCli(index) {
       this.imgIndex = index;
     },
-    fl1Cli(index, name) {
-      this.fl1Index = index;
+    fl1Cli(index, name, id) {
+      this.fl1Indexs = index;
+      this.fl1Index = id;
       this.fl1Name = name;
       if (index != 4) {
         // 获取服务列表
