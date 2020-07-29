@@ -5,17 +5,17 @@
       <div class="productDetails-box">
         <div class="productDetails-box-l">
           <div class="headers">
-            <div class="headers-top">整租 | 乌兰察布路XX小区精装修公寓初次出租，全新家具家电拎包入住</div>
+            <div class="headers-top">{{fwDat.title}}</div>
             <div class="headers-bottom">
               <div class="bottom-l">
                 <div class="l-top">
-                  <img :src="imgUrl" alt />
+                  <img :src="'http://zt.shenyueyun.com/'+imgUrl" alt />
                 </div>
                 <div class="l-bot">
                   <div class="bot-img-box">
                     <swiper :options="swiperOptions" ref="mySwiper">
                       <swiper-slide v-for="(item,index) in bannerData" :key="index">
-                        <img :src="item.url" alt @click="banCli(item.url)" />
+                        <img :src="'http://zt.shenyueyun.com/'+item" alt @click="banCli(item)" />
                       </swiper-slide>
                       <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
                       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
@@ -25,32 +25,44 @@
               </div>
               <div class="bottom-r">
                 <p class="jg">
-                  <span class="number">1170</span>
-                  <span class="yc">元/月</span>
+                  <span class="number">{{fwDat.rent}}</span>
+                  <span class="yc">元/{{fwDat.price_unit}}</span>
                 </p>
                 <div class="jbxx">
                   <p class="jbxx-l">租赁方式：</p>
-                  <p class="jbxx-r">整租</p>
+                  <p class="jbxx-r" v-if="fwDat.housing_type==0">整租</p>
+                  <p class="jbxx-r" v-else>合租</p>
                 </div>
                 <div class="jbxx">
                   <p class="jbxx-l">房屋类型：</p>
-                  <p class="jbxx-r">1室1厅1卫生 55平 精装修</p>
+                  <p class="jbxx-r">
+                    {{fwDat.room}}室{{fwDat.hall}}厅{{fwDat.toilet}}卫生 {{fwDat.area}}平
+                    <span
+                      v-if="fwDat.decorate==0"
+                    >毛坯</span>
+                    <span v-if="fwDat.decorate==1">简单装修</span>
+                    <span v-if="fwDat.decorate==2">精装修</span>
+                    <span v-if="fwDat.decorate==3">豪华装修</span>
+                  </p>
                 </div>
                 <div class="jbxx">
                   <p class="jbxx-l">朝向楼层：</p>
-                  <p class="jbxx-r">东 中层 / 28层</p>
+                  <p class="jbxx-r">{{fwDat.direction}} {{fwDat.floor}}层 / {{fwDat.floor_sum}}层</p>
                 </div>
                 <div class="jbxx">
                   <p class="jbxx-l">所在小区：</p>
-                  <p class="jbxx-r">明X园</p>
+                  <p class="jbxx-r">{{fwDat.com_name}}</p>
                 </div>
-                <div class="jbxx">
+                <div class="jbxx" v-if="fwDat">
                   <p class="jbxx-l">所属区域：</p>
-                  <p class="jbxx-r">赛罕区 乌兰察布东街</p>
+                  <p
+                    class="jbxx-r"
+                    v-if="fwDat.AREA_CODE"
+                  >{{fwDat.AREA_CODE.AREA_NAME}} {{fwDat.STREET_CODE.STREET_NAME}}</p>
                 </div>
                 <div class="jbxx">
                   <p class="jbxx-l">详细地址：</p>
-                  <p class="jbxx-r">赛罕区乌兰察布东街与东影南路交汇处南150米</p>
+                  <p class="jbxx-r">{{fwDat.address}}</p>
                 </div>
                 <p class="lxsjbtn">
                   <i class="iconfont">&#xe645;</i>
@@ -61,7 +73,7 @@
           </div>
           <div class="fwms">
             <p class="fwms-title">房源描述</p>
-            <ul>
+            <!--<ul>
               <li>
                 <p class="lis-l">
                   <img src="@assets/img/fyms1.png" alt />
@@ -110,123 +122,25 @@
                 </p>
                 <p class="lis-r">本人从事房地产多年，公司有大量好房源，欢迎进入我的店铺查看，欢迎随时电话咨询，相信我的专业，为您置业安家保驾护航。</p>
               </li>
-            </ul>
+            </ul>-->
+            <p class="fyms-txt">{{fwDat.content}}</p>
           </div>
           <div class="fwts">
             <p class="fwts-title">配套设施</p>
             <ul>
-              <li>
+              <li v-for="(item,index) in fwDat.config" :key="index">
                 <div class="img31">
-                  <img src="@assets/img/ptsb1.png" alt />
+                  <img :src="item.fa_image" alt />
                 </div>
-                <p>床</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb2.png" alt />
-                </div>
-                <p>宽带</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb3.png" alt />
-                </div>
-                <p>电视</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb4.png" alt />
-                </div>
-                <p>冰箱</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb5.png" alt />
-                </div>
-                <p>洗衣机</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb6.png" alt />
-                </div>
-                <p>空调</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb7.png" alt />
-                </div>
-                <p>热水器</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb8.png" alt />
-                </div>
-                <p>暖气</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb9.png" alt />
-                </div>
-                <p>微波炉</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb10.png" alt />
-                </div>
-                <p>可做饭</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb11.png" alt />
-                </div>
-                <p>卫生间</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb12.png" alt />
-                </div>
-                <p>沙发</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb13.png" alt />
-                </div>
-                <p>衣柜</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb14.png" alt />
-                </div>
-                <p>阳台</p>
-              </li>
-              <li>
-                <div class="img31">
-                  <img src="@assets/img/ptsb15.png" alt />
-                </div>
-                <p>电梯</p>
+                <p>{{item.fa_name}}</p>
               </li>
             </ul>
           </div>
           <div class="fwtp">
-            <p class="fwtp-title">服务图片</p>
+            <p class="fwtp-title">房屋图片</p>
             <ul>
-              <li>
-                <img src="img/fytp.png" alt />
-              </li>
-              <li>
-                <img src="img/fytp.png" alt />
-              </li>
-              <li>
-                <img src="img/fytp.png" alt />
-              </li>
-              <li>
-                <img src="img/fytp.png" alt />
-              </li>
-              <li>
-                <img src="img/fytp.png" alt />
-              </li>
-              <li>
-                <img src="img/fytp.png" alt />
+              <li v-for="(item,index) in bannerData" :key="index">
+                <img :src="'http://zt.shenyueyun.com/'+item" alt />
               </li>
             </ul>
           </div>
@@ -306,7 +220,7 @@
       </div>
       <div class="bddt">
         <p class="bddt-title">小区地图</p>
-        <Map />
+        <div id="map" style="min-height: 420px;"></div>
       </div>
       <div class="tj">
         <div class="rmtj">
@@ -354,24 +268,22 @@
 </template>
 
 <script>
+import AMap from "AMap";
 import "@style/headerFooter/productDetails1.scss";
 import Breadcrumb from "@components/Breadcrumb.vue";
-import Map from "@components/Map.vue";
+// import Map from "@components/Map.vue";
 export default {
   data() {
     return {
+      token: null,
+      id: null,
       breData: [
         { name: "社区便民", url: "/" },
         { name: "房屋租赁", url: "" },
-        { name: "赛罕区", url: "" }
+        { name: "赛罕区", url: "" },
       ],
-      imgUrl: "img/fwzl1.png",
-      bannerData: [
-        { url: "img/fwzl1.png" },
-        { url: "img/fwzl2.png" },
-        { url: "img/fwzl3.png" },
-        { url: "img/fwzl4.png" }
-      ],
+      imgUrl: "",
+      bannerData: [],
       swiperOptions: {
         slidesPerView: 4,
         spaceBetween: 8,
@@ -380,14 +292,38 @@ export default {
         loopFillGroupWithBlank: false,
         navigation: {
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      }
+          prevEl: ".swiper-button-prev",
+        },
+      },
+      fwDat: {},
     };
   },
   mounted() {
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
+    // 获取房屋详情
+    let id = this.$route.query.id;
+    this.id = id;
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
+    // 获取房屋详情
+    this.$api.article
+      .gerHousingDetailed({
+        token: this.token,
+        id: this.id,
+      })
+      .then((res) => {
+        console.log("房屋详情", res);
+        if (res.data.code == 1) {
+          let dat = res.data.data;
+          dat.images = dat.images.split(",");
+          this.bannerData = dat.images;
+          this.imgUrl = dat.images[0];
+          this.fwDat = dat;
+          this.init(dat.longitude, dat.latitude);
+        }
+      });
   },
   methods: {
     banCli(url) {
@@ -396,12 +332,25 @@ export default {
     // 进入店铺
     jrdp() {
       this.$router.push({ path: "/shop", query: { id: 1 } });
-    }
+    },
+    // 地图
+    init(longitude, latitude) {
+      console.log(longitude, latitude);
+      let map = new AMap.Map("map", {
+        zoom: 16, //级别
+        center: [longitude, latitude], //中心点坐标
+        viewMode: "3D", //使用3D视图
+      });
+      var marker = new AMap.Marker({
+        position: [longitude, latitude],
+      });
+      map.add(marker);
+    },
   },
   components: {
     Breadcrumb,
-    Map
-  }
+    // Map,
+  },
 };
 </script>
 

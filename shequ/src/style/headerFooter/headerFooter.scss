@@ -12,6 +12,7 @@
       height: 90px;
       line-height: 90px;
       overflow: hidden;
+      margin-bottom: 10px;
       .box-l {
         float: left;
         margin-right: 230px;
@@ -19,23 +20,46 @@
           width: 166px;
         }
       }
-      .box-nav {
+      .soso-box {
+        margin-top: 25px;
         float: left;
-        ul {
-          overflow: hidden;
-          li {
-            float: left;
-            margin-right: 40px;
-            color: #333333;
-            font-size: 14px;
-            cursor: pointer;
-            span {
-              &.sty {
-                color: $color;
-                font-weight: bold;
-              }
+        width: 500px;
+        line-height: normal;
+        .soso-top {
+          display: flex;
+          height: 36px;
+          .soso-inp {
+            display: flex;
+            width: 410px;
+            height: 36px;
+            box-sizing: border-box;
+            border: 2px solid $color;
+            line-height: 32px;
+            padding: 0 10px;
+            .iconfont {
+              color: #999;
+              margin-right: 10px;
+            }
+            input {
+              flex: 1;
+              font-size: 16px;
+              color: #666;
             }
           }
+          .soso-btn {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: $color;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+        .soso-ts {
+          color: $color;
+          font-size: 15px;
+          line-height: 30px;
         }
       }
       .box-r {
@@ -92,9 +116,29 @@
         }
       }
     }
+    .box-nav {
+      float: left;
+      ul {
+        overflow: hidden;
+        li {
+          float: left;
+          margin-right: 40px;
+          color: #333333;
+          font-size: 16px;
+          line-height: 50px;
+          cursor: pointer;
+          span {
+            &.sty {
+              color: $color;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
   }
   .header-zw {
-    height: 90px;
+    height: 150px;
   }
   .footer {
     background-color: #303338;
