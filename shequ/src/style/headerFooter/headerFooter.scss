@@ -19,21 +19,27 @@
           width: 166px;
         }
       }
-      .box-nav {
+      .soso-box {
         float: left;
-        ul {
-          overflow: hidden;
-          li {
-            float: left;
-            margin-right: 40px;
-            color: #333333;
-            font-size: 14px;
-            cursor: pointer;
-            span {
-              &.sty {
-                color: $color;
-                font-weight: bold;
-              }
+        width: 500px;
+        line-height: normal;
+        .soso-top {
+          display: flex;
+          height: 36px;
+          .soso-inp {
+            display: flex;
+            width: 410px;
+            height: 36px;
+            box-sizing: border-box;
+            border: 2px solid $color;
+            line-height: 32px;
+            padding: 0 10px;
+            .iconfont {
+              color: #999;
+              margin-right: 10px;
+            }
+            input {
+              flex: 1;
             }
           }
         }
@@ -88,6 +94,26 @@
             font-size: 14px;
             color: #333;
             cursor: pointer;
+          }
+        }
+      }
+    }
+    .box-nav {
+      float: left;
+      ul {
+        overflow: hidden;
+        li {
+          float: left;
+          margin-right: 40px;
+          color: #333333;
+          font-size: 14px;
+          line-height: 50px;
+          cursor: pointer;
+          span {
+            &.sty {
+              color: $color;
+              font-weight: bold;
+            }
           }
         }
       }
