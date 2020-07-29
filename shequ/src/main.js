@@ -191,7 +191,7 @@ router.onError((error) => {
     console.log(error)
   }
 });
-Vue.config.productionTip = false;
+
 // 全局守卫
 router.beforeEach((to, from, next) => {
   let getFlag = localStorage.getItem("shequ");
@@ -225,6 +225,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 Vue.use(asdFun)
+
+Vue.config.productionTip = false;
 new Vue({
   router,
   store,

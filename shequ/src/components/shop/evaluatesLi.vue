@@ -1,68 +1,31 @@
 <template>
-  <div class="Evaluate">
-    <detialTop/>
-    <div class="comment">
-      <div class="comment-top">
-        <div class="title">大家认为</div>
-        <div class="category">
-          <div class="cate-common chose">
-            全部（221110）
-          </div>
-          <div class="cate-common">
-            外观漂亮（866）
-          </div>
-          <div class="cate-common">
-            性价比高（726）
-          </div>
-          <div class="cate-common">
-            手感很好（516）
-          </div>
-          <div class="cate-common">
-            拍照清晰（505）
-          </div>
-          <div class="cate-common">
-            屏幕大（406）
-          </div>
+  <div class="evaluatesLi">
+    <div class="common">
+      <div class="top">
+        <a class="port">
+          <img class="titleImg"
+               :src="items.user.avatar">
+        </a>
+        <div class="time">
+          <a href="/comment/user?user_id=2245291928" class="tit">{{ items.user.nickname }}</a>
+          <div class="times">{{ a_transformTime(items.createtime) }}</div>
         </div>
       </div>
-      <div class="comment-mid">
-        <p v-if="!list.length" class="NONEP">
-          <a-empty  :description="false"/>
-        </p>
-        <div v-if="list.length" class="l-content ul">
-          <evaluatesLi v-for="item in list" v-bind:key="item.id" :items="item"/>
+      <span class="des"> {{ items.content }} </span>
+      <div class="images">
+        <div class="image big" v-for="(arr , index) in items.images" :key="index">
+          <img :src="arr" class="img">
         </div>
       </div>
-    </div>
-    <div v-if="list.length" class="bottoms">
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="page"
-          :page-sizes="[10, 50, 100, 300]"
-          :page-size="per_page"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import { Empty  } from 'ant-design-vue';
-import detialTop from "@components/shop/detialTop"
-import evaluatesLi from "@components/shop/evaluatesLi"
-
 export default {
-  name: "Evaluate",
+  name: "evaluatesLi",
   data() {
-    return {
-
-      list: [],
-      total: 0,
-      per_page: 10,
-      page: 1
-    };
+    return {};
   },
   /**
    * 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
@@ -70,10 +33,9 @@ export default {
   beforeCreate() {
   },
   /*
- * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
- * */
+   * 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始， 属性目前不可见。
+   * */
   created() {
-    this.getPull();
   },
   /**
    * 在挂载开始之前被调用：相关的 render 函数首次被调用。
@@ -115,7 +77,11 @@ export default {
    * 定义该 prop 是否是必填项。在非生产环境中，如果这个值为 truthy 且该 prop 没有被传入的，则一个控制台警告将会被抛出。
    * validator: Function
    * 自定义验证函数会将该 prop 的值作为唯一的参数代入。在非生产环境下，如果该函数返回一个 falsy 的值 (也就是验证失败)，一个控制台警告将会被抛出。你可以在这里查阅更多 prop 验证的相关信息。*/
-  props: {},
+  props: {
+    items: {
+      type: Object,
+    }
+  },
   /**
    * 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
    * 注意如果你为一个计算属性使用了箭头函数，则 this 不会指向这个组件的实例，不过你仍然可以将其实例作为函数的第一个参数来访问。
@@ -126,35 +92,7 @@ export default {
   /**
    * methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
    * */
-  methods: {
-    getPull() {
-      this.a_post("/addons/shopro/goods_comment/index?" + "goods_id=" + this.$route.query.id + "&pre_page=" + this.page + "&page=" + this.page + "&type=all", {
-        goods_id: this.$route.query.id,
-        per_page: this.per_page,
-        page: this.page,
-        type: "all"
-      }, res => {
-        console.log("/addons/shopro/goods_comment/index?goods_id=6&per_page=3&type=all", res.data.data.data);
-        if(res.data.code){
-          this.list = [];
-          this.total = res.data.data.total;
-          for (let i = 0; i < res.data.data.data.length; i++) {
-            this.list.splice(i, 0, res.data.data.data[i]);
-          }
-        }
-      });
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.per_page = val;
-      this.getPull();
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.page = val;
-      this.getPull();
-    }
-  },
+  methods: {},
   /**
    * 一个对象，键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 ()，遍历 watch 对象的每一个属性。
    * */
@@ -170,87 +108,94 @@ export default {
   /**
    * 包含 Vue 实例可用组件的哈希表。
    * */
-  components: {
-    detialTop,
-    evaluatesLi,
-    [Empty.name]:Empty
-},
+  components: {},
 }
 </script>
 
 <style scoped lang="scss">
-.Evaluate {
-  .comment {
-    background: #f5f5f5;
-    padding: 32px 0 30px;
-  }
+.evaluatesLi {
+  width: 100%;
+  background: #fff;
+  margin: 0 0 15px;
+  padding: 40px 40px 46px 103px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
 
-  .comment-top {
-    display: none;
-    width: 1226px;
-    margin: 0 auto 30px;
-    background: #fff;
-    padding: 40px;
-    box-sizing: border-box;
+  .common {
+    width: 100%;
 
-    .title {
-      font-size: 18px;
-      color: #757575;
-      line-height: 28px;
-    }
+    .top {
+      .port {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+        width: 47px;
+        height: 47px;
+        display: block;
 
-    .category {
-      margin-top: 14px;
+        img {
+          width: 100%
+        }
+      }
 
-      .cate-common {
-        display: inline-block;
-        width: 168px;
+      .time {
+        width: 100%;
         height: 44px;
-        line-height: 44px;
-        text-align: center;
-        margin: 0 20px 0 0;
-        color: #b0b0b0;
-        font-size: 14px;
-        border: 1px solid #eee;
-        background: #f5f5f5;
-        -webkit-transition: all .2s;
-        transition: all .2s;
-        cursor: pointer;
 
-        &.chose {
-          border-color: #ff6700;
-          background: #ff6700;
-          color: #fff;
+        .tit {
+          height: 18px;
+          line-height: 18px;
+          overflow: hidden;
+          _zoom: 1;
+          font-size: 16px;
+          color: #8d665a;
+          display: block
         }
 
-        &:hover {
-          background: #eee;
+        .times {
+          height: 20px;
+          line-height: 20px;
+          margin-top: 6px;
+          font-size: 14px;
+          color: #b0b0b0
         }
       }
     }
-  }
 
-  .comment-mid {
-    width: 1226px;
-    margin: 0 auto;
-    .NONEP{
+    .des {
+      display: inline-block;
+      margin-top: 8px;
+      color: #5e5e5e;
+      font-size: 18px;
+      line-height: 27px;
+    }
+
+    .images {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 500px;
-    }
-    .ul {
-      width: 100%
-    }
-  }
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: 14px;
 
-  .bottoms {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80px;
-    background-color: #ffffff;
+      .image {
+        width: 160px;
+        height: 160px;
+        margin: 0 8px 8px 0;
+        overflow: hidden;
+        cursor: pointer;
+
+        &.big {
+          width: 330px;
+          height: 330px
+        }
+      }
+
+      img {
+        position: relative;
+        width: 100%;
+        height: 100%
+      }
+    }
   }
 }
 </style>

@@ -29,6 +29,7 @@ export function post(url, data, callbacks) {
         console.log(url, err);
       });
 }
+
 /* get 请求 */
 export function get(url, data) {
   data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "47aea37e-801e-49be-b3b9-e7dca09a1eaa";
@@ -45,11 +46,12 @@ export function get(url, data) {
   };
   axios(options);
 }
+
 export function card(callbacks) {
   console.log("card");
-  post("/addons/shopro/cart",{},ress =>{
+  post("/addons/shopro/cart", {}, ress => {
     callbacks(ress);
-    this.$store.commit("change",stat=>{
+    this.$store.commit("change", stat => {
       let num = 0;
       for (let i = 0; i < ress.data.data.length; i++) {
         num += parseInt(ress.data.data[i].goods_num);
@@ -58,12 +60,27 @@ export function card(callbacks) {
     })
   })
 }
+
 export function go(url, data = {}) {
-  this.$router.push({ path: url, query: data });
+  this.$router.push({path: url, query: data});
 }
+
 export function gop(url, data = {}) {
-  this.$router.push({ name: url, params: data });
+  this.$router.push({name: url, params: data});
 }
+
+export function transformTime(time) {
+  let date = new Date(time * 1000);
+  let YY = date.getFullYear() + '-';
+  let MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  let DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+  let hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+  let mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+  let ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+  // return YY + MM + DD + " " + hh + mm + ss;
+  return YY + MM + DD;
+}
+
 export default {
   install: Vue => {
     Vue.prototype.a_post = post;
@@ -71,5 +88,6 @@ export default {
     Vue.prototype.a_go = go;
     Vue.prototype.a_gop = gop;
     Vue.prototype.a_card = card;
+    Vue.prototype.a_transformTime = transformTime;
   }
 };

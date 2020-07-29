@@ -4,7 +4,13 @@
       <img class="img" src="" alt="">
       <p class="title">康恩贝 维生素c vc 咀嚼片非泡腾片 补充VC 可搭配VE 1.2g*100片</p>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <div class="orderNumber">
+        <span class="left">订单号：</span>
+        <span class="rgiht">119515308597</span>
+      </div>
+        <time class="time"></time>
+    </div>
   </li>
 </template>
 

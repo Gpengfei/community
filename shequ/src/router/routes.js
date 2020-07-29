@@ -79,7 +79,6 @@ export default [
         },
         {
           path: '/shop/index',
-          name:"Index",
           title:"商城首页",
           component: ()=>import('@views/shop/Shop.vue'),
           children:[
@@ -90,17 +89,17 @@ export default [
             },
             {
               path: '/shop/index/detial',
-              name:"Detial",
+              name:"ShopDetial",
               component: ()=>import('@views/shop/ShopDetial.vue')
             },
             {
               path: '/shop/index/evaluate',
-              name:"Detial",
+              name:"Evaluate",
               component: ()=>import('@views/shop/Evaluate.vue')
             },
             {
               path: '/shop/shoppingCard',
-              name:"Detial",
+              name:"shoppingCard",
               component: ()=>import('@views/shop/shoppingCard.vue')
             },
             {
@@ -113,7 +112,7 @@ export default [
             },
             {
               path: '/shop/OrderSubmission',
-              name:"settlement",
+              name:"OrderSubmission",
               meta: {
                 title: "等待付款"
               },
