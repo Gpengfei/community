@@ -12,6 +12,7 @@
       height: 90px;
       line-height: 90px;
       overflow: hidden;
+      margin-bottom: 10px;
       .box-l {
         float: left;
         margin-right: 230px;
@@ -20,6 +21,7 @@
         }
       }
       .soso-box {
+        margin-top: 25px;
         float: left;
         width: 500px;
         line-height: normal;
@@ -40,8 +42,24 @@
             }
             input {
               flex: 1;
+              font-size: 16px;
+              color: #666;
             }
           }
+          .soso-btn {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: $color;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+        .soso-ts {
+          color: $color;
+          font-size: 15px;
+          line-height: 30px;
         }
       }
       .box-r {
