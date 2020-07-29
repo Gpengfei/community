@@ -1,66 +1,101 @@
-html,body, ul, ol, dl, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, table, th, td, menu {
-    margin: 0;
-    padding: 0;
-  }
-  
-  html {
-    font-family: Arial, "Microsoft YaHei",'微软雅黑','Avenir', Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow: auto;
-    min-width: 1300px;
-  }
-  ul, ol, menu {
-    list-style: none
-  }
-  
-  fieldset, img {
-    border: none
-  }
-  
-  img, object, select, input, textarea, button {
-    vertical-align: middle
-  }
-  
-  a,
-  a:focus,
-  a:hover {
-    cursor: pointer;
-    color: inherit;
-    outline: none;
-    text-decoration: none;
-  }
-  
-  div:focus {
-    outline: none;
-  }
-  
-  a:focus,
-  a:active {
-    outline: none;
-  }
-  
-  i {
-    font-style: normal;
-  }
-  input{
-    border: none;
-    outline: none;
-    &::-webkit-input-placeholder{
-      color: #999;
-    }
-  }
-  // 版心样式
-  .sqBox{
-    width: 1300px;
-    margin: 0 auto;
-  }
-  // 公共样式
-  .gpfzwsj{
-    width: 100%;
-    line-height: 100px;
-    text-align: center;
+html,
+body,
+ul,
+ol,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+table,
+th,
+td,
+menu {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Arial, "Microsoft YaHei", "微软雅黑", "Avenir", Helvetica,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: auto;
+  min-width: 1300px;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+ul,
+ol,
+menu {
+  list-style: none;
+}
+
+fieldset,
+img {
+  border: none;
+}
+
+img,
+object,
+select,
+input,
+textarea,
+button {
+  vertical-align: middle;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+i {
+  font-style: normal;
+}
+input {
+  border: none;
+  outline: none;
+  &::-webkit-input-placeholder {
     color: #999;
-    font-size: 20px;
   }
-  
+}
+// 版心样式
+.sqBox {
+  width: 1300px;
+  margin: 0 auto;
+}
+// 公共样式
+.gpfzwsj {
+  width: 100%;
+  line-height: 100px;
+  text-align: center;
+  color: #999;
+  font-size: 20px;
+}
