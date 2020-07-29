@@ -26,7 +26,7 @@ export default {
           delay: 3000,
           disableOnInteraction: false,
         },
-        loop: true,
+        loop: false,
         loopFillGroupWithBlank: true,
         pagination: {
           el: ".swiper-pagination",
