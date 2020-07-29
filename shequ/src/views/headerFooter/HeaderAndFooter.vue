@@ -7,14 +7,15 @@
           <div class="box-l">
             <img src="@assets/img/logo1.png" alt />
           </div>
-          <div class="box-nav">
-            <ul>
-              <li v-for="(item,index) in navData" :key="index">
-                <router-link :to="item.url">
-                  <span :class="navsIndex==index?'sty':''">{{item.name}}</span>
-                </router-link>
-              </li>
-            </ul>
+          <div class="soso-box">
+            <div class="soso-top">
+              <div class="soso-inp">
+                <i class="iconfont">&#xe608;</i>
+                <input type="text" placeholder="请输入搜索内容" />
+              </div>
+              <p class="soso-btn">搜索</p>
+            </div>
+            <p class="soso-ts">一站式养老生活服务尽在这里</p>
           </div>
           <div class="box-r">
             <i class="iconfont">&#xe608;</i>
@@ -40,6 +41,15 @@
               </router-link>
             </template>
           </div>
+        </div>
+        <div class="box-nav">
+          <ul>
+            <li v-for="(item,index) in navData" :key="index">
+              <router-link :to="item.url">
+                <span :class="navsIndex==index?'sty':''">{{item.name}}</span>
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -78,7 +88,7 @@ export default {
         { name: "通知资讯", url: "/" },
         { name: "会员商城", url: "/shop/index" },
         { name: "健康管理", url: "/" },
-        { name: "居家安防", url: "/" }
+        { name: "居家安防", url: "/" },
       ],
       navData0: [
         { name: "首页", url: "/" },
@@ -87,10 +97,10 @@ export default {
         { name: "会员商城", url: "/shop/index" },
         { name: "健康管理", url: "/" },
         { name: "居家安防", url: "/" },
-        { name: "手机App", url: "/" }
+        { name: "手机App", url: "/" },
       ],
       token: "",
-      avatar: ""
+      avatar: "",
     };
   },
   mounted() {
@@ -100,9 +110,9 @@ export default {
     if (this.token) {
       this.$api.article
         .user({
-          token: this.token
+          token: this.token,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code == 1) {
             this.avatar = res.data.data.avatar;
@@ -116,8 +126,8 @@ export default {
     },
     isLogin() {
       return this.$store.state.isLogin;
-    }
-  }
+    },
+  },
 };
 </script>
 
