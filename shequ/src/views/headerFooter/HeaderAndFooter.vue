@@ -84,13 +84,13 @@ export default {
     return {
       navData: [
         { name: "首页", url: "/" },
-        { name: "社区便民", url: "/" },
+        { name: "社区便民", url: "/communityConvenience" },
         { name: "会员商城", url: "/shop/index" },
         { name: "居家安防", url: "/" },
       ],
       navData0: [
         { name: "首页", url: "/" },
-        { name: "社区便民", url: "/" },
+        { name: "社区便民", url: "/communityConvenience" },
         { name: "会员商城", url: "/shop/index" },
         { name: "居家安防", url: "/" },
         { name: "手机App", url: "/" },
