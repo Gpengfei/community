@@ -18,7 +18,7 @@
             <p class="soso-ts">一站式养老生活服务尽在这里</p>
           </div>
           <div class="box-r">
-            <i class="iconfont">&#xe608;</i>
+            <!-- <i class="iconfont">&#xe608;</i> -->
             <template v-if="isLogin">
               <router-link to="/release">
                 <i class="iconfont bj">&#xe60e;</i>
