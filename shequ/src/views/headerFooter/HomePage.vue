@@ -88,6 +88,10 @@
             </template>
           </div>
         </div>
+        <!-- 广告位 -->
+        <div class="syggw1">
+          <img src="img/syggw1.png" alt />
+        </div>
       </div>
     </div>
   </div>
