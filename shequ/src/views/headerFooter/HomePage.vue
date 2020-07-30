@@ -92,6 +92,20 @@
         <div class="syggw1">
           <img src="img/syggw1.png" alt />
         </div>
+        <!-- 精选商品 -->
+        <div class="jxsp">
+          <p class="jxsp-title">精选商品</p>
+          <ul class="lis1nav">
+            <template v-for="(item,index) in nav2Dat">
+              <li
+                :key="index"
+                :class="{'sty':index==nav2Ind}"
+                @click="jxspCli(index,item.id)"
+              >{{item.name}}</li>
+            </template>
+            <li class="gd">更多</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -128,6 +142,18 @@ export default {
       nav1Inds: 0,
       userInfo: {},
       fwLists: [],
+      nav2Dat: [
+        { name: "全部", id: 0 },
+        { name: "书画", id: 1 },
+        { name: "电器", id: 2 },
+        { name: "手工制品", id: 3 },
+        { name: "药食同源", id: 4 },
+        { name: "老年产品", id: 5 },
+        { name: "智能家居", id: 6 },
+        { name: "进口食品", id: 7 },
+        { name: "康复理疗", id: 8 },
+      ],
+      nav2Ind: 0,
     };
   },
   mounted() {
@@ -182,6 +208,7 @@ export default {
       });
   },
   methods: {
+    // 优质服务
     yzfwCli(ins, id) {
       this.nav1Ind = ins;
       this.nav1Inds = id;
@@ -215,6 +242,11 @@ export default {
             }
           });
       }
+    },
+    // 精选商品
+    jxspCli(index, id) {
+      console.log(id);
+      this.nav2Ind = index;
     },
   },
 };
