@@ -5,7 +5,10 @@
         <ul>
           <li class="sty">全部订单</li>
           <li>待付款</li>
+          <li>待发货</li>
           <li>待收货</li>
+          <li>待评价</li>
+          <li>退换货</li>
         </ul>
         <div class="pfsoso">
           <div class="pfsoso-box">
@@ -39,10 +42,10 @@
       </div>
       <div class="myOrder-lis">
         <ul>
-          <li class="dfk">
+          <li class="dfk" v-for="(arr,index) in list" :key="index">
             <p class="dd-title">
-              <span class="title-time">2020-06-15 12:02:12</span>
-              <span class="title-ddh">订单号:123456789123</span>
+              <span class="title-time">{{ a_transformTime( parseInt(arr.createtime)) }}</span>
+              <span class="title-ddh">订单号:{{ arr.order_sn }}</span>
             </p>
             <table>
               <tr>
@@ -148,12 +151,15 @@
     <div class="fy">
       <div class="fy-box">
         <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="1000"
-          prev-text="上一页"
-          next-text="下一页"
-        ></el-pagination>
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="page"
+            background
+            :page-sizes="[10, 30, 100, 300]"
+            :page-size="100"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
       </div>
     </div>
   </div>
@@ -186,8 +192,44 @@ export default {
           label: "北京烤鸭"
         }
       ],
-      value: ""
+      value: "",
+      total: 0,
+      per_page: 10,
+      page: 1,
+      type:"all",
+      list:[]
     };
+  },
+  created() {
+    this.getPull();
+  },
+  methods: {
+    getPull() {
+      this.a_post("/addons/shopro/order/index?" + "pre_page=" + this.page + "&page=" + this.page + "&type=" + this.type, {
+        per_page: this.per_page,
+        page: this.page,
+        type: this.type
+      }, res => {
+        console.log("/addons/shopro/order/index", res.data.data);
+        if(res.data.code){
+          this.list = [];
+          this.total = res.data.data.total;
+          for (let i = 0; i < res.data.data.data.length; i++) {
+            this.list.splice(i, 0, res.data.data.data[i]);
+          }
+        }
+      });
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.per_page = val;
+      this.getPull();
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.page = val;
+      this.getPull();
+    }
   },
   mounted() {
     // 导航改变状态
