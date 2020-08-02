@@ -264,6 +264,96 @@
             </div>
           </div>
         </div>
+        <!-- 广告位 -->
+        <div class="syggw1">
+          <img src="img/syggw2.png" alt />
+        </div>
+        <!--猜你喜欢-->
+        <div class="cnxh">
+          <p class="cnxh-title">猜你喜欢</p>
+          <ul>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp1.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp1.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp1.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp1.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp1.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+            <li>
+              <div class="splis-box">
+                <div class="box-top">
+                  <img src="img/sysp.png" alt />
+                </div>
+                <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
