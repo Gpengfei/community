@@ -105,6 +105,17 @@
             </template>
             <li class="gd">更多</li>
           </ul>
+          <div class="spbox">
+            <div class="spbox-l">
+              <div class="l-top">
+                <img src="@assets/img/syspgd.png" alt />
+              </div>
+              <div class="l-bot">
+                <img src="@assets/img/syspgd.png" alt />
+              </div>
+            </div>
+            <div class="spbox-r"></div>
+          </div>
         </div>
       </div>
     </div>
