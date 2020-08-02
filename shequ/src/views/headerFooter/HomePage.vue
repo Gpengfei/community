@@ -114,7 +114,17 @@
                 <img src="@assets/img/syspgd.png" alt />
               </div>
             </div>
-            <div class="spbox-r"></div>
+            <div class="spbox-r">
+              <ul>
+                <li>
+                  <div class="splis-box">
+                    <div class="box-top">
+                      <img src="img/sysp.png" alt />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
