@@ -121,6 +121,8 @@
                     <div class="box-top">
                       <img src="img/sysp.png" alt />
                     </div>
+                    <p class="box-text">网红款床上用品四件套洗水棉被套床单学生单人宿舍三件套4夏季</p>
+                    <p class="box-myn">￥91.45</p>
                   </div>
                 </li>
               </ul>
