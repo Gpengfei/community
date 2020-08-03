@@ -17,75 +17,75 @@ const article = {
     // 注册页面
     // 获取用户类型
     getUserClassification (params) {
-        return axios.post(`${base.sq}/Userclass/getUserClassification`, qs.stringify(params));
+        return axios.post(`${base.sq}/Userclass/getUserClassification`, params);
     },
     // 获取社区
     getUserClassstreet(params){
-        return axios.post(`${base.sq}/Userclass/getUserClassstreet`, qs.stringify(params));
+        return axios.post(`${base.sq}/Userclass/getUserClassstreet`, params);
     },
     // 注册接口
     register(params){
-        return axios.post(`${base.sq}/User/register`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/register`, params);
     },
     // 登录接口
     login(params){
-        return axios.post(`${base.sq}/User/login`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/login`,params);
     },
      // 获取用户信息
      user(params){
-        return axios.post(`${base.sq}/User/user`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/user`, params);
     },
     // 获取消息列表
     getNoticeList(params){
-        return axios.post(`${base.sq}/Notice/getNoticeList`, qs.stringify(params));
+        return axios.post(`${base.sq}/Notice/getNoticeList`, params);
     },
     // 获取用户我的基本信息
     getUserInfo(params){
-        return axios.post(`${base.sq}/User/getUserInfo`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getUserInfo`, params);
     },
     // 修改用户名称
     xgyhm(params){
-        return axios.post(`${base.sq}/User/getUsernameEdit`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getUsernameEdit`, params);
     },
     // 修改手机号  
     getMobileEdit(params){
-        return axios.post(`${base.sq}/User/getMobileEdit`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getMobileEdit`, params);
     },
     // 修改性别
     getGenderEdit(params){
-        return axios.post(`${base.sq}/User/getGenderEdit`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getGenderEdit`, params);
     },
     // 修改头像
     getAvatarEdit(params){
-        return axios.post(`${base.sq}/User/getAvatarEdit`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getAvatarEdit`, params);
     },
     // 社区服务类型列表
     gerServiceList(params){
-        return axios.post(`${base.sq}/Community/gerServiceList`, qs.stringify(params));
+        return axios.post(`${base.sq}/Community/gerServiceList`, params);
     },
     // 社区服务列表
     gerCommunityList(params){
-        return axios.post(`${base.sq}/Community/gerCommunityList`, qs.stringify(params));
+        return axios.post(`${base.sq}/Community/gerCommunityList`, params);
     },
     // 社区房屋列表
     gerHousingList(params){
-        return axios.post(`${base.sq}/Housing/gerHousingList`, qs.stringify(params));
+        return axios.post(`${base.sq}/Housing/gerHousingList`, params);
     },
     // 获取服务详情
     gerCommunityDetailed(params){
-        return axios.post(`${base.sq}/Community/gerCommunityDetailed`, qs.stringify(params));
+        return axios.post(`${base.sq}/Community/gerCommunityDetailed`, params);
     },
      // 获取房屋详情
      gerHousingDetailed(params){
-        return axios.post(`${base.sq}/Housing/gerHousingDetailed`, qs.stringify(params));
+        return axios.post(`${base.sq}/Housing/gerHousingDetailed`, params);
     },
     // 修改密码
     getPwdEdit(params){
-        return axios.post(`${base.sq}/User/getPwdEdit`, qs.stringify(params));
+        return axios.post(`${base.sq}/User/getPwdEdit`, params);
     },
     // 发布消息通知
     getValidateAdd(params){
-        return axios.post(`${base.sq}/Notice/getValidateAdd`, qs.stringify(params));
+        return axios.post(`${base.sq}/Notice/getValidateAdd`, params);
     }
 }
 
