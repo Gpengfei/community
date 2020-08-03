@@ -20,7 +20,7 @@
               <li
                 :key="index"
                 :class="{'sty':index==nav1Ind}"
-                @click="yzfwCli(index,item.id)"
+                @click="yzfwCli(index,item.id,item.name)"
               >{{item.name}}</li>
             </template>
             <li class="gd">更多</li>
@@ -402,6 +402,7 @@ export default {
         { name: "康复理疗", id: 8 },
       ],
       nav2Ind: 0,
+      fl1Name:''
     };
   },
   mounted() {
@@ -457,9 +458,10 @@ export default {
   },
   methods: {
     // 优质服务
-    yzfwCli(ins, id) {
+    yzfwCli(ins, id,name) {
       this.nav1Ind = ins;
       this.nav1Inds = id;
+      this.fl1Name=name
       console.log(id);
       if (id != 4) {
         // 获取服务列表
@@ -495,6 +497,15 @@ export default {
     jxspCli(index, id) {
       console.log(id);
       this.nav2Ind = index;
+    },
+     // 进入商品详情
+    lisClis(index) {
+      console.log(index);
+      if (this.fl1Name == "房屋租赁") {
+        this.$router.push({ path: "/productDetails1", query: { id: index } });
+      } else {
+        this.$router.push({ path: "/productDetails", query: { id: index } });
+      }
     },
   },
 };
