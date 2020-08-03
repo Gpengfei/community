@@ -486,7 +486,6 @@ export default {
     let token = this.$store.state.token;
     this.token = token;
     // 获取用户基本信息
-
     this.$api.article
       .getUserInfo({
         token: this.token,
