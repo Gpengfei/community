@@ -26,9 +26,10 @@ export default {
     return {
       navFb: [
         { name: "房屋租赁", url: "/release" },
+        { name: "二手物品", url: "/secondHandGoods" },
         { name: "发布服务", url: "/releaseService" },
-        { name: "发布通知", url: "/releaseNotice" }
-      ]
+        { name: "发布通知", url: "/releaseNotice" },
+      ],
     };
   },
   mounted() {
@@ -37,8 +38,8 @@ export default {
   computed: {
     navIs() {
       return this.$store.state.navFb;
-    }
-  }
+    },
+  },
 };
 </script>
 
