@@ -92,12 +92,12 @@
           <span class="bt">*</span>
           <span class="text">服务区域</span>
           <el-cascader
-              placeholder="请选择地区"
-              popper-class="popper1"
-              :options="options1"
-              v-model="selectedOptions"
-              @change="handleChange"
-            ></el-cascader>
+            placeholder="请选择地区"
+            popper-class="popper1"
+            :options="options1"
+            v-model="selectedOptions"
+            @change="handleChange"
+          ></el-cascader>
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
@@ -125,7 +125,7 @@
 
 <script>
 import "@style/release/releaseService.scss";
-import { regionData } from "element-china-area-data"
+import { regionData } from "element-china-area-data";
 export default {
   data() {
     return {
@@ -135,24 +135,24 @@ export default {
       options: [
         {
           value: "选项1",
-          label: "黄金糕"
+          label: "黄金糕",
         },
         {
           value: "选项2",
-          label: "双皮奶"
+          label: "双皮奶",
         },
         {
           value: "选项3",
-          label: "蚵仔煎"
+          label: "蚵仔煎",
         },
         {
           value: "选项4",
-          label: "龙须面"
+          label: "龙须面",
         },
         {
           value: "选项5",
-          label: "北京烤鸭"
-        }
+          label: "北京烤鸭",
+        },
       ],
       value1: [],
       value2: [],
@@ -176,7 +176,7 @@ export default {
         "电梯",
         "可做饭",
         "微波炉",
-        "桌椅"
+        "桌椅",
       ],
       isIndeterminate: false,
       // 出租要求
@@ -190,7 +190,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("setNavFb", 1);
+    this.$store.dispatch("setNavFb", 2);
   },
   methods: {
     handleCheckAllChange(val) {
@@ -212,8 +212,8 @@ export default {
       this.dialogVisible = true;
     },
     // 省市区
-    handleChange(){},
-  }
+    handleChange() {},
+  },
 };
 </script>
 
