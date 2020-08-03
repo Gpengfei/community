@@ -280,11 +280,28 @@ export default {
       }
       this.$api.article
         .getPwdEdit({
+          token: this.token,
           newpassword: this.xmm,
           oldpassword: this.ymm,
         })
         .then((res) => {
           console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              type: "success",
+              message: "密码修改成功，请重新登陆",
+            });
+            this.$store.dispatch("setUser", false);
+            localStorage.removeItem("shequ");
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            this.$router.push({ path: "/login" });
+          } else {
+            this.$message({
+              type: "warning",
+              message: res.data.msg,
+            });
+          }
         });
     },
     // 修改密码
