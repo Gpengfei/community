@@ -26,7 +26,10 @@
             </div>
           </li>
         </ul>
-        <p class="gpfzwsj" v-else>暂无通知</p>
+        <p class="not-yet" v-else>
+          <img src="@assets/img/kzt.png" alt="">
+          <span>暂无通知</span>
+        </p>
       </div>
       <div class="xxtzLists" v-else-if="activeIndex==1">
         <ul v-if="newsLis1.length!=0">
@@ -44,7 +47,10 @@
             </div>
           </li>
         </ul>
-        <p class="gpfzwsj" v-else>暂无系统通知</p>
+         <p class="not-yet" v-else>
+          <img src="@assets/img/kzt.png" alt="">
+          <span>暂无通知</span>
+        </p>
       </div>
       <div class="xxtzLists" v-else>
         <ul v-if="newsLis2.length!=0">
@@ -62,7 +68,10 @@
             </div>
           </li>
         </ul>
-        <p class="gpfzwsj" v-else>暂无社区通知</p>
+         <p class="not-yet" v-else>
+          <img src="@assets/img/kzt.png" alt="">
+          <span>暂无通知</span>
+        </p>
       </div>
       <!--分页-->
       <div class="fy" v-if="activeIndex==0">

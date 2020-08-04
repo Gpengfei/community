@@ -384,9 +384,12 @@
     ul {
       width: 100%;
       display: flex;
-      justify-content: space-between;
       li {
         width: 230px;
+        margin-right: 25px;
+        &:last-child{
+          margin-right: 0px;
+        }
         img {
           width: 100%;
           height: 182px;

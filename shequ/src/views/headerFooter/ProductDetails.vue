@@ -91,14 +91,8 @@
           <div class="fwtp">
             <p class="fwtp-title">服务图片</p>
             <ul>
-              <li>
-                <img src="img/fwtp1.png" alt />
-              </li>
-              <li>
-                <img src="img/fwtp2.png" alt />
-              </li>
-              <li>
-                <img src="img/fwtp3.png" alt />
+              <li v-for="(item,index) in bannerData" :key="index">
+                <img :src="'http://zt.shenyueyun.com'+item" alt />
               </li>
             </ul>
           </div>
@@ -106,20 +100,21 @@
         <div class="productDetails-box-r">
           <div class="dprk">
             <div class="dprk-logo">
-              <img src="@assets/img/dplogo.png" alt />
-              <p>金万通保洁</p>
+              <img v-if="dpxx.logo" :src="'http://zt.shenyueyun.com/'+dpxx.logo" alt />
+              <img v-else src="@assets/img/dplogo.png" alt />
+              <p>{{dpxx.shop_name}}</p>
             </div>
             <div class="sc">
               <div class="sc-l">
-                <p class="l-top">32个月</p>
+                <p class="l-top">{{dpxx.count}}个月</p>
                 <p class="l-bot">加入时长</p>
               </div>
               <div class="sc-r">
-                <p class="r-top">9个</p>
+                <p class="r-top">{{dpxx.createtime}}个</p>
                 <p class="r-bot">发布商品</p>
               </div>
             </div>
-            <div class="dprk-btn" @click="jrdp">进入店铺</div>
+            <div class="dprk-btn" @click="jrdp(dpxx.id)">进入店铺</div>
           </div>
           <div class="ewm">
             <p class="ewm-title">
@@ -131,21 +126,9 @@
           <div class="cnxh1">
             <p class="cnxh1-title">猜你喜欢</p>
             <ul>
-              <li>
-                <img src="img/cnxh1.png" alt />
-                <p>水管/水龙头维修 水龙头安装/维修 水龙</p>
-              </li>
-              <li>
-                <img src="img/cnxh1.png" alt />
-                <p>水管/水龙头维修 水龙头安装/维修 水龙</p>
-              </li>
-              <li>
-                <img src="img/cnxh1.png" alt />
-                <p>水管/水龙头维修 水龙头安装/维修 水龙</p>
-              </li>
-              <li>
-                <img src="img/cnxh1.png" alt />
-                <p>水管/水龙头维修 水龙头安装/维修 水龙</p>
+              <li v-for="(item,index) in GuessYouLikeIt" :key="index" @click="fwCli(item.id)">
+                <img :src="'http://zt.shenyueyun.com/'+item.image" alt />
+                <p>{{item.title}}</p>
               </li>
             </ul>
           </div>
@@ -158,26 +141,11 @@
       <div class="cnxh2">
         <p class="cnxh2-title">猜你喜欢</p>
         <ul>
-          <li>
-            <img src="img/cnxh2.png" alt />
-            <p>各种（品牌）家电维修 油烟机 空调，热水器 冰箱 洗衣机，壁挂炉哈哈哈</p>
+          <li v-for="(item,index) in GuessYouLikeIt" :key="index" @click="fwCli(item.id)">
+            <img :src="'http://zt.shenyueyun.com/'+item.image" alt />
+            <p>{{item.title}}</p>
           </li>
-          <li>
-            <img src="img/cnxh2.png" alt />
-            <p>各种（品牌）家电维修 油烟机 空调，热水器 冰箱 洗衣机，壁挂炉哈哈哈</p>
-          </li>
-          <li>
-            <img src="img/cnxh2.png" alt />
-            <p>各种（品牌）家电维修 油烟机 空调，热水器 冰箱 洗衣机，壁挂炉哈哈哈</p>
-          </li>
-          <li>
-            <img src="img/cnxh2.png" alt />
-            <p>各种（品牌）家电维修 油烟机 空调，热水器 冰箱 洗衣机，壁挂炉哈哈哈</p>
-          </li>
-          <li>
-            <img src="img/cnxh2.png" alt />
-            <p>各种（品牌）家电维修 油烟机 空调，热水器 冰箱 洗衣机，壁挂炉哈哈哈</p>
-          </li>
+          
         </ul>
       </div>
       <div class="tj">
@@ -234,6 +202,8 @@ export default {
       },
       nrData: {},
       jwd: [],
+      GuessYouLikeIt:[],
+      dpxx:{}
     };
   },
   mounted() {
@@ -260,6 +230,10 @@ export default {
           this.bannerData = dat.images;
           this.imgUrl = dat.images[0];
           this.nrData = dat;
+          // 猜你喜欢
+          this.GuessYouLikeIt=res.data.data.sent_data
+          // 店铺
+          this.dpxx=res.data.data.shop
         }
       });
   },
@@ -281,9 +255,13 @@ export default {
       map.add(marker);
     },
     // 进入店铺
-    jrdp() {
-      this.$router.push({ path: "/shop", query: { id: 1 } });
+    jrdp(id) {
+      this.$router.push({ path: "/shop", query: { id: id } });
     },
+    fwCli(id){
+      this.$router.push({ path: "/productDetails", query: { id: id } });
+      this.$router.go(0);
+    }
   },
   components: {
     Breadcrumb,

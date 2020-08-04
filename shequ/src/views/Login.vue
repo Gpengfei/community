@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       userName: "",
-      password: ""
+      password: "",
     };
   },
   methods: {
@@ -46,42 +46,43 @@ export default {
       if (this.userName == "") {
         this.$message({
           message: "用户名不能为空",
-          type: "warning"
+          type: "warning",
         });
         return;
       }
       if (this.password == "") {
         this.$message({
           message: "密码不能为空",
-          type: "warning"
+          type: "warning",
         });
         return;
       }
       this.$api.article
         .login({
           account: this.userName,
-          password: this.password
+          password: this.password,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
           if (res.data.code != 1) {
             this.$message({
               message: res.data.msg,
-              type: "warning"
+              type: "warning",
             });
-          }else{
+          } else {
             this.$message({
               message: res.data.msg,
-              type: "success"
+              type: "success",
             });
+            this.$store.dispatch("setUser", true);
             localStorage.setItem("shequ", "isLogin");
             localStorage.setItem("token", res.data.data.userinfo.token);
             localStorage.setItem("userId", res.data.data.userinfo.id);
-            this.$router.push({ path: "/" })
+            this.$router.push({ path: "/" });
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

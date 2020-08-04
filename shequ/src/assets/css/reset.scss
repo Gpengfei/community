@@ -99,3 +99,15 @@ input {
   color: #999;
   font-size: 20px;
 }
+// 空状态全局样式
+.not-yet{
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
+  span{
+    font-size: 20px;
+    padding: 20px 0;
+    color: #999;
+    display: block;
+  }
+}

@@ -143,13 +143,77 @@
       </div>
       <div class="jbxx">
         <p class="jbxx-title">店铺信息</p>
-        <ul>
+        <ul v-if="dpxxOr">
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人姓名</p>
+              <p class="jbxx-box-r">
+                <span class="xx">李三</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人联系方式</p>
+              <p class="jbxx-box-r">
+                <span class="xx">182****0000</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人身份证号</p>
+              <p class="jbxx-box-r">
+                <span class="xx">150425********0010</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">统一社会编码</p>
+              <p class="jbxx-box-r">
+                <span class="xx">JY113100200000000000</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">营业执照</p>
+              <div class="jbxx-box-r">
+                <div class="demo-image__preview">
+                  <el-image style="width: 100px;" :src="url" :preview-src-list="srcList"></el-image>
+                </div>
+                <!-- <span class="xx">金万通保洁</span> -->
+                <!-- <span class="xg">修改</span> -->
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">店铺logo</p>
+              <div class="jbxx-box-r">
+                <div class="demo-image__preview">
+                  <el-image
+                    style="width: 100px; height: 100px"
+                    :src="url1"
+                    :preview-src-list="srcList1"
+                  ></el-image>
+                </div>
+                <!-- <span class="xx">金万通保洁</span> -->
+                <!-- <span class="xg">修改</span> -->
+              </div>
+            </div>
+          </li>
           <li>
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺名称</p>
               <p class="jbxx-box-r">
                 <span class="xx">金万通保洁</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -158,7 +222,7 @@
               <p class="jbxx-box-l">店铺地址</p>
               <p class="jbxx-box-r">
                 <span class="xx">赛罕区乌兰察布东街与东影南路交汇处南150米</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -169,7 +233,7 @@
                 <span class="qgk">地毯清洗</span>
                 <span class="qgk">开荒保洁</span>
                 <span class="qgk">物业保洁</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -182,6 +246,10 @@
             </div>
           </li>
         </ul>
+        <div class="jbxx-btn">
+          <span v-if="dpxxOr">修改店铺信息</span>
+          <span v-else @click="wsspxxCli">立即完善商铺信息</span>
+        </div>
       </div>
     </div>
     <!--自定义弹出框-->
@@ -211,6 +279,55 @@
         </div>
       </div>
     </div>
+    <!-- 店铺信息提交弹出框 -->
+    <div class="dpxxmodel">
+      <div class="dpxxmodel-box">
+        <p class="dpxxmodel-title">店铺信息完善</p>
+        <div class="inp-box">
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人姓名" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人联系方式" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人身份证号" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入统一社会编码" />
+          </p>
+          <p class="up-lis">
+            <span>上传营业执照</span>
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </p>
+          <p class="inp-lis">
+            <span>上传店铺logo</span>
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入店铺名称" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入店铺详细地址" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请选择店铺服务" />
+          </p>
+        </div>
+        <div class="dpxxbc-btn">
+          <span class="dpxxbc-btn-l">提交店铺信息</span>
+          <span class="dpxxbc-btn-r">取消提交</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -233,9 +350,23 @@ export default {
       ymm: "",
       xmm: "",
       yxmm: "",
+      // 营业执照
+      url: "img/yyzz.png",
+      srcList: ["img/yyzz.png"],
+      // logo
+      url1: "img/splogo.png",
+      srcList1: ["img/splogo.png"],
+      // 店铺是否完善
+      dpxxOr: false,
+      // 营业执照
+      imageUrl: "",
     };
   },
   methods: {
+    // 点击完善商铺信息
+    wsspxxCli() {
+      this.dpxxOr = true;
+    },
     // 修改密码
     xgmmCli() {
       this.isTck = true;
@@ -280,11 +411,28 @@ export default {
       }
       this.$api.article
         .getPwdEdit({
+          token: this.token,
           newpassword: this.xmm,
           oldpassword: this.ymm,
         })
         .then((res) => {
           console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              type: "success",
+              message: "密码修改成功，请重新登陆",
+            });
+            this.$store.dispatch("setUser", false);
+            localStorage.removeItem("shequ");
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            this.$router.push({ path: "/login" });
+          } else {
+            this.$message({
+              type: "warning",
+              message: res.data.msg,
+            });
+          }
         });
     },
     // 修改密码
@@ -476,6 +624,15 @@ export default {
           });
         }
       });
+    },
+    // 上传营业执照
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type;
+      const isLt2M = file.size;
+      return isJPG && isLt2M;
     },
   },
   mounted() {

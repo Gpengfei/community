@@ -19,8 +19,14 @@
           <div class="imgList">
             <ul>
               <li v-for="(item,index) in imgList" :key="index" @click="imgCli(index)">
-                <img :src="item.imgUrl" alt />
-                <p :class="imgIndex==index?'sty'+index:''">{{item.name}}</p>
+                <a v-if="item.url" :href="item.url" target="view_window">
+                  <img :src="item.imgUrl" alt />
+                  <p :class="imgIndex==index?'sty'+index:''">{{item.name}}</p>
+                </a>
+                <a v-else>
+                  <img :src="item.imgUrl" alt />
+                  <p :class="imgIndex==index?'sty'+index:''">{{item.name}}</p>
+                </a>
               </li>
             </ul>
           </div>
@@ -179,10 +185,20 @@ export default {
       // 带图片导航
       imgIndex: 0,
       imgList: [
-        { name: "水费", imgUrl: "img/sqbmsf.png" },
-        { name: "电费", imgUrl: "img/sqbmdf.png" },
-        { name: "燃气费", imgUrl: "img/sqbmrqf.png" },
-        { name: "物业费", imgUrl: "img/sqbmwyf.png" },
+        {
+          name: "水费",
+          imgUrl: "img/sqbmsf.png",
+          url:
+            "https://billcloud.unionpay.com/ccfront/entry/search?category=D4&areaId=1900",
+        },
+        {
+          name: "电费",
+          imgUrl: "img/sqbmdf.png",
+          url:
+            "https://billcloud.unionpay.com/ccfront/entry/search?category=D1&areaId=1900",
+        },
+        { name: "燃气费", imgUrl: "img/sqbmrqf.png", url: "" },
+        { name: "物业费", imgUrl: "img/sqbmwyf.png", url: "" },
       ],
       // 分类导航
       fl1Name: "全部",
