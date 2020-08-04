@@ -185,11 +185,7 @@
               <p class="jbxx-box-l">营业执照</p>
               <div class="jbxx-box-r">
                 <div class="demo-image__preview">
-                  <el-image
-                    style="width: 100px; height: 100px"
-                    :src="url"
-                    :preview-src-list="srcList"
-                  ></el-image>
+                  <el-image style="width: 100px;" :src="url" :preview-src-list="srcList"></el-image>
                 </div>
                 <!-- <span class="xx">金万通保洁</span> -->
                 <!-- <span class="xg">修改</span> -->
@@ -199,11 +195,17 @@
           <li>
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺logo</p>
-              <p class="jbxx-box-r">
-                <img class="dplogo" src alt />
+              <div class="jbxx-box-r">
+                <div class="demo-image__preview">
+                  <el-image
+                    style="width: 100px; height: 100px"
+                    :src="url1"
+                    :preview-src-list="srcList1"
+                  ></el-image>
+                </div>
                 <!-- <span class="xx">金万通保洁</span> -->
                 <!-- <span class="xg">修改</span> -->
-              </p>
+              </div>
             </div>
           </li>
           <li>
@@ -296,12 +298,11 @@ export default {
       xmm: "",
       yxmm: "",
       // 营业执照
-      url:
-        "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-      srcList: [
-        "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
-        "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
-      ],
+      url: "img/yyzz.png",
+      srcList: ["img/yyzz.png"],
+      // logo
+      url1: "img/splogo.png",
+      srcList1: ["img/splogo.png"],
     };
   },
   methods: {
