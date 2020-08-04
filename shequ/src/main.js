@@ -8,6 +8,8 @@ Vue.prototype.$https = https;
 import api from "./api";
 import vueAwesomeSwiper from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
 import moment from 'moment'
 import "@assets/css/reset.scss";
 import storage from 'good-storage';
@@ -208,7 +210,7 @@ router.beforeEach((to, from, next) => {
           message: "请先退出登录登录",
           type: "warning"
         });
-        next({path: '/'})
+        next({ path: '/' })
       }
     }
   } else {
@@ -218,7 +220,7 @@ router.beforeEach((to, from, next) => {
         message: "请先登录",
         type: "warning"
       });
-      next({path: '/login'})
+      next({ path: '/login' })
     } else {
       next()
     }
