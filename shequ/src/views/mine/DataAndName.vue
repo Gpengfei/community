@@ -309,8 +309,9 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </p>
-          <p class="inp-lis">
+          <p class="up-lis">
             <span>上传店铺logo</span>
+            <croppers />
           </p>
           <p class="inp-lis">
             <input type="text" placeholder="请输入店铺名称" />
@@ -334,6 +335,7 @@
 <script>
 import "@style/mine/dataAndName.scss";
 import Map from "@components/Map.vue";
+import croppers from "@components/croppers.vue";
 export default {
   data() {
     return {
@@ -662,6 +664,7 @@ export default {
   },
   components: {
     Map,
+    croppers,
   },
 };
 </script>
