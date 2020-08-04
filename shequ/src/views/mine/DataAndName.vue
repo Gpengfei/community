@@ -143,7 +143,7 @@
       </div>
       <div class="jbxx">
         <p class="jbxx-title">店铺信息</p>
-        <ul>
+        <ul v-if="dpxxOr">
           <li>
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人姓名</p>
@@ -246,6 +246,10 @@
             </div>
           </li>
         </ul>
+        <div class="jbxx-btn">
+          <span v-if="dpxxOr">修改店铺信息</span>
+          <span v-else @click="wsspxxCli">立即完善商铺信息</span>
+        </div>
       </div>
     </div>
     <!--自定义弹出框-->
@@ -303,9 +307,15 @@ export default {
       // logo
       url1: "img/splogo.png",
       srcList1: ["img/splogo.png"],
+      // 店铺是否完善
+      dpxxOr: false,
     };
   },
   methods: {
+    // 点击完善商铺信息
+    wsspxxCli() {
+      this.dpxxOr = true;
+    },
     // 修改密码
     xgmmCli() {
       this.isTck = true;
