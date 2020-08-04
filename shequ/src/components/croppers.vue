@@ -104,7 +104,6 @@ export default {
           let img = window.URL.createObjectURL(data);
           formData.append("multfile", data, _this.fileName);
           formData.append("operaType", this.uploadType);
-          console.log(formData);
           this.$store
             .dispatch("UPLOAD_HEAD", formData)
             .then((res) => {
