@@ -146,10 +146,72 @@
         <ul>
           <li>
             <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人姓名</p>
+              <p class="jbxx-box-r">
+                <span class="xx">李三</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人联系方式</p>
+              <p class="jbxx-box-r">
+                <span class="xx">182****0000</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">法人身份证号</p>
+              <p class="jbxx-box-r">
+                <span class="xx">150425********0010</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">统一社会编码</p>
+              <p class="jbxx-box-r">
+                <span class="xx">JY113100200000000000</span>
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">营业执照</p>
+              <div class="jbxx-box-r">
+                <div class="demo-image__preview">
+                  <el-image
+                    style="width: 100px; height: 100px"
+                    :src="url"
+                    :preview-src-list="srcList"
+                  ></el-image>
+                </div>
+                <!-- <span class="xx">金万通保洁</span> -->
+                <!-- <span class="xg">修改</span> -->
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
+              <p class="jbxx-box-l">店铺logo</p>
+              <p class="jbxx-box-r">
+                <img class="dplogo" src alt />
+                <!-- <span class="xx">金万通保洁</span> -->
+                <!-- <span class="xg">修改</span> -->
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺名称</p>
               <p class="jbxx-box-r">
                 <span class="xx">金万通保洁</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -158,7 +220,7 @@
               <p class="jbxx-box-l">店铺地址</p>
               <p class="jbxx-box-r">
                 <span class="xx">赛罕区乌兰察布东街与东影南路交汇处南150米</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -169,7 +231,7 @@
                 <span class="qgk">地毯清洗</span>
                 <span class="qgk">开荒保洁</span>
                 <span class="qgk">物业保洁</span>
-                <span class="xg">修改</span>
+                <!-- <span class="xg">修改</span> -->
               </p>
             </div>
           </li>
@@ -233,6 +295,13 @@ export default {
       ymm: "",
       xmm: "",
       yxmm: "",
+      // 营业执照
+      url:
+        "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+      srcList: [
+        "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
+        "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
+      ],
     };
   },
   methods: {
