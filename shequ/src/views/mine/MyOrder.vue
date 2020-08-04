@@ -47,14 +47,14 @@
               <span class="title-time">{{ a_transformTime( parseInt(arr.createtime)) }}</span>
               <span class="title-ddh">订单号:{{ arr.order_sn }}</span>
             </p>
-            <table>
+            <table  v-for="(arrItem,j ) in arr.item" :key="j">
               <tr>
                 <td width="426px" align="center">
                   <div class="tb-box">
                     <div class="tb-img">
-                      <img src="img/ddt.png" alt />
+                      <img :src=" arrItem.goods_image " alt />
                     </div>
-                    <div class="tb-con">安普生邦利鱼油软胶囊成人中老年人辅助降血脂深海鱼肝油2瓶</div>
+                    <div class="tb-con">{{ arrItem.goods_title }}</div>
                     <div class="tb-num">x1</div>
                   </div>
                 </td>
@@ -72,7 +72,7 @@
               </tr>
             </table>
           </li>
-          <li class="dsh">
+          <!--<li class="dsh">
             <p class="dd-title">
               <span class="title-time">2020-06-15 12:02:12</span>
               <span class="title-ddh">订单号:123456789123</span>
@@ -144,7 +144,7 @@
                 </td>
               </tr>
             </table>
-          </li>
+          </li>-->
         </ul>
       </div>
     </div>
