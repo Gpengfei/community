@@ -279,6 +279,55 @@
         </div>
       </div>
     </div>
+    <!-- 店铺信息提交弹出框 -->
+    <div class="dpxxmodel">
+      <div class="dpxxmodel-box">
+        <p class="dpxxmodel-title">店铺信息完善</p>
+        <div class="inp-box">
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人姓名" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人联系方式" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入法人身份证号" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入统一社会编码" />
+          </p>
+          <p class="up-lis">
+            <span>上传营业执照</span>
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </p>
+          <p class="inp-lis">
+            <span>上传店铺logo</span>
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入店铺名称" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请输入店铺详细地址" />
+          </p>
+          <p class="inp-lis">
+            <input type="text" placeholder="请选择店铺服务" />
+          </p>
+        </div>
+        <div class="dpxxbc-btn">
+          <span class="dpxxbc-btn-l">提交店铺信息</span>
+          <span class="dpxxbc-btn-r">取消提交</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -309,6 +358,8 @@ export default {
       srcList1: ["img/splogo.png"],
       // 店铺是否完善
       dpxxOr: false,
+      // 营业执照
+      imageUrl: "",
     };
   },
   methods: {
@@ -573,6 +624,15 @@ export default {
           });
         }
       });
+    },
+    // 上传营业执照
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type;
+      const isLt2M = file.size;
+      return isJPG && isLt2M;
     },
   },
   mounted() {
