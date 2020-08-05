@@ -260,40 +260,39 @@ export default {
       })
       .then((res) => {
         console.log(res);
-        if (res.data.code == 1) {
-          this.userInfo = res.data.data;
-          // 获取社区
-          this.$api.article
-            .getUserClassstreet({
-              code: this.userInfo.AREA_CODE,
-            })
-            .then((res) => {
-              console.log(res);
-              if (res.data.code == 1) {
-                let arrs = this.fl2List;
-                let list = res.data.data;
-                for (let i = 0; i < list.length; i++) {
-                  arrs.push(list[i]);
-                }
-                this.fl2List = arrs;
+
+        this.userInfo = res.data;
+        // 获取社区
+        this.$api.article
+          .getUserClassstreet({
+            code: this.userInfo.AREA_CODE,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              let arrs = this.fl2List;
+              let list = res.data.data;
+              for (let i = 0; i < list.length; i++) {
+                arrs.push(list[i]);
               }
-            });
-          // 获取服务列表
-          this.$api.article
-            .gerCommunityList({
-              token: this.token,
-              AREA_CODE: this.userInfo.AREA_CODE,
-              service_type: this.fl1Index,
-              STREET_CODE: this.ids,
-            })
-            .then((res) => {
-              console.log("服务列表", res);
-              if (res.data.code == 1) {
-                this.fwLists = res.data.data.rows;
-                this.total = res.data.data.total;
-              }
-            });
-        }
+              this.fl2List = arrs;
+            }
+          });
+        // 获取服务列表
+        this.$api.article
+          .gerCommunityList({
+            token: this.token,
+            AREA_CODE: this.userInfo.AREA_CODE,
+            service_type: this.fl1Index,
+            STREET_CODE: this.ids,
+          })
+          .then((res) => {
+            console.log("服务列表", res);
+            if (res.data.code == 1) {
+              this.fwLists = res.data.data.rows;
+              this.total = res.data.data.total;
+            }
+          });
       });
   },
   methods: {
