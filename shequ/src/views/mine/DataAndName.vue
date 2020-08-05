@@ -327,7 +327,14 @@
             <input type="text" placeholder="请输入店铺详细地址" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请选择店铺服务" />
+            <el-select v-model="value1" multiple placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
           </p>
         </div>
         <div class="dpxxbc-btn">
@@ -376,6 +383,30 @@ export default {
       imageUrl: "",
       // 上传logo
       imageUrl1: "",
+      // 选择店铺服务
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎",
+        },
+        {
+          value: "选项4",
+          label: "龙须面",
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭",
+        },
+      ],
+      value1: [],
       // 空值变量
       // 图片剪切
       tpjqOff: false,
