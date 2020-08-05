@@ -240,6 +240,9 @@
             flex: 1;
             font-size: 14px;
           }
+          .el-select {
+            width: 100%;
+          }
         }
         .up-lis {
           width: 100%;
@@ -326,6 +329,14 @@
       cursor: pointer;
     }
   }
+}
+// 选择组件默认样式
+.dataAndName .dpxxmodel .dpxxmodel-box .inp-box .inp-lis input {
+  border: none;
+  padding-left: 0;
+}
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+  color: $color;
 }
 // 组件默认样式
 .el-message-box__wrapper {
