@@ -339,7 +339,7 @@
         </div>
         <div class="dpxxbc-btn">
           <span class="dpxxbc-btn-l" @click="tjdpxxCli">提交店铺信息</span>
-          <span class="dpxxbc-btn-r">取消提交</span>
+          <span class="dpxxbc-btn-r" @click="qxtjdpxxCli">取消提交</span>
         </div>
       </div>
     </div>
@@ -573,6 +573,9 @@ export default {
             });
           }
         });
+    },
+    qxtjdpxxCli() {
+      this.dpxxtjOff = false;
     },
     // 点击完善商铺信息
     wsspxxCli() {
