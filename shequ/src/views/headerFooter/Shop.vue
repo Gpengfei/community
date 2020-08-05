@@ -3,6 +3,13 @@
     <div class="sqBox">
       <div class="shop-box">
         <div class="box-left">
+          <div class="shop-tab">
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+              <el-tab-pane label="二手房" name="first"></el-tab-pane>
+              <el-tab-pane label="二手物品" name="second"></el-tab-pane>
+              <el-tab-pane label="便民服务" name="third"></el-tab-pane>
+            </el-tabs>
+          </div>
           <div class="left-list">
             <ul>
               <li>
@@ -153,12 +160,18 @@ import "@style/headerFooter/shop.scss";
 export default {
   data() {
     return {
-      
-    }
+      activeName: "second",
+    };
   },
   mounted() {
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
+  },
+  methods: {
+    // tab切换
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
   },
 };
 </script>
