@@ -285,16 +285,16 @@
         <p class="dpxxmodel-title">店铺信息完善</p>
         <div class="inp-box">
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人姓名" />
+            <input type="text" placeholder="请输入法人姓名" v-model="frxm" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人联系方式" />
+            <input type="text" placeholder="请输入法人联系方式" v-model="frlxfs" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人身份证号" />
+            <input type="text" placeholder="请输入法人身份证号" v-model="frsfzh" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入统一社会编码" />
+            <input type="text" placeholder="请输入统一社会编码" v-model="tyshbm" />
           </p>
           <p class="up-lis">
             <span class="up-lis-text">上传营业执照</span>
@@ -321,10 +321,10 @@
             <img class="sctp" v-else src="img/sctp.png" alt @click="sclogoCli" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入店铺名称" />
+            <input type="text" placeholder="请输入店铺名称" v-model="dpmc" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入店铺详细地址" />
+            <input type="text" placeholder="请输入店铺详细地址" v-model="dpxxdz" />
           </p>
           <p class="inp-lis">
             <el-select v-model="value1" multiple placeholder="请选择">
@@ -412,6 +412,14 @@ export default {
       tpjqOff: false,
       // 店铺信息提交弹出框
       dpxxtjOff: false,
+      // 店铺提交的信息
+      frxm: "",
+      frlxfs: "",
+      frsfzh: "",
+      tyshbm: "",
+      dpmc: "",
+      dpxxdz: "",
+      is_shopcom: "",
     };
   },
   methods: {
@@ -739,6 +747,29 @@ export default {
         if (res.data.code == 1) {
           this.userInfo = res.data.data;
           this.radio = res.data.data.gender + "";
+        }
+      });
+    // 获取店铺信息
+    this.$api.article
+      .getSelect({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("获取店铺信息", res);
+        this.is_shopcom = res.data.data.is_shopcom;
+        if (res.data.data.is_shopcom == 1) {
+          this.dpxxOr = true;
+          this.frxm = res.data.data.person_name;
+          this.frlxfs = res.data.data.person_phone;
+          this.frsfzh = res.data.data.person_code;
+          this.tyshbm = res.data.data.social_coding;
+          this.imageUrl = res.data.data.businessimage;
+          this.imageUrl1 = res.data.data.logo;
+          this.dpmc = res.data.data.shop_name;
+          this.dpxxdz = res.data.data.address;
+          this.value1 = res.data.data.service_ids;
+        } else {
+          this.dpxxOr = false;
         }
       });
   },
