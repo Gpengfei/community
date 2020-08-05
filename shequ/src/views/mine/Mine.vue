@@ -69,10 +69,9 @@ export default {
           token: this.token,
         })
         .then((res) => {
-          console.log(res);
-          if (res.data.code == 1) {
-            this.avatar = res.data.data;
-          }
+          console.log("我的个人信息", res);
+
+          this.avatar = res.data;
         });
     }
   },
