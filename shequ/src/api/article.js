@@ -77,7 +77,10 @@ const article = {
     // 获取店铺信息
     getSelect(params) {
         return axios.post(`${base.sq}/ShopCom/getSelect`, params);
-    }
+    },
+    getAdd(params) {
+        return axios.post(`${base.sq}/ShopCom/getAdd`, params);
+    },
 }
 
 export default article;
