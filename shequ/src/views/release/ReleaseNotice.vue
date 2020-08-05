@@ -88,8 +88,8 @@ export default {
         token: this.token,
       })
       .then((res) => {
-        console.log(res);
-        let qcode = res.data.data.AREA_CODE;
+        console.log("个人信息", res);
+        let qcode = res.data.AREA_CODE;
         this.$api.article
           .getUserClassstreet({
             code: qcode,
