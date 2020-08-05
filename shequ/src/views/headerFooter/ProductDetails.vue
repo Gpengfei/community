@@ -96,6 +96,149 @@
               </li>
             </ul>
           </div>
+          <div class="yhpj">
+            <p class="fwtp-title">用户评价（68）</p>
+            <ul>
+              <li>
+                <div class="pjlist">
+                  <div class="pjlist-l">
+                    <img src="img/pjtx.png" alt />
+                    <span>用**称233</span>
+                  </div>
+                  <div class="pjlist-r">
+                    <p class="r-top">
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                    </p>
+                    <p
+                      class="r-text"
+                    >家居360°保洁服务：厨房清洁：厨房全面清洁、除污、除油、蒸汽无缝杀菌、橱柜及瓷砖面抑菌处理。卫生间清洁：保养、洁具、瓷砖除污</p>
+                    <div class="r-img">
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                    </div>
+                    <div class="r-dtp">
+                      <img src="img/pjdt.png" alt />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pjlist">
+                  <div class="pjlist-l">
+                    <img src="img/pjtx.png" alt />
+                    <span>用**称233</span>
+                  </div>
+                  <div class="pjlist-r">
+                    <p class="r-top">
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                    </p>
+                    <p
+                      class="r-text"
+                    >家居360°保洁服务：厨房清洁：厨房全面清洁、除污、除油、蒸汽无缝杀菌、橱柜及瓷砖面抑菌处理。卫生间清洁：保养、洁具、瓷砖除污</p>
+                    <div class="r-img">
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pjlist">
+                  <div class="pjlist-l">
+                    <img src="img/pjtx.png" alt />
+                    <span>用**称233</span>
+                  </div>
+                  <div class="pjlist-r">
+                    <p class="r-top">
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                    </p>
+                    <p
+                      class="r-text"
+                    >家居360°保洁服务：厨房清洁：厨房全面清洁、除污、除油、蒸汽无缝杀菌、橱柜及瓷砖面抑菌处理。卫生间清洁：保养、洁具、瓷砖除污</p>
+                    <div class="r-img">
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pjlist">
+                  <div class="pjlist-l">
+                    <img src="img/pjtx.png" alt />
+                    <span>用**称233</span>
+                  </div>
+                  <div class="pjlist-r">
+                    <p class="r-top">
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                    </p>
+                    <p
+                      class="r-text"
+                    >家居360°保洁服务：厨房清洁：厨房全面清洁、除污、除油、蒸汽无缝杀菌、橱柜及瓷砖面抑菌处理。卫生间清洁：保养、洁具、瓷砖除污</p>
+                    <div class="r-img">
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="pjlist">
+                  <div class="pjlist-l">
+                    <img src="img/pjtx.png" alt />
+                    <span>用**称233</span>
+                  </div>
+                  <div class="pjlist-r">
+                    <p class="r-top">
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                      <i class="iconfont">&#xe642;</i>
+                    </p>
+                    <p
+                      class="r-text"
+                    >家居360°保洁服务：厨房清洁：厨房全面清洁、除污、除油、蒸汽无缝杀菌、橱柜及瓷砖面抑菌处理。卫生间清洁：保养、洁具、瓷砖除污</p>
+                    <div class="r-img">
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                      <img src="img/pjxt.png" alt />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="productDetails-box-r">
           <div class="dprk">
@@ -145,7 +288,6 @@
             <img :src="'http://zt.shenyueyun.com/'+item.image" alt />
             <p>{{item.title}}</p>
           </li>
-          
         </ul>
       </div>
       <div class="tj">
@@ -202,8 +344,8 @@ export default {
       },
       nrData: {},
       jwd: [],
-      GuessYouLikeIt:[],
-      dpxx:{}
+      GuessYouLikeIt: [],
+      dpxx: {},
     };
   },
   mounted() {
@@ -231,9 +373,9 @@ export default {
           this.imgUrl = dat.images[0];
           this.nrData = dat;
           // 猜你喜欢
-          this.GuessYouLikeIt=res.data.data.sent_data
+          this.GuessYouLikeIt = res.data.data.sent_data;
           // 店铺
-          this.dpxx=res.data.data.shop
+          this.dpxx = res.data.data.shop;
         }
       });
   },
@@ -258,10 +400,10 @@ export default {
     jrdp(id) {
       this.$router.push({ path: "/shop", query: { id: id } });
     },
-    fwCli(id){
+    fwCli(id) {
       this.$router.push({ path: "/productDetails", query: { id: id } });
       this.$router.go(0);
-    }
+    },
   },
   components: {
     Breadcrumb,
