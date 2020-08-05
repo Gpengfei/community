@@ -280,7 +280,7 @@
       </div>
     </div>
     <!-- 店铺信息提交弹出框 -->
-    <div class="dpxxmodel">
+    <div class="dpxxmodel" v-if="dpxxtjOff">
       <div class="dpxxmodel-box">
         <p class="dpxxmodel-title">店铺信息完善</p>
         <div class="inp-box">
@@ -297,21 +297,28 @@
             <input type="text" placeholder="请输入统一社会编码" />
           </p>
           <p class="up-lis">
-            <span>上传营业执照</span>
+            <span class="up-lis-text">上传营业执照</span>
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
+              action
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
+              :auto-upload="false"
+              :on-change="onChange"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="'http://zt.shenyueyun.com'+imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </p>
           <p class="up-lis">
-            <span>上传店铺logo</span>
-            <croppers />
+            <span class="up-lis-text">上传店铺logo</span>
+            <img
+              class="sctp"
+              v-if="imageUrl1"
+              :src="'http://zt.shenyueyun.com'+imageUrl1"
+              alt
+              @click="sclogoCli"
+            />
+            <img class="sctp" v-else src="img/sctp.png" alt @click="sclogoCli" />
           </p>
           <p class="inp-lis">
             <input type="text" placeholder="请输入店铺名称" />
@@ -328,6 +335,11 @@
           <span class="dpxxbc-btn-r">取消提交</span>
         </div>
       </div>
+    </div>
+    <!-- 图片剪切 -->
+    <div class="smrzTpjq" v-if="tpjqOff">
+      <i class="iconfont" @click="gbjqCli">&#xe62a;</i>
+      <croppers :wbl="5" :hbl="5" @tpscCli="tpscClis" />
     </div>
   </div>
 </template>
@@ -362,12 +374,20 @@ export default {
       dpxxOr: false,
       // 营业执照
       imageUrl: "",
+      // 上传logo
+      imageUrl1: "",
+      // 空值变量
+      // 图片剪切
+      tpjqOff: false,
+      // 店铺信息提交弹出框
+      dpxxtjOff: false,
     };
   },
   methods: {
     // 点击完善商铺信息
     wsspxxCli() {
-      this.dpxxOr = true;
+      // this.dpxxOr = true;
+      this.dpxxtjOff = true;
     },
     // 修改密码
     xgmmCli() {
@@ -628,13 +648,47 @@ export default {
       });
     },
     // 上传营业执照
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    onChange(files) {
+      console.log(files);
+      let that = this;
+      let file = files.raw;
+      let fd = new FormData();
+      fd.append("file", file);
+      fd.append("token", this.token);
+      this.$https({
+        url: "http://zt.shenyueyun.com/api/common/upload",
+        method: "post",
+        data: fd,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 1) {
+          this.$message({
+            type: "success",
+            message: "营业执照上传成功",
+          });
+          this.imageUrl = res.data.data.url;
+        } else {
+          this.$message({
+            type: "warning",
+            message: res.data.msg,
+          });
+        }
+      });
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type;
-      const isLt2M = file.size;
-      return isJPG && isLt2M;
+    // 店铺上传logo
+    sclogoCli() {
+      this.tpjqOff = true;
+    },
+    gbjqCli() {
+      this.tpjqOff = false;
+    },
+    tpscClis(e) {
+      console.log(e);
+      this.imageUrl1 = e;
+      this.tpjqOff = false;
     },
   },
   mounted() {
