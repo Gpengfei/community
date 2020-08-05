@@ -327,7 +327,7 @@
             <input type="text" placeholder="请输入店铺详细地址" v-model="dpxxdz" />
           </p>
           <p class="inp-lis">
-            <el-select v-model="value1" multiple placeholder="请选择">
+            <el-select v-model="value1" multiple placeholder="请选择店铺服务类型">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -338,7 +338,7 @@
           </p>
         </div>
         <div class="dpxxbc-btn">
-          <span class="dpxxbc-btn-l">提交店铺信息</span>
+          <span class="dpxxbc-btn-l" @click="tjdpxxCli">提交店铺信息</span>
           <span class="dpxxbc-btn-r">取消提交</span>
         </div>
       </div>
@@ -423,6 +423,157 @@ export default {
     };
   },
   methods: {
+    // 提交店铺信息
+    tjdpxxCli() {
+      let regName = /^[\u4e00-\u9fa5]{2,8}$/;
+      if (this.frxm == "") {
+        this.$message({
+          message: "请填写法人姓名",
+          type: "warning",
+        });
+        return;
+      }
+      if (!regName.test(this.frxm)) {
+        this.$message({
+          message: "请正确填写法人姓名",
+          type: "warning",
+        });
+        return;
+      }
+      let regPhone = /^1[3456789]\d{9}$/;
+      if (this.frlxfs == "") {
+        this.$message({
+          message: "请填写法人联系方式",
+          type: "warning",
+        });
+        return;
+      }
+      if (!regPhone.test(this.frlxfs)) {
+        this.$message({
+          message: "请正确填写法人联系方式",
+          type: "warning",
+        });
+        return;
+      }
+      let regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (this.frsfzh == "") {
+        this.$message({
+          message: "请填写法人身份证号",
+          type: "warning",
+        });
+        return;
+      }
+      if (!regIdNo.test(this.frsfzh)) {
+        this.$message({
+          message: "请正确填写法人身份证号",
+          type: "warning",
+        });
+        return;
+      }
+      let regTyshbm = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
+      if (this.tyshbm == "") {
+        this.$message({
+          message: "请填写统一社会编码",
+          type: "warning",
+        });
+        return;
+      }
+      // if (!regTyshbm.test(this.tyshbm)) {
+      //   this.$message({
+      //     message: "请正确填写统一社会编码",
+      //     type: "warning",
+      //   });
+      //   return;
+      // }
+      if (this.imageUrl == "") {
+        this.$message({
+          message: "请上传营业执照",
+          type: "warning",
+        });
+        return;
+      }
+      if (this.imageUrl1 == "") {
+        this.$message({
+          message: "请上传店铺logo",
+          type: "warning",
+        });
+        return;
+      }
+      if (this.dpmc == "") {
+        this.$message({
+          message: "请填写店铺名称",
+          type: "warning",
+        });
+        return;
+      }
+      if (this.dpxxdz == "") {
+        this.$message({
+          message: "请填写店铺名详细地址",
+          type: "warning",
+        });
+        return;
+      }
+      if (this.value1.length == 0) {
+        this.$message({
+          message: "请选择店铺服务类型",
+          type: "warning",
+        });
+        return;
+      }
+      let val = this.value1;
+      let valStr = val.join(",");
+      this.$api.article
+        .getAdd({
+          token: this.token,
+          is_shopcom: this.is_shopcom,
+          person_name: this.frxm,
+          person_phone: this.frlxfs,
+          person_code: this.frsfzh,
+          social_coding: this.tyshbm,
+          businessimage: this.imageUrl,
+          logo: this.imageUrl1,
+          shop_name: this.dpmc,
+          address: this.dpxxdz,
+          service_ids: valStr,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              message: "店铺信息提交成功",
+              type: "success",
+            });
+            // 获取店铺信息
+            this.$api.article
+              .getSelect({
+                token: this.token,
+              })
+              .then((res) => {
+                console.log("获取店铺信息", res);
+                this.is_shopcom = res.data.data.is_shopcom;
+                if (res.data.data.is_shopcom == 1) {
+                  this.dpxxOr = true;
+                  this.frxm = res.data.data.person_name;
+                  this.frlxfs = res.data.data.person_phone;
+                  this.frsfzh = res.data.data.person_code;
+                  this.tyshbm = res.data.data.social_coding;
+                  this.imageUrl = res.data.data.businessimage;
+                  this.imageUrl1 = res.data.data.logo;
+                  this.dpmc = res.data.data.shop_name;
+                  this.dpxxdz = res.data.data.address;
+                  this.value1 = res.data.data.service_ids;
+                } else {
+                  this.dpxxOr = false;
+                }
+              });
+          } else {
+            this.$message({
+              message: res.data.msg,
+              type: "warning",
+            });
+          }
+        });
+    },
     // 点击完善商铺信息
     wsspxxCli() {
       // this.dpxxOr = true;
@@ -771,6 +922,24 @@ export default {
         } else {
           this.dpxxOr = false;
         }
+      });
+    // 获取服务类型接口
+    this.$api.article
+      .gerServiceList({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("获取服务类型接口", res);
+        let lis = res.data.data;
+        let arr = [];
+        for (let i = 0; i < lis.length; i++) {
+          let obj = {
+            value: lis[i].id,
+            label: lis[i].name,
+          };
+          arr.push(obj);
+        }
+        this.options = arr;
       });
   },
   computed: {
