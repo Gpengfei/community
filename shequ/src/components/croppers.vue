@@ -26,14 +26,16 @@
             :img="option.img"
             :outputSize="option.size"
             :outputType="option.outputType"
-            :info="option.info"
+            :info="true"
             :full="option.full"
             :canMove="option.canMove"
             :canMoveBox="option.canMoveBox"
             :original="option.original"
             :autoCrop="option.autoCrop"
-            :autoCropWidth="option.autoCropWidth"
-            :autoCropHeight="option.autoCropHeight"
+            :fixed="option.fixed"
+            :fixedNumber="option.fixedNumber"
+            :centerBox="option.centerBox"
+            :infoTrue="option.infoTrue"
             :fixedBox="option.fixedBox"
             @realTime="realTime"
             @imgLoad="imgLoad"
@@ -53,8 +55,13 @@
 <script>
 export default {
   name: "cropper",
+  props: {
+    wbl: Number,
+    hbl: Number,
+  },
   data() {
     return {
+      token: null,
       //剪切图片上传
       crap: false,
       previews: {},
@@ -64,13 +71,15 @@ export default {
         outputSize: 1, // 剪切后的图片质量（0.1-1）
         full: true, // 输出原图比例截图 props名full
         outputType: "png", // 裁剪生成额图片的格式
+        //fixedBox: true, // 固定截图框大小 不允许改变
         canMove: true, // 能否拖动图片
         original: false, // 上传图片是否显示原始宽高
         canMoveBox: true, // 能否拖动截图框
         autoCrop: true, // 是否默认生成截图框
-        autoCropWidth: 150,
-        autoCropHeight: 150,
-        fixedBox: false, // 截图框固定大小
+        fixed: true, // 是否开启截图框宽高固定比例
+        fixedNumber: [this.wbl, this.hbl], // 截图框的宽高比例
+        // autoCropWidth: 150,
+        // autoCropHeight: 150,
       },
       fileName: "", // 本机文件地址
       downImg: "#",
@@ -78,7 +87,7 @@ export default {
       uploadImgRelaPath: "", // 上传后的图片的地址（不带服务器域名）
     };
   },
-  props: ["uploadType"],
+
   methods: {
     // 放大/缩小
     changeScale(num) {
@@ -95,6 +104,7 @@ export default {
     },
     // 上传图片（点击上传按钮）
     finish(type) {
+      console.log(this.token);
       console.log("finish", type);
       let _this = this;
       let formData = new FormData();
@@ -102,22 +112,30 @@ export default {
       if (type === "blob") {
         this.$refs.cropper.getCropBlob((data) => {
           let img = window.URL.createObjectURL(data);
-          formData.append("multfile", data, _this.fileName);
-          formData.append("operaType", this.uploadType);
-          this.$store
-            .dispatch("UPLOAD_HEAD", formData)
-            .then((res) => {
-              let data = res.data.data;
-              this.$emit("upload", data);
-              this.$message.success("上传成功！");
-            })
-            .catch((err) => {
-              if (err.data) {
-                this.$message.error(err.data.msg);
-              } else {
-                this.$message.error("上传失败！");
-              }
-            });
+          formData.append("file", data, _this.fileName);
+          formData.append("token", this.token);
+          this.$https({
+            url: "http://zt.shenyueyun.com/api/common/upload",
+            method: "post",
+            data: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }).then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                type: "success",
+                message: "图片上传成功",
+              });
+              this.$emit("tpscCli", res.data.data.url);
+            } else {
+              this.$message({
+                type: "warning",
+                message: res.data.msg,
+              });
+            }
+          });
         });
       } else {
         this.$refs.cropper.getCropData((data) => {
@@ -187,6 +205,11 @@ export default {
       console.log(msg);
     },
   },
+  mounted() {
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
+  },
 };
 </script>
 
@@ -201,7 +224,7 @@ export default {
       padding: 4px 12px;
       text-align: center;
       border-radius: 4px;
-      background-color: #387ef6;
+      background-color: $color;
       color: #fff;
       cursor: pointer;
       display: inline-block;
@@ -222,6 +245,7 @@ export default {
     }
   }
   .info-item {
+    padding-top: 5%;
     .operation-box {
       display: inline-block;
       .cropper {
@@ -235,7 +259,7 @@ export default {
       .preview {
         width: 150px;
         height: 150px;
-        border-radius: 50%;
+        // border-radius: 50%;
         border: 1px solid #ccc;
         background-color: #ccc;
         margin: 5px;
