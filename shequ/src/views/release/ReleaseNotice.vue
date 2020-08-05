@@ -142,6 +142,15 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              message: "通知发不成功！",
+              type: "success",
+            });
+            this.titles = "";
+            this.msg = "";
+            this.value = "";
+          }
         });
     },
     // 鼠标单击的事件
