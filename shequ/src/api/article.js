@@ -73,6 +73,10 @@ const article = {
     // 发布消息通知
     getValidateAdd(params) {
         return axios.post(`${base.sq}/Notice/getValidateAdd`, params);
+    },
+    // 获取店铺信息
+    getSelect(params) {
+        return axios.post(`${base.sq}/ShopCom/getSelect`, params);
     }
 }
 
