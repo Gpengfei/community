@@ -119,20 +119,22 @@
             }
             .lxsjbtn {
               width: 326px;
-              height: 62px;
-              margin-left: 30px;
+              height: 40px;
+              margin-left: 40px;
               text-align: center;
               color: #fff;
               background-color: $color;
-              line-height: 62px;
+              line-height: 40px;
               border-radius: 5px;
+              margin-bottom: 10px;
+              cursor: pointer;
               .iconfont {
                 font-size: 20px;
                 vertical-align: middle;
                 margin-right: 5px;
               }
               span {
-                font-size: 20px;
+                font-size: 16px;
                 vertical-align: middle;
               }
             }
