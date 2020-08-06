@@ -78,9 +78,14 @@ const article = {
     getSelect(params) {
         return axios.post(`${base.sq}/ShopCom/getSelect`, params);
     },
+    // 提交店铺信息
     getAdd(params) {
         return axios.post(`${base.sq}/ShopCom/getAdd`, params);
     },
+    // 发布服务
+    gerSetviceAdd(params) {
+        return axios.post(`${base.sq}/Community/gerSetviceAdd`, params);
+    }
 }
 
 export default article;
