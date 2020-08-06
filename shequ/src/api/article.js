@@ -85,7 +85,11 @@ const article = {
     // 发布服务
     gerSetviceAdd(params) {
         return axios.post(`${base.sq}/Community/gerSetviceAdd`, params);
-    }
+    },
+    // 申请服务
+    sub_com(params) {
+        return axios.post(`${base.sq}/v1/com_service/sub_com`, params);
+    },
 }
 
 export default article;
