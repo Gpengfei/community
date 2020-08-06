@@ -15,6 +15,11 @@ import "@assets/css/reset.scss";
 import storage from 'good-storage';
 import "@assets/css/fonts.scss";
 import asdFun from "./common/asd_publicMethod";
+Vue.prototype.$api = api;
+Vue.use(vueAwesomeSwiper)
+Vue.prototype.$moment = moment
+import enc from '@/utils/encrypt'
+Vue.prototype.$enc = enc
 import {
   Alert,
   Aside,
@@ -95,9 +100,7 @@ import {
   Upload,
 } from "element-ui";
 
-Vue.prototype.$api = api;
-Vue.use(vueAwesomeSwiper)
-Vue.prototype.$moment = moment
+
 
 Vue.use(Pagination);
 Vue.use(Dialog);
