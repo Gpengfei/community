@@ -25,7 +25,7 @@
           <span class="text">标题</span>
           <input type="text" placeholder="请输入标题" class="inp" v-model="fwbt" />
         </div>
-        <div class="fwjbxx-lis">
+        <!-- <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">服务区域</span>
           <el-cascader
@@ -35,11 +35,23 @@
             v-model="selectedOptions"
             @change="handleChange"
           ></el-cascader>
-        </div>
-        <div class="fwjbxx-lis" v-if="options.length!=0">
+        </div>-->
+        <div class="fwjbxx-lis">
           <span class="bt">*</span>
-          <span class="text">服务社区</span>
-          <el-select v-model="value1" multiple placeholder="请选择服务社区">
+          <span class="text">所属社区</span>
+          <el-select v-model="value3" placeholder="请选择所属社区">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </div>
+        <div class="fwjbxx-lis">
+          <span class="bt">*</span>
+          <span class="text">服务区域</span>
+          <el-select v-model="value1" multiple placeholder="请选择服务区域">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -156,6 +168,7 @@ import croppers from "@components/croppers.vue";
 export default {
   data() {
     return {
+      token: null,
       // 多图下标
       dtxb: "",
       // 切图控制变量
@@ -182,7 +195,7 @@ export default {
       // 类型
       radio: "1",
       fwbt: "",
-      selectedOptions: [],
+      value3: "",
       value1: [],
       value2: "",
       jg: "",
@@ -194,7 +207,36 @@ export default {
     };
   },
   mounted() {
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
     this.$store.dispatch("setNavFb", 2);
+    // 获取个人信息
+    this.$api.article
+      .user({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("用户基本信息", res);
+        let code = res.data.AREA_CODE;
+        this.$api.article
+          .getUserClassstreet({
+            code: code,
+          })
+          .then((res) => {
+            console.log("获取社区", res);
+            let lis = res.data.data;
+            let arr = [];
+            for (let i = 0; i < lis.length; i++) {
+              let obj = {
+                value: lis[i].STREET_CODE,
+                label: lis[i].STREET_NAME,
+              };
+              arr.push(obj);
+            }
+            this.options = arr;
+          });
+      });
   },
   methods: {
     // 图片上传
@@ -223,27 +265,7 @@ export default {
       this.dtxb = index;
       this.tpjqOff = true;
     },
-    // 省市区
-    handleChange() {
-      console.log(this.selectedOptions);
-      this.$api.article
-        .getUserClassstreet({
-          code: this.selectedOptions[2],
-        })
-        .then((res) => {
-          console.log("获取社区", res);
-          let lis = res.data.data;
-          let arr = [];
-          for (let i = 0; i < lis.length; i++) {
-            let obj = {
-              value: lis[i].STREET_CODE,
-              label: lis[i].STREET_NAME,
-            };
-            arr.push(obj);
-          }
-          this.options = arr;
-        });
-    },
+    // 提交发不信息
     fbfwCli() {
       if (this.radio == "") {
         this.$message({
@@ -259,16 +281,16 @@ export default {
         });
         return;
       }
-      if (this.selectedOptions.length == 0) {
+      if (this.value3 == "") {
         this.$message({
-          message: "请选择服务区域",
+          message: "请选择所属社区",
           type: "warning",
         });
         return;
       }
       if (this.value1.length == 0) {
         this.$message({
-          message: "请选择服务社区",
+          message: "请选择服务区域",
           type: "warning",
         });
         return;
@@ -341,6 +363,27 @@ export default {
         });
         return;
       }
+      // 提交之前数据处理
+      let fwsqStr = this.value1.join(",");
+      let imgsStr = this.imgsArr.join(",");
+      this.$api.article
+        .gerSetviceAdd({
+          token: this.token,
+          service_type: this.radio,
+          title: this.fwbt,
+          contact_area: fwsqStr,
+          STREET_CODE: this.value3,
+          price_type: this.value2,
+          price: this.jg,
+          content: this.fwtsms,
+          images: imgsStr,
+          address: this.xxdz,
+          contact_name: this.lxxm,
+          contact_phone: this.lxfs,
+        })
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
   components: {
