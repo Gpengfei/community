@@ -148,7 +148,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人姓名</p>
               <p class="jbxx-box-r">
-                <span class="xx">李三</span>
+                <span class="xx">{{dpxxDat.person_names}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -157,7 +157,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人联系方式</p>
               <p class="jbxx-box-r">
-                <span class="xx">182****0000</span>
+                <span class="xx">{{dpxxDat.person_phones}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -166,7 +166,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人身份证号</p>
               <p class="jbxx-box-r">
-                <span class="xx">150425********0010</span>
+                <span class="xx">{{dpxxDat.person_codes}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -175,7 +175,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">统一社会编码</p>
               <p class="jbxx-box-r">
-                <span class="xx">JY113100200000000000</span>
+                <span class="xx">{{dpxxDat.social_coding}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -212,7 +212,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺名称</p>
               <p class="jbxx-box-r">
-                <span class="xx">金万通保洁</span>
+                <span class="xx">{{dpxxDat.shop_name}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -221,7 +221,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺地址</p>
               <p class="jbxx-box-r">
-                <span class="xx">赛罕区乌兰察布东街与东影南路交汇处南150米</span>
+                <span class="xx">{{dpxxDat.address}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -230,9 +230,12 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">服务类型</p>
               <p class="jbxx-box-r">
-                <span class="qgk">地毯清洗</span>
-                <span class="qgk">开荒保洁</span>
-                <span class="qgk">物业保洁</span>
+                <span
+                  class="qgk"
+                  v-for="(item,index) in dpxxDat.service_idss"
+                  :key="index"
+                >{{item.label}}</span>
+
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -379,6 +382,8 @@ export default {
       srcList1: ["img/splogo.png"],
       // 店铺是否完善
       dpxxOr: false,
+      // 店铺信息
+      dpxxDat: {},
       // 营业执照
       imageUrl: "",
       // 上传logo
@@ -903,29 +908,7 @@ export default {
           this.radio = res.data.data.gender + "";
         }
       });
-    // 获取店铺信息
-    this.$api.article
-      .getSelect({
-        token: this.token,
-      })
-      .then((res) => {
-        console.log("获取店铺信息", res);
-        this.is_shopcom = res.data.data.is_shopcom;
-        if (res.data.data.is_shopcom == 1) {
-          this.dpxxOr = true;
-          this.frxm = res.data.data.person_name;
-          this.frlxfs = res.data.data.person_phone;
-          this.frsfzh = res.data.data.person_code;
-          this.tyshbm = res.data.data.social_coding;
-          this.imageUrl = res.data.data.businessimage;
-          this.imageUrl1 = res.data.data.logo;
-          this.dpmc = res.data.data.shop_name;
-          this.dpxxdz = res.data.data.address;
-          this.value1 = res.data.data.service_ids;
-        } else {
-          this.dpxxOr = false;
-        }
-      });
+
     // 获取服务类型接口
     this.$api.article
       .gerServiceList({
@@ -943,6 +926,46 @@ export default {
           arr.push(obj);
         }
         this.options = arr;
+        // 获取店铺信息
+        this.$api.article
+          .getSelect({
+            token: this.token,
+          })
+          .then((res) => {
+            console.log("获取店铺信息", res);
+            let xx = res.data.data;
+            this.is_shopcom = res.data.data.is_shopcom;
+            if (res.data.data.is_shopcom == 1) {
+              this.dpxxOr = true;
+              this.frxm = res.data.data.person_name;
+              this.frlxfs = res.data.data.person_phone;
+              this.frsfzh = res.data.data.person_code;
+              this.tyshbm = res.data.data.social_coding;
+              this.imageUrl = res.data.data.businessimage;
+              this.imageUrl1 = res.data.data.logo;
+              this.dpmc = res.data.data.shop_name;
+              this.dpxxdz = res.data.data.address;
+              this.value1 = res.data.data.service_ids.split(",");
+              xx.person_names = this.$enc.plusXing(xx.person_name, 1, 0);
+              xx.person_phones = this.$enc.plusXing(xx.person_phone, 3, 4);
+              xx.person_codes = this.$enc.plusXing(xx.person_code, 6, 4);
+              xx.service_ids = xx.service_ids.split(",");
+              let arrs = [];
+              for (let j = 0; j < xx.service_ids.length; j++) {
+                for (let s = 0; s < this.options.length; s++) {
+                  if (xx.service_ids[j] == this.options[s].value) {
+                    arrs.push(this.options[s]);
+                    break;
+                  }
+                }
+              }
+              xx.service_idss = arrs;
+              this.dpxxDat = xx;
+              console.log(xx);
+            } else {
+              this.dpxxOr = false;
+            }
+          });
       });
   },
   computed: {
