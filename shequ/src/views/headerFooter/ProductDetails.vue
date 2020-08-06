@@ -53,11 +53,11 @@
                   <p class="jbxx-l">商家地址：</p>
                   <p class="jbxx-r">{{nrData.address}}</p>
                 </div>
-                <p class="lxsjbtn">
+                <p class="lxsjbtn" @click="lxsj(nrData.contact_name,nrData.contact_phone)">
                   <i class="iconfont">&#xe645;</i>
                   <span>联系商家</span>
                 </p>
-                <p class="lxsjbtn">
+                <p class="lxsjbtn" @click="sqfw(nrData.id)">
                   <i class="iconfont">&#xe60b;</i>
                   <span>申请服务</span>
                 </p>
@@ -407,6 +407,31 @@ export default {
     fwCli(id) {
       this.$router.push({ path: "/productDetails", query: { id: id } });
       this.$router.go(0);
+    },
+    // 联系商家
+    lxsj(p, n) {
+      console.log(p, n);
+      this.$alert("联系方式：" + n, "联系人：" + p, {
+        confirmButtonText: "确定",
+        callback: (action) => {
+          this.$message({
+            type: "info",
+            message: "尽快联系商家哦！",
+          });
+        },
+      });
+    },
+    // 申请服务
+    sqfw(id) {
+      console.log(id);
+      this.$api.article
+        .sub_com({
+          token: this.token,
+          community_id: id,
+        })
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
   components: {
