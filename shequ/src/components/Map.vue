@@ -29,6 +29,14 @@ export default {
     console.log(this.longitude, this.latitude);
     this.init(this.longitude, this.latitude);
   },
+  watch: {
+    longitude(val) {
+      this.init(this.longitude, this.latitude);
+    },
+    latitude(val) {
+      this.init(this.longitude, this.latitude);
+    },
+  },
 };
 </script>
 
