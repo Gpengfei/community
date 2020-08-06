@@ -244,7 +244,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">地图标点</p>
               <div class="jbxx-box-rs">
-                <Map />
+                <Map :longitude="dpxxDat.longitude" :latitude="dpxxDat.latitude" />
               </div>
             </div>
           </li>
