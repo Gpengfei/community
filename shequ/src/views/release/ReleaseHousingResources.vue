@@ -615,7 +615,7 @@ export default {
             rent: this.je,
             cash_pledge: this.value2,
             decorate: this.radio1,
-            config: this.checkedCities.join(","),
+            config: "1,2", //this.checkedCities.join(",")
             require: this.checkList.join(","),
             content: this.fyms,
             images: this.imgsLis.join(","),
