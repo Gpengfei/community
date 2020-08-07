@@ -100,6 +100,14 @@ export default [
             component: () => import("@views/shop/ShopDetial.vue"),
           },
           {
+            path: "/shop/index/EvaluateDetial",
+            name: "EvaluateDetial",
+            meta: {
+              title: "输入评价",
+            },
+            component: () => import("@views/shop/EvaluateDetial.vue"),
+          },
+          {
             path: "/shop/index/evaluate",
             name: "Evaluate",
             meta: {

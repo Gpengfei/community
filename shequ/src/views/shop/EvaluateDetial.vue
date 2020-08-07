@@ -1,8 +1,11 @@
 <template>
-<div class="EvaluateDetial"> </div>
+<div class="EvaluateDetial">
+  <evaluateRow />
+</div>
 </template>
 
 <script>
+import evaluateRow from "@components/shop/evaluateRow"
 export default {
 name: "EvaluateDetial",
   data() {
@@ -78,10 +81,15 @@ name: "EvaluateDetial",
   /**
    * 包含 Vue 实例可用组件的哈希表。
    * */
-  components: {},
+  components: {
+    evaluateRow
+  },
 }
 </script>
 
 <style scoped lang="scss">
-.EvaluateDetial{}
+.EvaluateDetial{
+  max-width: 1220px;
+  margin: auto;
+}
 </style>
