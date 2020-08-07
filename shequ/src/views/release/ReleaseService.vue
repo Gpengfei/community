@@ -383,6 +383,13 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              message: "发布服务成功！",
+              type: "success",
+            });
+            this.$router.push("/myService");
+          }
         });
     },
   },

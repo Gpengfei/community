@@ -90,6 +90,10 @@ const article = {
     sub_com(params) {
         return axios.post(`${base.sq}/v1/com_service/sub_com`, params);
     },
+    // 获取服务评价列表
+    my_com_service(params) {
+        return axios.post(`${base.sq}/v1/com_service/my_com_service`, params);
+    }
 }
 
 export default article;
