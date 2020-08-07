@@ -101,6 +101,10 @@ const article = {
     // 提交评价接口
     sub_comment(params) {
         return axios.post(`${base.sq}/v1/com_service/sub_comment`, params);
+    },
+    // 发布房源接口
+    gerHousingAdd(params) {
+        return axios.post(`${base.sq}/Housing/gerHousingAdd`, params);
     }
 }
 
