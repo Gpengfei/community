@@ -22,41 +22,41 @@
                 <div class="r-xx">
                   <p class="text">商品评分</p>
                   <p class="xx-box">
-                    <i class="iconfont sty">&#xe642;</i>
-                    <i class="iconfont">&#xe642;</i>
-                    <i class="iconfont">&#xe642;</i>
-                    <i class="iconfont">&#xe642;</i>
-                    <i class="iconfont">&#xe642;</i>
+                    <template v-for="(item,index) in 5">
+                      <i
+                        class="iconfont"
+                        :class="{'sty':index<=xxInd}"
+                        :key="index"
+                        @click="xxCli(index)"
+                      >&#xe642;</i>
+                    </template>
                   </p>
                 </div>
                 <div class="r-inp">
                   <p class="text">评价晒单</p>
-                  <textarea name placeholder="分享新的体验，给千万想买的人一个参考~"></textarea>
+                  <textarea name placeholder="分享新的体验，给千万想买的人一个参考~" v-model="pjnr"></textarea>
                 </div>
                 <div class="tjtp">
-                  <template v-if="imgsLis.length!=0"></template>
-                  <img src alt />
+                  <template v-if="imgsLis.length!=0">
+                    <img
+                      :src="'http://zt.shenyueyun.com'+item"
+                      alt
+                      v-for="(item,index) in imgsLis"
+                      :key="index"
+                      @click="qtClis(index)"
+                    />
+                  </template>
+
                   <p class="sctp" @click="qtCli">
                     <i class="iconfont">&#xe61e;</i>
                   </p>
-                  <!-- <el-upload
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    list-type="picture-card"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove"
-                  >
-                    <i class="el-icon-plus"></i>
-                  </el-upload>
-                  <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt />
-                  </el-dialog>-->
                 </div>
               </div>
             </div>
             <div class="tj-box">
-              <router-link to="/serviceEvaluationCompleted">
-                <span class="btn">提交评价</span>
-              </router-link>
+              <!-- <router-link to="/serviceEvaluationCompleted"> -->
+              <span class="btn" @click="tjpjCli">提交评价</span>
+              <!-- </router-link> -->
               <el-checkbox v-model="checked">匿名提交</el-checkbox>
             </div>
           </li>
@@ -84,6 +84,9 @@ export default {
       // 切图控制变量
       tpjqOff: false,
       imgsLis: [],
+      xxInd: 0,
+      pjnr: "",
+      imgInd: "",
     };
   },
   mounted() {
@@ -120,9 +123,76 @@ export default {
     },
     tpscClis(e) {
       console.log(e);
+      if (this.imgInd === "") {
+        let arr = this.imgsLis;
+        arr.push(e);
+        this.imgsLis = arr;
+        this.tpjqOff = false;
+      } else {
+        let arrs = this.imgsLis;
+        arrs[this.imgInd] = e;
+        this.imgsLis = arrs;
+        this.tpjqOff = false;
+        this.imgInd = "";
+      }
     },
     qtCli() {
       this.tpjqOff = true;
+    },
+    // 点击图片更换
+    qtClis(index) {
+      this.tpjqOff = true;
+      this.imgInd = index;
+    },
+    // 点击星星
+    xxCli(index) {
+      this.xxInd = index;
+    },
+    // 提交评价信息
+    tjpjCli() {
+      let pjx = this.xxInd + 1;
+      let pjnr = this.pjnr;
+      let imgStr = this.imgsLis.join(",");
+      let sfnm;
+      if (this.checked) {
+        sfnm = 1;
+      } else {
+        sfnm = 0;
+      }
+      if (this.pjnr == "") {
+        this.$message({
+          message: "评价内容不能为空！",
+          type: "warning",
+        });
+        return;
+      }
+      this.$api.article
+        .sub_comment({
+          token: this.token,
+          apply_id: this.id,
+          star: pjx,
+          attachment: imgStr,
+          comment_text: pjnr,
+          is_anonymous: sfnm,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              message: "评价成功！",
+              type: "success",
+            });
+            this.$router.push({
+              path: "/serviceEvaluationCompleted",
+              query: { id: this.id },
+            });
+          } else {
+            this.$message({
+              message: res.data.msg,
+              type: "warning",
+            });
+          }
+        });
     },
   },
   components: {
