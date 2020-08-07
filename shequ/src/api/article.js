@@ -93,6 +93,10 @@ const article = {
     // 获取服务评价列表
     my_com_service(params) {
         return axios.post(`${base.sq}/v1/com_service/my_com_service`, params);
+    },
+    // 获取用户订单
+    my_service(params) {
+        return axios.post(`${base.sq}/v1/com_service/my_service`, params);
     }
 }
 
