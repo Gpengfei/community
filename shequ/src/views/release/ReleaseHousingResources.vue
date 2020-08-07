@@ -10,9 +10,9 @@
       <div class="fwxzlx-box">
         <span class="bt">*</span>
         <span class="text">房产</span>
-        <el-radio v-model="radio" label="1">整租房</el-radio>
-        <el-radio v-model="radio" label="2">合租房</el-radio>
-        <el-radio v-model="radio" label="3">出售</el-radio>
+        <el-radio v-model="radio" label="0">整租房</el-radio>
+        <el-radio v-model="radio" label="1">合租房</el-radio>
+        <el-radio v-model="radio" label="2">出售</el-radio>
       </div>
     </div>
     <!--房屋基本信息-->
@@ -24,6 +24,18 @@
           <span class="bt">*</span>
           <span class="text">小区名称</span>
           <input type="text" placeholder="填写小区名称" class="inp" v-model="xqmc" />
+        </div>
+        <div class="fwjbxx-lis">
+          <span class="bt">*</span>
+          <span class="text">所属区域</span>
+          <el-select style="width:420px" v-model="value4" placeholder="请选择卧室">
+            <el-option
+              v-for="item in options4"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
@@ -57,10 +69,10 @@
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
-          <span class="text" v-if="radio==1">整租</span>
-          <span class="text" v-if="radio==2">出租卧室</span>
-          <span class="text" v-if="radio==3">出售</span>
-          <el-select v-model="value" v-if="radio==2" placeholder="请选择卧室">
+          <span class="text" v-if="radio==0">整租</span>
+          <span class="text" v-if="radio==1">出租卧室</span>
+          <span class="text" v-if="radio==2">出售</span>
+          <el-select v-model="value" v-if="radio==1" placeholder="请选择卧室">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -108,11 +120,11 @@
           <span class="text">出租卧室</span>
           <div class="lis-inp">
             <input type="text" v-model="je" />
-            <span v-if="radio==3">元/平米</span>
+            <span v-if="radio==2">元/平米</span>
             <span v-else>元/每月</span>
           </div>
 
-          <el-select v-model="value3" v-if="radio==3" placeholder="选择租付款方式">
+          <el-select v-model="value3" v-if="radio==2" placeholder="选择租付款方式">
             <el-option
               v-for="item in options3"
               :key="item.value"
@@ -198,7 +210,22 @@
           <div class="sctp">
             <p
               class="sctp-ts"
-            >请上传清晰、实拍的室内图片，请不要在图片上添加文字、数字、网址等内容，请勿上传名片、二维码、自拍照、风景照等与房源无关的图片，最多上传12张，每张最大10M</p>148
+            >请上传清晰、实拍的室内图片，请不要在图片上添加文字、数字、网址等内容，请勿上传名片、二维码、自拍照、风景照等与房源无关的图片，最多上传12张，每张最大10M</p>
+            <div class="img-box">
+              <template v-if="imgsLis.length!=0">
+                <img
+                  :src="'http://zt.shenyueyun.com'+item"
+                  alt
+                  v-for="(item,index) in imgsLis"
+                  :key="index"
+                  @click="ggtp(index)"
+                />
+              </template>
+
+              <p class="tpsc" @click="tpsc" v-if="imgsLis.length<12">
+                <i class="iconfont">&#xe61e;</i>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -207,6 +234,11 @@
     <div class="fwjbxx" style="border-bottom: none;">
       <p class="titleFw">联系信息</p>
       <div class="fwjbxx-box">
+        <div class="fwjbxx-lis">
+          <span class="bt">*</span>
+          <span class="text">详细地址</span>
+          <input type="text" placeholder="填写详细地址" class="inp" v-model="xxdz" />
+        </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">联系姓名</span>
@@ -221,18 +253,27 @@
     </div>
     <!--提交按钮-->
     <div class="tjan">
-      <p class="tjbtn">提交</p>
+      <p class="tjbtn" @click="tjfwxxCli">提交</p>
+    </div>
+    <!-- 图片剪切 -->
+    <div class="smrzTpjq" v-if="tpjqOff">
+      <i class="iconfont" @click="gbjqCli">&#xe62a;</i>
+      <croppers :wbl="95" :hbl="71" @tpscCli="tpscClis" />
     </div>
   </div>
 </template>
 
 <script>
 import "@style/release/releaseHousingResources.scss";
+import croppers from "@components/croppers.vue";
 export default {
   data() {
     return {
+      token: null,
+      // 切图控制变量
+      tpjqOff: false,
       // 房屋类型
-      radio: "1",
+      radio: "0",
       //   选择卧室
       options: [
         {
@@ -301,6 +342,18 @@ export default {
         },
       ],
       value3: "",
+      // 所属街道
+      options4: [
+        {
+          value: "全款",
+          label: "全款",
+        },
+        {
+          value: "贷款",
+          label: "贷款",
+        },
+      ],
+      value4: "",
       // 选择装修
       radio1: "0",
       // 房屋配置
@@ -330,6 +383,8 @@ export default {
       // 上传图片
       dialogImageUrl: "",
       dialogVisible: false,
+      // 图片下标
+      tpxb: "",
       // 提交的信息
       xqmc: "",
       s: "",
@@ -338,16 +393,48 @@ export default {
       djc: "",
       gjc: "",
       pmdx: "",
+      imgsLis: [],
       je: "",
       fyms: "",
+      xxdz: "",
       xm: "",
       lxfs: "",
     };
   },
   mounted() {
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
     this.$store.dispatch("setNavFb", 0);
+    // 获取个人信息
+    this.$api.article
+      .user({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("用户基本信息", res);
+        let code = res.data.AREA_CODE;
+        this.$api.article
+          .getUserClassstreet({
+            code: code,
+          })
+          .then((res) => {
+            console.log("获取社区", res);
+            let lis = res.data.data;
+            let arr = [];
+            for (let i = 0; i < lis.length; i++) {
+              let obj = {
+                value: lis[i].STREET_CODE,
+                label: lis[i].STREET_NAME,
+              };
+              arr.push(obj);
+            }
+            this.options4 = arr;
+          });
+      });
   },
   methods: {
+    // 选择房屋配套
     handleCheckAllChange(val) {
       this.checkedCities = val ? this.cities : [];
       this.isIndeterminate = false;
@@ -359,13 +446,191 @@ export default {
         checkedCount > 0 && checkedCount < this.cities.length;
     },
     // 上传图片
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    gbjqCli() {
+      this.tpjqOff = false;
     },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+    tpsc() {
+      this.tpjqOff = true;
     },
+    tpscClis(e) {
+      console.log(e);
+      if (this.tpxb === "") {
+        let arr = this.imgsLis;
+        arr.push(e);
+        this.imgsLis = arr;
+      } else {
+        let arrs = this.imgsLis;
+        arrs[this.tpxb] = e;
+        this.imgsLis = arrs;
+        this.tpxb = "";
+      }
+      this.tpjqOff = false;
+    },
+    ggtp(index) {
+      this.tpjqOff = true;
+      this.tpxb = index;
+    },
+    // 提交
+    tjfwxxCli() {
+      if (this.radio == 0) {
+        if (this.xqmc == "") {
+          this.$message({
+            message: "请填写小区名称",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value4 == "") {
+          this.$message({
+            message: "请选择所属区域",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.s == "") {
+          this.$message({
+            message: "请填写卧室数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.t == "") {
+          this.$message({
+            message: "请填写客厅餐厅数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.w == "") {
+          this.$message({
+            message: "请填写卫生间数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.djc == "") {
+          this.$message({
+            message: "请填写楼层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.gjc == "") {
+          this.$message({
+            message: "请填写一共多少层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value1 == "") {
+          this.$message({
+            message: "请选择朝向",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.pmdx == "") {
+          this.$message({
+            message: "请填写房屋平米",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.je == "") {
+          this.$message({
+            message: "请填写租金",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value2 == "") {
+          this.$message({
+            message: "请选择交租方式",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkedCities.length == 0) {
+          this.$message({
+            message: "请选择房屋配置",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkList.length == 0) {
+          this.$message({
+            message: "请选择出租要求",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.fyms == "") {
+          this.$message({
+            message: "请选填写房源描述",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.imgsLis.length == 0) {
+          this.$message({
+            message: "请上传房源图片",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xxdz == "") {
+          this.$message({
+            message: "请填写详细地址",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xm == "") {
+          this.$message({
+            message: "请填写姓名",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.lxfs == "") {
+          this.$message({
+            message: "请填写联系方式",
+            type: "warning",
+          });
+          return;
+        }
+        this.$api.article
+          .gerHousingAdd({
+            token: this.token,
+            housing_type: this.radio,
+            com_name: this.xqmc,
+            STREET_CODE: this.value4,
+            room: this.s,
+            hall: this.t,
+            toilet: this.w,
+            floor: this.djc,
+            floor_sum: this.gjc,
+            direction: this.value1,
+            area: this.pmdx,
+            rent: this.je,
+            cash_pledge: this.value2,
+            decorate: this.radio1,
+            config: this.checkedCities.join(","),
+            require: this.checkList.join(","),
+            content: this.fyms,
+            images: this.imgsLis.join(","),
+            address: this.xxdz,
+            home_name: this.xm,
+            home_phone: this.lxfs,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    },
+  },
+  components: {
+    croppers,
   },
 };
 </script>
