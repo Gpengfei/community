@@ -64,9 +64,9 @@
                   </td>
 
                   <td width="152px" align="center">
-                    <router-link to="/serviceEvaluation1">
-                      <p class="pj">评价</p>
-                    </router-link>
+                    <!-- <router-link to="/serviceEvaluation1"> -->
+                    <p class="pj" @click="pjCli(item.id)">评价</p>
+                    <!-- </router-link> -->
                   </td>
                 </tr>
               </table>
@@ -173,6 +173,11 @@ export default {
     // tab
     tabCli(index) {
       this.tabInde = index;
+    },
+    // 评价
+    pjCli(id) {
+      console.log(id);
+      this.$router.push({ path: "/serviceEvaluation1", query: { id: id } });
     },
   },
 };
