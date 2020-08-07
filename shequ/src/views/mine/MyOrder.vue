@@ -66,40 +66,44 @@
                     <p>订单详情</p>
                   </div>
                 </td>
-                <td width="200px" align="center">
+                <td width="200px" style="padding: 15px;" align="center">
                   <ul class="ul">
+                    <li v-for="(btn, btnl) in arr.btns" :key="btnl" class="li">
+                      <el-button type="danger" class="cu-btn btn1" v-if="btn === 'pay'">
+                        立即支付
+                      </el-button>
+                      <el-button  v-if="btn === 'cancel'" class="cu-btn obtn1">取消订单</el-button>
+                      <el-button class="cu-btn btn1"  v-if="btn === 'after_detail'">售后详情</el-button>
+                    </li>
                     <li v-for="(btn, btnl) in arrItem.btns" :key="btnl" class="li">
-                      <button
+                      <el-button
                           class="cu-btn btn1"
                           v-if="btn === 'buy_again'"
                       >
                         再次购买
-                      </button>
-                      <button class="cu-btn btn1"  v-if="btn === 'express'" >
+                      </el-button>
+                      <el-button class="cu-btn btn1" type="primary"  v-if="btn === 'express'" >
                         查看物流
-                      </button>
-                      <button  class="cu-btn btn1"  v-if="btn === 'get'">
+                      </el-button>
+                      <el-button  class="cu-btn btn1" type="primary"  v-if="btn === 'get'">
                         确认收货
-                      </button>
-                      <button class="cu-btn btn1"  v-if="btn === 'aftersale'">
+                      </el-button>
+                      <!--<el-button class="cu-btn btn1"  v-if="btn === 'aftersale'">
                         申请售后
-                      </button>
-                      <button v-if="btn === 'reapply_refund'" class="cu-btn btn1" >
+                      </el-button>-->
+                      <el-button v-if="btn === 'reapply_refund'" class="cu-btn btn1" >
                         重新退款
-                      </button>
-                      <button class="cu-btn btn1"  v-if="btn === 'apply_refund'">
+                      </el-button>
+                      <el-button class="cu-btn btn1"  v-if="btn === 'apply_refund'">
                         申请退款
-                      </button>
-                      <button class="cu-btn btn1"  v-if="btn === 'comment'">
+                      </el-button>
+                      <el-button class="cu-btn btn1" type="primary"  v-if="btn === 'comment'">
                         待评价
-                      </button>
-                      <button class="czan"  v-if="btn === 'pay'">
-                        立即支付
-                      </button>
-                      <button class="cu-btn btn1"  v-if="btn === 'after_detail'">售后详情</button>
+                      </el-button>
+                      <el-button class="cu-btn btn1"  v-if="btn === 'after_detail'">售后详情</el-button>
                     </li>
                   </ul>
-                  <p class="czan"></p>
+<!--                  <p class="czan">123</p>-->
                 </td>
               </tr>
             </table>
@@ -283,7 +287,6 @@ export default {
         justify-content: space-between;
         .li{
           margin: 0 0 0 0;
-
         }
       }
     }
