@@ -55,19 +55,51 @@
                       <img :src=" arrItem.goods_image " alt />
                     </div>
                     <div class="tb-con">{{ arrItem.goods_title }}</div>
-                    <div class="tb-num">x1</div>
+                    <div class="tb-num">x{{ arrItem.goods_num }}</div>
                   </div>
                 </td>
                 <td width="111px" align="center">李三三</td>
-                <td width="111px" align="center">￥1500</td>
+                <td width="111px" align="center">￥ {{arrItem.goods_price}}</td>
                 <td width="140px" align="center">
                   <div class="zt-box">
-                    <p>等待商家付款</p>
+                    <p>{{ arrItem.status_name }}</p>
                     <p>订单详情</p>
                   </div>
                 </td>
-                <td width="152px" align="center">
-                  <p class="czan">立即付款</p>
+                <td width="200px" align="center">
+                  <ul class="ul">
+                    <li v-for="(btn, btnl) in arrItem.btns" :key="btnl" class="li">
+                      <button
+                          class="cu-btn btn1"
+                          v-if="btn === 'buy_again'"
+                      >
+                        再次购买
+                      </button>
+                      <button class="cu-btn btn1"  v-if="btn === 'express'" >
+                        查看物流
+                      </button>
+                      <button  class="cu-btn btn1"  v-if="btn === 'get'">
+                        确认收货
+                      </button>
+                      <button class="cu-btn btn1"  v-if="btn === 'aftersale'">
+                        申请售后
+                      </button>
+                      <button v-if="btn === 'reapply_refund'" class="cu-btn btn1" >
+                        重新退款
+                      </button>
+                      <button class="cu-btn btn1"  v-if="btn === 'apply_refund'">
+                        申请退款
+                      </button>
+                      <button class="cu-btn btn1"  v-if="btn === 'comment'">
+                        待评价
+                      </button>
+                      <button class="czan"  v-if="btn === 'pay'">
+                        立即支付
+                      </button>
+                      <button class="cu-btn btn1"  v-if="btn === 'after_detail'">售后详情</button>
+                    </li>
+                  </ul>
+                  <p class="czan"></p>
                 </td>
               </tr>
             </table>
@@ -241,4 +273,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.myOrder{
+  .myOrder-box {
+    .myOrder-lis {
+      .ul{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .li{
+          margin: 0 0 0 0;
+
+        }
+      }
+    }
+  }
+
+}
+
 </style>
