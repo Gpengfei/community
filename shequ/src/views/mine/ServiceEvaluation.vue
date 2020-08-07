@@ -21,10 +21,10 @@
       <div class="myOrder-lis">
         <ul>
           <template v-if="tabInde==1">
-            <li class="ywc">
+            <li class="ywc" v-for="(item,index) in dwcDatLis" :key="index">
               <p class="dd-title">
                 <span class="title-time">商家名称：金万通保洁</span>
-                <span class="title-ddh">2019-06-27 15:30</span>
+                <span class="title-ddh">{{item.apply_time}}</span>
               </p>
               <table>
                 <tr>
@@ -33,7 +33,7 @@
                       <div class="tb-img">
                         <img src="img/fwjl.png" alt />
                       </div>
-                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
+                      <div class="tb-con">{{item.community.title}}</div>
                     </div>
                   </td>
 
@@ -47,10 +47,10 @@
             </li>
           </template>
           <template v-if="tabInde==2">
-            <li class="ywc">
+            <li class="ywc" v-for="(item,index) in dpjDatLis" :key="index">
               <p class="dd-title">
                 <span class="title-time">商家名称：金万通保洁</span>
-                <span class="title-ddh">2019-06-27 15:30</span>
+                <span class="title-ddh">{{item.apply_time}}</span>
               </p>
               <table>
                 <tr>
@@ -59,7 +59,7 @@
                       <div class="tb-img">
                         <img src="img/fwjl.png" alt />
                       </div>
-                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
+                      <div class="tb-con">{{item.community.title}}</div>
                     </div>
                   </td>
 
@@ -73,10 +73,10 @@
             </li>
           </template>
           <template v-if="tabInde==3">
-            <li class="ywc">
+            <li class="ywc" v-for="(item,index) in ypjDatLis" :key="index">
               <p class="dd-title">
                 <span class="title-time">商家名称：金万通保洁</span>
-                <span class="title-ddh">2019-06-27 15:30</span>
+                <span class="title-ddh">{{item.apply_time}}</span>
               </p>
               <table>
                 <tr>
@@ -85,7 +85,7 @@
                       <div class="tb-img">
                         <img src="img/fwjl.png" alt />
                       </div>
-                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
+                      <div class="tb-con">{{item.community.title}}</div>
                     </div>
                   </td>
 
@@ -101,7 +101,7 @@
         </ul>
       </div>
     </div>
-    <div class="fy">
+    <!-- <div class="fy">
       <div class="fy-box">
         <el-pagination
           background
@@ -111,7 +111,7 @@
           next-text="下一页"
         ></el-pagination>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -148,6 +148,10 @@ export default {
           let arr2 = [];
           let arr3 = [];
           for (let i = 0; i < lis.length; i++) {
+            console.log(lis[i].apply_time);
+            lis[i].apply_time = this.$moment(lis[i].apply_time).format(
+              "YYYY-MM-DD hh:mm"
+            );
             console.log(lis[i].star);
             if (lis[i].status == 1) {
               arr1.push(lis[i]);
