@@ -116,6 +116,8 @@
               width: 100%;
               box-sizing: border-box;
               padding-left: 100px;
+              display: flex;
+              flex-wrap: wrap;
               img {
                 height: 60px;
                 margin-right: 10px;
@@ -160,6 +162,7 @@
             padding: 10px 30px;
             border-radius: 10px;
             margin-right: 20px;
+            cursor: pointer;
           }
           .el-checkbox__input.is-checked + .el-checkbox__label {
             color: $color;
