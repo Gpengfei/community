@@ -109,10 +109,9 @@ export default {
           token: this.token,
         })
         .then((res) => {
-          console.log(res);
-          if (res.data.code == 1) {
-            this.avatar = res.data.data.avatar;
-          }
+          console.log("头部数据", res);
+          this.avatar = res.data.avatar;
+          console.log(this.avatar);
         });
     }
   },

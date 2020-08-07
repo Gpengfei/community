@@ -402,7 +402,7 @@ export default {
         { name: "康复理疗", id: 8 },
       ],
       nav2Ind: 0,
-      fl1Name:''
+      fl1Name: "",
     };
   },
   mounted() {
@@ -437,31 +437,29 @@ export default {
       })
       .then((res) => {
         console.log(res);
-        if (res.data.code == 1) {
-          this.userInfo = res.data.data;
-          // 获取服务列表
-          this.$api.article
-            .gerCommunityList({
-              token: this.token,
-              AREA_CODE: this.userInfo.AREA_CODE,
-              service_type: this.nav1Inds,
-              limit: 12,
-            })
-            .then((res) => {
-              console.log("服务列表", res);
-              if (res.data.code == 1) {
-                this.fwLists = res.data.data.rows;
-              }
-            });
-        }
+        this.userInfo = res.data;
+        // 获取服务列表
+        this.$api.article
+          .gerCommunityList({
+            token: this.token,
+            AREA_CODE: this.userInfo.AREA_CODE,
+            service_type: this.nav1Inds,
+            limit: 12,
+          })
+          .then((res) => {
+            console.log("服务列表", res);
+            if (res.data.code == 1) {
+              this.fwLists = res.data.data.rows;
+            }
+          });
       });
   },
   methods: {
     // 优质服务
-    yzfwCli(ins, id,name) {
+    yzfwCli(ins, id, name) {
       this.nav1Ind = ins;
       this.nav1Inds = id;
-      this.fl1Name=name
+      this.fl1Name = name;
       console.log(id);
       if (id != 4) {
         // 获取服务列表
@@ -498,7 +496,7 @@ export default {
       console.log(id);
       this.nav2Ind = index;
     },
-     // 进入商品详情
+    // 进入商品详情
     lisClis(index) {
       console.log(index);
       if (this.fl1Name == "房屋租赁") {

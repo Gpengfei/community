@@ -148,7 +148,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人姓名</p>
               <p class="jbxx-box-r">
-                <span class="xx">李三</span>
+                <span class="xx">{{dpxxDat.person_names}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -157,7 +157,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人联系方式</p>
               <p class="jbxx-box-r">
-                <span class="xx">182****0000</span>
+                <span class="xx">{{dpxxDat.person_phones}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -166,7 +166,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">法人身份证号</p>
               <p class="jbxx-box-r">
-                <span class="xx">150425********0010</span>
+                <span class="xx">{{dpxxDat.person_codes}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -175,7 +175,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">统一社会编码</p>
               <p class="jbxx-box-r">
-                <span class="xx">JY113100200000000000</span>
+                <span class="xx">{{dpxxDat.social_coding}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -212,7 +212,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺名称</p>
               <p class="jbxx-box-r">
-                <span class="xx">金万通保洁</span>
+                <span class="xx">{{dpxxDat.shop_name}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -221,7 +221,7 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">店铺地址</p>
               <p class="jbxx-box-r">
-                <span class="xx">赛罕区乌兰察布东街与东影南路交汇处南150米</span>
+                <span class="xx">{{dpxxDat.address}}</span>
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -230,9 +230,12 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">服务类型</p>
               <p class="jbxx-box-r">
-                <span class="qgk">地毯清洗</span>
-                <span class="qgk">开荒保洁</span>
-                <span class="qgk">物业保洁</span>
+                <span
+                  class="qgk"
+                  v-for="(item,index) in dpxxDat.service_idss"
+                  :key="index"
+                >{{item.label}}</span>
+
                 <!-- <span class="xg">修改</span> -->
               </p>
             </div>
@@ -241,13 +244,13 @@
             <div class="jbxx-lis-box">
               <p class="jbxx-box-l">地图标点</p>
               <div class="jbxx-box-rs">
-                <Map />
+                <Map :longitude="dpxxDat.longitude" :latitude="dpxxDat.latitude" />
               </div>
             </div>
           </li>
         </ul>
         <div class="jbxx-btn">
-          <span v-if="dpxxOr">修改店铺信息</span>
+          <span v-if="dpxxOr" @click="wsspxxCli">修改店铺信息</span>
           <span v-else @click="wsspxxCli">立即完善商铺信息</span>
         </div>
       </div>
@@ -280,53 +283,73 @@
       </div>
     </div>
     <!-- 店铺信息提交弹出框 -->
-    <div class="dpxxmodel">
+    <div class="dpxxmodel" v-if="dpxxtjOff">
       <div class="dpxxmodel-box">
         <p class="dpxxmodel-title">店铺信息完善</p>
         <div class="inp-box">
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人姓名" />
+            <input type="text" placeholder="请输入法人姓名" v-model="frxm" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人联系方式" />
+            <input type="text" placeholder="请输入法人联系方式" v-model="frlxfs" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入法人身份证号" />
+            <input type="text" placeholder="请输入法人身份证号" v-model="frsfzh" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入统一社会编码" />
+            <input type="text" placeholder="请输入统一社会编码" v-model="tyshbm" />
           </p>
           <p class="up-lis">
-            <span>上传营业执照</span>
+            <span class="up-lis-text">上传营业执照</span>
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
+              action
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
+              :auto-upload="false"
+              :on-change="onChange"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <img v-if="imageUrl" :src="'http://zt.shenyueyun.com'+imageUrl" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </p>
-          <p class="inp-lis">
-            <span>上传店铺logo</span>
+          <p class="up-lis">
+            <span class="up-lis-text">上传店铺logo</span>
+            <img
+              class="sctp"
+              v-if="imageUrl1"
+              :src="'http://zt.shenyueyun.com'+imageUrl1"
+              alt
+              @click="sclogoCli"
+            />
+            <img class="sctp" v-else src="img/sctp.png" alt @click="sclogoCli" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入店铺名称" />
+            <input type="text" placeholder="请输入店铺名称" v-model="dpmc" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请输入店铺详细地址" />
+            <input type="text" placeholder="请输入店铺详细地址" v-model="dpxxdz" />
           </p>
           <p class="inp-lis">
-            <input type="text" placeholder="请选择店铺服务" />
+            <el-select v-model="value1" multiple placeholder="请选择店铺服务类型">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
           </p>
         </div>
         <div class="dpxxbc-btn">
-          <span class="dpxxbc-btn-l">提交店铺信息</span>
-          <span class="dpxxbc-btn-r">取消提交</span>
+          <span class="dpxxbc-btn-l" @click="tjdpxxCli">提交店铺信息</span>
+          <span class="dpxxbc-btn-r" @click="qxtjdpxxCli">取消提交</span>
         </div>
       </div>
+    </div>
+    <!-- 图片剪切 -->
+    <div class="smrzTpjq" v-if="tpjqOff">
+      <i class="iconfont" @click="gbjqCli">&#xe62a;</i>
+      <croppers :wbl="5" :hbl="5" @tpscCli="tpscClis" />
     </div>
   </div>
 </template>
@@ -334,6 +357,7 @@
 <script>
 import "@style/mine/dataAndName.scss";
 import Map from "@components/Map.vue";
+import croppers from "@components/croppers.vue";
 export default {
   data() {
     return {
@@ -358,14 +382,380 @@ export default {
       srcList1: ["img/splogo.png"],
       // 店铺是否完善
       dpxxOr: false,
+      // 店铺信息
+      dpxxDat: {},
       // 营业执照
       imageUrl: "",
+      // 上传logo
+      imageUrl1: "",
+      // 选择店铺服务
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎",
+        },
+        {
+          value: "选项4",
+          label: "龙须面",
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭",
+        },
+      ],
+      value1: [],
+      // 空值变量
+      // 图片剪切
+      tpjqOff: false,
+      // 店铺信息提交弹出框
+      dpxxtjOff: false,
+      // 店铺提交的信息
+      frxm: "",
+      frlxfs: "",
+      frsfzh: "",
+      tyshbm: "",
+      dpmc: "",
+      dpxxdz: "",
+      is_shopcom: "",
     };
   },
   methods: {
+    // 提交店铺信息
+    tjdpxxCli() {
+      if (!this.dpxxOr) {
+        let regName = /^[\u4e00-\u9fa5]{2,8}$/;
+        if (this.frxm == "") {
+          this.$message({
+            message: "请填写法人姓名",
+            type: "warning",
+          });
+          return;
+        }
+        if (!regName.test(this.frxm)) {
+          this.$message({
+            message: "请正确填写法人姓名",
+            type: "warning",
+          });
+          return;
+        }
+        let regPhone = /^1[3456789]\d{9}$/;
+        if (this.frlxfs == "") {
+          this.$message({
+            message: "请填写法人联系方式",
+            type: "warning",
+          });
+          return;
+        }
+        if (!regPhone.test(this.frlxfs)) {
+          this.$message({
+            message: "请正确填写法人联系方式",
+            type: "warning",
+          });
+          return;
+        }
+        let regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (this.frsfzh == "") {
+          this.$message({
+            message: "请填写法人身份证号",
+            type: "warning",
+          });
+          return;
+        }
+        if (!regIdNo.test(this.frsfzh)) {
+          this.$message({
+            message: "请正确填写法人身份证号",
+            type: "warning",
+          });
+          return;
+        }
+        let regTyshbm = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
+        if (this.tyshbm == "") {
+          this.$message({
+            message: "请填写统一社会编码",
+            type: "warning",
+          });
+          return;
+        }
+        // if (!regTyshbm.test(this.tyshbm)) {
+        //   this.$message({
+        //     message: "请正确填写统一社会编码",
+        //     type: "warning",
+        //   });
+        //   return;
+        // }
+        if (this.imageUrl == "") {
+          this.$message({
+            message: "请上传营业执照",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.imageUrl1 == "") {
+          this.$message({
+            message: "请上传店铺logo",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.dpmc == "") {
+          this.$message({
+            message: "请填写店铺名称",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.dpxxdz == "") {
+          this.$message({
+            message: "请填写店铺名详细地址",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value1.length == 0) {
+          this.$message({
+            message: "请选择店铺服务类型",
+            type: "warning",
+          });
+          return;
+        }
+        let val = this.value1;
+        console.log(val);
+        let valStr = val.join(",");
+        this.$api.article
+          .getAdd({
+            token: this.token,
+            is_shopcom: this.is_shopcom,
+            person_name: this.frxm,
+            person_phone: this.frlxfs,
+            person_code: this.frsfzh,
+            social_coding: this.tyshbm,
+            businessimage: this.imageUrl,
+            logo: this.imageUrl1,
+            shop_name: this.dpmc,
+            address: this.dpxxdz,
+            service_ids: valStr,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "店铺信息提交成功",
+                type: "success",
+              });
+              this.dpxxtjOff = false;
+              // 获取店铺信息
+              this.$api.article
+                .getSelect({
+                  token: this.token,
+                })
+                .then((res) => {
+                  console.log("获取店铺信息", res);
+                  let xx = res.data.data;
+                  this.is_shopcom = res.data.data.is_shopcom;
+                  if (res.data.data.is_shopcom == 1) {
+                    this.dpxxOr = true;
+                    this.frxm = res.data.data.person_name;
+                    this.frlxfs = res.data.data.person_phone;
+                    this.frsfzh = res.data.data.person_code;
+                    this.tyshbm = res.data.data.social_coding;
+                    this.imageUrl = res.data.data.businessimage;
+                    this.imageUrl1 = res.data.data.logo;
+                    this.dpmc = res.data.data.shop_name;
+                    this.dpxxdz = res.data.data.address;
+                    // this.value1 = res.data.data.service_ids.split(",");
+                    xx.person_names = this.$enc.plusXing(xx.person_name, 1, 0);
+                    xx.person_phones = this.$enc.plusXing(
+                      xx.person_phone,
+                      3,
+                      4
+                    );
+                    xx.person_codes = this.$enc.plusXing(xx.person_code, 6, 4);
+                    xx.service_ids = xx.service_ids.split(",");
+                    console.log(this.value1);
+                    let arrs = [];
+                    for (let j = 0; j < xx.service_ids.length; j++) {
+                      // console.log(xx.service_ids[j]);
+                      xx.service_ids[j] = parseInt(xx.service_ids[j]);
+                      for (let s = 0; s < this.options.length; s++) {
+                        if (xx.service_ids[j] == this.options[s].value) {
+                          arrs.push(this.options[s]);
+                          break;
+                        }
+                      }
+                    }
+                    this.value1 = xx.service_ids;
+                    xx.service_idss = arrs;
+                    this.dpxxDat = xx;
+                    this.url = "http://zt.shenyueyun.com" + xx.businessimage;
+                    this.url1 = "http://zt.shenyueyun.com" + xx.logo;
+                    (this.srcList = [
+                      "http://zt.shenyueyun.com" + xx.businessimage,
+                    ]),
+                      (this.srcList1 = ["http://zt.shenyueyun.com" + xx.logo]),
+                      console.log(xx);
+                  } else {
+                    this.dpxxOr = false;
+                  }
+                });
+            } else {
+              this.$message({
+                message: res.data.msg,
+                type: "warning",
+              });
+            }
+          });
+      } else {
+        if (this.frxm != "") {
+          let regName = /^[\u4e00-\u9fa5]{2,8}$/;
+          if (!regName.test(this.frxm)) {
+            this.$message({
+              message: "请正确填写法人姓名",
+              type: "warning",
+            });
+            return;
+          }
+        }
+        if (this.frlxfs != "") {
+          let regPhone = /^1[3456789]\d{9}$/;
+          if (!regPhone.test(this.frlxfs)) {
+            this.$message({
+              message: "请正确填写法人联系方式",
+              type: "warning",
+            });
+            return;
+          }
+        }
+        if (this.frsfzh != "") {
+          let regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+          if (!regIdNo.test(this.frsfzh)) {
+            this.$message({
+              message: "请正确填写法人身份证号",
+              type: "warning",
+            });
+            return;
+          }
+        }
+        if (this.tyshbm != "") {
+          let regTyshbm = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
+          // if (!regTyshbm.test(this.tyshbm)) {
+          //   this.$message({
+          //     message: "请正确填写统一社会编码",
+          //     type: "warning",
+          //   });
+          //   return;
+          // }
+        }
+
+        if (this.value1.length == 0) {
+          this.$message({
+            message: "请选择店铺服务类型",
+            type: "warning",
+          });
+          return;
+        }
+        let val = this.value1;
+        console.log(val);
+        let valStr = val.join(",");
+        this.$api.article
+          .getAdd({
+            token: this.token,
+            is_shopcom: this.is_shopcom,
+            person_name: this.frxm,
+            person_phone: this.frlxfs,
+            person_code: this.frsfzh,
+            social_coding: this.tyshbm,
+            businessimage: this.imageUrl,
+            logo: this.imageUrl1,
+            shop_name: this.dpmc,
+            address: this.dpxxdz,
+            service_ids: valStr,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "店铺信息提交成功",
+                type: "success",
+              });
+              this.dpxxtjOff = false;
+              // 获取店铺信息
+              this.$api.article
+                .getSelect({
+                  token: this.token,
+                })
+                .then((res) => {
+                  console.log("获取店铺信息", res);
+                  let xx = res.data.data;
+                  this.is_shopcom = res.data.data.is_shopcom;
+                  if (res.data.data.is_shopcom == 1) {
+                    this.dpxxOr = true;
+                    this.frxm = res.data.data.person_name;
+                    this.frlxfs = res.data.data.person_phone;
+                    this.frsfzh = res.data.data.person_code;
+                    this.tyshbm = res.data.data.social_coding;
+                    this.imageUrl = res.data.data.businessimage;
+                    this.imageUrl1 = res.data.data.logo;
+                    this.dpmc = res.data.data.shop_name;
+                    this.dpxxdz = res.data.data.address;
+                    // this.value1 = res.data.data.service_ids.split(",");
+                    xx.person_names = this.$enc.plusXing(xx.person_name, 1, 0);
+                    xx.person_phones = this.$enc.plusXing(
+                      xx.person_phone,
+                      3,
+                      4
+                    );
+                    xx.person_codes = this.$enc.plusXing(xx.person_code, 6, 4);
+                    xx.service_ids = xx.service_ids.split(",");
+                    console.log(this.value1);
+                    let arrs = [];
+                    for (let j = 0; j < xx.service_ids.length; j++) {
+                      // console.log(xx.service_ids[j]);
+                      xx.service_ids[j] = parseInt(xx.service_ids[j]);
+                      for (let s = 0; s < this.options.length; s++) {
+                        if (xx.service_ids[j] == this.options[s].value) {
+                          arrs.push(this.options[s]);
+                          break;
+                        }
+                      }
+                    }
+                    this.value1 = xx.service_ids;
+                    xx.service_idss = arrs;
+                    this.dpxxDat = xx;
+                    this.url = "http://zt.shenyueyun.com" + xx.businessimage;
+                    this.url1 = "http://zt.shenyueyun.com" + xx.logo;
+                    (this.srcList = [
+                      "http://zt.shenyueyun.com" + xx.businessimage,
+                    ]),
+                      (this.srcList1 = ["http://zt.shenyueyun.com" + xx.logo]),
+                      console.log(xx);
+                  } else {
+                    this.dpxxOr = false;
+                  }
+                });
+            } else {
+              this.$message({
+                message: res.data.msg,
+                type: "warning",
+              });
+            }
+          });
+      }
+    },
+    qxtjdpxxCli() {
+      this.dpxxtjOff = false;
+    },
     // 点击完善商铺信息
     wsspxxCli() {
-      this.dpxxOr = true;
+      // this.dpxxOr = true;
+      this.dpxxtjOff = true;
     },
     // 修改密码
     xgmmCli() {
@@ -626,13 +1016,47 @@ export default {
       });
     },
     // 上传营业执照
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    onChange(files) {
+      console.log(files);
+      let that = this;
+      let file = files.raw;
+      let fd = new FormData();
+      fd.append("file", file);
+      fd.append("token", this.token);
+      this.$https({
+        url: "http://zt.shenyueyun.com/api/common/upload",
+        method: "post",
+        data: fd,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res.data.code == 1) {
+          this.$message({
+            type: "success",
+            message: "营业执照上传成功",
+          });
+          this.imageUrl = res.data.data.url;
+        } else {
+          this.$message({
+            type: "warning",
+            message: res.data.msg,
+          });
+        }
+      });
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type;
-      const isLt2M = file.size;
-      return isJPG && isLt2M;
+    // 店铺上传logo
+    sclogoCli() {
+      this.tpjqOff = true;
+    },
+    gbjqCli() {
+      this.tpjqOff = false;
+    },
+    tpscClis(e) {
+      console.log(e);
+      this.imageUrl1 = e;
+      this.tpjqOff = false;
     },
   },
   mounted() {
@@ -654,6 +1078,73 @@ export default {
           this.radio = res.data.data.gender + "";
         }
       });
+
+    // 获取服务类型接口
+    this.$api.article
+      .gerServiceList({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("获取服务类型接口", res);
+        let lis = res.data.data;
+        let arr = [];
+        for (let i = 0; i < lis.length; i++) {
+          let obj = {
+            value: lis[i].id,
+            label: lis[i].name,
+          };
+          arr.push(obj);
+        }
+        this.options = arr;
+        // 获取店铺信息
+        this.$api.article
+          .getSelect({
+            token: this.token,
+          })
+          .then((res) => {
+            console.log("获取店铺信息", res);
+            let xx = res.data.data;
+            this.is_shopcom = res.data.data.is_shopcom;
+            if (res.data.data.is_shopcom == 1) {
+              this.dpxxOr = true;
+              this.frxm = res.data.data.person_name;
+              this.frlxfs = res.data.data.person_phone;
+              this.frsfzh = res.data.data.person_code;
+              this.tyshbm = res.data.data.social_coding;
+              this.imageUrl = res.data.data.businessimage;
+              this.imageUrl1 = res.data.data.logo;
+              this.dpmc = res.data.data.shop_name;
+              this.dpxxdz = res.data.data.address;
+              // this.value1 = res.data.data.service_ids.split(",");
+              xx.person_names = this.$enc.plusXing(xx.person_name, 1, 0);
+              xx.person_phones = this.$enc.plusXing(xx.person_phone, 3, 4);
+              xx.person_codes = this.$enc.plusXing(xx.person_code, 6, 4);
+              xx.service_ids = xx.service_ids.split(",");
+              console.log(this.value1);
+              let arrs = [];
+              for (let j = 0; j < xx.service_ids.length; j++) {
+                // console.log(xx.service_ids[j]);
+                xx.service_ids[j] = parseInt(xx.service_ids[j]);
+                for (let s = 0; s < this.options.length; s++) {
+                  if (xx.service_ids[j] == this.options[s].value) {
+                    arrs.push(this.options[s]);
+                    break;
+                  }
+                }
+              }
+              this.value1 = xx.service_ids;
+              xx.service_idss = arrs;
+              this.dpxxDat = xx;
+              this.url = "http://zt.shenyueyun.com" + xx.businessimage;
+              this.url1 = "http://zt.shenyueyun.com" + xx.logo;
+              (this.srcList = ["http://zt.shenyueyun.com" + xx.businessimage]),
+                (this.srcList1 = ["http://zt.shenyueyun.com" + xx.logo]),
+                console.log(xx);
+            } else {
+              this.dpxxOr = false;
+            }
+          });
+      });
   },
   computed: {
     ssnav() {
@@ -662,6 +1153,7 @@ export default {
   },
   components: {
     Map,
+    croppers,
   },
 };
 </script>

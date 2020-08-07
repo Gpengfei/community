@@ -3,90 +3,93 @@ import axios from '@/utils/http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
 let httpFFs = process.env.NODE_ENV === 'production' ? 'http://zt.shenyueyun.com/' : 'http://zt.shenyueyun.com/';
 const article = {
-    // 新闻列表
-    // articleList () {
-    //     return axios.get(`${base.sq}/topics`);
-    // },
-    // 新闻详情,演示
-    // articleDetail (id, params) {
-    //     return axios.get(`${base.sq}/topic/${id}`, {
-    //         params: params
-    //     });
-    // },
-    // post提交
-    // 注册页面
-    // 获取用户类型
-    getUserClassification (params) {
+    getUserClassification(params) {
         return axios.post(`${base.sq}/Userclass/getUserClassification`, params);
     },
     // 获取社区
-    getUserClassstreet(params){
+    getUserClassstreet(params) {
         return axios.post(`${base.sq}/Userclass/getUserClassstreet`, params);
     },
     // 注册接口
-    register(params){
+    register(params) {
         return axios.post(`${base.sq}/User/register`, params);
     },
     // 登录接口
-    login(params){
-        return axios.post(`${base.sq}/User/login`,params);
+    login(params) {
+        return axios.post(`${base.sq}/User/login`, params);
     },
-     // 获取用户信息
-     user(params){
+    // 获取用户信息
+    user(params) {
         return axios.post(`${base.sq}/User/user`, params);
     },
     // 获取消息列表
-    getNoticeList(params){
+    getNoticeList(params) {
         return axios.post(`${base.sq}/Notice/getNoticeList`, params);
     },
     // 获取用户我的基本信息
-    getUserInfo(params){
+    getUserInfo(params) {
         return axios.post(`${base.sq}/User/getUserInfo`, params);
     },
     // 修改用户名称
-    xgyhm(params){
+    xgyhm(params) {
         return axios.post(`${base.sq}/User/getUsernameEdit`, params);
     },
     // 修改手机号  
-    getMobileEdit(params){
+    getMobileEdit(params) {
         return axios.post(`${base.sq}/User/getMobileEdit`, params);
     },
     // 修改性别
-    getGenderEdit(params){
+    getGenderEdit(params) {
         return axios.post(`${base.sq}/User/getGenderEdit`, params);
     },
     // 修改头像
-    getAvatarEdit(params){
+    getAvatarEdit(params) {
         return axios.post(`${base.sq}/User/getAvatarEdit`, params);
     },
     // 社区服务类型列表
-    gerServiceList(params){
+    gerServiceList(params) {
         return axios.post(`${base.sq}/Community/gerServiceList`, params);
     },
     // 社区服务列表
-    gerCommunityList(params){
+    gerCommunityList(params) {
         return axios.post(`${base.sq}/Community/gerCommunityList`, params);
     },
     // 社区房屋列表
-    gerHousingList(params){
+    gerHousingList(params) {
         return axios.post(`${base.sq}/Housing/gerHousingList`, params);
     },
     // 获取服务详情
-    gerCommunityDetailed(params){
+    gerCommunityDetailed(params) {
         return axios.post(`${base.sq}/Community/gerCommunityDetailed`, params);
     },
-     // 获取房屋详情
-     gerHousingDetailed(params){
+    // 获取房屋详情
+    gerHousingDetailed(params) {
         return axios.post(`${base.sq}/Housing/gerHousingDetailed`, params);
     },
     // 修改密码
-    getPwdEdit(params){
+    getPwdEdit(params) {
         return axios.post(`${base.sq}/User/getPwdEdit`, params);
     },
     // 发布消息通知
-    getValidateAdd(params){
+    getValidateAdd(params) {
         return axios.post(`${base.sq}/Notice/getValidateAdd`, params);
-    }
+    },
+    // 获取店铺信息
+    getSelect(params) {
+        return axios.post(`${base.sq}/ShopCom/getSelect`, params);
+    },
+    // 提交店铺信息
+    getAdd(params) {
+        return axios.post(`${base.sq}/ShopCom/getAdd`, params);
+    },
+    // 发布服务
+    gerSetviceAdd(params) {
+        return axios.post(`${base.sq}/Community/gerSetviceAdd`, params);
+    },
+    // 申请服务
+    sub_com(params) {
+        return axios.post(`${base.sq}/v1/com_service/sub_com`, params);
+    },
 }
 
 export default article;

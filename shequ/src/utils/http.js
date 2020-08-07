@@ -20,14 +20,14 @@ const tip = msg => {
  * 跳转登录页
  * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
  */
-const toLogin = () => {
-    router.replace({
-        path: '/login',
-        query: {
-            redirect: router.currentRoute.fullPath
-        }
-    });
-}
+// const toLogin = () => {
+//     router.replace({
+//         path: '/login',
+//         query: {
+//             redirect: router.currentRoute.fullPath
+//         }
+//     });
+// }
 
 /**
  * 请求失败后的错误统一处理
@@ -67,19 +67,21 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
  * 请求拦截器
  * 每次请求前，如果存在token则在请求头中携带token
  */
-instance.interceptors.request.use(function(config){
+instance.interceptors.request.use(function (config) {
     config.data = qs.stringify(config.data)
     if (Object.keys(loadingQueue).length == 0) {
         store.state.isShowLoading = true  //改变为true
     }
     loadingQueue[config.url] = true
+    // const token = store.state.token;
+    // token && (config.headers.token = token);
     return config;
-},function(error) {
+}, function (error) {
     return Promise.reject(error);
 })
 
 // 响应拦截器
-instance.interceptors.response.use(function(response) {
+instance.interceptors.response.use(function (response) {
     /* TODOS 使用store进行loading方法解除 */
     // console.log('loading结束');
     delete loadingQueue[response.config.url];  //删除路径 
@@ -87,7 +89,7 @@ instance.interceptors.response.use(function(response) {
         store.state.isShowLoading = false  //改变为false
     }
     return response;
-}, function(error) {
+}, function (error) {
     return Promise.reject(error);
 });
 

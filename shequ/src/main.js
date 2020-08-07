@@ -8,11 +8,18 @@ Vue.prototype.$https = https;
 import api from "./api";
 import vueAwesomeSwiper from "vue-awesome-swiper"
 import 'swiper/css/swiper.css'
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
 import moment from 'moment'
 import "@assets/css/reset.scss";
 import storage from 'good-storage';
 import "@assets/css/fonts.scss";
 import asdFun from "./common/asd_publicMethod";
+Vue.prototype.$api = api;
+Vue.use(vueAwesomeSwiper)
+Vue.prototype.$moment = moment
+import enc from '@/utils/encrypt'
+Vue.prototype.$enc = enc
 import {
   Alert,
   Aside,
@@ -93,9 +100,7 @@ import {
   Upload,
 } from "element-ui";
 
-Vue.prototype.$api = api;
-Vue.use(vueAwesomeSwiper)
-Vue.prototype.$moment = moment
+
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -208,7 +213,7 @@ router.beforeEach((to, from, next) => {
           message: "请先退出登录登录",
           type: "warning"
         });
-        next({path: '/'})
+        next({ path: '/' })
       }
     }
   } else {
@@ -218,7 +223,7 @@ router.beforeEach((to, from, next) => {
         message: "请先登录",
         type: "warning"
       });
-      next({path: '/login'})
+      next({ path: '/login' })
     } else {
       next()
     }

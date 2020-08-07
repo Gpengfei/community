@@ -68,6 +68,10 @@
                   <i class="iconfont">&#xe645;</i>
                   <span>联系商家</span>
                 </p>
+                <p class="lxsjbtn">
+                  <i class="iconfont">&#xe60b;</i>
+                  <span>申请服务</span>
+                </p>
               </div>
             </div>
           </div>
