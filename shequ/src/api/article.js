@@ -97,6 +97,10 @@ const article = {
     // 获取用户订单
     my_service(params) {
         return axios.post(`${base.sq}/v1/com_service/my_service`, params);
+    },
+    // 提交评价接口
+    sub_comment(params) {
+        return axios.post(`${base.sq}/v1/com_service/sub_comment`, params);
     }
 }
 
