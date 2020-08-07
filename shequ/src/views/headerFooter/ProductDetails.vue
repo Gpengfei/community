@@ -74,23 +74,7 @@
           </div>
           <div class="fwms">
             <p class="fwms-title">服务描述</p>
-            <p
-              class="fwms-js"
-            >专业承接新居、旧居、楼宇、别墅、商场、工程、厂房、医院、4s店、复式楼、写字楼、办公楼、商厦、宾馆、酒店、及大中小型建筑物的全面日常保洁、开荒保洁、地毯清洗、地板清洗、玻璃清洗、钟点工与小时工。</p>
-            <div class="fwms-zt">
-              <p class="zt-title">业务范围:</p>
-              <ul>
-                <li>1.开荒保洁，单位保洁，家庭保洁，企业保洁，日常保洁。</li>
-                <li>2.石材翻新，石材养护，石材结晶，石材打蜡，石材抛光。</li>
-                <li>3.清洗地毯，羊毛地毯清洗，化纤地毯清洗，普通地毯清洗。</li>
-                <li>4.清洗沙发，布衣沙发清洗，皮沙发清洗，皮革沙发清洗。</li>
-                <li>5.椅子清洗，办公椅清洗，皮椅清洗，布椅清洗。</li>
-                <li>6.窗帘清洗，薄纱窗帘清洗，加厚窗帘清洗，高中低档清洗。</li>
-                <li>7.外墙清洗，玻璃清洗，广告牌清洗，室外灯具清洗。</li>
-                <li>8.地板打蜡，地板增光，地板翻新，地板固体蜡。</li>
-                <li>9.广告牌清洗,大小中等广告牌清洗。</li>
-              </ul>
-            </div>
+            <p class="fwms-js">{{nrData.content}}</p>
           </div>
           <div class="fwtp">
             <p class="fwtp-title">服务图片</p>
@@ -431,6 +415,17 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          if (res.data.code == 1) {
+            this.$message({
+              message: res.data.msg,
+              type: "success",
+            });
+          } else {
+            this.$message({
+              message: res.data.msg,
+              type: "warning",
+            });
+          }
         });
     },
   },
