@@ -3,8 +3,9 @@
     <div class="myOrder-box">
       <div class="myOrder-sxandsoso">
         <ul>
-          <li class="sty">待评价（16）</li>
-          <li>已评价</li>
+          <li :class="{'sty':tabInde==1}" @click="tabCli(1)">待完成({{dwcDatLis.length}})</li>
+          <li :class="{'sty':tabInde==2}" @click="tabCli(2)">待评价({{dpjDatLis.length}})</li>
+          <li :class="{'sty':tabInde==3}" @click="tabCli(3)">已评价({{ypjDatLis.length}})</li>
         </ul>
       </div>
       <div class="myOrder-sx">
@@ -19,54 +20,84 @@
       </div>
       <div class="myOrder-lis">
         <ul>
-          <li class="ywc">
-            <p class="dd-title">
-              <span class="title-time">商家名称：金万通保洁</span>
-              <span class="title-ddh">2019-06-27 15:30</span>
-            </p>
-            <table>
-              <tr>
-                <td width="426px" align="center">
-                  <div class="tb-box">
-                    <div class="tb-img">
-                      <img src="img/fwjl.png" alt />
+          <template v-if="tabInde==1">
+            <li class="ywc">
+              <p class="dd-title">
+                <span class="title-time">商家名称：金万通保洁</span>
+                <span class="title-ddh">2019-06-27 15:30</span>
+              </p>
+              <table>
+                <tr>
+                  <td width="426px" align="center">
+                    <div class="tb-box">
+                      <div class="tb-img">
+                        <img src="img/fwjl.png" alt />
+                      </div>
+                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
                     </div>
-                    <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
-                  </div>
-                </td>
+                  </td>
 
-                <td width="152px" align="center">
-                  <router-link to="/serviceEvaluation1">
-                    <p class="pj">评价</p>
-                  </router-link>
-                </td>
-              </tr>
-            </table>
-          </li>
-          <li class="ywc">
-            <p class="dd-title">
-              <span class="title-time">商家名称：金万通保洁</span>
-              <span class="title-ddh">2019-06-27 15:30</span>
-            </p>
-            <table>
-              <tr>
-                <td width="426px" align="center">
-                  <div class="tb-box">
-                    <div class="tb-img">
-                      <img src="img/fwjl.png" alt />
+                  <td width="152px" align="center">
+                    <router-link to="/serviceEvaluationDetails">
+                      <p class="dwc">服务中...</p>
+                    </router-link>
+                  </td>
+                </tr>
+              </table>
+            </li>
+          </template>
+          <template v-if="tabInde==2">
+            <li class="ywc">
+              <p class="dd-title">
+                <span class="title-time">商家名称：金万通保洁</span>
+                <span class="title-ddh">2019-06-27 15:30</span>
+              </p>
+              <table>
+                <tr>
+                  <td width="426px" align="center">
+                    <div class="tb-box">
+                      <div class="tb-img">
+                        <img src="img/fwjl.png" alt />
+                      </div>
+                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
                     </div>
-                    <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
-                  </div>
-                </td>
+                  </td>
 
-                <td width="152px" align="center">
-                  <router-link to="/serviceEvaluationDetails">
-                    <p class="ckpj">查看评价</p>
-                  </router-link>
-                </td>
-              </tr>
-            </table>
-          </li>
+                  <td width="152px" align="center">
+                    <router-link to="/serviceEvaluation1">
+                      <p class="pj">评价</p>
+                    </router-link>
+                  </td>
+                </tr>
+              </table>
+            </li>
+          </template>
+          <template v-if="tabInde==3">
+            <li class="ywc">
+              <p class="dd-title">
+                <span class="title-time">商家名称：金万通保洁</span>
+                <span class="title-ddh">2019-06-27 15:30</span>
+              </p>
+              <table>
+                <tr>
+                  <td width="426px" align="center">
+                    <div class="tb-box">
+                      <div class="tb-img">
+                        <img src="img/fwjl.png" alt />
+                      </div>
+                      <div class="tb-con">开荒保洁、日常保洁、物业保洁、擦玻璃、清洗地毯</div>
+                    </div>
+                  </td>
+
+                  <td width="152px" align="center">
+                    <router-link to="/serviceEvaluationDetails">
+                      <p class="ckpj">查看评价</p>
+                    </router-link>
+                  </td>
+                </tr>
+              </table>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -89,29 +120,11 @@ import "@style/mine/serviceEvaluation.scss";
 export default {
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "默认近三个月订单"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value: ""
+      tabInde: 1,
+      token: null,
+      dwcDatLis: [],
+      dpjDatLis: [],
+      ypjDatLis: [],
     };
   },
   mounted() {
@@ -119,7 +132,45 @@ export default {
     this.$store.dispatch("setNav", 100);
     // 导航改变状态
     this.$store.dispatch("setMin", this.$route.query.id);
-  }
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
+    // 获取服务评价列表
+    this.$api.article
+      .my_com_service({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("服务评价列表", res);
+        if (res.data.code == 1) {
+          let lis = res.data.data;
+          let arr1 = [];
+          let arr2 = [];
+          let arr3 = [];
+          for (let i = 0; i < lis.length; i++) {
+            console.log(lis[i].star);
+            if (lis[i].status == 1) {
+              arr1.push(lis[i]);
+            } else {
+              if (lis[i].star) {
+                arr3.push(lis[i]);
+              } else {
+                arr2.push(lis[i]);
+              }
+            }
+          }
+          this.dwcDatLis = arr1;
+          this.dpjDatLis = arr2;
+          this.ypjDatLis = arr3;
+        }
+      });
+  },
+  methods: {
+    // tab
+    tabCli(index) {
+      this.tabInde = index;
+    },
+  },
 };
 </script>
 
