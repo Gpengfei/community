@@ -67,6 +67,10 @@ export default [
             path: "/serviceEvaluation",
             component: () => import("@views/mine/ServiceEvaluation.vue"),
           },
+          {
+            path: "/serviceEvaluationsj",
+            component: () => import("@views/mine/ServiceEvaluationsj.vue"),
+          },
         ],
       },
       {
