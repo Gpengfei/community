@@ -258,6 +258,7 @@ export default {
         imgghArr[this.dtxb] = e;
         this.imgsArr = imgghArr;
         this.tpjqOff = false;
+        this.dtxb = "";
       }
     },
     // 图片更换
