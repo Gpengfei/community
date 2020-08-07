@@ -94,16 +94,25 @@ export default [
           {
             path: "/shop/index/detial",
             name: "ShopDetial",
+            meta: {
+              title: "商品详情",
+            },
             component: () => import("@views/shop/ShopDetial.vue"),
           },
           {
             path: "/shop/index/evaluate",
             name: "Evaluate",
+            meta: {
+              title: "评价",
+            },
             component: () => import("@views/shop/Evaluate.vue"),
           },
           {
             path: "/shop/shoppingCard",
             name: "shoppingCard",
+            meta: {
+              title: "购物车",
+            },
             component: () => import("@views/shop/shoppingCard.vue"),
           },
           {
