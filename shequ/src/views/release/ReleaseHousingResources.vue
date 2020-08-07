@@ -12,6 +12,7 @@
         <span class="text">房产</span>
         <el-radio v-model="radio" label="1">整租房</el-radio>
         <el-radio v-model="radio" label="2">合租房</el-radio>
+        <el-radio v-model="radio" label="3">出售</el-radio>
       </div>
     </div>
     <!--房屋基本信息-->
@@ -22,21 +23,21 @@
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">小区名称</span>
-          <input type="text" placeholder="填写小区名称" class="inp" />
+          <input type="text" placeholder="填写小区名称" class="inp" v-model="xqmc" />
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">房屋户型</span>
           <div class="lis-inp">
-            <input type="text" />
+            <input type="text" v-model="s" />
             <span>室</span>
           </div>
           <div class="lis-inp">
-            <input type="text" />
+            <input type="text" v-model="t" />
             <span>厅</span>
           </div>
           <div class="lis-inp">
-            <input type="text" />
+            <input type="text" v-model="w" />
             <span>卫</span>
           </div>
         </div>
@@ -45,19 +46,21 @@
           <span class="text">楼层信息</span>
           <div class="lis-inp">
             <span>第</span>
-            <input type="text" />
+            <input type="text" v-model="djc" />
             <span>层</span>
           </div>
           <div class="lis-inp">
             <span>共</span>
-            <input type="text" />
+            <input type="text" v-model="gjc" />
             <span>层</span>
           </div>
         </div>
-        <div class="fwjbxx-lis" v-if="radio==2">
+        <div class="fwjbxx-lis">
           <span class="bt">*</span>
-          <span class="text">出租卧室</span>
-          <el-select v-model="value" placeholder="请选择">
+          <span class="text" v-if="radio==1">整租</span>
+          <span class="text" v-if="radio==2">出租卧室</span>
+          <span class="text" v-if="radio==3">出售</span>
+          <el-select v-model="value" v-if="radio==2" placeholder="请选择卧室">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -65,9 +68,9 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value1" placeholder="请选择朝向">
             <el-option
-              v-for="item in options"
+              v-for="item in options1"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -75,14 +78,14 @@
           </el-select>
           <div class="lis-inp">
             <span>共</span>
-            <input type="text" />
+            <input type="text" v-model="pmdx" />
             <span style="line-height: 32px;">
               m
               <sup>2</sup>
             </span>
           </div>
         </div>
-        <div class="fwjbxx-lis" v-else>
+        <!-- <div class="fwjbxx-lis" v-else>
           <span class="bt">*</span>
           <span class="text">房屋朝向</span>
           <el-select v-model="value" placeholder="请选择">
@@ -93,7 +96,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-        </div>
+        </div>-->
       </div>
     </div>
     <!--租金信息-->
@@ -104,12 +107,22 @@
           <span class="bt">*</span>
           <span class="text">出租卧室</span>
           <div class="lis-inp">
-            <input type="text" />
-            <span>元/每月</span>
+            <input type="text" v-model="je" />
+            <span v-if="radio==3">元/平米</span>
+            <span v-else>元/每月</span>
           </div>
-          <el-select v-model="value" placeholder="请选择">
+
+          <el-select v-model="value3" v-if="radio==3" placeholder="选择租付款方式">
             <el-option
-              v-for="item in options"
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-select v-model="value2" v-else placeholder="选择租金缴纳方式">
+            <el-option
+              v-for="item in options2"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -125,10 +138,10 @@
         <div class="fwjbxx-lis">
           <span class="text">装修情况</span>
           <div class="dxk">
-            <el-radio v-model="radio" label="1">毛坯</el-radio>
-            <el-radio v-model="radio" label="2">简单装修</el-radio>
-            <el-radio v-model="radio" label="3">精装修</el-radio>
-            <el-radio v-model="radio" label="4">豪华装修</el-radio>
+            <el-radio v-model="radio1" label="0">毛坯</el-radio>
+            <el-radio v-model="radio1" label="1">简单装修</el-radio>
+            <el-radio v-model="radio1" label="2">精装修</el-radio>
+            <el-radio v-model="radio1" label="3">豪华装修</el-radio>
           </div>
         </div>
         <div class="fwjbxx-lis">
@@ -149,9 +162,10 @@
           <span class="text">出租要求</span>
           <div class="dxk">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="复选框 A"></el-checkbox>
-              <el-checkbox label="复选框 B"></el-checkbox>
-              <el-checkbox label="复选框 C"></el-checkbox>
+              <el-checkbox label="禁止养宠物"></el-checkbox>
+              <el-checkbox label="只租女生"></el-checkbox>
+              <el-checkbox label="只租一家人"></el-checkbox>
+              <el-checkbox label="不限"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -161,6 +175,7 @@
             <textarea
               name
               id
+              v-model="fyms"
               cols="30"
               rows="10"
               placeholder="案例文本：
@@ -183,18 +198,7 @@
           <div class="sctp">
             <p
               class="sctp-ts"
-            >请上传清晰、实拍的室内图片，请不要在图片上添加文字、数字、网址等内容，请勿上传名片、二维码、自拍照、风景照等与房源无关的图片，最多上传12张，每张最大10M</p>
-            <el-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card"
-              :on-preview="handlePictureCardPreview"
-              :on-remove="handleRemove"
-            >
-              <i class="el-icon-plus"></i>
-            </el-upload>
-            <el-dialog :visible.sync="dialogVisible">
-              <img width="100%" :src="dialogImageUrl" alt />
-            </el-dialog>
+            >请上传清晰、实拍的室内图片，请不要在图片上添加文字、数字、网址等内容，请勿上传名片、二维码、自拍照、风景照等与房源无关的图片，最多上传12张，每张最大10M</p>148
           </div>
         </div>
       </div>
@@ -206,12 +210,12 @@
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">联系姓名</span>
-          <input type="text" placeholder="填写联系姓名" class="inp" />
+          <input type="text" placeholder="填写联系姓名" class="inp" v-model="xm" />
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
           <span class="text">联系方式</span>
-          <input type="text" placeholder="填写联系方式" class="inp" />
+          <input type="text" placeholder="填写联系方式" class="inp" v-model="lxfs" />
         </div>
       </div>
     </div>
@@ -232,27 +236,73 @@ export default {
       //   选择卧室
       options: [
         {
-          value: "选项1",
-          label: "黄金糕"
+          value: "主卧",
+          label: "主卧",
         },
         {
-          value: "选项2",
-          label: "双皮奶"
+          value: "次卧",
+          label: "次卧",
         },
         {
-          value: "选项3",
-          label: "蚵仔煎"
+          value: "隔间",
+          label: "隔间",
         },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
       ],
       value: "",
+      // 选择朝向
+      options1: [
+        {
+          value: "东",
+          label: "东",
+        },
+        {
+          value: "西",
+          label: "西",
+        },
+        {
+          value: "南",
+          label: "南",
+        },
+        {
+          value: "北",
+          label: "北",
+        },
+      ],
+      value1: "",
+      // 选择租金方式
+      options2: [
+        {
+          value: "押一付一",
+          label: "押一付一",
+        },
+        {
+          value: "押一付三",
+          label: "押一付三",
+        },
+        {
+          value: "半年租",
+          label: "半年租",
+        },
+        {
+          value: "整年租",
+          label: "整年租",
+        },
+      ],
+      value2: "",
+      // 出售付款方式
+      options3: [
+        {
+          value: "全款",
+          label: "全款",
+        },
+        {
+          value: "贷款",
+          label: "贷款",
+        },
+      ],
+      value3: "",
+      // 选择装修
+      radio1: "0",
       // 房屋配置
       checkAll: false,
       checkedCities: [],
@@ -272,17 +322,29 @@ export default {
         "电梯",
         "可做饭",
         "微波炉",
-        "桌椅"
+        "桌椅",
       ],
       isIndeterminate: false,
       // 出租要求
       checkList: [],
       // 上传图片
       dialogImageUrl: "",
-      dialogVisible: false
+      dialogVisible: false,
+      // 提交的信息
+      xqmc: "",
+      s: "",
+      t: "",
+      w: "",
+      djc: "",
+      gjc: "",
+      pmdx: "",
+      je: "",
+      fyms: "",
+      xm: "",
+      lxfs: "",
     };
   },
-  mounted(){
+  mounted() {
     this.$store.dispatch("setNavFb", 0);
   },
   methods: {
@@ -297,14 +359,14 @@ export default {
         checkedCount > 0 && checkedCount < this.cities.length;
     },
     // 上传图片
-     handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      }
-  }
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+  },
 };
 </script>
 
