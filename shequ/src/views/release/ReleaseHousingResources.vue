@@ -374,6 +374,7 @@ export default {
       // 图片下标
       tpxb: "",
       // 提交的信息
+      ids: null,
       title: "",
       xqmc: "",
       s: "",
@@ -391,6 +392,8 @@ export default {
     };
   },
   mounted() {
+    this.ids = this.$route.query.ids;
+    console.log(this.ids);
     // 获取token
     let token = this.$store.state.token;
     this.token = token;
@@ -439,6 +442,10 @@ export default {
         }
         this.cities = arr;
       });
+    // 数据回填
+    // if(this.ids){
+
+    // }
   },
   methods: {
     // 选择房屋配套
