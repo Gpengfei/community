@@ -22,6 +22,11 @@
       <div class="fwjbxx-box">
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
+          <span class="text">标语</span>
+          <input type="text" placeholder="填写标语" class="inp" v-model="title" />
+        </div>
+        <div class="fwjbxx-lis">
+          <span class="bt">*</span>
           <span class="text">小区名称</span>
           <input type="text" placeholder="填写小区名称" class="inp" v-model="xqmc" />
         </div>
@@ -386,6 +391,7 @@ export default {
       // 图片下标
       tpxb: "",
       // 提交的信息
+      title: "",
       xqmc: "",
       s: "",
       t: "",
@@ -432,6 +438,14 @@ export default {
             this.options4 = arr;
           });
       });
+    // 获取房屋配套参数
+    this.$api.article
+      .getFacilities({
+        token: this.token,
+      })
+      .then((res) => {
+        console.log("获取房屋配套参数", res);
+      });
   },
   methods: {
     // 选择房屋配套
@@ -473,6 +487,13 @@ export default {
     // 提交
     tjfwxxCli() {
       if (this.radio == 0) {
+        if (this.title == "") {
+          this.$message({
+            message: "请填标语",
+            type: "warning",
+          });
+          return;
+        }
         if (this.xqmc == "") {
           this.$message({
             message: "请填写小区名称",
@@ -622,7 +643,7 @@ export default {
             address: this.xxdz,
             home_name: this.xm,
             home_phone: this.lxfs,
-            title: "测试",
+            title: this.title,
           })
           .then((res) => {
             console.log(res);
