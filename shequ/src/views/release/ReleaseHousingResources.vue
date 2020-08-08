@@ -171,7 +171,7 @@
             >全选</el-checkbox>
             <div style="margin: 15px 0;"></div>
             <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-              <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+              <el-checkbox v-for="city in cities" :label="city.id" :key="city.id">{{city.fa_name}}</el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -364,24 +364,7 @@ export default {
       // 房屋配置
       checkAll: false,
       checkedCities: [],
-      cities: [
-        "冰箱",
-        "电视",
-        "洗衣机",
-        "热水器",
-        "空调",
-        "宽带",
-        "沙发",
-        "床（独）",
-        "暖气",
-        "衣柜",
-        "独立卫生间",
-        "独立阳台",
-        "电梯",
-        "可做饭",
-        "微波炉",
-        "桌椅",
-      ],
+      cities: [],
       isIndeterminate: false,
       // 出租要求
       checkList: [],
@@ -445,15 +428,37 @@ export default {
       })
       .then((res) => {
         console.log("获取房屋配套参数", res);
+        let lis = res.data.data;
+        let arr = [];
+        for (let i = 0; i < lis.length; i++) {
+          let obj = {
+            fa_name: lis[i].fa_name,
+            id: lis[i].id,
+          };
+          arr.push(obj);
+        }
+        this.cities = arr;
       });
   },
   methods: {
     // 选择房屋配套
     handleCheckAllChange(val) {
-      this.checkedCities = val ? this.cities : [];
+      console.log("val", val);
+      // this.checkedCities = val ? this.cities : [];
+      // this.isIndeterminate = false;
+      if (val) {
+        let arr = [];
+        for (let i = 0; i < this.cities.length; i++) {
+          arr.push(this.cities[i].id);
+        }
+        this.checkedCities = arr;
+      } else {
+        this.checkedCities = [];
+      }
       this.isIndeterminate = false;
     },
     handleCheckedCitiesChange(value) {
+      console.log(value);
       let checkedCount = value.length;
       this.checkAll = checkedCount === this.cities.length;
       this.isIndeterminate =
@@ -636,7 +641,7 @@ export default {
             rent: this.je,
             cash_pledge: this.value2,
             decorate: this.radio1,
-            config: "1,2", //this.checkedCities.join(",")
+            config: this.checkedCities.join(","),
             require: this.checkList.join(","),
             content: this.fyms,
             images: this.imgsLis.join(","),
@@ -647,6 +652,361 @@ export default {
           })
           .then((res) => {
             console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "房源发布成功",
+                type: "success",
+              });
+            }
+            this.$router.push({ path: "/myService", query: { id: 1 } });
+          });
+      }
+      if (this.radio == 1) {
+        if (this.title == "") {
+          this.$message({
+            message: "请填标语",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xqmc == "") {
+          this.$message({
+            message: "请填写小区名称",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value4 == "") {
+          this.$message({
+            message: "请选择所属区域",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.s == "") {
+          this.$message({
+            message: "请填写卧室数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.t == "") {
+          this.$message({
+            message: "请填写客厅餐厅数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.w == "") {
+          this.$message({
+            message: "请填写卫生间数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.djc == "") {
+          this.$message({
+            message: "请填写楼层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.gjc == "") {
+          this.$message({
+            message: "请填写一共多少层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value == "") {
+          this.$message({
+            message: "请选择卧室",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value1 == "") {
+          this.$message({
+            message: "请选择朝向",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.pmdx == "") {
+          this.$message({
+            message: "请填写房屋平米",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.je == "") {
+          this.$message({
+            message: "请填写租金",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value2 == "") {
+          this.$message({
+            message: "请选择交租方式",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkedCities.length == 0) {
+          this.$message({
+            message: "请选择房屋配置",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkList.length == 0) {
+          this.$message({
+            message: "请选择出租要求",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.fyms == "") {
+          this.$message({
+            message: "请选填写房源描述",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.imgsLis.length == 0) {
+          this.$message({
+            message: "请上传房源图片",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xxdz == "") {
+          this.$message({
+            message: "请填写详细地址",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xm == "") {
+          this.$message({
+            message: "请填写姓名",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.lxfs == "") {
+          this.$message({
+            message: "请填写联系方式",
+            type: "warning",
+          });
+          return;
+        }
+        this.$api.article
+          .gerHousingAdd({
+            token: this.token,
+            housing_type: this.radio,
+            com_name: this.xqmc,
+            STREET_CODE: this.value4,
+            room: this.s,
+            hall: this.t,
+            toilet: this.w,
+            floor: this.djc,
+            floor_sum: this.gjc,
+            direction: this.value1,
+            area: this.pmdx,
+            rent: this.je,
+            bedroom: this.value,
+            cash_pledge: this.value2,
+            decorate: this.radio1,
+            config: this.checkedCities.join(","),
+            require: this.checkList.join(","),
+            content: this.fyms,
+            images: this.imgsLis.join(","),
+            address: this.xxdz,
+            home_name: this.xm,
+            home_phone: this.lxfs,
+            title: this.title,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "房源发布成功",
+                type: "success",
+              });
+            }
+            this.$router.push({ path: "/myService", query: { id: 1 } });
+          });
+      }
+      if (this.radio == 2) {
+        if (this.title == "") {
+          this.$message({
+            message: "请填标语",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xqmc == "") {
+          this.$message({
+            message: "请填写小区名称",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value4 == "") {
+          this.$message({
+            message: "请选择所属区域",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.s == "") {
+          this.$message({
+            message: "请填写卧室数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.t == "") {
+          this.$message({
+            message: "请填写客厅餐厅数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.w == "") {
+          this.$message({
+            message: "请填写卫生间数量",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.djc == "") {
+          this.$message({
+            message: "请填写楼层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.gjc == "") {
+          this.$message({
+            message: "请填写一共多少层",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value1 == "") {
+          this.$message({
+            message: "请选择朝向",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.pmdx == "") {
+          this.$message({
+            message: "请填写房屋平米",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.je == "") {
+          this.$message({
+            message: "请填写租金",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.value3 == "") {
+          this.$message({
+            message: "请选择付款方式",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkedCities.length == 0) {
+          this.$message({
+            message: "请选择房屋配置",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.checkList.length == 0) {
+          this.$message({
+            message: "请选择出租要求",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.fyms == "") {
+          this.$message({
+            message: "请选填写房源描述",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.imgsLis.length == 0) {
+          this.$message({
+            message: "请上传房源图片",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xxdz == "") {
+          this.$message({
+            message: "请填写详细地址",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.xm == "") {
+          this.$message({
+            message: "请填写姓名",
+            type: "warning",
+          });
+          return;
+        }
+        if (this.lxfs == "") {
+          this.$message({
+            message: "请填写联系方式",
+            type: "warning",
+          });
+          return;
+        }
+        this.$api.article
+          .gerHousingAdd({
+            token: this.token,
+            housing_type: this.radio,
+            com_name: this.xqmc,
+            STREET_CODE: this.value4,
+            room: this.s,
+            hall: this.t,
+            toilet: this.w,
+            floor: this.djc,
+            floor_sum: this.gjc,
+            direction: this.value1,
+            area: this.pmdx,
+            rent: this.je,
+            cash_pledge: this.value3,
+            decorate: this.radio1,
+            config: this.checkedCities.join(","),
+            require: this.checkList.join(","),
+            content: this.fyms,
+            images: this.imgsLis.join(","),
+            address: this.xxdz,
+            home_name: this.xm,
+            home_phone: this.lxfs,
+            title: this.title,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "房源发布成功",
+                type: "success",
+              });
+            }
+            this.$router.push({ path: "/myService", query: { id: 1 } });
           });
       }
     },
