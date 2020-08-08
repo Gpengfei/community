@@ -1,4 +1,4 @@
-.secondHandGoods {
+.SecondHandGoods {
   background-color: #fff;
   overflow: hidden;
   border-radius: 10px;
@@ -144,17 +144,39 @@
           line-height: 25px;
           margin-bottom: 20px;
         }
-        .el-upload--picture-card:hover,
-        .el-upload:focus {
-          border-color: $color;
-          color: $color;
+        .imgLisBox {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          img {
+            height: 148px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+          }
+          .sctpbz {
+            width: 148px;
+            height: 148px;
+            box-sizing: border-box;
+            border: 1px dashed #999;
+            text-align: center;
+            line-height: 146px;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+              border: 1px dashed $color;
+            }
+            .iconfont {
+              font-size: 30px;
+              color: #999;
+            }
+          }
         }
       }
       .el-cascader {
         width: 420px;
       }
       .el-select {
-        width: 700px;
+        width: 420px;
         margin-right: 20px;
       }
       .el-input__inner {
@@ -207,6 +229,23 @@
   .bt {
     color: #e22424;
     margin-right: 5px;
+  }
+  .smrzTpjq {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.9);
+    .iconfont {
+      font-size: 30px;
+      color: #333;
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      cursor: pointer;
+    }
   }
 }
 // 修改组件样式
