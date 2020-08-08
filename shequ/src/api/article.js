@@ -118,6 +118,18 @@ const article = {
     gerSecondgoodsAdd(params) {
         return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsAdd`, params);
     },
+    // 商家用户获取自己房屋信息
+    gerMyHousingSelect(params) {
+        return axios.post(`${base.sq}/Housing/gerMyHousingSelect`, params);
+    },
+    // 商家用户获取自己二手物品
+    getMySecondgoodsList(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsList`, params);
+    },
+    // 修改服务信息回填
+    gerServiceSelect(params) {
+        return axios.post(`${base.sq}/Community/gerServiceSelect`, params);
+    },
 }
 
 export default article;
