@@ -412,7 +412,7 @@ export default {
             console.log(res);
             if (res.data.code == 1) {
               this.$message({
-                message: "发布二手物品成功！",
+                message: "修改成功",
                 type: "success",
               });
               this.$router.push({ path: "/myService", query: { id: 1 } });
