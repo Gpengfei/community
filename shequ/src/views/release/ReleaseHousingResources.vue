@@ -757,7 +757,7 @@ export default {
               console.log(res);
               if (res.data.code == 1) {
                 this.$message({
-                  message: "房源发布成功",
+                  message: "修改成功",
                   type: "success",
                 });
               }
@@ -936,7 +936,7 @@ export default {
               console.log(res);
               if (res.data.code == 1) {
                 this.$message({
-                  message: "房源发布成功",
+                  message: "修改成功",
                   type: "success",
                 });
               }
@@ -1107,7 +1107,7 @@ export default {
               console.log(res);
               if (res.data.code == 1) {
                 this.$message({
-                  message: "房源发布成功",
+                  message: "修改成功",
                   type: "success",
                 });
               }
