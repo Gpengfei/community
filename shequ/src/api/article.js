@@ -105,7 +105,11 @@ const article = {
     // 发布房源接口
     gerHousingAdd(params) {
         return axios.post(`${base.sq}/Housing/gerHousingAdd`, params);
-    }
+    },
+    // 获取房屋配套
+    getFacilities(params) {
+        return axios.post(`${base.sq}/Housing/getFacilitiesd`, params);
+    },
 }
 
 export default article;
