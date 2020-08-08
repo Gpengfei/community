@@ -134,6 +134,10 @@ const article = {
     gerHousingSelect(params) {
         return axios.post(`${base.sq}/Housing/gerHousingSelect`, params);
     },
+    // 修改二手物品回填
+    gerSecondgoodsSelect(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsSelect`, params);
+    },
 }
 
 export default article;
