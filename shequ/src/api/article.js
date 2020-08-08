@@ -130,6 +130,10 @@ const article = {
     gerServiceSelect(params) {
         return axios.post(`${base.sq}/Community/gerServiceSelect`, params);
     },
+    // 修改房屋数据回填
+    gerHousingSelect(params) {
+        return axios.post(`${base.sq}/Housing/gerHousingSelect`, params);
+    },
 }
 
 export default article;
