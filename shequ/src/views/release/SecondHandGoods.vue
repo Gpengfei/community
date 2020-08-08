@@ -192,6 +192,7 @@ export default {
       options1: regionData,
       // 提交的数据
       // 类型
+      ids: null,
       radio: "1",
       fwbt: "",
       value3: "",
@@ -206,6 +207,7 @@ export default {
     };
   },
   mounted() {
+    this.ids = this.$route.query.ids;
     // 获取token
     let token = this.$store.state.token;
     this.token = token;
