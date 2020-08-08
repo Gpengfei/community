@@ -138,6 +138,14 @@ const article = {
     gerSecondgoodsSelect(params) {
         return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsSelect`, params);
     },
+    // 获取二手物品列表
+    gerSecondgoodsList(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsList`, params);
+    },
+    // 二手货详情
+    gerSecondgoodsDetailed(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsDetailed`, params);
+    },
 }
 
 export default article;
