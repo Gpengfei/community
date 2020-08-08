@@ -3,22 +3,23 @@
     <div class="myService-box">
       <div class="myService-sxandsoso">
         <ul>
-          <li class="sty">服务</li>
-          <li>房产</li>
+          <li :class="{'sty':tab1Ind==0}" @click="tab1Cli(0)">服务</li>
+          <li :class="{'sty':tab1Ind==1}" @click="tab1Cli(1)">房产</li>
+          <li :class="{'sty':tab1Ind==2}" @click="tab1Cli(2)">二手物品</li>
         </ul>
-        <div class="pfsoso">
+        <!-- <div class="pfsoso">
           <div class="pfsoso-box">
             <input type="text" placeholder="商品名称" />
             <i class="iconfont">&#xe608;</i>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="myService-sx">
         <div class="sx-box">
           <div class="sx-r">
             <ul>
-              <li class="sty">未出租</li>
-              <li>已出租下线</li>
+              <li class="sty">已上线</li>
+              <li>已下线</li>
             </ul>
           </div>
         </div>
@@ -75,14 +76,35 @@
 import "@style/mine/myService.scss";
 export default {
   data() {
-    return {};
+    return {
+      token: null,
+      tab1Ind: 0,
+    };
   },
   mounted() {
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
     // 导航改变状态
     this.$store.dispatch("setMin", this.$route.query.id);
-  }
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
+    if (this.tab1Ind == 0) {
+      this.$api.article
+        .getMyCommunityList({
+          token: this.token,
+          is_open: 1,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
+  },
+  methods: {
+    tab1Cli(e) {
+      this.tab1Ind = e;
+    },
+  },
 };
 </script>
 
