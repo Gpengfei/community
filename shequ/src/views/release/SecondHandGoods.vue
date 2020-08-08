@@ -269,14 +269,14 @@ export default {
     fbfwCli() {
       if (this.radio == "") {
         this.$message({
-          message: "请选择服务类型",
+          message: "请选择物品类型",
           type: "warning",
         });
         return;
       }
       if (this.fwbt == "") {
         this.$message({
-          message: "请填写服务标题",
+          message: "请填写标题",
           type: "warning",
         });
         return;
@@ -290,7 +290,7 @@ export default {
       }
       if (this.value1.length == 0) {
         this.$message({
-          message: "请选择服务区域",
+          message: "请选择区域",
           type: "warning",
         });
         return;
@@ -321,7 +321,7 @@ export default {
       }
       if (this.fwtsms == "") {
         this.$message({
-          message: "请填写服务描述",
+          message: "请填写物品描述",
           type: "warning",
         });
         return;
@@ -385,7 +385,7 @@ export default {
           console.log(res);
           if (res.data.code == 1) {
             this.$message({
-              message: "发布服务成功！",
+              message: "发布二手物品成功！",
               type: "success",
             });
             this.$router.push("/myService");
