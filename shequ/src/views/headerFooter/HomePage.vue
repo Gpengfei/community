@@ -26,36 +26,7 @@
             <li class="gd">更多</li>
           </ul>
           <div class="sqbmFw-lists">
-            <template v-if="nav1Inds!=4">
-              <ul v-if="fwLists&&fwLists.length!=0">
-                <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
-                  <div class="lists-box">
-                    <div class="box-top">
-                      <img v-if="item.image" :src="'http://zt.shenyueyun.com/'+item.image" alt />
-                      <img v-else src="img/sqbmzw.png" alt />
-                    </div>
-                    <p class="box-txt">{{item.title}}</p>
-                    <div class="box-con">
-                      <p class="dz">
-                        <i class="iconfont">&#xe634;</i>
-                        <span>{{item.address}}</span>
-                      </p>
-                    </div>
-                    <div class="box-jg">
-                      <span class="jg-number" v-if="item.price_type==0">暂无报价</span>
-                      <span class="jg-number" v-if="item.price_type==1">{{item.price}}</span>
-                      <span class="jg-number" v-if="item.price_type==2">面议</span>
-                      <span class="jg-yy" v-if="item.price_type==1">元/{{item.price_unit}}</span>
-                    </div>
-                    <div class="box-lxdh">
-                      <i class="iconfont">&#xe645;</i>
-                      <span>联系商家</span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </template>
-            <template v-else>
+            <template v-if="nav1Inds==4">
               <ul v-if="fwLists&&fwLists.length!=0">
                 <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
                   <div class="lists-box">
@@ -77,6 +48,66 @@
                     <div class="box-jg">
                       <span class="jg-number">{{item.rent}}</span>
                       <span class="jg-yy">元/{{item.price_unit}}</span>
+                    </div>
+                    <div class="box-lxdh">
+                      <i class="iconfont">&#xe645;</i>
+                      <span>联系商家</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </template>
+            <template v-else-if="nav1Inds==5">
+              <ul v-if="fwLists&&fwLists.length!=0">
+                <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
+                  <div class="lists-box">
+                    <div class="box-top">
+                      <img v-if="item.image" :src="'http://zt.shenyueyun.com/'+item.image" alt />
+                      <img v-else src="img/sqbmzw.png" alt />
+                    </div>
+                    <p class="box-txt">{{item.title}}</p>
+                    <div class="box-con">
+                      <p class="dz" :title="item.address">
+                        <i class="iconfont">&#xe634;</i>
+                        <span>{{item.address}}</span>
+                      </p>
+                      <p class="hx">
+                        <i class="iconfont">&#xe6c2;</i>
+                        <span>{{item.bedroom}}({{item.room}}室{{item.hall}}厅{{item.toilet}}卫){{item.area}}㎡</span>
+                      </p>
+                    </div>
+                    <div class="box-jg">
+                      <span class="jg-number">{{item.rent}}</span>
+                      <span class="jg-yy">元/{{item.price_unit}}</span>
+                    </div>
+                    <div class="box-lxdh">
+                      <i class="iconfont">&#xe645;</i>
+                      <span>联系商家</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </template>
+            <template v-else>
+              <ul v-if="fwLists&&fwLists.length!=0">
+                <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
+                  <div class="lists-box">
+                    <div class="box-top">
+                      <img v-if="item.image" :src="'http://zt.shenyueyun.com/'+item.image" alt />
+                      <img v-else src="img/sqbmzw.png" alt />
+                    </div>
+                    <p class="box-txt">{{item.title}}</p>
+                    <div class="box-con">
+                      <p class="dz">
+                        <i class="iconfont">&#xe634;</i>
+                        <span>{{item.address}}</span>
+                      </p>
+                    </div>
+                    <div class="box-jg">
+                      <span class="jg-number" v-if="item.price_type==0">暂无报价</span>
+                      <span class="jg-number" v-if="item.price_type==1">{{item.price}}</span>
+                      <span class="jg-number" v-if="item.price_type==2">面议</span>
+                      <span class="jg-yy" v-if="item.price_type==1">元/{{item.price_unit}}</span>
                     </div>
                     <div class="box-lxdh">
                       <i class="iconfont">&#xe645;</i>
@@ -426,6 +457,8 @@ export default {
           }
           let fcfw = { id: arr.length, name: "房屋租赁" };
           arr.push(fcfw);
+          let fcfws = { id: arr.length, name: "二手物品" };
+          arr.push(fcfws);
           this.nav1Dat = arr;
         }
       });
@@ -461,7 +494,32 @@ export default {
       this.nav1Inds = id;
       this.fl1Name = name;
       console.log(id);
-      if (id != 4) {
+      if (id == 4) {
+        this.$api.article
+          .gerHousingList({
+            token: this.token,
+            AREA_CODE: this.userInfo.AREA_CODE,
+            limit: 12,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.fwLists = res.data.data.rows;
+            }
+          });
+      } else if (id == 5) {
+        this.$api.article
+          .gerSecondgoodsList({
+            token: this.token,
+            AREA_CODE: this.userInfo.AREA_CODE,
+          })
+          .then((res) => {
+            console.log("二手货", res);
+            if (res.data.code == 1) {
+              this.fwLists = res.data.data.rows;
+            }
+          });
+      } else {
         // 获取服务列表
         this.$api.article
           .gerCommunityList({
@@ -472,19 +530,6 @@ export default {
           })
           .then((res) => {
             console.log("服务列表", res);
-            if (res.data.code == 1) {
-              this.fwLists = res.data.data.rows;
-            }
-          });
-      } else {
-        this.$api.article
-          .gerHousingList({
-            token: this.token,
-            AREA_CODE: this.userInfo.AREA_CODE,
-            limit: 12,
-          })
-          .then((res) => {
-            console.log(res);
             if (res.data.code == 1) {
               this.fwLists = res.data.data.rows;
             }
@@ -501,6 +546,8 @@ export default {
       console.log(index);
       if (this.fl1Name == "房屋租赁") {
         this.$router.push({ path: "/productDetails1", query: { id: index } });
+      } else if (this.fl1Name == "二手物品") {
+        this.$router.push({ path: "/productDetails2", query: { id: index } });
       } else {
         this.$router.push({ path: "/productDetails", query: { id: index } });
       }
