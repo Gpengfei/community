@@ -92,7 +92,7 @@
                 </div>
               </div>
               <div class="lis-r">
-                <span>编辑</span>
+                <span @click="bj(item.id)">编辑</span>
                 <span>下架</span>
                 <span>删除</span>
               </div>
@@ -313,6 +313,9 @@ export default {
     bj(id) {
       if (this.tab1Ind == 0) {
         this.$router.push({ path: "/releaseService", query: { ids: id } });
+      }
+      if (this.tab1Ind == 1) {
+        this.$router.push({ path: "/release", query: { ids: id } });
       }
     },
     // 分页
