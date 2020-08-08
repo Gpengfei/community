@@ -238,6 +238,29 @@ export default {
             this.options = arr;
           });
       });
+    // 回填数据
+    if (this.ids) {
+      this.$api.article
+        .gerSecondgoodsSelect({
+          token: this.token,
+          id: this.ids,
+        })
+        .then((res) => {
+          console.log("回填数据", res);
+          let d = res.data.data;
+          this.radio = d.goods_type + "";
+          this.fwbt = d.title;
+          this.value1 = d.contact_area.split(",");
+          this.value3 = d.STREET_CODE + "";
+          this.value2 = d.price_type + "";
+          this.jg = d.price;
+          this.fwtsms = d.content;
+          this.imgsArr = d.images.split(",");
+          this.xxdz = d.address;
+          this.lxxm = d.contact_name;
+          this.lxfs = d.contact_phone;
+        });
+    }
   },
   methods: {
     // 图片上传
@@ -368,31 +391,60 @@ export default {
       // 提交之前数据处理
       let fwsqStr = this.value1.join(",");
       let imgsStr = this.imgsArr.join(",");
-      this.$api.article
-        .gerSecondgoodsAdd({
-          token: this.token,
-          goods_type: this.radio,
-          title: this.fwbt,
-          contact_area: fwsqStr,
-          STREET_CODE: this.value3,
-          price_type: this.value2,
-          price: this.jg,
-          content: this.fwtsms,
-          images: imgsStr,
-          address: this.xxdz,
-          contact_name: this.lxxm,
-          contact_phone: this.lxfs,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.code == 1) {
-            this.$message({
-              message: "发布二手物品成功！",
-              type: "success",
-            });
-            this.$router.push({ path: "/myService", query: { id: 1 } });
-          }
-        });
+      if (this.ids) {
+        this.$api.article
+          .gerSecondgoodsAdd({
+            id: this.ids,
+            token: this.token,
+            goods_type: this.radio,
+            title: this.fwbt,
+            contact_area: fwsqStr,
+            STREET_CODE: this.value3,
+            price_type: this.value2,
+            price: this.jg,
+            content: this.fwtsms,
+            images: imgsStr,
+            address: this.xxdz,
+            contact_name: this.lxxm,
+            contact_phone: this.lxfs,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "发布二手物品成功！",
+                type: "success",
+              });
+              this.$router.push({ path: "/myService", query: { id: 1 } });
+            }
+          });
+      } else {
+        this.$api.article
+          .gerSecondgoodsAdd({
+            token: this.token,
+            goods_type: this.radio,
+            title: this.fwbt,
+            contact_area: fwsqStr,
+            STREET_CODE: this.value3,
+            price_type: this.value2,
+            price: this.jg,
+            content: this.fwtsms,
+            images: imgsStr,
+            address: this.xxdz,
+            contact_name: this.lxxm,
+            contact_phone: this.lxfs,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "发布二手物品成功！",
+                type: "success",
+              });
+              this.$router.push({ path: "/myService", query: { id: 1 } });
+            }
+          });
+      }
     },
   },
   components: {
