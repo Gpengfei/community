@@ -110,6 +110,14 @@ const article = {
     getFacilities(params) {
         return axios.post(`${base.sq}/Housing/getFacilities`, params);
     },
+    // 商家用户获取自己发不服务
+    getMyCommunityList(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityList`, params);
+    },
+    // 二手物品发不
+    gerSecondgoodsAdd(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsAdd`, params);
+    },
 }
 
 export default article;
