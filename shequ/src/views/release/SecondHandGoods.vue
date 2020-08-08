@@ -3,7 +3,7 @@
     <div class="releaseHome-title">
       <p>发布二手物品</p>
     </div>
-    <!--服务类别-->
+    <!--物品类别-->
 
     <div class="fwxzlb">
       <p class="titleFw">物品类型</p>
@@ -14,7 +14,7 @@
         <el-radio v-model="radio" label="2">寻物</el-radio>
       </div>
     </div>
-    <!--服务基本信息-->
+    <!--物品基本信息-->
 
     <div class="fwjbxx">
       <p class="titleFw">基本信息</p>
@@ -26,9 +26,9 @@
         </div>
         <!-- <div class="fwjbxx-lis">
           <span class="bt">*</span>
-          <span class="text">服务区域</span>
+          <span class="text">物品区域</span>
           <el-cascader
-            placeholder="请选择服务区域"
+            placeholder="请选择物品区域"
             popper-class="popper1"
             :options="options1"
             v-model="selectedOptions"
@@ -49,8 +49,8 @@
         </div>
         <div class="fwjbxx-lis">
           <span class="bt">*</span>
-          <span class="text">服务区域</span>
-          <el-select v-model="value1" multiple placeholder="请选择服务区域">
+          <span class="text">物品区域</span>
+          <el-select v-model="value1" multiple placeholder="请选择物品区域">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <!--服务特色描述-->
+    <!--物品特色描述-->
     <div class="fwjbxx">
       <p class="titleFw">物品描述</p>
       <div class="fwjbxx-box">
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <!--服务图片-->
+    <!--物品图片-->
     <div class="fwjbxx">
       <p class="titleFw">物品图片</p>
       <div class="fwjbxx-box">
@@ -172,7 +172,7 @@ export default {
       dtxb: "",
       // 切图控制变量
       tpjqOff: false,
-      //   选择服务区域
+      //   选择物品区域
       options: [],
       options2: [
         {
@@ -305,7 +305,7 @@ export default {
       if (this.value2 == 1) {
         if (this.jg == "") {
           this.$message({
-            message: "请填写服务价格",
+            message: "请填写物品价格",
             type: "warning",
           });
           return;
