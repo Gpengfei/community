@@ -209,7 +209,7 @@ export default {
     // 获取token
     let token = this.$store.state.token;
     this.token = token;
-    this.$store.dispatch("setNavFb", 2);
+    this.$store.dispatch("setNavFb", 1);
     // 获取个人信息
     this.$api.article
       .user({
