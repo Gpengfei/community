@@ -108,7 +108,7 @@ const article = {
     },
     // 获取房屋配套
     getFacilities(params) {
-        return axios.post(`${base.sq}/Housing/getFacilitiesd`, params);
+        return axios.post(`${base.sq}/Housing/getFacilities`, params);
     },
 }
 
