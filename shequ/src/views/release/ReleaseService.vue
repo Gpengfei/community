@@ -389,7 +389,7 @@ export default {
               message: "发布服务成功！",
               type: "success",
             });
-            this.$router.push("/myService");
+            this.$router.push({ path: "/myService", query: { id: 1 } });
           }
         });
     },
