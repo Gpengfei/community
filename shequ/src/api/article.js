@@ -150,6 +150,14 @@ const article = {
     getMyCommunityShop(params) {
         return axios.post(`${base.sq}/Community/getMyCommunityShop`, params);
     },
+    // 店铺获取房源信息
+    getMyHousingShop(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingShop`, params);
+    },
+    // 店铺获取二手物品列表
+    getMySecondgoodsShop(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsShop`, params);
+    },
     // 服务上下架
     getMyCommunityIsOpen(params) {
         return axios.post(`${base.sq}/Community/getMyCommunityIsOpen`, params);
