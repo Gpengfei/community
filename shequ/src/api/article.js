@@ -182,6 +182,19 @@ const article = {
     getMySecondgoodsDelete(params) {
         return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsDelete`, params);
     },
+    // 社区用户获取自己发不的通知
+    getMyNoticeList(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeList`, params);
+    },
+    // 获取通知回掉
+    getMyNoticeInto(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeInto`, params);
+    },
+    // 删除公告通知
+    getMyNoticeDelete(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeDelete`, params);
+    },
+
 }
 
 export default article;
