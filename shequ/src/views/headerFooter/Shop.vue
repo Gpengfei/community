@@ -5,9 +5,9 @@
         <div class="box-left">
           <div class="shop-tab">
             <el-tabs v-model="activeName" @tab-click="handleClick">
-              <el-tab-pane label="二手房" name="first"></el-tab-pane>
-              <el-tab-pane label="二手物品" name="second"></el-tab-pane>
-              <el-tab-pane label="便民服务" name="third"></el-tab-pane>
+              <el-tab-pane label="便民服务" name="0"></el-tab-pane>
+              <el-tab-pane label="二手房" name="1"></el-tab-pane>
+              <el-tab-pane label="二手物品" name="2"></el-tab-pane>
             </el-tabs>
           </div>
           <div class="left-list">
@@ -160,17 +160,35 @@ import "@style/headerFooter/shop.scss";
 export default {
   data() {
     return {
-      activeName: "second",
+      activeName: "0",
+      id: null,
+      token: null,
     };
   },
   mounted() {
     // 导航改变状态
     this.$store.dispatch("setNav", 100);
+    // 获取id
+    let id = this.$route.query.id;
+    this.id = id;
+    console.log(this.id);
+    // 获取token
+    let token = this.$store.state.token;
+    this.token = token;
+    // 获取服务列表
+    this.$api.article
+      .getMyCommunityShop({
+        token: this.token,
+        shop_id: this.id,
+      })
+      .then((res) => {
+        console.log("获取服务列表", res);
+      });
   },
   methods: {
     // tab切换
     handleClick(tab, event) {
-      console.log(tab, event);
+      console.log(tab.index, event);
     },
   },
 };
