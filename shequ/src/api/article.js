@@ -146,6 +146,34 @@ const article = {
     gerSecondgoodsDetailed(params) {
         return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsDetailed`, params);
     },
+    // 店铺获取服务列表
+    getMyCommunityShop(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityShop`, params);
+    },
+    // 服务上下架
+    getMyCommunityIsOpen(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityIsOpen`, params);
+    },
+    // 房源上下架
+    getMyHousingIsOpen(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingIsOpen`, params);
+    },
+    // 二手物品上下架
+    getMySecondgoodsIsOpen(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsIsOpen`, params);
+    },
+    // 删除服务
+    getMyCommunityDelete(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityDelete`, params);
+    },
+    // 删除房源
+    getMyHousingDelete(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingDelete`, params);
+    },
+    // 删除二手物品
+    getMySecondgoodsDelete(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsDelete`, params);
+    },
 }
 
 export default article;
