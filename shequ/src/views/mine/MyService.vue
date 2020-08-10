@@ -59,8 +59,9 @@
               </div>
               <div class="lis-r">
                 <span @click="bj(item.id)">编辑</span>
-                <span>下架</span>
-                <span>删除</span>
+                <span @click="fwxjCli(item.id)" v-if="item.is_open==0">上架</span>
+                <span @click="fwxjCli(item.id)" v-else>下架</span>
+                <span @click="delCli(item.id)">删除</span>
               </div>
             </div>
           </li>
@@ -93,8 +94,9 @@
               </div>
               <div class="lis-r">
                 <span @click="bj(item.id)">编辑</span>
-                <span>下架</span>
-                <span>删除</span>
+                <span @click="fwxjCli(item.id)" v-if="item.is_open==0">上架</span>
+                <span @click="fwxjCli(item.id)" v-else>下架</span>
+                <span @click="delCli(item.id)">删除</span>
               </div>
             </div>
           </li>
@@ -134,8 +136,9 @@
               </div>
               <div class="lis-r">
                 <span @click="bj(item.id)">编辑</span>
-                <span>下架</span>
-                <span>删除</span>
+                <span @click="fwxjCli(item.id)" v-if="item.is_open==0">上架</span>
+                <span @click="fwxjCli(item.id)" v-else>下架</span>
+                <span @click="delCli(item.id)">删除</span>
               </div>
             </div>
           </li>
@@ -227,6 +230,7 @@ export default {
     tab1Cli(e) {
       this.currentPage = 1;
       this.tab1Ind = e;
+      this.tab2Ind = "";
       if (this.tab1Ind == 0) {
         // 获取服务
         this.$api.article
@@ -319,6 +323,474 @@ export default {
       }
       if (this.tab1Ind == 2) {
         this.$router.push({ path: "/secondHandGoods", query: { ids: id } });
+      }
+    },
+    // 上下架
+    fwxjCli(id) {
+      if (this.tab1Ind == 0) {
+        this.$api.article
+          .getMyCommunityIsOpen({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.data.is_open == 0) {
+              this.$message({
+                message: "已下架",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            } else {
+              this.$message({
+                message: "上架成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
+      }
+      if (this.tab1Ind == 1) {
+        this.$api.article
+          .getMyHousingIsOpen({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.data.is_open == 0) {
+              this.$message({
+                message: "已下架",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            } else {
+              this.$message({
+                message: "上架成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
+      }
+      if (this.tab1Ind == 2) {
+        this.$api.article
+          .getMySecondgoodsIsOpen({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.data.is_open == 0) {
+              this.$message({
+                message: "已下架",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            } else {
+              this.$message({
+                message: "上架成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
+      }
+    },
+    // 删除
+    delCli(id) {
+      if (this.tab1Ind == 0) {
+        this.$api.article
+          .getMyCommunityDelete({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "删除成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
+      }
+      if (this.tab1Ind == 1) {
+        this.$api.article
+          .getMyHousingDelete({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "删除成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
+      }
+      if (this.tab1Ind == 2) {
+        this.$api.article
+          .getMySecondgoodsDelete({
+            token: this.token,
+            id: id,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "删除成功",
+                type: "success",
+              });
+              if (this.tab1Ind == 0) {
+                // 获取服务
+                this.$api.article
+                  .getMyCommunityList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取房屋
+              if (this.tab1Ind == 1) {
+                this.$api.article
+                  .gerMyHousingSelect({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+              // 获取二手货
+              if (this.tab1Ind == 2) {
+                this.$api.article
+                  .getMySecondgoodsList({
+                    token: this.token,
+                    is_open: this.tab2Ind,
+                  })
+                  .then((res) => {
+                    console.log("获取二手货", res);
+                    this.lisDat = res.data.data.rows;
+                    this.zts = res.data.data.total;
+                  });
+              }
+            }
+          });
       }
     },
     // 分页
