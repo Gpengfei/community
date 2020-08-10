@@ -103,7 +103,9 @@
           <div class="fy">
             <div class="fy-box">
               <el-pagination
+                @current-change="change"
                 background
+                :current-page.sync="currentPage"
                 :hide-on-single-page="true"
                 :page-size="16"
                 layout="prev, pager, next"
@@ -158,6 +160,7 @@ export default {
       datlis: [],
       // 分页
       total: 0,
+      currentPage: 1,
     };
   },
   mounted() {
@@ -186,6 +189,7 @@ export default {
   methods: {
     // tab切换
     handleClick(tab, event) {
+      this.currentPage = 1;
       console.log(tab.index, event);
       if (tab.index == 0) {
         this.$api.article
@@ -233,6 +237,46 @@ export default {
       }
       if (this.activeName == 2) {
         this.$router.push({ path: "/productDetails2", query: { id: id } });
+      }
+    },
+    // 分页
+    change(e) {
+      console.log(e);
+      if (this.activeName == 0) {
+        this.$api.article
+          .getMyCommunityShop({
+            token: this.token,
+            shop_id: this.id,
+            page: e,
+          })
+          .then((res) => {
+            console.log("获取服务列表", res);
+            this.datlis = res.data.data.rows;
+          });
+      }
+      if (this.activeName == 1) {
+        this.$api.article
+          .getMyHousingShop({
+            token: this.token,
+            shop_id: this.id,
+            page: e,
+          })
+          .then((res) => {
+            console.log(res);
+            this.datlis = res.data.data.rows;
+          });
+      }
+      if (this.activeName == 2) {
+        this.$api.article
+          .getMySecondgoodsShop({
+            token: this.token,
+            shop_id: this.id,
+            page: e,
+          })
+          .then((res) => {
+            console.log(res);
+            this.datlis = res.data.data.rows;
+          });
       }
     },
   },
