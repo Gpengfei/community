@@ -65,7 +65,7 @@
           <div class="sqbmFw">
             <p class="sqbmFw-title">社区便民</p>
             <div class="sqbmFw-lists">
-              <template v-if="fl1Index!=4">
+              <template v-if="fl1Index!=4&&fl1Index!=5">
                 <ul v-if="fwLists&&fwLists.length!=0">
                   <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
                     <div class="lists-box">
@@ -94,7 +94,7 @@
                   </li>
                 </ul>
               </template>
-              <template v-else-if="fl1Index!=5">
+              <template v-else-if="fl1Index!=4&&fl1Index==5">
                 <ul v-if="fwLists&&fwLists.length!=0">
                   <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
                     <div class="lists-box">
