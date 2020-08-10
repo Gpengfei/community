@@ -71,14 +71,18 @@
                         <i class="iconfont">&#xe634;</i>
                         <span>{{item.address}}</span>
                       </p>
-                      <p class="hx">
+                      <!-- <p class="hx">
                         <i class="iconfont">&#xe6c2;</i>
                         <span>{{item.bedroom}}({{item.room}}室{{item.hall}}厅{{item.toilet}}卫){{item.area}}㎡</span>
-                      </p>
+                      </p>-->
                     </div>
                     <div class="box-jg">
-                      <span class="jg-number">{{item.rent}}</span>
-                      <span class="jg-yy">元/{{item.price_unit}}</span>
+                      <!-- <span class="jg-number">{{item.rent}}</span>
+                      <span class="jg-yy">元/{{item.price_unit}}</span>-->
+                      <span class="jg-number" v-if="item.price_type==0">暂无报价</span>
+                      <span class="jg-number" v-if="item.price_type==1">{{item.price}}</span>
+                      <span class="jg-number" v-if="item.price_type==2">面议</span>
+                      <span class="jg-yy" v-if="item.price_type==1">元/{{item.price_unit}}</span>
                     </div>
                     <div class="box-lxdh">
                       <i class="iconfont">&#xe645;</i>
