@@ -3,7 +3,7 @@
     <div class="myOrder-box">
       <div class="myOrder-sxandsoso">
         <ul>
-          <li :class="{sty:arr.type == type}" v-for="(arr ,index) in orderState" :key="index" @click="type = arr.type">{{arr.title}}</li>
+          <li :class="{sty:arr.type == type}" v-for="(arr ,index) in orderState" :key="index" @click="changeTitleType(arr.type)">{{arr.title}}</li>
 <!--          <li class="sty">全部订单</li>-->
 <!--          <li>待付款</li>-->
 <!--          <li>待发货</li>-->
@@ -89,9 +89,9 @@
                       <el-button  class="cu-btn btn1" type="primary"  v-if="btn === 'get'">
                         确认收货
                       </el-button>
-                      <!--<el-button class="cu-btn btn1"  v-if="btn === 'aftersale'">
+                      <el-button class="cu-btn btn1"  v-if="btn === 'aftersale'">
                         申请售后
-                      </el-button>-->
+                      </el-button>
                       <el-button v-if="btn === 'reapply_refund'" class="cu-btn btn1" >
                         重新退款
                       </el-button>
@@ -185,9 +185,10 @@
         </ul>
       </div>
     </div>
+    <!-- 底部导航条 -->
     <div class="fy">
       <div class="fy-box">
-        <el-pagination
+        <!--<el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="page"
@@ -196,7 +197,7 @@
             :page-size="100"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total">
-        </el-pagination>
+        </el-pagination>-->
       </div>
     </div>
   </div>
@@ -273,6 +274,10 @@ export default {
     this.getPull();
   },
   methods: {
+    changeTitleType(type){
+      this.type = type;
+      this.getPull();
+    },
     getPull() {
       this.a_post("/addons/shopro/order/index?" +  "type=" + this.type, {
         per_page: this.per_page,
