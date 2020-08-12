@@ -90,6 +90,6 @@ name: "EvaluateDetial",
 <style scoped lang="scss">
 .EvaluateDetial{
   max-width: 1220px;
-  margin: auto;
+  margin: 30px auto;
 }
 </style>
