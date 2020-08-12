@@ -63,17 +63,17 @@
                 <td width="111px" align="center">￥ {{arrItem.goods_price}}</td>
                 <td width="140px" align="center">
                   <div class="zt-box">
-                    <p>{{ arrItem.status_name }}</p>
-                    <p>订单详情</p>
+                    <p style="color: #a8700d;">{{ arrItem.status_name||arr.status_name }}</p>
+<!--                    <p>订单详情</p>-->
                   </div>
                 </td>
                 <td width="200px" style="padding: 15px;" align="center">
-                  <ul class="ul">
+                  <ul class="ul" style="width: 200px">
                     <li v-for="(btn, btnl) in arr.btns" :key="btnl" class="li">
                       <el-button type="danger" class="cu-btn btn1" v-if="btn === 'pay'">
                         立即支付
                       </el-button>
-                      <el-button  v-if="btn === 'cancel'" class="cu-btn obtn1">取消订单</el-button>
+                      <el-button  v-if="btn === 'cancel'" @click="setCancel(arr.id)" class="cu-btn obtn1">取消订单</el-button>
                       <el-button class="cu-btn btn1"  v-if="btn === 'after_detail'">售后详情</el-button>
                     </li>
                     <li v-for="(btn, btnl) in arrItem.btns" :key="btnl" class="li">
@@ -274,14 +274,28 @@ export default {
     this.getPull();
   },
   methods: {
+    /* 取消订单 */
+    setCancel(id) {
+      this.a_post("/addons/shopro/order/cancel", {
+        id:id
+      }, res => {
+        console.log("/addons/shopro/order/cancel", res.data.data);
+        if(res.data.code){
+          this.$message(res.data.msg);
+          this.getPull();
+        }
+      });
+    },
+    /* 顶部切换 */
     changeTitleType(type){
       this.type = type;
       this.getPull();
     },
+    /* 列表请求 */
     getPull() {
       this.a_post("/addons/shopro/order/index?" +  "type=" + this.type, {
-        per_page: this.per_page,
-        page: this.page,
+        /*per_page: this.per_page,
+        page: this.page,*/
         type: this.type
       }, res => {
         console.log("/addons/shopro/order/index", res.data.data);
