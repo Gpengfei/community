@@ -93,7 +93,108 @@ const article = {
     // 获取服务评价列表
     my_com_service(params) {
         return axios.post(`${base.sq}/v1/com_service/my_com_service`, params);
-    }
+    },
+    // 获取用户订单
+    my_service(params) {
+        return axios.post(`${base.sq}/v1/com_service/my_service`, params);
+    },
+    // 提交评价接口
+    sub_comment(params) {
+        return axios.post(`${base.sq}/v1/com_service/sub_comment`, params);
+    },
+    // 发布房源接口
+    gerHousingAdd(params) {
+        return axios.post(`${base.sq}/Housing/gerHousingAdd`, params);
+    },
+    // 获取房屋配套
+    getFacilities(params) {
+        return axios.post(`${base.sq}/Housing/getFacilities`, params);
+    },
+    // 商家用户获取自己发不服务
+    getMyCommunityList(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityList`, params);
+    },
+    // 二手物品发不
+    gerSecondgoodsAdd(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsAdd`, params);
+    },
+    // 商家用户获取自己房屋信息
+    gerMyHousingSelect(params) {
+        return axios.post(`${base.sq}/Housing/gerMyHousingSelect`, params);
+    },
+    // 商家用户获取自己二手物品
+    getMySecondgoodsList(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsList`, params);
+    },
+    // 修改服务信息回填
+    gerServiceSelect(params) {
+        return axios.post(`${base.sq}/Community/gerServiceSelect`, params);
+    },
+    // 修改房屋数据回填
+    gerHousingSelect(params) {
+        return axios.post(`${base.sq}/Housing/gerHousingSelect`, params);
+    },
+    // 修改二手物品回填
+    gerSecondgoodsSelect(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsSelect`, params);
+    },
+    // 获取二手物品列表
+    gerSecondgoodsList(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsList`, params);
+    },
+    // 二手货详情
+    gerSecondgoodsDetailed(params) {
+        return axios.post(`${base.sq}/Secondgoods/gerSecondgoodsDetailed`, params);
+    },
+    // 店铺获取服务列表
+    getMyCommunityShop(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityShop`, params);
+    },
+    // 店铺获取房源信息
+    getMyHousingShop(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingShop`, params);
+    },
+    // 店铺获取二手物品列表
+    getMySecondgoodsShop(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsShop`, params);
+    },
+    // 服务上下架
+    getMyCommunityIsOpen(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityIsOpen`, params);
+    },
+    // 房源上下架
+    getMyHousingIsOpen(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingIsOpen`, params);
+    },
+    // 二手物品上下架
+    getMySecondgoodsIsOpen(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsIsOpen`, params);
+    },
+    // 删除服务
+    getMyCommunityDelete(params) {
+        return axios.post(`${base.sq}/Community/getMyCommunityDelete`, params);
+    },
+    // 删除房源
+    getMyHousingDelete(params) {
+        return axios.post(`${base.sq}/Housing/getMyHousingDelete`, params);
+    },
+    // 删除二手物品
+    getMySecondgoodsDelete(params) {
+        return axios.post(`${base.sq}/Secondgoods/getMySecondgoodsDelete`, params);
+    },
+    // 社区用户获取自己发不的通知
+    getMyNoticeList(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeList`, params);
+    },
+    // 获取通知回掉
+    getMyNoticeInto(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeInto`, params);
+    },
+    // 删除公告通知
+    getMyNoticeDelete(params) {
+        return axios.post(`${base.sq}/Notice/getMyNoticeDelete`, params);
+    },
+
 }
 
 export default article;

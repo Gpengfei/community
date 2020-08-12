@@ -50,35 +50,15 @@ export default {
       msg: "",
       disabled: false,
       //   选择服务区域
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
-
+      options: [],
       value: "",
       token: null,
       titles: "",
+      ids: null,
     };
   },
   mounted() {
+    this.ids = this.$route.query.ids;
     this.$store.dispatch("setNavFb", 3);
     // 获取token
     let token = this.$store.state.token;
@@ -108,6 +88,21 @@ export default {
             this.options = arr;
           });
       });
+    // 回掉内容
+    if (this.ids) {
+      this.$api.article
+        .getMyNoticeInto({
+          token: this.token,
+          id: this.ids,
+        })
+        .then((res) => {
+          console.log("回掉内容", res);
+          let d = res.data.data;
+          this.titles = d.title;
+          this.msg = d.content;
+          this.value = d.STREET_CODE + "";
+        });
+    }
   },
   methods: {
     // 提交
@@ -133,25 +128,50 @@ export default {
         });
         return;
       }
-      this.$api.article
-        .getValidateAdd({
-          token: this.token,
-          title: this.titles,
-          content: this.msg,
-          STREET_CODE: this.value,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.code == 1) {
-            this.$message({
-              message: "通知发不成功！",
-              type: "success",
-            });
-            this.titles = "";
-            this.msg = "";
-            this.value = "";
-          }
-        });
+      if (this.ids) {
+        this.$api.article
+          .getValidateAdd({
+            id: this.ids,
+            token: this.token,
+            title: this.titles,
+            content: this.msg,
+            STREET_CODE: this.value,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "修改成功",
+                type: "success",
+              });
+              this.titles = "";
+              this.msg = "";
+              this.value = "";
+              this.$router.push("/mine");
+            }
+          });
+      } else {
+        this.$api.article
+          .getValidateAdd({
+            token: this.token,
+            title: this.titles,
+            content: this.msg,
+            STREET_CODE: this.value,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "通知发不成功！",
+                type: "success",
+              });
+              this.titles = "";
+              this.msg = "";
+              this.value = "";
+              this.$router.push("/mine");
+            }
+          });
+      }
     },
     // 鼠标单击的事件
     onClick(e, editor) {

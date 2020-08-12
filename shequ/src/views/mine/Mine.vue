@@ -11,7 +11,9 @@
             </div>
             <p class="grxx-name">{{avatar.username}}</p>
             <p class="grxx-zz">{{avatar.STREET_NAME}}</p>
-            <p class="fb-btn">开始发布</p>
+            <router-link to="/release">
+              <p class="fb-btn">开始发布</p>
+            </router-link>
           </div>
           <div class="mine-nav">
             <ul>

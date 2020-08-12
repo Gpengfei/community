@@ -21,7 +21,6 @@
           height: 100%;
           overflow: hidden;
           border-bottom: 1px solid #f7f7f7;
-          height: 302px;
           .lis-l {
             height: 100%;
             width: 320px;
@@ -117,6 +116,30 @@
               width: 100%;
               box-sizing: border-box;
               padding-left: 100px;
+              display: flex;
+              flex-wrap: wrap;
+              img {
+                height: 60px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+              }
+              .sctp {
+                width: 60px;
+                height: 60px;
+                box-sizing: border-box;
+                border: 1px dashed #999;
+                text-align: center;
+                line-height: 58px;
+                border-radius: 5px;
+                cursor: pointer;
+                &:hover {
+                  border: 1px dashed $color;
+                }
+                .iconfont {
+                  font-size: 20px;
+                  color: #999;
+                }
+              }
             }
             .text {
               float: left;
@@ -139,6 +162,7 @@
             padding: 10px 30px;
             border-radius: 10px;
             margin-right: 20px;
+            cursor: pointer;
           }
           .el-checkbox__input.is-checked + .el-checkbox__label {
             color: $color;
@@ -163,5 +187,22 @@
   .el-upload-list--picture-card .el-upload-list__item {
     width: 60px;
     height: 60px;
+  }
+  .smrzTpjq {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.9);
+    .iconfont {
+      font-size: 30px;
+      color: #333;
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      cursor: pointer;
+    }
   }
 }

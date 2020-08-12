@@ -65,7 +65,36 @@
           <div class="sqbmFw">
             <p class="sqbmFw-title">社区便民</p>
             <div class="sqbmFw-lists">
-              <template v-if="fl1Index!=4">
+              <template v-if="fl1Index!=4&&fl1Index!=5">
+                <ul v-if="fwLists&&fwLists.length!=0">
+                  <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
+                    <div class="lists-box">
+                      <div class="box-top">
+                        <img v-if="item.image" :src="'http://zt.shenyueyun.com/'+item.image" alt />
+                        <img v-else src="img/sqbmzw.png" alt />
+                      </div>
+                      <p class="box-txt">{{item.title}}</p>
+                      <div class="box-con">
+                        <p class="dz">
+                          <i class="iconfont">&#xe634;</i>
+                          <span>{{item.address}}</span>
+                        </p>
+                      </div>
+                      <div class="box-jg">
+                        <span class="jg-number" v-if="item.price_type==0">暂无报价</span>
+                        <span class="jg-number" v-if="item.price_type==1">{{item.price}}</span>
+                        <span class="jg-number" v-if="item.price_type==2">面议</span>
+                        <span class="jg-yy" v-if="item.price_type==1">元/{{item.price_unit}}</span>
+                      </div>
+                      <div class="box-lxdh">
+                        <i class="iconfont">&#xe645;</i>
+                        <span>联系商家</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </template>
+              <template v-else-if="fl1Index!=4&&fl1Index==5">
                 <ul v-if="fwLists&&fwLists.length!=0">
                   <li v-for="(item,index) in fwLists" :key="index" @click="lisClis(item.id)">
                     <div class="lists-box">
@@ -250,6 +279,8 @@ export default {
           }
           let fcfw = { id: arr.length, name: "房屋租赁" };
           arr.push(fcfw);
+          let fcfws = { id: arr.length + 1, name: "二手物品" };
+          arr.push(fcfws);
           this.fl1List = arr;
         }
       });
@@ -304,7 +335,7 @@ export default {
       this.fl1Indexs = index;
       this.fl1Index = id;
       this.fl1Name = name;
-      if (index != 4) {
+      if (index != 4 && index != 5) {
         // 获取服务列表
         this.$api.article
           .gerCommunityList({
@@ -320,6 +351,35 @@ export default {
               this.total = res.data.data.total;
             }
           });
+      } else if (index != 4 && index == 5) {
+        if (this.ids == 0) {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+            })
+            .then((res) => {
+              console.log("二手货", res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        } else {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+              STREET_CODE: this.ids,
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        }
       } else {
         if (this.ids == 0) {
           this.$api.article
@@ -354,7 +414,8 @@ export default {
     fl2Cli(index, ids) {
       this.fl2Index = index;
       this.ids = ids;
-      if (this.fl1Index != 4) {
+      console.log(this.fl1Indexs);
+      if (this.fl1Indexs != 4 && this.fl1Indexs != 5) {
         // 获取服务列表
         this.$api.article
           .gerCommunityList({
@@ -370,6 +431,35 @@ export default {
               this.total = res.data.data.total;
             }
           });
+      } else if (this.fl1Indexs != 4 && this.fl1Indexs == 5) {
+        if (this.ids == 0) {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+            })
+            .then((res) => {
+              console.log("二手货", res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        } else {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+              STREET_CODE: this.ids,
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        }
       } else {
         if (this.ids == 0) {
           this.$api.article
@@ -405,6 +495,8 @@ export default {
       console.log(index);
       if (this.fl1Name == "房屋租赁") {
         this.$router.push({ path: "/productDetails1", query: { id: index } });
+      } else if (this.fl1Name == "二手物品") {
+        this.$router.push({ path: "/productDetails2", query: { id: index } });
       } else {
         this.$router.push({ path: "/productDetails", query: { id: index } });
       }
@@ -415,7 +507,7 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(val);
-      if (this.fl1Index != 4) {
+      if (this.fl1Indexs != 4 && this.fl1Indexs != 5) {
         // 获取服务列表
         this.$api.article
           .gerCommunityList({
@@ -431,6 +523,37 @@ export default {
               this.fwLists = res.data.data.rows;
             }
           });
+      } else if (this.fl1Indexs != 4 && this.fl1Indexs == 5) {
+        if (this.ids == 0) {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+              page: val,
+            })
+            .then((res) => {
+              console.log("二手货", res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        } else {
+          this.$api.article
+            .gerSecondgoodsList({
+              token: this.token,
+              AREA_CODE: this.userInfo.AREA_CODE,
+              STREET_CODE: this.ids,
+              page: val,
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.data.code == 1) {
+                this.fwLists = res.data.data.rows;
+                this.total = res.data.data.total;
+              }
+            });
+        }
       } else {
         if (this.ids == 0) {
           this.$api.article

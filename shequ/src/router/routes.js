@@ -28,6 +28,10 @@ export default [
         component: () => import("@views/headerFooter/ProductDetails1.vue"),
       },
       {
+        path: "/productDetails2",
+        component: () => import("@views/headerFooter/ProductDetails2.vue"),
+      },
+      {
         path: "/mine",
         component: () => import("@views/mine/Mine.vue"),
         children: [

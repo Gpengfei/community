@@ -193,6 +193,7 @@ export default {
       options1: regionData,
       // 提交的数据
       // 类型
+      ids: null,
       radio: "1",
       fwbt: "",
       value3: "",
@@ -207,6 +208,7 @@ export default {
     };
   },
   mounted() {
+    this.ids = this.$route.query.ids;
     // 获取token
     let token = this.$store.state.token;
     this.token = token;
@@ -237,6 +239,29 @@ export default {
             this.options = arr;
           });
       });
+    // 获取数据回填
+    if (this.ids) {
+      this.$api.article
+        .gerServiceSelect({
+          token: this.token,
+          id: this.ids,
+        })
+        .then((res) => {
+          console.log("获取数据回填", res);
+          let dat = res.data.data;
+          this.radio = dat.service_type + "";
+          this.fwbt = dat.title;
+          this.value1 = dat.contact_area.split(",");
+          this.value3 = dat.STREET_CODE + "";
+          this.value2 = dat.price_type;
+          this.jg = dat.price;
+          this.fwtsms = dat.content;
+          this.imgsArr = dat.images.split(",");
+          this.xxdz = dat.address;
+          this.lxxm = dat.contact_name;
+          this.lxfs = dat.contact_phone;
+        });
+    }
   },
   methods: {
     // 图片上传
@@ -258,6 +283,7 @@ export default {
         imgghArr[this.dtxb] = e;
         this.imgsArr = imgghArr;
         this.tpjqOff = false;
+        this.dtxb = "";
       }
     },
     // 图片更换
@@ -366,31 +392,60 @@ export default {
       // 提交之前数据处理
       let fwsqStr = this.value1.join(",");
       let imgsStr = this.imgsArr.join(",");
-      this.$api.article
-        .gerSetviceAdd({
-          token: this.token,
-          service_type: this.radio,
-          title: this.fwbt,
-          contact_area: fwsqStr,
-          STREET_CODE: this.value3,
-          price_type: this.value2,
-          price: this.jg,
-          content: this.fwtsms,
-          images: imgsStr,
-          address: this.xxdz,
-          contact_name: this.lxxm,
-          contact_phone: this.lxfs,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.code == 1) {
-            this.$message({
-              message: "发布服务成功！",
-              type: "success",
-            });
-            this.$router.push("/myService");
-          }
-        });
+      if (this.ids) {
+        this.$api.article
+          .gerSetviceAdd({
+            id: this.ids,
+            token: this.token,
+            service_type: this.radio,
+            title: this.fwbt,
+            contact_area: fwsqStr,
+            STREET_CODE: this.value3,
+            price_type: this.value2,
+            price: this.jg,
+            content: this.fwtsms,
+            images: imgsStr,
+            address: this.xxdz,
+            contact_name: this.lxxm,
+            contact_phone: this.lxfs,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "修改成功！",
+                type: "success",
+              });
+              this.$router.push({ path: "/myService", query: { id: 1 } });
+            }
+          });
+      } else {
+        this.$api.article
+          .gerSetviceAdd({
+            token: this.token,
+            service_type: this.radio,
+            title: this.fwbt,
+            contact_area: fwsqStr,
+            STREET_CODE: this.value3,
+            price_type: this.value2,
+            price: this.jg,
+            content: this.fwtsms,
+            images: imgsStr,
+            address: this.xxdz,
+            contact_name: this.lxxm,
+            contact_phone: this.lxfs,
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.data.code == 1) {
+              this.$message({
+                message: "发布服务成功！",
+                type: "success",
+              });
+              this.$router.push({ path: "/myService", query: { id: 1 } });
+            }
+          });
+      }
     },
   },
   components: {
