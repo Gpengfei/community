@@ -3,7 +3,7 @@ import qs from "qs";
 
 /* post请求 */
 export function post(url, data, callbacks) {
-  data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "47aea37e-801e-49be-b3b9-e7dca09a1eaa";
+  data.token = process.env.NODE_ENV === 'production' ? this.$store.state.token : "259ccffe-836c-41ba-b6e0-45cdbbfbfd9a";
   const options = {
     method: "POST",
     headers: {

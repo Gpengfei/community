@@ -3,12 +3,13 @@
     <div class="myOrder-box">
       <div class="myOrder-sxandsoso">
         <ul>
-          <li class="sty">全部订单</li>
-          <li>待付款</li>
-          <li>待发货</li>
-          <li>待收货</li>
-          <li>待评价</li>
-          <li>退换货</li>
+          <li :class="{sty:arr.type == type}" v-for="(arr ,index) in orderState" :key="index" @click="type = arr.type">{{arr.title}}</li>
+<!--          <li class="sty">全部订单</li>-->
+<!--          <li>待付款</li>-->
+<!--          <li>待发货</li>-->
+<!--          <li>待收货</li>-->
+<!--          <li>待评价</li>-->
+<!--          <li>退换货</li>-->
         </ul>
         <div class="pfsoso">
           <div class="pfsoso-box">
@@ -20,14 +21,14 @@
       <div class="myOrder-sx">
         <div class="sx-box">
           <div class="sx-l">
-            <el-select v-model="value" placeholder="默认近三个月订单">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
+<!--            <el-select v-model="value" placeholder="默认近三个月订单">-->
+<!--              <el-option-->
+<!--                v-for="item in options"-->
+<!--                :key="item.value"-->
+<!--                :label="item.label"-->
+<!--                :value="item.value"-->
+<!--              ></el-option>-->
+<!--            </el-select>-->
           </div>
           <div class="sx-r">
             <ul>
@@ -206,6 +207,38 @@ import "@style/mine/myOrder.scss";
 export default {
   data() {
     return {
+      orderState: [
+        {
+          id: 0,
+          title: '全部',
+          type: 'all'
+        },
+        {
+          id: 1,
+          title: '待付款',
+          type: 'nopay'
+        },
+        {
+          id: 2,
+          title: '待发货',
+          type: 'nosend'
+        },
+        {
+          id: 3,
+          title: '待收货',
+          type: 'noget'
+        },
+        {
+          id: 4,
+          title: '待评价',
+          type: 'nocomment'
+        },
+        {
+          id: 5,
+          title: '退换货',
+          type: 'aftersale'
+        }
+      ],
       options: [
         {
           value: "选项1",
@@ -241,7 +274,7 @@ export default {
   },
   methods: {
     getPull() {
-      this.a_post("/addons/shopro/order/index?" + "pre_page=" + this.page + "&page=" + this.page + "&type=" + this.type, {
+      this.a_post("/addons/shopro/order/index?" +  "type=" + this.type, {
         per_page: this.per_page,
         page: this.page,
         type: this.type
