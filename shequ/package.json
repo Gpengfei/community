@@ -20,7 +20,7 @@
     "moment": "^2.27.0",
     "qs": "^6.9.4",
     "swiper": "^5.4.5",
-    "tinymce": "^5.4.1",
+    "tinymce": "^5.10.0",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-cropper": "^0.5.5",
